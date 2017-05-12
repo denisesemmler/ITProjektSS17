@@ -1,5 +1,5 @@
 package de.hdm.itprojekt.shared.report;
 
-public class AlleBewerbungenNutzer {
+public class AlleBewerbungenNutzer extends SimpleReport{
 
 }

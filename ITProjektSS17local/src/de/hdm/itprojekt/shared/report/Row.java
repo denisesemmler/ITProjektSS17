@@ -12,7 +12,7 @@ public class Row implements Serializable {
 
   /**
    * Spalte hinzufügen 
-   * @param Spaltenobjekt c
+   * @param c Spaltenobjekt 
    */
   public void addColumn(Column c) {
     this.columns.addElement(c);
@@ -20,7 +20,7 @@ public class Row implements Serializable {
 
   /**
    * Entfernen einer Spalte
-   * @param das zu entfernende Spaltenobjekt c
+   * @param c das zu entfernende Spaltenobjekt 
    */
   public void removeColumn(Column c) {
     this.columns.removeElement(c);
@@ -29,7 +29,7 @@ public class Row implements Serializable {
   /**
    * Auslesen der Spalten-Objekte aus Vector.
    * 
-   * @return <code>Vector</code>mit Spalten
+   * @return Vector mit Spalten
    */
   public Vector<Column> getColumns() {
     return this.columns;
@@ -46,8 +46,8 @@ public class Row implements Serializable {
   /**
    * Auslesen eines einzelnen Spalten-Objekts an index i.
    * 
-   * @param Index i für Spalte
-   * @return das Spaltenobjekt mit Index i.
+   * @param i Index für Spalte
+   * @return i das Spaltenobjekt mit Index.
    */
   public Column getColumnAt(int i) {
     return this.columns.elementAt(i);
