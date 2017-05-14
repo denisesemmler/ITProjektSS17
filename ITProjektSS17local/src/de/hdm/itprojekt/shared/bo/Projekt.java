@@ -8,8 +8,8 @@ public class Projekt extends BusinessObjekt{
 	
 	private String 	projektName = "";
 	private String 	projektbeschreibung = "";
-	private int 	startDatum = 0;
-	private int 	endDatum = 0;
+	private Date 	startDatum = null;
+	private Date	endDatum = null;
 	/**
 	 * @return the projektName
 	 */
@@ -37,25 +37,25 @@ public class Projekt extends BusinessObjekt{
 	/**
 	 * @return the startDatum
 	 */
-	public int getStartDatum() {
+	public Date getStartDatum() {
 		return startDatum;
 	}
 	/**
 	 * @param startDatum the startDatum to set
 	 */
-	public void setStartDatum(int startDatum) {
+	public void setStartDatum(Date startDatum) {
 		this.startDatum = startDatum;
 	}
 	/**
 	 * @return the endDatum
 	 */
-	public int getEndDatum() {
+	public Date getEndDatum() {
 		return endDatum;
 	}
 	/**
 	 * @param endDatum the endDatum to set
 	 */
-	public void setEndDatum(int endDatum) {
+	public void setEndDatum(Date endDatum) {
 		this.endDatum = endDatum;
 	}
 	
