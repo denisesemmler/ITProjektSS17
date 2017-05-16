@@ -9,24 +9,25 @@ package de.hdm.itprojekt.shared.bo;
  * und zur Suche von Projektteilnehmern zu realisieren
  *
  */
-public class PartnerProfil extends BusinessObjekt {
+public class Profil extends BusinessObjekt {
+
 
 	private static final long serialVersionUID = 1L;
+
 	/**
-	 * Email-Adresse des Teilnehmers 
-	 */
-	private String 	email		= "";
-	
-	/**
-	 * Name des Teilnehmers anlegen
+	 * Name des Profil anlegen
 	 */
 	private String name 	= "";
 	
 	/**
-	 * Wohnort oder UN-Sitz des Teilnehmers
+	 * Wohn- oder Einsatzort  des Teilnehmers
 	 */
 	private String 	ort			= "";
 	
+	/**
+	 * Postleitzahl des Teilnehmers oder Einsatzort
+	 */
+	private int plz = 0;
 	
 	/**
 	 * Straße des Teilnehmers
@@ -44,30 +45,12 @@ public class PartnerProfil extends BusinessObjekt {
 	 */
 	private boolean	projektLeiter	= false;
 	
-	private Eigenschaft be		= new Eigenschaft("","");
+	private Eigenschaft e		= new Eigenschaft("","");
 	
-	
-	
- /**
-  * 
-  * Innere KLasse Eigenshaft erstellt um individuelle Eigenschaften beim 
-  * erstellen von Partnerprofilen zu ermöglichen
-  * 
-  *
-  */
-class Eigenschaft {
-
-	String name;
-	
-	public Eigenschaft (String n, String w){
-		this.name =n;
-		}
-	
-}
 
 
 /**
- * @return the profilName
+ * @return profilName
  */
 public String getName() {
 	return name;
@@ -83,7 +66,7 @@ public void setName(String name) {
 
 
 /**
- * @return the ort
+ * @return  ort
  */
 public String getOrt() {
 	return ort;
@@ -99,7 +82,7 @@ public void setOrt(String ort) {
 
 
 /**
- * @return the strasse
+ * @return  strasse
  */
 public String getStrasse() {
 	return strasse;
@@ -115,23 +98,23 @@ public void setStrasse(String strasse) {
 
 
 /**
- * @return the be
+ * @return be
  */
-public Eigenschaft getBe() {
-	return be;
+public Eigenschaft getE() {
+	return e;
 }
 
 
 /**
  * @param be the be to set
  */
-public void setBe(Eigenschaft be) {
-	this.be = be;
+public void setE(Eigenschaft e) {
+	this.e = e;
 }
 
 
 /**
- * @return the rolle
+ * @return rolle
  */
 public int getRolle() {
 	return rolle;
@@ -147,7 +130,7 @@ public void setRolle(int rolle) {
 
 
 /**
- * @return the projektLeiter
+ * @return projektLeiter
  */
 public boolean isProjektLeiter() {
 	return projektLeiter;
@@ -163,18 +146,18 @@ public void setProjektLeiter(boolean projektl) {
 
 
 /**
- * @return the email
+ * @return the plz
  */
-public String getEmail() {
-	return email;
+public int getPlz() {
+	return plz;
 }
 
 
 /**
- * @param email the email to set
+ * @param plz the plz to set
  */
-public void setEmail(String email) {
-	this.email = email;
+public void setPlz(int plz) {
+	this.plz = plz;
 }
 	
 	
