@@ -9,13 +9,41 @@ package de.hdm.itprojekt.shared.bo;
  * und zur Suche von Projektteilnehmern zu realisieren
  *
  */
-public class Partnerprofil extends BusinessObjekt {
+public class PartnerProfil extends BusinessObjekt {
 
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Email-Adresse des Teilnehmers 
+	 */
+	private String 	email		= "";
 	
-	private String 	profilName 	= "";
+	/**
+	 * Name des Teilnehmers anlegen
+	 */
+	private String name 	= "";
+	
+	/**
+	 * Wohnort oder UN-Sitz des Teilnehmers
+	 */
 	private String 	ort			= "";
+	
+	
+	/**
+	 * Straﬂe des Teilnehmers
+	 */
 	private String 	strasse		= "";
+	
+	/**
+	 * bei Rolle  wird angegeben ob Teilnehmers UN/ Team oder Person ist
+	 */	
+	private int		rolle		= 0;
+	
+	/**
+	 * erstellt ein Teilnehmer ein Projekt wird der boolean 
+	 * projektleiter auf true gesetzt
+	 */
+	private boolean	projektLeiter	= false;
+	
 	private Eigenschaft be		= new Eigenschaft("","");
 	
 	
@@ -28,13 +56,11 @@ public class Partnerprofil extends BusinessObjekt {
   *
   */
 class Eigenschaft {
-	
-	private String name;
-	private String wert;
+
+	String name;
 	
 	public Eigenschaft (String n, String w){
 		this.name =n;
-		this.wert =w;
 		}
 	
 }
@@ -43,16 +69,16 @@ class Eigenschaft {
 /**
  * @return the profilName
  */
-public String getProfilName() {
-	return profilName;
+public String getName() {
+	return name;
 }
 
 
 /**
  * @param profilName the profilName to set
  */
-public void setProfilName(String profilName) {
-	this.profilName = profilName;
+public void setName(String name) {
+	this.name = name;
 }
 
 
@@ -101,6 +127,54 @@ public Eigenschaft getBe() {
  */
 public void setBe(Eigenschaft be) {
 	this.be = be;
+}
+
+
+/**
+ * @return the rolle
+ */
+public int getRolle() {
+	return rolle;
+}
+
+
+/**
+ * @param rolle the rolle to set
+ */
+public void setRolle(int rolle) {
+	this.rolle = rolle;
+}
+
+
+/**
+ * @return the projektLeiter
+ */
+public boolean isProjektLeiter() {
+	return projektLeiter;
+}
+
+
+/**
+ * @param projektl the projektLeiter to set
+ */
+public void setProjektLeiter(boolean projektl) {
+	this.projektLeiter = projektl;
+}
+
+
+/**
+ * @return the email
+ */
+public String getEmail() {
+	return email;
+}
+
+
+/**
+ * @param email the email to set
+ */
+public void setEmail(String email) {
+	this.email = email;
 }
 	
 	
