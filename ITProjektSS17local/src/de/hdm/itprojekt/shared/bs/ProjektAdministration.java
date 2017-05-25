@@ -1,6 +1,6 @@
 package de.hdm.itprojekt.shared.bs;
 
-import java.util.Date;
+import java.sql.Date;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -21,5 +21,10 @@ public interface ProjektAdministration extends RemoteService {
 	 * 
 	 */
 	public Projekt createProjekt(String projektName, String projektBezeichnung, Date startDatum, Date endDatum) throws IllegalArgumentException;
+	
+	
+	
+	
+	
 
 }
