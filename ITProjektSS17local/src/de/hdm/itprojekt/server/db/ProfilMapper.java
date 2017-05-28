@@ -59,7 +59,7 @@ public class ProfilMapper {
 			// Neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
 			// SQL Query ausführen
-			ResultSet rs = stmt.executeQuery("SELECT idProfil, name, idTeilnehmer FROM Profil " 
+			ResultSet rs = stmt.executeQuery("SELECT idProfil, name, ort, strasse,  plz, rolle,  idTeilnehmer FROM Profil " 
 					+ "WHERE idProfil = " 
 					+ id);
 			// Bei Treffer 
