@@ -14,7 +14,7 @@ public class ProjektMapper {
 	
 		/**
 		 * <p>
-		 * Mapper-Klasse zur Abbildung von <code>Projektmarktplätzen</code> Objekten auf die Datenbank.
+		 * Mapper-Klasse zur Abbildung von <code>Projekten</code> Objekten auf die Datenbank.
 		 * Über das Mapping können sowohl Objekte als auch deren Attribute in die Datenbank 
 		 * geschrieben werden, als auch von der Datenbank ausgelesen werden.
 		 * </p>
@@ -39,7 +39,7 @@ public class ProjektMapper {
 			 * Singleton
 			 * @return
 			 */
-			public static ProjektzMapper projektMapper() {
+			public static ProjektMapper projektMapper() {
 				if(projektMapper == null) {
 					projektMapper = new ProjektMapper();
 				}
