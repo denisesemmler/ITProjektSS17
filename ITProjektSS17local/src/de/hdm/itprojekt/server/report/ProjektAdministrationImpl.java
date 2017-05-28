@@ -2,6 +2,8 @@ package de.hdm.itprojekt.server.report;
 
 import java.sql.Date;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
+import de.hdm.itprojekt.server.db.ProjektMapper;
 import de.hdm.itprojekt.server.db.TeilnehmerMapper;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bs.ProjektAdministration;
@@ -9,23 +11,20 @@ import de.hdm.itprojekt.shared.bs.ProjektAdministration;
 @SuppressWarnings("serial")
 public class ProjektAdministrationImpl extends RemoteServiceServlet implements ProjektAdministration {
 
-	//Bsp für die Mapper -->In Bearbeitung
-	//TODO durch Projektmapper ersetzen
-	private TeilnehmerMapper tMapper =null;
+	private ProjektMapper pMapper = null;
 	
 	
 	
 	public ProjektAdministrationImpl() throws IllegalArgumentException {
 		/*
-		 * Der No-Argument-Constructor muss einfach vorhanden sein.
+		 * Der No-Argument-Constructor muss vorhanden sein.
 		 */
 	}
 
 	@Override
+	//Init ist eine Initialisierungsmethode, diese Methode MUSS für jede Instanz von "ProjektAdministrationImpl" gerufen werden!
 	public void init() throws IllegalArgumentException {
-		//bsp für die Mapper --> In Bearbeitung
-		//TODO durch Projektmapper ersetzen
-		tMapper = TeilnehmerMapper.teilnehmerMapper();
+		pMapper = ProjektMapper.projektMapper();
 		
 	}
 
@@ -39,12 +38,11 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		p.setStartDatum(startDatum);
 		p.setEndDatum(endDatum);
 		
-		//setzen einer Vorläufigen Projekt-Nr diese ist mit der DB konsistent
+		//setzen einer vorläufigen Projekt-Nr diese ist mit der DB konsistent
 		p.setId(1);
 		
 		//Objekt in DB speichern
-		//TODO gegen ProjektMapper ersetzen
-		return null; //this.tMapper.insert(p);
+		return this.pMapper.insert(p);
 	
 	}
 
