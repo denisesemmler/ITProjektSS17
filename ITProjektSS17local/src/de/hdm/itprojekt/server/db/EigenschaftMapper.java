@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
+import de.hdm.itprojekt.shared.bo.Profil;
+
 
 /**
  * p>
@@ -40,6 +42,66 @@ public class EigenschaftMapper {
 	private EigenschaftMapper() {
 	}
 
+	
+	/**
+	 * Methode die eine Eigenschaft einfügt
+	 * @param Eigenschaft e
+	 */
+	
+	public Eigenschaft insert (Eigenschaft e){
+		
+		//Connection zur DB auf
+		Connection con = DBConnection.connection();
+		
+		try {
+			Statement stmt = con.createStatement();
+			
+			//Bisher größte EigenschaftsID bestimmen
+			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM Eigenschaft");
+			
+			if (rs.next()){
+				//Abgefragte EigenschaftsID++
+				e.setId(rs.getInt("maxid")+ 1);
+			
+				stmt = con.createStatement();
+				
+				//In DB einfuegen
+				stmt.executeUpdate("INSERT INTO Eigenschaft (id, name, wert)" + "VALUES (" +e.getId() +"','" + e.getName() + "')");
+				
+			}
+		}
+		
+		catch (SQLException s)
+		{
+			s.printStackTrace();
+		}
+		
+		return e;
+	}
+	
+	public Eigenschaft update (Eigenschaft e){
+		
+		//Connection zur DB auf
+		Connection con = DBConnection.connection();
+		
+		try{
+			Statement stmt = con.createStatement();
+		
+			stmt.executeUpdate ("UPDATE Eigenschaft SET name='" +e.getName() + "'wert='" +e.getWert() + "'WHERE id='" + e.getId() + "'");
+			
+		}
+		
+		catch (SQLException s) {
+			s.printStackTrace();
+		}
+		
+		return e;
+	}
+	
+	
+	
+	
+	
 }
 
 
