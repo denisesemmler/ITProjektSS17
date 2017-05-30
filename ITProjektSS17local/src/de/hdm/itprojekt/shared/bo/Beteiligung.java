@@ -16,9 +16,10 @@ public class Beteiligung {
 	/**
 	 * Attribute erstellen 
 	 */
-	private int idBeteiligung 		=0;
+	private int idBeteiligung 		= 0;
 	private float bewertung 		= 0;
 	private String stellungnahme 	= "";
+	private String projektName 		= "";
 	public Profil ausschreibender;
 	public Profil bewerbender;
 	
@@ -83,6 +84,18 @@ public class Beteiligung {
 	 */
 	public void setIdBeteiligung(int idBeteiligung) {
 		this.idBeteiligung = idBeteiligung;
+	}
+	/**
+	 * @return the projektName
+	 */
+	public String getProjektName() {
+		return projektName;
+	}
+	/**
+	 * @param projektName the projektName to set
+	 */
+	public void setProjektName(String projektName) {
+		this.projektName = projektName;
 	}
 	
 	

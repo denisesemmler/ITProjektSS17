@@ -48,10 +48,10 @@ package de.hdm.itprojekt.server.db;
 		
 		
 		/**
-		 * Suche eines Nutzers anhand seiner einzigartigen ID.
+		 * Suche eines Nutzers anhand seiner eindeutigen ID.
 		 * 
-		 * @param id - Primärschlüssel von Nutzer
-		 * @return Nutzer Objekt, das die gesuchte ID enthält
+		 * @param id - Primärschlüssel von Teilnehmer
+		 * @return Teilnehmer Objekt, das die gesuchte ID enthält
 		 */
 		public Teilnehmer findById(int id) {
 			// Datenbankverbindung öffnen
@@ -92,9 +92,9 @@ package de.hdm.itprojekt.server.db;
 		 * Ergebnisse ausgegeben werden. Alle gefundenen Nutzer werden in einem
 		 * Vektor gespeichert.
 		 * 
-		 * @param firstName name des gesuchten Nutzers
-		 * @param lastName zusatz des gesuchten Nutzers
-		 * @return Vektor mit allen zu den Suchparametern gefundenen Nutzern
+		 * @param firstName name des gesuchten Teilnehmer
+		 * @param lastName zusatz des gesuchten Teilnehmer
+		 * @return Vektor mit allen zu den Suchparametern gefundenen Teilnehmer
 		 */
 		public ArrayList<Teilnehmer> findByName(String name, String lastName) {
 			// Datenbankverbindung 
@@ -131,10 +131,10 @@ package de.hdm.itprojekt.server.db;
 		}
 		
 		/**
-		 * Suche eines Nutzers anhand seiner einzigartigen Email-Adresse.
+		 * Suche eines Teilnehmer anhand seiner einzigartigen Email-Adresse.
 		 * 
-		 * @param email Die Email-Adresse des gesuchten Nutzers
-		 * @return Nutzer Objekt, das die gesuchte Email-Adresse enthÃ¤lt
+		 * @param email Die Email-Adresse des gesuchten Teilnehmer
+		 * @return Teilnehmer Objekt, das die gesuchte Email-Adresse enthÃ¤lt
 		 */
 		public Teilnehmer findByEmail(String emailAdresse) {
 			// Datenbankverbindung Ã¶ffnen
@@ -150,7 +150,7 @@ package de.hdm.itprojekt.server.db;
 				if(rs.next()) {
 					// Neues User Objekt anlegen
 					Teilnehmer t = new Teilnehmer();
-					// Das Objekt mit Daten aus der DB fÃ¼llen
+					// Das Objekt mit Daten aus der DB füllen
 					t.setId(rs.getInt("idTeilnehmer"));
 					t.setName(rs.getString("name"));
 					t.setZusatz(rs.getString("zusatz"));
@@ -167,9 +167,9 @@ package de.hdm.itprojekt.server.db;
 			}
 		
 		/**
-		 * Ausgabe aller Nutzer DatensÃ¤tze
+		 * Ausgabe aller Teilnehmer DatensÃ¤tze
 		 * 
-		 * @return Vektor mit allen registrierten Nutzern
+		 * @return Vektor mit allen registrierten Teilnehmer
 		 */
 		public ArrayList<Teilnehmer> findAllTeilnehmer() {
 			// Datenbankverbindung Ã¶ffnen
@@ -306,7 +306,7 @@ package de.hdm.itprojekt.server.db;
 		}
 		
 		/**
-		 * Diese Methode löscht einen Teilnehmer in der Datenbank die dazugehÃ¶rigen Nutzer-Referenzen in allen Tabellen
+		 * Diese Methode löscht einen Teilnehmer in der Datenbank die dazugehörigen Nutzer-Referenzen in allen Tabellen
 		 * 
 		 * @param u der zu löschende Teilnehmer 
 		 */
