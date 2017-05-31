@@ -11,16 +11,18 @@ public class ProjektmarktplatzMapper {
 	
 
 
-
+/*
+ * Test fÃ¼r Installation
+ */
 	
 	/**
 	 * <p>
-	 * Mapper-Klasse zur Abbildung von <code>Projektmarktplätzen</code> Objekten auf die Datenbank.
-	 * Über das Mapping können sowohl Objekte als auch deren Attribute in die Datenbank 
+	 * Mapper-Klasse zur Abbildung von <code>Projektmarktplï¿½tzen</code> Objekten auf die Datenbank.
+	 * ï¿½ber das Mapping kï¿½nnen sowohl Objekte als auch deren Attribute in die Datenbank 
 	 * geschrieben werden, als auch von der Datenbank ausgelesen werden.
 	 * </p>
 	 * <p>
-	 * Es werden Methoden zum Erstellen, Ãndern, Löschen und Ausgeben von Nutzern
+	 * Es werden Methoden zum Erstellen, ï¿½ndern, Lï¿½schen und Ausgeben von Nutzern
 	 * bereitgestellt.
 	 * </p>
 	 * @author Philipp
@@ -52,28 +54,28 @@ public class ProjektmarktplatzMapper {
 		/**
 		 * Suche eines Projektmarktplatzes anhand seiner einzigartigen ID.
 		 * 
-		 * @param id - Primärschlüssel von Projektmarktplatz
-		 * @return Projektmarktplatz Objekt, das die gesuchte ID enthält
+		 * @param id - Primï¿½rschlï¿½ssel von Projektmarktplatz
+		 * @return Projektmarktplatz Objekt, das die gesuchte ID enthï¿½lt
 		 */
 		public Projektmarktplatz findById(int id) {
-			// Datenbankverbindung öffnen
+			// Datenbankverbindung ï¿½ffnen
 			Connection con = DBConnection.connection();
 			
 			try {
 				// Neues SQL Statement anlegen
 				Statement stmt = con.createStatement();
-				// SQL Query ausführen
+				// SQL Query ausfï¿½hren
 				ResultSet rs = stmt.executeQuery("SELECT * FROM Projektmarktplatz " +
 						"WHERE idProjektmarktplatz = " + id);
 				// Bei Treffer 
 				if(rs.next()) {
 					// Neues Projektmarktplatz Objekt erzeugen
 					Projektmarktplatz pm = new Projektmarktplatz();
-					// Id und Bezeichnung mit den Daten aus der DB füllen
+					// Id und Bezeichnung mit den Daten aus der DB fï¿½llen
 					pm.setId(rs.getInt("idProjektmarktplatz"));
 					pm.setBezeichnung(rs.getString("bezeichnung"));
 				
-					// Objekt zurückgeben
+					// Objekt zurï¿½ckgeben
 					return pm;
 				}
 			} 
@@ -82,18 +84,18 @@ public class ProjektmarktplatzMapper {
 				e.printStackTrace();
 				return null;
 			}
-			// Falls nichts gefunden wurde null zurückgeben
+			// Falls nichts gefunden wurde null zurï¿½ckgeben
 			return null;
 		}
 		
 		/**
 		 * Suche eines Projektmarktplatz anhand seiner Bezeichnung.
-		 * Da die Bezeichnung eindeutig ist, können mehrere 
-		 * Ergebnisse ausgegeben werden. Alle gefundenen Projektmarktplätze werden in einem
+		 * Da die Bezeichnung eindeutig ist, kï¿½nnen mehrere 
+		 * Ergebnisse ausgegeben werden. Alle gefundenen Projektmarktplï¿½tze werden in einem
 		 * Vektor gespeichert.
 		 * 
 		 * @param bezeichnung Bezeichnung des gesuchten Projektmarktplatzes
-		 * @return Vektor mit allen zu den Suchparametern gefundenen Projektmarktplätzen.
+		 * @return Vektor mit allen zu den Suchparametern gefundenen Projektmarktplï¿½tzen.
 		 */
 		public ArrayList<Projektmarktplatz> findByBezeichnung(String bezeichnung) {
 			// Datenbankverbindung 
@@ -129,7 +131,7 @@ public class ProjektmarktplatzMapper {
 		/**
 		 * Ausgabe aller Projektmarktplatz DatensÃ¤tze
 		 * 
-		 * @return Vektor mit allen Projektmarktplätzen
+		 * @return Vektor mit allen Projektmarktplï¿½tzen
 		 */
 		
 		public ArrayList<Projektmarktplatz> findAllProjektmarkplaetze() {
@@ -165,25 +167,25 @@ public class ProjektmarktplatzMapper {
 		/**
 		 * Neuer Projektmarktplatz in der Datenbank anlegen.
 		 * 
-		 * @param pm Projektmarktplatz Objekt, das in die Datenbank eingefügt werden soll
+		 * @param pm Projektmarktplatz Objekt, das in die Datenbank eingefï¿½gt werden soll
 		 */
 		public Projektmarktplatz insert(Projektmarktplatz pm) {
 			
-			// Datenbankverbindung öffnen
+			// Datenbankverbindung ï¿½ffnen
 			Connection con = DBConnection.connection();
 			System.out.println("dbconnection: " + con);
 			
 			try {
 				// neues SQL Statement anlegen
 				Statement stmt = con.createStatement();
-				// SQL Query ausführen um die höchste id zu erhalten
+				// SQL Query ausfï¿½hren um die hï¿½chste id zu erhalten
 				ResultSet rs = stmt.executeQuery("SELECT MAX(idProjektmarktplatz) AS maxId FROM Projektmarktplatz");
 				if(rs.next()) {
-					// id um 1 erhöhen, damit ein neuer Eintrag erzeugt wird
+					// id um 1 erhï¿½hen, damit ein neuer Eintrag erzeugt wird
 					pm.setId(rs.getInt("maxId") + 1);
 					// neues SQL Statement
 					stmt = con.createStatement();
-					// SQL Query ausführen um Datensatz in DB zu schreiben
+					// SQL Query ausfï¿½hren um Datensatz in DB zu schreiben
 					stmt.executeUpdate("INSERT INTO Projektmarktplatz (idProjektmarktplatz, bezeichnung) " +
 							"VALUES "
 							+ "('" 
@@ -211,18 +213,18 @@ public class ProjektmarktplatzMapper {
 		}
 		
 		/**
-		 *Projektmarktplatzdaten eines bestehenden Projektmarktplatzes in der Datenbank ändern
+		 *Projektmarktplatzdaten eines bestehenden Projektmarktplatzes in der Datenbank ï¿½ndern
 		 * 
-		 * @param pm das bereits geänderte Projektmarktplatzobjekt
+		 * @param pm das bereits geï¿½nderte Projektmarktplatzobjekt
 		 */
 		public Projektmarktplatz update(Projektmarktplatz pm) {
-			// Datenbankverbindung öffnen
+			// Datenbankverbindung ï¿½ffnen
 			Connection con = DBConnection.connection();
 			
 			try {
 				// neues SQL Statement anlegen
 				Statement stmt = con.createStatement();
-				// SQL Query ausführen
+				// SQL Query ausfï¿½hren
 				stmt.executeUpdate("UPDATE Projektmarktplatz "
 						+ "SET bezeichnung = '" 
 						+ pm.getBezeichnung()
@@ -246,18 +248,18 @@ public class ProjektmarktplatzMapper {
 		}
 		
 		/**
-		 * Diese Methode löscht einen Projektmarktplatz in der Datenbank die dazugehÃ¶rigen Projektmarktplatz-Referenzen in allen Tabellen
+		 * Diese Methode lï¿½scht einen Projektmarktplatz in der Datenbank die dazugehÃ¶rigen Projektmarktplatz-Referenzen in allen Tabellen
 		 * 
-		 * @param pm der zu löschende Projektmarktplatz
+		 * @param pm der zu lï¿½schende Projektmarktplatz
 		 */
 		public void delete(Projektmarktplatz pm) {
-			// Datenbankverbindung öffnen
+			// Datenbankverbindung ï¿½ffnen
 			Connection con = DBConnection.connection();
 		
 			try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen
+			// SQL Query ausfï¿½hren
 			stmt.executeUpdate("DELETE FROM Projektmarktplatz WHERE idProjektmarktplatz = " + pm.getId());
 		}
 			// Error Handling
