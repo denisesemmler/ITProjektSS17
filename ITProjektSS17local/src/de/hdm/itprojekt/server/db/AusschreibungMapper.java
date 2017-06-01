@@ -4,7 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
+
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class AusschreibungMapper {
 	
@@ -279,6 +282,39 @@ public class AusschreibungMapper {
 					catch (SQLException e) {
 						e.printStackTrace();
 					}
+				}
+				
+//@Philipp --> Methode hinzugef�gt von Patricia
+				public Vector<Ausschreibung> findByProjekt(Projekt p) {
+					// Datenbankverbindung 
+					Connection con = DBConnection.connection();
+					//Ergebnis-ArrayList anlegen
+					Vector<Ausschreibung> result = new Vector<Ausschreibung>();
+					
+					try {
+						// neues SQL Statement anlegen
+						Statement stmt = con.createStatement();
+						// SQL Query ausführen
+						ResultSet rs = stmt.executeQuery("SELECT * FROM Ausschreibung " +
+								"WHERE Projekt_idProjekt = '" + p.getId() +"'");
+						// Für jeden gefundenen Treffer...
+						while (rs.next()) {
+							// ... neues Ausschreibungs Objekt anlegen
+							Ausschreibung a = new Ausschreibung();
+							a.setAusschreibungID(rs.getInt("idAusschreibung"));
+							a.setBezeichnung(rs.getString("name"));
+							a.setBeschreibung(rs.getString("beschreibung"));
+							a.setBewerbungsfrist(rs.getDate("bewerbungsfrist"));
+							// ... Objekt dem Ergebnisvektor hinzufügen
+							result.add(a);
+						}
+					}
+					// Error Handling
+					catch (SQLException e) {
+						e.printStackTrace();
+					}
+					// Ergebnis zurückgeben
+					return result;
 				}
 				
 			}
