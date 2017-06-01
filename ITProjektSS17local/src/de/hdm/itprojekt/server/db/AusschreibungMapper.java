@@ -264,7 +264,7 @@ public class AusschreibungMapper {
 				}
 				
 				/**
-				 * Diese Methode löscht eine Ausschreibung in der Datenbank die dazugehÃ¶rigen Ausschreibung-Referenzen in allen Tabellen
+				 * Diese Methode löscht eine Ausschreibung in der Datenbank die dazugehörigen Ausschreibung-Referenzen in allen Tabellen
 				 * 
 				 * @param a die zu löschende Ausschreibung
 				 */
