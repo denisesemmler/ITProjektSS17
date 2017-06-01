@@ -131,7 +131,7 @@ public class AusschreibungMapper {
 				 * @return Vektor mit allen Ausschreibungen
 				 */
 				
-				public ArrayList<Ausschreibung> findAllAusschreibungen() {
+				public ArrayList<Ausschreibung> findAllAusschreibungen() {		// 3) Abfrage von allen Ausschreibungen
 					// Datenbankverbindung öffnen
 					Connection con = DBConnection.connection();
 					//Ergebnis-ArrayList anlegen
