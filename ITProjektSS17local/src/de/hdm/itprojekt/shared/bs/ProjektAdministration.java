@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.itprojekt.shared.bo.Projekt;
+import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 @RemoteServiceRelativePath("projektadministration")
 public interface ProjektAdministration extends RemoteService {
@@ -25,6 +26,9 @@ public interface ProjektAdministration extends RemoteService {
 	public void updateProjekt(Projekt p) throws IllegalArgumentException;
 	
 	public void deleteProjekt(Projekt p) throws IllegalArgumentException;
+	
+	public Teilnehmer createTeilnehemr(String name, String zusatz, String emailAdresse, int rolle) throws IllegalArgumentException;
+
 	
 	
 	

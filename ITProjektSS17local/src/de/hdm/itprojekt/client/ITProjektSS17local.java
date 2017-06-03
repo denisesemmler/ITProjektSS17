@@ -1,6 +1,8 @@
 package de.hdm.itprojekt.client;
 
 import de.hdm.itprojekt.shared.FieldVerifier;
+import de.hdm.itprojekt.shared.bs.ProjektAdministration;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -31,7 +33,9 @@ public class ITProjektSS17local implements EntryPoint {
 	/**
 	 * Create a remote service proxy to talk to the server-side Greeting service.
 	 */
-	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+	//private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+	private final ProjektAdministration projektadministration = GWT.create(GreetingService.class);
+
 
 	/**
 	 * This is the entry point method.

@@ -5,6 +5,7 @@ import java.sql.Date;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.itprojekt.shared.bo.Projekt;
+import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 public interface ProjektAdministrationAsync {
 
@@ -16,5 +17,10 @@ public interface ProjektAdministrationAsync {
 	void updateProjekt(Projekt p, AsyncCallback<Void> callback);
 
 	void deleteProjekt(Projekt p, AsyncCallback<Void> callback);
+
+	void createTeilnehemr(String name, String zusatz, String emailAdresse, int rolle,
+			AsyncCallback<Teilnehmer> callback);
+	
+	
 
 }
