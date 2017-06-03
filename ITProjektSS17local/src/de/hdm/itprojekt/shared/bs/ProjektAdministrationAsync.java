@@ -18,8 +18,8 @@ public interface ProjektAdministrationAsync {
 
 	void deleteProjekt(Projekt p, AsyncCallback<Void> callback);
 
-	void createTeilnehemr(String name, String zusatz, String emailAdresse, int rolle,
-			AsyncCallback<Teilnehmer> callback);
+	void createTeilnehmer(String name, String zusatz, String emailAdresse, int rolle,
+			AsyncCallback<Teilnehmer> asyncCallback);
 	
 	
 
