@@ -13,7 +13,6 @@ import java.sql.Timestamp;
 public class Projekt extends BusinessObjekt{
 	
 	private static final long serialVersionUID = 1L;
-	private int idProjekt = 0;
 	private String 	projektName = "";
 	private String 	projektbeschreibung = "";
 	private Timestamp	startDatum;
