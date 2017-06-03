@@ -1,4 +1,4 @@
-package de.hdm.itprojekt.server.report;
+package de.hdm.itprojekt.server;
 
 import java.util.Date;
 import java.util.Vector;
