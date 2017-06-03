@@ -7,10 +7,10 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.itprojekt.server.db.AusschreibungMapper;
 import de.hdm.itprojekt.server.db.ProjektMapper;
+import de.hdm.itprojekt.shared.ProjektAdministration;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Projekt;
-import de.hdm.itprojekt.shared.bs.ProjektAdministration;
 
 @SuppressWarnings("serial")
 public class ProjektAdministrationImpl extends RemoteServiceServlet implements ProjektAdministration {

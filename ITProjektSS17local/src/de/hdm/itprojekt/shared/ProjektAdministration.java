@@ -1,4 +1,4 @@
-package de.hdm.itprojekt.shared.bs;
+package de.hdm.itprojekt.shared;
 
 import java.sql.Date;
 
