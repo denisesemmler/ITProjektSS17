@@ -134,7 +134,7 @@ public class AusschreibungMapper {
 				 * @return Vektor mit allen Ausschreibungen
 				 */
 				
-				public ArrayList<Ausschreibung> findAllAusschreibungen() {
+				public ArrayList<Ausschreibung> findAllAusschreibungen() {		// 3) Abfrage von allen Ausschreibungen
 					// Datenbankverbindung Ã¶ffnen
 					Connection con = DBConnection.connection();
 					//Ergebnis-ArrayList anlegen
@@ -264,7 +264,7 @@ public class AusschreibungMapper {
 				}
 				
 				/**
-				 * Diese Methode löscht eine Ausschreibung in der Datenbank die dazugehÃ¶rigen Ausschreibung-Referenzen in allen Tabellen
+				 * Diese Methode löscht eine Ausschreibung in der Datenbank die dazugehörigen Ausschreibung-Referenzen in allen Tabellen
 				 * 
 				 * @param a die zu löschende Ausschreibung
 				 */
