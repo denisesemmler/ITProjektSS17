@@ -7,9 +7,11 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.itprojekt.server.db.AusschreibungMapper;
 import de.hdm.itprojekt.server.db.ProjektMapper;
+import de.hdm.itprojekt.server.db.TeilnehmerMapper;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Projekt;
+import de.hdm.itprojekt.shared.bo.Teilnehmer;
 import de.hdm.itprojekt.shared.bs.ProjektAdministration;
 
 @SuppressWarnings("serial")
@@ -17,6 +19,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 	private ProjektMapper pMapper = null;
 	private AusschreibungMapper aMapper = null;
+	private TeilnehmerMapper tMapper = null;
+
 
 	public ProjektAdministrationImpl() throws IllegalArgumentException {
 		/*
@@ -30,7 +34,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	public void init() throws IllegalArgumentException {
 		pMapper = ProjektMapper.projektMapper();
 		aMapper = AusschreibungMapper.ausschreibungMapper();
-
+		tMapper = TeilnehmerMapper.teilnehmerMapper();
 	}
 
 	@Override
@@ -94,6 +98,24 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 */
 	private Vector<Ausschreibung> getAusschreibung(Projekt p) {
 		return aMapper.findByProjekt(p);
+	}
+	
+	public Teilnehmer createTeilnehemr(String name, String zusatz, String emailAdresse, int rolle) throws IllegalArgumentException {
+		
+		Teilnehmer teilnehmer = new Teilnehmer();
+		
+		teilnehmer.setName(name);
+		teilnehmer.setZusatz(zusatz);
+		teilnehmer.setEmailAdresse(emailAdresse);
+		teilnehmer.setRolle(rolle);
+		
+		Teilnehmer t = this.tMapper.insert(teilnehmer);
+		
+		
+		
+		return t;
+		
+		
 	}
 
 }

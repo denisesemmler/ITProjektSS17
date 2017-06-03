@@ -2,10 +2,12 @@ package de.hdm.itprojekt.shared.bs;
 
 import java.sql.Date;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.itprojekt.shared.bo.Projekt;
+import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 @RemoteServiceRelativePath("projektadministration")
 public interface ProjektAdministration extends RemoteService {
@@ -25,6 +27,9 @@ public interface ProjektAdministration extends RemoteService {
 	public void updateProjekt(Projekt p) throws IllegalArgumentException;
 	
 	public void deleteProjekt(Projekt p) throws IllegalArgumentException;
+	
+	public Teilnehmer createTeilnehmer(String name, String zusatz, String emailAdresse, int rolle);
+
 	
 	
 	
