@@ -1,11 +1,16 @@
 package de.hdm.itprojekt.shared.bo;
 
+/**
+ * Umsetzung der Projektmarktplatzklasse. Als Attribute dienen ID und Bezeichnung
+ * @author denisesemmler
+ */
+
 public class Projektmarktplatz extends BusinessObjekt {
 	
 	private static final long serialVersionUID = 1L;
 	private int idProjektmarktplatz = 0; 
-	private String Bezeichnung = null;
-
+	private String Bezeichnung = "";
+	
 	/**
 	 * @return  bezeichnung
 	 */
@@ -35,3 +40,7 @@ public class Projektmarktplatz extends BusinessObjekt {
 	}
 
 }
+
+
+
+
