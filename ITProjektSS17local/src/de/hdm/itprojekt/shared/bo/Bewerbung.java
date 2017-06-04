@@ -3,7 +3,7 @@
  */
 package de.hdm.itprojekt.shared.bo;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * @author Denise
@@ -13,18 +13,18 @@ public class Bewerbung extends BusinessObjekt{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Date erstellDatum = null;
+	private Timestamp erstellDatum = null;
 	private String bewerbungsText= "";
 	/**
 	 * @return the erstellDatum
 	 */
-	public Date getErstellDatum() {
+	public Timestamp getErstellDatum() {
 		return erstellDatum;
 	}
 	/**
 	 * @param erstellDatum the erstellDatum to set
 	 */
-	public void setErstellDatum(Date erstellDatum) {
+	public void setErstellDatum(Timestamp erstellDatum) {
 		this.erstellDatum = erstellDatum;
 	}
 	/**
