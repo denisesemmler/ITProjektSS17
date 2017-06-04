@@ -3,7 +3,7 @@
  */
 package de.hdm.itprojekt.shared.bo;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * @author Denise
@@ -12,19 +12,32 @@ import java.sql.Date;
 public class Bewerbung extends BusinessObjekt{
 	
 	private static final long serialVersionUID = 1L;
-	
-	private Date erstellDatum = null;
+	private Timestamp erstellDatum = null;
 	private String bewerbungsText= "";
+	
+
+	/**
+	 * Fremdschlüsselbeziehung zu Teilnehmer
+	 */
+	private int idTeilnehmer;
+	
+	/**
+	 * Fremdschlüsselbeziehung zu Ausschreibung
+	 */
+	private int ausschreibungID;
+	
+	
+	
 	/**
 	 * @return the erstellDatum
 	 */
-	public Date getErstellDatum() {
+	public Timestamp getErstellDatum() {
 		return erstellDatum;
 	}
 	/**
 	 * @param erstellDatum the erstellDatum to set
 	 */
-	public void setErstellDatum(Date erstellDatum) {
+	public void setErstellDatum(Timestamp erstellDatum) {
 		this.erstellDatum = erstellDatum;
 	}
 	/**
@@ -38,6 +51,30 @@ public class Bewerbung extends BusinessObjekt{
 	 */
 	public void setBewerbungsText(String bewerbungsText) {
 		this.bewerbungsText = bewerbungsText;
+	}
+	/**
+	 * @return the ausschreibungID
+	 */
+	public int getAusschreibungID() {
+		return ausschreibungID;
+	}
+	/**
+	 * @param ausschreibungID the ausschreibungID to set
+	 */
+	public void setAusschreibungID(int ausschreibungID) {
+		this.ausschreibungID = ausschreibungID;
+	}
+	/**
+	 * @return the idTeilnehmer
+	 */
+	public int getIdTeilnehmer() {
+		return idTeilnehmer;
+	}
+	/**
+	 * @param idTeilnehmer the idTeilnehmer to set
+	 */
+	public void setIdTeilnehmer(int idTeilnehmer) {
+		this.idTeilnehmer = idTeilnehmer;
 	}
 	
 	
