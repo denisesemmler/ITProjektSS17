@@ -12,9 +12,22 @@ import java.sql.Timestamp;
 public class Bewerbung extends BusinessObjekt{
 	
 	private static final long serialVersionUID = 1L;
-	
 	private Timestamp erstellDatum = null;
 	private String bewerbungsText= "";
+	
+
+	/**
+	 * Fremdschlüsselbeziehung zu Teilnehmer
+	 */
+	private int idTeilnehmer;
+	
+	/**
+	 * Fremdschlüsselbeziehung zu Ausschreibung
+	 */
+	private int ausschreibungID;
+	
+	
+	
 	/**
 	 * @return the erstellDatum
 	 */
@@ -38,6 +51,30 @@ public class Bewerbung extends BusinessObjekt{
 	 */
 	public void setBewerbungsText(String bewerbungsText) {
 		this.bewerbungsText = bewerbungsText;
+	}
+	/**
+	 * @return the ausschreibungID
+	 */
+	public int getAusschreibungID() {
+		return ausschreibungID;
+	}
+	/**
+	 * @param ausschreibungID the ausschreibungID to set
+	 */
+	public void setAusschreibungID(int ausschreibungID) {
+		this.ausschreibungID = ausschreibungID;
+	}
+	/**
+	 * @return the idTeilnehmer
+	 */
+	public int getIdTeilnehmer() {
+		return idTeilnehmer;
+	}
+	/**
+	 * @param idTeilnehmer the idTeilnehmer to set
+	 */
+	public void setIdTeilnehmer(int idTeilnehmer) {
+		this.idTeilnehmer = idTeilnehmer;
 	}
 	
 	
