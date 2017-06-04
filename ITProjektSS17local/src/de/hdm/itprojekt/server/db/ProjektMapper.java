@@ -72,8 +72,8 @@ public class ProjektMapper {
 						p.setId(rs.getInt("idProjekt"));
 						p.setProjektName(rs.getString("name"));
 						p.setProjektbeschreibung(rs.getString("beschreibung"));
-						p.setStartDatum(rs.getDate("startdatum"));
-						p.setEndDatum(rs.getDate("enddatum"));
+						p.setStartDatum(rs.getTimestamp("startdatum"));
+						p.setEndDatum(rs.getTimestamp("enddatum"));
 						// Objekt zur�ckgeben
 						return p;
 					}
@@ -115,8 +115,8 @@ public class ProjektMapper {
 						p.setId(rs.getInt("idProjekt"));
 						p.setProjektName(rs.getString("name"));
 						p.setProjektbeschreibung(rs.getString("beschreibung"));
-						p.setStartDatum(rs.getDate("startdatum"));
-						p.setEndDatum(rs.getDate("enddatum"));
+						p.setStartDatum(rs.getTimestamp("startdatum"));
+						p.setEndDatum(rs.getTimestamp("enddatum"));
 						// ... Objekt dem Ergebnisvektor hinzufügen
 						result.add(p);
 					}
@@ -154,8 +154,8 @@ public class ProjektMapper {
 						p.setId(rs.getInt("idProjekt"));
 						p.setProjektName(rs.getString("name"));
 						p.setProjektbeschreibung(rs.getString("beschreibung"));
-						p.setStartDatum(rs.getDate("startdatum"));
-						p.setEndDatum(rs.getDate("enddatum"));
+						p.setStartDatum(rs.getTimestamp("startdatum"));
+						p.setEndDatum(rs.getTimestamp("enddatum"));
 						// ... Objekt dem Ergebnisvektor hinzufügen
 						result.add(p);
 					}
