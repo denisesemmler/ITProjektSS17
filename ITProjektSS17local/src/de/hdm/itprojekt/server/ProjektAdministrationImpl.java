@@ -1,6 +1,5 @@
 package de.hdm.itprojekt.server;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Vector;
 
@@ -10,6 +9,9 @@ import de.hdm.itprojekt.server.db.AusschreibungMapper;
 import de.hdm.itprojekt.server.db.ProjektMapper;
 import de.hdm.itprojekt.server.db.TeilnehmerMapper;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Beteiligung;
+import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
@@ -43,8 +45,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 			throws IllegalArgumentException {
 
 		Projekt p = new Projekt();
-		p.setProjektName(projektName);
-		p.setProjektbeschreibung(projektBeschreibung);
+		p.setName(projektName);
+		p.setBeschreibung(projektBeschreibung);
 		p.setStartDatum(startDatum);
 		p.setEndDatum(endDatum);
 
@@ -107,7 +109,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		
 		teilnehmer.setName(name);
 		teilnehmer.setZusatz(zusatz);
-		teilnehmer.setEmailAdresse(emailAdresse);
+		teilnehmer.setEmail(emailAdresse);
 		teilnehmer.setRolle(rolle);
 		
 		Teilnehmer t = this.tMapper.insert(teilnehmer);
