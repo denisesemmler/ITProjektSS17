@@ -67,11 +67,13 @@ public class AusschreibungMapper {
 							// Neues Ausschreibung Objekt erzeugen
 							Ausschreibung a = new Ausschreibung();
 							// Id, Bezeichnung, Ausschreibungsbeschreibung, und bewberungsfrist den Daten aus der DB füllen
-							a.set(rs.getInt("idAusschreibung"));
-							a.setBezeichnung(rs.getString("name"));
+							a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
-							a.setBewerbungsfrist(rs.getDate("bewerbungsfrist"));
-						
+							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
+							a.setStatus(rs.getString("status"));
+							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
+							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
 							// Objekt zurückgeben
 							return a;
 						}
@@ -110,10 +112,13 @@ public class AusschreibungMapper {
 						while (rs.next()) {
 							// ... neues Ausschreibungs Objekt anlegen
 							Ausschreibung a = new Ausschreibung();
-							a.setAusschreibungID(rs.getInt("idAusschreibung"));
-							a.setBezeichnung(rs.getString("name"));
+							a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
-							a.setBewerbungsfrist(rs.getDate("bewerbungsfrist"));
+							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
+							a.setStatus(rs.getString("status"));
+							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
+							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
 							// ... Objekt dem Ergebnisvektor hinzufÃ¼gen
 							result.add(a);
 						}
@@ -148,10 +153,13 @@ public class AusschreibungMapper {
 						// FÃ¼r jeden Eintrag neues Ausschreibungs Objekt erzeugen
 						while(rs.next()) {
 							Ausschreibung a = new Ausschreibung();
-							a.setAusschreibungID(rs.getInt("idAusschreibung"));
-							a.setBezeichnung(rs.getString("name"));
+							a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
-							a.setBewerbungsfrist(rs.getDate("bewerbungsfrist"));
+							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
+							a.setStatus(rs.getString("status"));
+							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
+							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
 							// ... Objekt dem Ergebnisvektor hinzufÃ¼gen
 							result.add(a);
 						}
@@ -182,32 +190,44 @@ public class AusschreibungMapper {
 						ResultSet rs = stmt.executeQuery("SELECT MAX(idAusschreibung) AS maxId FROM Ausschreibung");
 						if(rs.next()) {
 							// id um 1 erhöhen, damit ein neuer Eintrag erzeugt wird
-							a.setAusschreibungID(rs.getInt("maxId") + 1);
+							a.setIdAusschreibung(rs.getInt("maxId") + 1);
 							// neues SQL Statement
 							stmt = con.createStatement();
 							// SQL Query ausführen um Datensatz in DB zu schreiben
-							stmt.executeUpdate("INSERT INTO Ausschreibung (idAusschreibung, name, beschreibung, bewerbungsfrist) " +
+							stmt.executeUpdate("INSERT INTO Ausschreibung (idAusschreibung, titel, beschreibung, bewerbungsfrist, status, Projekt_idProjekt, Profil_idSuchprofil) " +
 									"VALUES "
 									+ "('" 
-									+ a.getAusschreibungID() 
+									+ a.getIdAusschreibung() 
 									+ "', '" 
-									+ a.getBezeichnung()
+									+ a.getTitel()
 									+ "', '" 
 									+ a.getBeschreibung()
 									+ "', '" 
 									+ a.getBewerbungsfrist()
+									+ "', '" 
+									+ a.getStatus()
+									+ "', '" 
+									+ a.getProjekt_idProjekt()
+									+ "', '" 
+									+ a.getProfil_idSuchprofil()
 									+ "')");	
 							
-							System.out.println("INSERT INTO Ausschreibung (idAusschreibung, name, beschreibung, bewerbungsfrist) " +
+							System.out.println("INSERT INTO Ausschreibung (idAusschreibung, titel, beschreibung, bewerbungsfrist, status, Projekt_idProjekt, Profil_idSuchprofil) " +
 									"VALUES "
 									+ "('" 
-									+ a.getAusschreibungID() 
+									+ a.getIdAusschreibung() 
 									+ "', '" 
-									+ a.getBezeichnung()
+									+ a.getTitel()
 									+ "', '" 
 									+ a.getBeschreibung()
 									+ "', '" 
 									+ a.getBewerbungsfrist()
+									+ "', '" 
+									+ a.getStatus()
+									+ "', '" 
+									+ a.getProjekt_idProjekt()
+									+ "', '" 
+									+ a.getProfil_idSuchprofil()
 									+ "')");	
 						}
 					}
@@ -232,25 +252,29 @@ public class AusschreibungMapper {
 						Statement stmt = con.createStatement();
 						// SQL Query ausführen
 						stmt.executeUpdate("UPDATE Ausschreibung "
-								+ "SET name = '" 
-								+ a.getBezeichnung()
+								+ "SET titel = '" 
+								+ a.getTitel()
 								+ "', beschreibung = '" 
 								+ a.getBeschreibung()
 								+ "', bewerbungsfrist= '" 
 								+ a.getBewerbungsfrist()
+								+ "', status= '" 
+								+ a.getStatus()
 								+ "' WHERE idAusschreibung = " 
-								+ a.getAusschreibungID());
+								+ a.getIdAusschreibung());
 						
 						
 						System.out.println("UPDATE Ausschreibung "
-								+ "SET name = '" 
-								+ a.getBezeichnung()
+								+ "SET titel = '" 
+								+ a.getTitel()
 								+ "', beschreibung = '" 
 								+ a.getBeschreibung()
 								+ "', bewerbungsfrist= '" 
 								+ a.getBewerbungsfrist()
+								+ "', status= '" 
+								+ a.getStatus()
 								+ "' WHERE idAusschreibung = " 
-								+ a.getAusschreibungID());
+								+ a.getIdAusschreibung());
 						
 					}
 					// Error Handling
@@ -274,7 +298,7 @@ public class AusschreibungMapper {
 					// neues SQL Statement anlegen
 					Statement stmt = con.createStatement();
 					// SQL Query ausführen
-					stmt.executeUpdate("DELETE FROM Ausschreibung WHERE idAusschreibung = " + a.getAusschreibungID());
+					stmt.executeUpdate("DELETE FROM Ausschreibung WHERE idAusschreibung = " + a.getIdAusschreibung());
 				}
 					// Error Handling
 					catch (SQLException e) {
@@ -294,15 +318,18 @@ public class AusschreibungMapper {
 						Statement stmt = con.createStatement();
 						// SQL Query ausfÃ¼hren
 						ResultSet rs = stmt.executeQuery("SELECT * FROM Ausschreibung " +
-								"WHERE Projekt_idProjekt = '" + p.getId() +"'");
+								"WHERE Projekt_idProjekt = '" + p.getIdProjekt() +"'");
 						// FÃ¼r jeden gefundenen Treffer...
 						while (rs.next()) {
 							// ... neues Ausschreibungs Objekt anlegen
 							Ausschreibung a = new Ausschreibung();
-							a.setAusschreibungID(rs.getInt("idAusschreibung"));
-							a.setBezeichnung(rs.getString("name"));
+							a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
-							a.setBewerbungsfrist(rs.getDate("bewerbungsfrist"));
+							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
+							a.setStatus(rs.getString("status"));
+							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
+							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
 							// ... Objekt dem Ergebnisvektor hinzufÃ¼gen
 							result.add(a);
 						}
