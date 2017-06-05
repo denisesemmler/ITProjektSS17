@@ -1,5 +1,7 @@
 package de.hdm.itprojekt.shared;
 
-public interface EditorService {
+import com.google.gwt.user.client.rpc.RemoteService;
+
+public interface EditorService extends RemoteService {
 
 }
