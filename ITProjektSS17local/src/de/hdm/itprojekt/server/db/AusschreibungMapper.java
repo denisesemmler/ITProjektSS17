@@ -66,7 +66,7 @@ public class AusschreibungMapper {
 						if(rs.next()) {
 							// Neues Ausschreibung Objekt erzeugen
 							Ausschreibung a = new Ausschreibung();
-							// Id, Bezeichnung, Ausschreibungsbeschreibung, und bewberungsfrist den Daten aus der DB füllen
+							// Id, Bezeichnung, Ausschreibungsbeschreibung, und bewberungsfrist den Daten aus der DB füllen.
 							a.setIdAusschreibung(rs.getInt("idAusschreibung"));
 							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
