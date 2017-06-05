@@ -39,7 +39,21 @@ public class EigenschaftMapper {
 	 * EigenschaftMapper per <code>new</code> erzeugt werden kann.
 	 */
 	
+	
+	
 	private EigenschaftMapper() {
+	}
+	
+	/**
+	 * Singleton
+	 * @return
+	 */
+	public static EigenschaftMapper eigenschaftMapper() {
+		if(eigenschaftMapper == null) {
+			eigenschaftMapper = new EigenschaftMapper();
+		}
+		
+		return eigenschaftMapper;
 	}
 
 	
