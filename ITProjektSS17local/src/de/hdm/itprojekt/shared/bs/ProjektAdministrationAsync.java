@@ -1,6 +1,6 @@
 package de.hdm.itprojekt.shared.bs;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -11,7 +11,7 @@ public interface ProjektAdministrationAsync {
 
 	void init(AsyncCallback<Void> callback);
 
-	void createProjekt(String projektName, String projektBeschreibung, Date startDatum, Date endDatum,
+	void createProjekt(String projektName, String projektBezeichnung, Timestamp startDatum, Timestamp endDatum,
 			AsyncCallback<Projekt> callback);
 
 	void updateProjekt(Projekt p, AsyncCallback<Void> callback);

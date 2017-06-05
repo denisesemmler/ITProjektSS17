@@ -2,9 +2,6 @@ package de.hdm.itprojekt.shared.report;
 
 import java.util.Vector;
 
-import de.hdm.thies.bankProjekt.shared.report.AllAccountsOfCustomerReport;
-import de.hdm.thies.bankProjekt.shared.report.Row;
-
 public class HTMLReportWriter extends ReportWriter{
 
 	

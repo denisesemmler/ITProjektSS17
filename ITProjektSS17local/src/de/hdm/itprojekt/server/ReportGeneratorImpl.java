@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bs.ProjektAdministration;
 import de.hdm.itprojekt.shared.report.AlleAusschreibungen;
 import de.hdm.itprojekt.shared.report.Column;
 import de.hdm.itprojekt.shared.report.Row;
@@ -14,6 +15,7 @@ public class ReportGeneratorImpl {
 	//Verbindung zu Marktplatzadministration fehlt
 	
 	//Instantiierung von Administration fehlt
+	ProjektAdministration administration;
 	
 	//get und set Administration fehlt
 	
@@ -76,23 +78,23 @@ public class ReportGeneratorImpl {
 		     * Nun werden sÃ¤mtliche Konten des Kunden ausgelesen und deren Kto.-Nr. und
 		     * Kontostand sukzessive in die Tabelle eingetragen.
 		     */
-		    Vector<Ausschreibung> ausschreibungen = this.administration.getAusschreibungenOf(a); //Get Ausschreibungen of Marktplatz
-
-		    for (Ausschreibung a : ausschreibungen) {
-		      
-		    	// Eine leere Zeile anlegen.
-		      Row ausschreibungRow = new Row();
-
-		      // Erste Spalte: Bezeichnung hinzufügen
-		      ausschreibungRow.addColumn(new Column(String.valueOf(a.getBezeichnung())));
-
-		      // Zweite Spalte: Beschreibung hinzufügen			Bank Verwaltung wird nach Banalnce gefragt
-		      ausschreibungRow.addColumn(new Column(String.valueOf(this.administration
-		          .getBeschreibung(a))));
-
-		      // hinzufügen der Zeile an den Report
-		      result.addRow(ausschreibungRow);
-		    }
+//		    Vector<Ausschreibung> ausschreibungen = this.administration.getAusschreibungenOf(n); //Get Ausschreibungen of Marktplatz
+//
+//		    for (Ausschreibung a : ausschreibungen) {
+//		      
+//		    	// Eine leere Zeile anlegen.
+//		      Row ausschreibungRow = new Row();
+//
+//		      // Erste Spalte: Bezeichnung hinzufügen
+//		      ausschreibungRow.addColumn(new Column(String.valueOf(a.getBezeichnung())));
+//
+//		      // Zweite Spalte: Beschreibung hinzufügen			Bank Verwaltung wird nach Banalnce gefragt
+//		      ausschreibungRow.addColumn(new Column(String.valueOf(this.administration
+//		          .getBeschreibung(a))));
+//
+//		      // hinzufügen der Zeile an den Report
+//		      result.addRow(ausschreibungRow);
+//		    }
 
 		    /*
 		     * Rückgabe des fertigen Report

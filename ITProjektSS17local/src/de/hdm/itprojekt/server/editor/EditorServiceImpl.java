@@ -20,7 +20,7 @@ public class EditorServiceImpl  extends RemoteServiceServlet implements EditorSe
 	//Instanzen der DB-Mapper
 	private AusschreibungMapper aMapper = AusschreibungMapper.ausschreibungMapper();
 	private BeteiligungMapper bMapper = BeteiligungMapper.beteiligungMapper();
-	private EigenschaftMapper eMapper = EigenschaftMapper.eigenschaftMapper();
+	//private EigenschaftMapper eMapper = EigenschaftMapper.eigenschaftMapper();
 	private ProfilMapper pMapper = ProfilMapper.profilMapper();
 	private ProjektMapper proMapper = ProjektMapper.projektMapper();
 	private ProjektmarktplatzMapper pmMapper = ProjektmarktplatzMapper.projektmarktplatzMapper();
