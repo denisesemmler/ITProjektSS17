@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  *
  */
 
-public class Beteiligung {
+public class Beteiligung extends BusinessObjekt {
 	
 	private static final long serialVersionUID = 1L;
 	
