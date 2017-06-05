@@ -17,26 +17,22 @@ public class Beteiligung extends BusinessObjekt {
 	 * Attribute erstellen 
 	 */
 	private int idBeteiligung 		= 0;
-	private float bewertung 		= 0;
 	private String stellungnahme 	= "";
-	private String projektName 		= "";
 	public Profil ausschreibender;
 	public Profil bewerbender;
-	
-
+	private String projektName;
 	
 	/**
-	 * @return the bewertung
+	 * Fremdschlüsselbeziehung zu Projekt
 	 */
-	public float getBewertung() {
-		return bewertung;
-	}
+	private int idProjekt;
+	
 	/**
-	 * @param bewertung the bewertung to set
+	 * Fremdschlüsselbeziehung zu Bewerbung zum Abrufen der Bewertung
 	 */
-	public void setBewertung(float bewertung) {
-		this.bewertung = bewertung;
-	}
+	private int idBewerbung;
+	
+	
 	/**
 	 * @return the stellungnahme
 	 */
@@ -96,6 +92,30 @@ public class Beteiligung extends BusinessObjekt {
 	 */
 	public void setProjektName(String projektName) {
 		this.projektName = projektName;
+	}
+	/**
+	 * @return the idProjekt
+	 */
+	public int getIdProjekt() {
+		return idProjekt;
+	}
+	/**
+	 * @param idProjekt the idProjekt to set
+	 */
+	public void setIdProjekt(int idProjekt) {
+		this.idProjekt = idProjekt;
+	}
+	/**
+	 * @return the idBewerbung
+	 */
+	public int getIdBewerbung() {
+		return idBewerbung;
+	}
+	/**
+	 * @param idBewerbung the idBewerbung to set
+	 */
+	public void setIdBewerbung(int idBewerbung) {
+		this.idBewerbung = idBewerbung;
 	}
 	
 	
