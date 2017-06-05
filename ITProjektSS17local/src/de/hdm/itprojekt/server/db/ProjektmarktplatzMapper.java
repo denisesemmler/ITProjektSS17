@@ -6,13 +6,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 
+/*
+ * 
+ */
+
 
 public class ProjektmarktplatzMapper {
 	
 
 
 /*
- * Test für Installation
+ * Test f�r Installation
  */
 	
 	/**
@@ -74,6 +78,7 @@ public class ProjektmarktplatzMapper {
 					// Id und Bezeichnung mit den Daten aus der DB f�llen
 					pm.setId(rs.getInt("idProjektmarktplatz"));
 					pm.setBezeichnung(rs.getString("bezeichnung"));
+					pm.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 				
 					// Objekt zur�ckgeben
 					return pm;
@@ -116,6 +121,7 @@ public class ProjektmarktplatzMapper {
 					// ... Id und Bezeichnung mit den Daten aus der DB füllen
 					pm.setId(rs.getInt("idProjektmarktplatz"));
 					pm.setBezeichnung(rs.getString("bezeichnung"));
+					pm.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 					// ... Objekt dem Ergebnisvektor hinzufügen
 					result.add(pm);
 				}
@@ -152,6 +158,7 @@ public class ProjektmarktplatzMapper {
 					Projektmarktplatz pm = new Projektmarktplatz();
 					pm.setId(rs.getInt("idProjektmarktplatz"));
 					pm.setBezeichnung(rs.getString("bezeichnung"));
+					pm.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 					// Projektmarktplatz dem Ergebnisvektor hinzufügen
 					result.add(pm);
 				}
@@ -186,12 +193,14 @@ public class ProjektmarktplatzMapper {
 					// neues SQL Statement
 					stmt = con.createStatement();
 					// SQL Query ausf�hren um Datensatz in DB zu schreiben
-					stmt.executeUpdate("INSERT INTO Projektmarktplatz (idProjektmarktplatz, bezeichnung) " +
+					stmt.executeUpdate("INSERT INTO Projektmarktplatz (idProjektmarktplatz, bezeichnung, ) " +
 							"VALUES "
 							+ "('" 
 							+ pm.getId() 
 							+ "', '" 
 							+ pm.getBezeichnung()
+							+ "', '" 
+							+ pm.getTeilnehmer_idTeilnehmer()
 							+ "', '" 
 							+ "')");	
 					

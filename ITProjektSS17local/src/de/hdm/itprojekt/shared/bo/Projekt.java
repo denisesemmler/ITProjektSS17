@@ -13,44 +13,21 @@ import java.sql.Timestamp;
 public class Projekt extends BusinessObjekt{
 	
 	private static final long serialVersionUID = 1L;
-	private String 	projektName = "";
-	private String 	projektbeschreibung = "";
+	private String 	name = "";
+	private String 	beschreibung = "";
 	private Timestamp	startDatum;
 	private Timestamp	endDatum;
+	private int Projektmarktplatz_idProjektmarkplatz=0;
 
 	/**
 	 * Fremschlüsselbeziehung zu Teilnehmer
 	 */
-	private int idTeilnehmer;
+	private int teilnehmer_idTeilnehmer;
 	
 	/**
 	 * Fremschlüsselbeziehung zu Projekt
 	 */
 	private int idProjekt;
-	/**
-	 * @return the projektName
-	 */
-	public String getProjektName() {
-		return projektName;
-	}
-	/**
-	 * @param projektName the projektName to set
-	 */
-	public void setProjektName(String projektName) {
-		this.projektName = projektName;
-	}
-	/**
-	 * @return the projektbeschreibung
-	 */
-	public String getProjektbeschreibung() {
-		return projektbeschreibung;
-	}
-	/**
-	 * @param projektbeschreibung the projektbeschreibung to set
-	 */
-	public void setProjektbeschreibung(String projektbeschreibung) {
-		this.projektbeschreibung = projektbeschreibung;
-	}
 	/**
 	 * @return the startDatum
 	 */
@@ -78,14 +55,14 @@ public class Projekt extends BusinessObjekt{
 	/**
 	 * @return the idTeilnehmer
 	 */
-	public int getIdTeilnehmer() {
-		return idTeilnehmer;
+	public int getTeilnehmer_idTeilnehmer() {
+		return teilnehmer_idTeilnehmer;
 	}
 	/**
 	 * @param idTeilnehmer the idTeilnehmer to set
 	 */
-	public void setIdTeilnehmer(int idTeilnehmer) {
-		this.idTeilnehmer = idTeilnehmer;
+	public void setTeilnehmer_idTeilnehmer(int idTeilnehmer) {
+		this.teilnehmer_idTeilnehmer = teilnehmer_idTeilnehmer;
 	}
 	/**
 	 * @return the idProjekt
@@ -98,6 +75,42 @@ public class Projekt extends BusinessObjekt{
 	 */
 	public void setIdProjekt(int idProjekt) {
 		this.idProjekt = idProjekt;
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	/**
+	 * @return the beschreibung
+	 */
+	public String getBeschreibung() {
+		return beschreibung;
+	}
+	/**
+	 * @param beschreibung the beschreibung to set
+	 */
+	public void setBeschreibung(String beschreibung) {
+		this.beschreibung = beschreibung;
+	}
+	/**
+	 * @return the projektmarktplatz_idProjektmarkplatz
+	 */
+	public int getProjektmarktplatz_idProjektmarkplatz() {
+		return Projektmarktplatz_idProjektmarkplatz;
+	}
+	/**
+	 * @param projektmarktplatz_idProjektmarkplatz the projektmarktplatz_idProjektmarkplatz to set
+	 */
+	public void setProjektmarktplatz_idProjektmarkplatz(int projektmarktplatz_idProjektmarkplatz) {
+		Projektmarktplatz_idProjektmarkplatz = projektmarktplatz_idProjektmarkplatz;
 	}
 	
 	

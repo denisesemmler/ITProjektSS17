@@ -25,14 +25,12 @@ public class AusschreibungMapper {
 			 * @author Philipp
 			 */	
 				private static AusschreibungMapper ausschreibungMapper = null;
-				
-				
+								
 				/**
 				 * Privater Konstruktor verhindert das Erzeugen neuer Instanzen
 				 * mittels des <code>new</code> Keywords.
 				 */
 				private AusschreibungMapper() {
-					
 				}
 				
 				/**
@@ -69,7 +67,7 @@ public class AusschreibungMapper {
 							// Neues Ausschreibung Objekt erzeugen
 							Ausschreibung a = new Ausschreibung();
 							// Id, Bezeichnung, Ausschreibungsbeschreibung, und bewberungsfrist den Daten aus der DB füllen
-							a.setAusschreibungID(rs.getInt("idAusschreibung"));
+							a.set(rs.getInt("idAusschreibung"));
 							a.setBezeichnung(rs.getString("name"));
 							a.setBeschreibung(rs.getString("beschreibung"));
 							a.setBewerbungsfrist(rs.getDate("bewerbungsfrist"));
