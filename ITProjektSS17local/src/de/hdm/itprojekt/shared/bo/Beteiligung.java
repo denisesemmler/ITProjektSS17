@@ -1,8 +1,5 @@
 package de.hdm.itprojekt.shared.bo;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-
 /**
  * Klasse Beteiligung um Verträge zwischen  Bewerbung und Ausschreibenden zu ermöglichen
  * @author Denise
@@ -17,26 +14,19 @@ public class Beteiligung extends BusinessObjekt {
 	 * Attribute erstellen 
 	 */
 	private int idBeteiligung 		= 0;
-	private float bewertung 		= 0;
 	private String stellungnahme 	= "";
-	private String projektName 		= "";
-	public Profil ausschreibender;
-	public Profil bewerbender;
-	
-
 	
 	/**
-	 * @return the bewertung
+	 * Fremdschlüsselbeziehung zu Projekt
 	 */
-	public float getBewertung() {
-		return bewertung;
-	}
+	public int projektID;
+	
 	/**
-	 * @param bewertung the bewertung to set
+	 * Fremdschlüsselbeziehung zu Bewerbung zum Abrufen der Bewertung
 	 */
-	public void setBewertung(float bewertung) {
-		this.bewertung = bewertung;
-	}
+	private int bewerbungID;
+	
+	
 	/**
 	 * @return the stellungnahme
 	 */
@@ -49,30 +39,8 @@ public class Beteiligung extends BusinessObjekt {
 	public void setStellungnahme(String stellungnahme) {
 		this.stellungnahme = stellungnahme;
 	}
-	/**
-	 * @return the ausschreibender
-	 */
-	public Profil getAusschreibender() {
-		return ausschreibender;
-	}
-	/**
-	 * @param ausschreibender the ausschreibender to set
-	 */
-	public void setAusschreibender(Profil ausschreibender) {
-		this.ausschreibender = ausschreibender;
-	}
-	/**
-	 * @return the bewerbender
-	 */
-	public Profil getBewerbender() {
-		return bewerbender;
-	}
-	/**
-	 * @param bewerbender the bewerbender to set
-	 */
-	public void setBewerbender(Profil bewerbender) {
-		this.bewerbender = bewerbender;
-	}
+	
+
 	/**
 	 * @return the idBeteiligung
 	 */
@@ -85,17 +53,32 @@ public class Beteiligung extends BusinessObjekt {
 	public void setIdBeteiligung(int idBeteiligung) {
 		this.idBeteiligung = idBeteiligung;
 	}
+
+	
+
 	/**
-	 * @return the projektName
+	 * @return the idProjekt
 	 */
-	public String getProjektName() {
-		return projektName;
+	public int getProjektID() {
+		return projektID;
 	}
 	/**
-	 * @param projektName the projektName to set
+	 * @param idProjekt the projektID to set
 	 */
-	public void setProjektName(String projektName) {
-		this.projektName = projektName;
+	public void setProjektID(int projektID) {
+		this.projektID = projektID;
+	}
+	/**
+	 * @return the bewerbungID
+	 */
+	public int getBewerbungID() {
+		return bewerbungID;
+	}
+	/**
+	 * @param bewerbungID the bewerbungID to set
+	 */
+	public void setBewerbungID(int bewerbungID) {
+		this.bewerbungID = bewerbungID;
 	}
 	
 	
