@@ -75,6 +75,30 @@ public class Projekt extends BusinessObjekt{
 	public void setEndDatum(Timestamp endDatum) {
 		this.endDatum = endDatum;
 	}
+	/**
+	 * @return the idTeilnehmer
+	 */
+	public int getIdTeilnehmer() {
+		return idTeilnehmer;
+	}
+	/**
+	 * @param idTeilnehmer the idTeilnehmer to set
+	 */
+	public void setIdTeilnehmer(int idTeilnehmer) {
+		this.idTeilnehmer = idTeilnehmer;
+	}
+	/**
+	 * @return the idProjekt
+	 */
+	public int getIdProjekt() {
+		return idProjekt;
+	}
+	/**
+	 * @param idProjekt the idProjekt to set
+	 */
+	public void setIdProjekt(int idProjekt) {
+		this.idProjekt = idProjekt;
+	}
 	
 	
 	
