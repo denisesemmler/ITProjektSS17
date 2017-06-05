@@ -8,9 +8,6 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 
 
 public class ProjektMapper {
-
-
-
 	
 		/**
 		 * <p>
@@ -69,11 +66,13 @@ public class ProjektMapper {
 						// Neues Projekt Objekt erzeugen
 						Projekt p = new Projekt();
 						// Id, Projektname, Projektbeschreibung, startdatum und enddatum den Daten aus der DB füllen
-						p.setId(rs.getInt("idProjekt"));
-						p.setProjektName(rs.getString("name"));
-						p.setProjektbeschreibung(rs.getString("beschreibung"));
+						p.setIdProjekt(rs.getInt("idProjekt"));
+						p.setName(rs.getString("name"));
+						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getTimestamp("startdatum"));
 						p.setEndDatum(rs.getTimestamp("enddatum"));
+						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("projektmarktplatz_idProjektmarkplatz"));
+						p.setTeilnehmer_idTeilnehmer(rs.getInt("teilnehmer_idTeilnehmer"));
 						// Objekt zurückgeben
 						return p;
 					}
@@ -112,11 +111,13 @@ public class ProjektMapper {
 					while (rs.next()) {
 						// ... neues Projekt Objekt anlegen
 						Projekt p = new Projekt();
-						p.setId(rs.getInt("idProjekt"));
-						p.setProjektName(rs.getString("name"));
-						p.setProjektbeschreibung(rs.getString("beschreibung"));
+						p.setIdProjekt(rs.getInt("idProjekt"));
+						p.setName(rs.getString("name"));
+						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getTimestamp("startdatum"));
 						p.setEndDatum(rs.getTimestamp("enddatum"));
+						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("projektmarktplatz_idProjektmarkplatz"));
+						p.setTeilnehmer_idTeilnehmer(rs.getInt("teilnehmer_idTeilnehmer"));
 						// ... Objekt dem Ergebnisvektor hinzufÃ¼gen
 						result.add(p);
 					}
@@ -151,11 +152,13 @@ public class ProjektMapper {
 					// FÃ¼r jeden Eintrag neues Projekt Objekt erzeugen
 					while(rs.next()) {
 						Projekt p = new Projekt();
-						p.setId(rs.getInt("idProjekt"));
-						p.setProjektName(rs.getString("name"));
-						p.setProjektbeschreibung(rs.getString("beschreibung"));
+						p.setIdProjekt(rs.getInt("idProjekt"));
+						p.setName(rs.getString("name"));
+						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getTimestamp("startdatum"));
 						p.setEndDatum(rs.getTimestamp("enddatum"));
+						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("projektmarktplatz_idProjektmarkplatz"));
+						p.setTeilnehmer_idTeilnehmer(rs.getInt("teilnehmer_idTeilnehmer"));
 						// ... Objekt dem Ergebnisvektor hinzufÃ¼gen
 						result.add(p);
 					}
@@ -190,33 +193,42 @@ public class ProjektMapper {
 						// neues SQL Statement
 						stmt = con.createStatement();
 						// SQL Query ausführen um Datensatz in DB zu schreiben
-						stmt.executeUpdate("INSERT INTO Projekt (idProjekt, name, startdatum, enddatum, beschreibung) " +
+						stmt.executeUpdate("INSERT INTO Projekt (idProjekt, name, startdatum, enddatum, beschreibung, Projektmarktplatz_idProjektmarkplatz, Teilnehmer_idTeilnehmer  ) " +
 								"VALUES "
 								+ "('" 
 								+ p.getId() 
 								+ "', '" 
-								+ p.getProjektName()
+								+ p.getName()
 								+ "', '" 
 								+ p.getStartDatum()
 								+ "', '" 
 								+ p.getEndDatum()
 								+ "', '" 
-								+ p.getProjektbeschreibung()
+								+ p.getBeschreibung()
+								+ "', '" 
+								+ p.getProjektmarktplatz_idProjektmarkplatz()
+								+ "', '" 
+								+ p.getTeilnehmer_idTeilnehmer()
 								+ "')");	
 						
-						System.out.println("INSERT INTO Projekt (idProjekt, name, startdatum, enddatum, beschreibung) " +
+						System.out.println("INSERT INTO Projekt (idProjekt, name, startdatum, enddatum, beschreibung, Projektmarktplatz_idProjektmarkplatz, Teilnehmer_idTeilnehmer  ) " +
 								"VALUES "
 								+ "('" 
 								+ p.getId() 
 								+ "', '" 
-								+ p.getProjektName()
+								+ p.getName()
 								+ "', '" 
 								+ p.getStartDatum()
 								+ "', '" 
 								+ p.getEndDatum()
 								+ "', '" 
-								+ p.getProjektbeschreibung()
+								+ p.getBeschreibung()
+								+ "', '" 
+								+ p.getProjektmarktplatz_idProjektmarkplatz()
+								+ "', '" 
+								+ p.getTeilnehmer_idTeilnehmer()
 								+ "')");	
+						
 					}
 				}
 				// Error Handling
@@ -241,28 +253,27 @@ public class ProjektMapper {
 					// SQL Query ausführen
 					stmt.executeUpdate("UPDATE Projekt "
 							+ "SET name = '" 
-							+ p.getProjektName()
+							+ p.getName()
 							+ "', startdatum = '" 
 							+ p.getStartDatum()
 							+ "', enddatum = '" 
 							+ p.getEndDatum()
 							+ "', beschreibung = '" 
-							+ p.getProjektbeschreibung()
-						    + "' WHERE idProjekt = " 
-							+ p.getId());
-					
-					
+							+ p.getBeschreibung()
+							+ "' WHERE idProjekt = " 
+							+ p.getIdProjekt());
+							
 					System.out.println("UPDATE Projekt "
 							+ "SET name = '" 
-							+ p.getProjektName()
+							+ p.getName()
 							+ "', startdatum = '" 
 							+ p.getStartDatum()
 							+ "', enddatum = '" 
 							+ p.getEndDatum()
 							+ "', beschreibung = '" 
-							+ p.getProjektbeschreibung()
-						    + "' WHERE idProjekt = " 
-							+ p.getId());
+							+ p.getBeschreibung()
+							+ "' WHERE idProjekt = " 
+							+ p.getIdProjekt());
 					
 				}
 				// Error Handling
