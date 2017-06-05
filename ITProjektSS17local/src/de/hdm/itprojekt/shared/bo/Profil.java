@@ -3,102 +3,71 @@
  */
 package de.hdm.itprojekt.shared.bo;
 
+import java.sql.Timestamp;
+
 /**
  * @author Denise
  * Klasse Partnerprofil zur Darstellung der Projektmarktplatzteilnehmer 
- * und zur Suche von Projektteilnehmern zu realisieren
  *
  */
 public class Profil extends BusinessObjekt {
 
 
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Name des Profil anlegen
-	 */
-	private String name 	= "";
-	
-	/**
-	 * Wohn- oder Einsatzort  des Teilnehmers
-	 */
-	private String 	ort			= "";
-	
-	/**
-	 * Postleitzahl des Teilnehmers oder Einsatzort
-	 */
-	private int plz = 0;
-	
-	/**
-	 * Straﬂe des Teilnehmers
-	 */
-	private String 	strasse		= "";
-	
-	/**
-	 * bei Rolle  wird angegeben ob Teilnehmers UN/ Team oder Person ist
-	 */	
-	private int		rolle		= 0;
-	
-	/**
-	 * erstellt ein Teilnehmer ein Projekt wird der boolean 
-	 * projektleiter auf true gesetzt
-	 */
-	private boolean	projektLeiter	= false;
-	
+	private int idProfil =0;
+	private Timestamp erstellDatum;
+	private Timestamp aenderungsDatum;
 	private Eigenschaft e		= new Eigenschaft("","");
 	
 
+/**
+ * @return the idProfil
+ */
+public int getIdProfil() {
+	return idProfil;
+}
 
 /**
- * @return profilName
+ * @param idProfil the idProfil to set
  */
-public String getName() {
-	return name;
+public void setIdProfil(int idProfil) {
+	this.idProfil = idProfil;
+}
+
+/**
+ * @return the erstellDatum
+ */
+public Timestamp getErstellDatum() {
+	return erstellDatum;
 }
 
 
 /**
- * @param profilName the profilName to set
+ * @param erstellDatum the erstellDatum to set
  */
-public void setName(String name) {
-	this.name = name;
+public void setErstellDatum(Timestamp erstellDatum) {
+	this.erstellDatum = erstellDatum;
 }
 
 
 /**
- * @return  ort
+ * @return the aenderungsDatum
  */
-public String getOrt() {
-	return ort;
+public Timestamp getAenderungsDatum() {
+	return aenderungsDatum;
 }
 
 
 /**
- * @param ort the ort to set
+ * @param aenderungsDatum the aenderungsDatum to set
  */
-public void setOrt(String ort) {
-	this.ort = ort;
+public void setAenderungsDatum(Timestamp aenderungsDatum) {
+	this.aenderungsDatum = aenderungsDatum;
 }
 
 
 /**
- * @return  strasse
- */
-public String getStrasse() {
-	return strasse;
-}
-
-
-/**
- * @param strasse the strasse to set
- */
-public void setStrasse(String strasse) {
-	this.strasse = strasse;
-}
-
-
-/**
- * @return be
+ * @return the e
  */
 public Eigenschaft getE() {
 	return e;
@@ -106,58 +75,10 @@ public Eigenschaft getE() {
 
 
 /**
- * @param be the be to set
+ * @param e the e to set
  */
 public void setE(Eigenschaft e) {
 	this.e = e;
-}
-
-
-/**
- * @return rolle
- */
-public int getRolle() {
-	return rolle;
-}
-
-
-/**
- * @param rolle the rolle to set
- */
-public void setRolle(int rolle) {
-	this.rolle = rolle;
-}
-
-
-/**
- * @return projektLeiter
- */
-public boolean isProjektLeiter() {
-	return projektLeiter;
-}
-
-
-/**
- * @param projektl the projektLeiter to set
- */
-public void setProjektLeiter(boolean projektl) {
-	this.projektLeiter = projektl;
-}
-
-
-/**
- * @return the plz
- */
-public int getPlz() {
-	return plz;
-}
-
-
-/**
- * @param plz the plz to set
- */
-public void setPlz(int plz) {
-	this.plz = plz;
 }
 	
 	
