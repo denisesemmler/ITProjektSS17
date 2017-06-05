@@ -74,6 +74,10 @@ public class BewerbungMapper {
 				b.setId(rs.getInt("idBewerbung"));
 				b.setBewerbungsText(rs.getString("bewerbungstext"));
 				b.setErstellDatum(rs.getTimestamp("erstellDatum"));
+				b.setAusschreibungID(rs.getInt("Ausschreibung_idAusschreibung"));
+				b.setStatus(rs.getString("status"));
+				b.setBewertung(rs.getFloat("bewertung"));
+				b.setIdProfil(rs.getInt("Profil_idProfil"));
 				// Objekt zurückgeben
 				return b;
 			}
@@ -204,9 +208,11 @@ public class BewerbungMapper {
 						+ "', '" 
 						+ b.getErstellDatum()
 						+ "', '" 
-						+ b.getIdTeilnehmer()
+						+ b.getIdBewerbung()
 						+ "', '" 
-						+ b.getAusschreibungID()
+						+ b.getBewertung()
+						+ "', '" 
+						+ b.getStatus()
 						+ "')");	
 				
 				System.out.println("INSERT INTO Bewerbung (idBewerbung, bewerbungstext, erstelldatum, idTeilnehmer, AusschreibungsID) " +
@@ -218,10 +224,13 @@ public class BewerbungMapper {
 						+ "', '" 
 						+ b.getErstellDatum()
 						+ "', '" 
-						+ b.getIdTeilnehmer()
+						+ b.getIdBewerbung()
 						+ "', '" 
-						+ b.getAusschreibungID() //ID Teilnehmer oder Profil ID? 
+						+ b.getBewertung()
+						+ "', '" 
+						+ b.getStatus()
 						+ "')");	
+					
 			}
 		}
 		// Error Handling
@@ -247,6 +256,7 @@ public class BewerbungMapper {
 			stmt.executeUpdate("UPDATE Bewerbung "
 					+ "SET bewerbungstext = '" 
 					+ b.getBewerbungsText()
+	
 					+ "' WHERE idBewerbung = " 
 					+ b.getId());
 			
