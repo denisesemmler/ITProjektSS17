@@ -69,10 +69,11 @@ public class BeteiligungMapper {
 			if(rs.next()) {
 				// Neues Beteiligung Objekt erzeugen
 				Beteiligung b = new Beteiligung();
-				// Id, bewertung, stellungname mit den Daten aus der DB füllen
+				// Id, stellungname mit den Daten aus der DB füllen
 				b.setIdBeteiligung(rs.getInt("idBeteiligung"));
 				b.setStellungnahme(rs.getString("stellungnahme"));
-				b.setBewertung(rs.getFloat("bewertung"));
+				b.setProjektID(rs.getInt("Projekt_idProjekt"));
+				b.setBewerbungID(rs.getInt("Bewerbung_idBewerbung"));
 				// Objekt zurückgeben
 				return b;
 			}
@@ -113,8 +114,8 @@ public class BeteiligungMapper {
 				Beteiligung b = new Beteiligung();
 				// ... Id, Projetname, Bewertung und Beschreibung mit den Daten aus der DB füllen
 				b.setIdBeteiligung(rs.getInt("idBeteiligung"));
-				b.setProjektName(rs.getString("projektname"));
-				b.setBewertung(rs.getFloat("bewertung"));
+				b.setProjektID(rs.getInt("Projekt_idProjekt"));
+				b.setBewerbungID(rs.getInt("Bewerbung_idBewerbung"));
 				b.setStellungnahme(rs.getString("stellungnahme"));
 				// ... Objekt dem Ergebnisvektor hinzufÃ¼gen
 				result.add(b);
@@ -151,9 +152,9 @@ public class BeteiligungMapper {
 			while(rs.next()) {
 				Beteiligung b = new Beteiligung();
 				b.setIdBeteiligung(rs.getInt("idBeteiligung"));
-				b.setProjektName(rs.getString("projektname"));
 				b.setStellungnahme(rs.getString("stellungnahme"));
-				b.setBewertung(rs.getFloat("bewertung"));
+				b.setProjektID(rs.getInt("Projekt_idProjekt"));
+				b.setBewerbungID(rs.getInt("Bewerbung_idBewerbung"));
 				// Teilnehmer dem Ergebnisvektor hinzufÃ¼gen
 				result.add(b);
 			}
@@ -193,13 +194,11 @@ public class BeteiligungMapper {
 						+ "('" 
 						+ b.getIdBeteiligung() 
 						+ "', '" 
-						+ b.getBewertung()
+						+ b.getBewerbungID()
 						+ "', '" 
 						+ b.getStellungnahme()						
 						+ "', '" 
-						+ b.getAusschreibender()
-						+ "', '"
-						+ b.getBewerbender()
+						+ b.getProjektID()
 						+ "')");	
 				
 				System.out.println("INSERT INTO Beteiligung (idBeteiligung, bewertung, stellungnahme, ausschreibender, bewerbender) " +
@@ -207,13 +206,11 @@ public class BeteiligungMapper {
 						+ "('" 
 						+ b.getIdBeteiligung() 
 						+ "', '" 
-						+ b.getBewertung()
+						+ b.getBewerbungID()
 						+ "', '" 
 						+ b.getStellungnahme()						
-						+ "', '" 
-						+ b.getAusschreibender()
 						+ "', '"
-						+ b.getBewerbender()
+						+ b.getProjektID()
 						+ "')");	
 			}
 		}
