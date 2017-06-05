@@ -68,11 +68,18 @@ package de.hdm.itprojekt.server.db;
 					// Neues Teilnehmer Objekt erzeugen
 					Teilnehmer t = new Teilnehmer();
 					// Id, name, zusatz Email und Rolle mit den Daten aus der DB füllen
-					t.setId(rs.getInt("idTeilnehmer"));
+					t.setIdTeilnehmer(rs.getInt("idTeilnehmer"));
 					t.setName(rs.getString("name"));
 					t.setZusatz(rs.getString("zusatz"));
-					t.setEmailAdresse(rs.getString("emailAddresse"));
+					t.setEmail(rs.getString("email"));
 					t.setRolle(rs.getInt("rolle"));
+					t.setOrt(rs.getString("ort"));
+					t.setPlz(rs.getInt("plz"));
+					t.setStrasse(rs.getString("strasse"));
+					t.setProfil_idProfil(rs.getInt("profil_idProfil"));
+					t.setProjektLeiter(rs.getInt("projektleiter"));
+					
+					
 					// Objekt zurückgeben
 					return t;
 				}
@@ -113,11 +120,16 @@ package de.hdm.itprojekt.server.db;
 					// ... neues User Objekt anlegen
 					Teilnehmer t = new Teilnehmer();
 					// ... Id, Vorname, Nachname und Email mit den Daten aus der DB fÃ¼llen
-					t.setId(rs.getInt("idTeilnehmer"));
+					t.setIdTeilnehmer(rs.getInt("idTeilnehmer"));
 					t.setName(rs.getString("name"));
 					t.setZusatz(rs.getString("zusatz"));
-					t.setEmailAdresse(rs.getString("emailAddresse"));
+					t.setEmail(rs.getString("email"));
 					t.setRolle(rs.getInt("rolle"));
+					t.setOrt(rs.getString("ort"));
+					t.setPlz(rs.getInt("plz"));
+					t.setStrasse(rs.getString("strasse"));
+					t.setProfil_idProfil(rs.getInt("profil_idProfil"));
+					t.setProjektLeiter(rs.getInt("projektleiter"));
 					// ... Objekt dem Ergebnisvektor hinzufÃ¼gen
 					result.add(t);
 				}
@@ -151,11 +163,16 @@ package de.hdm.itprojekt.server.db;
 					// Neues User Objekt anlegen
 					Teilnehmer t = new Teilnehmer();
 					// Das Objekt mit Daten aus der DB füllen
-					t.setId(rs.getInt("idTeilnehmer"));
+					t.setIdTeilnehmer(rs.getInt("idTeilnehmer"));
 					t.setName(rs.getString("name"));
 					t.setZusatz(rs.getString("zusatz"));
-					t.setEmailAdresse(rs.getString("emailAddresse"));
+					t.setEmail(rs.getString("email"));
 					t.setRolle(rs.getInt("rolle"));
+					t.setOrt(rs.getString("ort"));
+					t.setPlz(rs.getInt("plz"));
+					t.setStrasse(rs.getString("strasse"));
+					t.setProfil_idProfil(rs.getInt("profil_idProfil"));
+					t.setProjektLeiter(rs.getInt("projektleiter"));
 					
 					return t;
 				}
@@ -187,11 +204,16 @@ package de.hdm.itprojekt.server.db;
 				// FÃ¼r jeden Eintrag neues User Objekt erzeugen
 				while(rs.next()) {
 					Teilnehmer t = new Teilnehmer();
-					t.setId(rs.getInt("idTeilnehmer"));
+					t.setIdTeilnehmer(rs.getInt("idTeilnehmer"));
 					t.setName(rs.getString("name"));
 					t.setZusatz(rs.getString("zusatz"));
-					t.setEmailAdresse(rs.getString("emailAddresse"));
+					t.setEmail(rs.getString("email"));
 					t.setRolle(rs.getInt("rolle"));
+					t.setOrt(rs.getString("ort"));
+					t.setPlz(rs.getInt("plz"));
+					t.setStrasse(rs.getString("strasse"));
+					t.setProfil_idProfil(rs.getInt("profil_idProfil"));
+					t.setProjektLeiter(rs.getInt("projektleiter"));
 					// Teilnehmer dem Ergebnisvektor hinzufÃ¼gen
 					result.add(t);
 				}
@@ -226,33 +248,54 @@ package de.hdm.itprojekt.server.db;
 					// neues SQL Statement
 					stmt = con.createStatement();
 					// SQL Query ausführen um Datensatz in DB zu schreiben
-					stmt.executeUpdate("INSERT INTO Teilnehmer (idTeilnehmer, name, zusatz, emailAdresse, rolle) " +
+					stmt.executeUpdate("INSERT INTO Teilnehmer (idTeilnehmer, name, zusatz, email, rolle, ort, plz, strasse, Profil_idProfil, projektleiter) " +
 							"VALUES "
 							+ "('" 
-							+ t.getId() 
+							+ t.getIdTeilnehmer() 
 							+ "', '" 
 							+ t.getName()
 							+ "', '" 
 							+ t.getZusatz()
 							+ "', '" 
-							+ t.getEmailAdresse()
+							+ t.getEmail()
 							+ "', '" 
 							+ t.getRolle()
-							+ "')");	
+							+ "', '" 
+							+ t.getOrt()
+							+ "', '" 
+							+ t.getPlz()
+							+ "', '" 
+							+ t.getStrasse()
+							+ "', '" 
+							+ t.getProfil_idProfil()
+							+ "', '" 
+							+ t.getProjektLeiter()
+												+ "')");	
 					
-					System.out.println("INSERT INTO Teilnehmer (idTeilnehmer, name, zusatz, emailAdresse, rolle) " +
-							"VALUES "
-							+ "('" 
-							+ t.getId() 
-							+ "', '" 
-							+ t.getName()
-							+ "', '" 
-							+ t.getZusatz()
-							+ "', '" 
-							+ t.getEmailAdresse()
-							+ "', '" 
-							+ t.getRolle()
-							+ "')");	
+					System.out.println("idTeilnehmer, name, zusatz, email, rolle, ort, plz, strasse, Profil_idProfil, projektleiter) " +
+					"VALUES "
+					+ "('" 
+					+ t.getIdTeilnehmer() 
+					+ "', '" 
+					+ t.getName()
+					+ "', '" 
+					+ t.getZusatz()
+					+ "', '" 
+					+ t.getEmail()
+					+ "', '" 
+					+ t.getRolle()
+					+ "', '" 
+					+ t.getOrt()
+					+ "', '" 
+					+ t.getPlz()
+					+ "', '" 
+					+ t.getStrasse()
+					+ "', '" 
+					+ t.getProfil_idProfil()
+					+ "', '" 
+					+ t.getProjektLeiter()
+										+ "')");	
+			
 				}
 			}
 			// Error Handling
@@ -281,9 +324,21 @@ package de.hdm.itprojekt.server.db;
 						+ "', zusatz = '" 
 						+ t.getZusatz()
 						+ "', rolle = '" 
-						+ t.getRolle()
+						+ t.getRolle() 
+						+ "',email = '" 
+						+ t.getEmail()
+						+ "',ort = '" 
+						+ t.getOrt()
+						+ "', plz = '" 
+						+ t.getPlz()
+						+ "',strasse = '" 
+						+ t.getStrasse()
+						+ "',Profil_idProfil = '" 
+						+ t.getProfil_idProfil()
+						+ "', projektleiter = '" 
+						+ t.getProjektLeiter()
 						+ "' WHERE idTeilnehmer = " 
-						+ t.getId());
+						+ t.getIdTeilnehmer());
 				
 				
 				System.out.println("UPDATE Teilnehmer "
@@ -292,9 +347,22 @@ package de.hdm.itprojekt.server.db;
 						+ "', zusatz = '" 
 						+ t.getZusatz()
 						+ "', rolle = '" 
-						+ t.getRolle()
+						+ t.getRolle() 
+						+ "',email = '" 
+						+ t.getEmail()
+						+ "',ort = '" 
+						+ t.getOrt()
+						+ "', plz = '" 
+						+ t.getPlz()
+						+ "',strasse = '" 
+						+ t.getStrasse()
+						+ "',Profil_idProfil = '" 
+						+ t.getProfil_idProfil()
+						+ "', projektleiter = '" 
+						+ t.getProjektLeiter()
 						+ "' WHERE idTeilnehmer = " 
-						+ t.getId());
+						+ t.getIdTeilnehmer());
+			
 				
 			}
 			// Error Handling
