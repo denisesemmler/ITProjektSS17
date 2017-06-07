@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
@@ -33,6 +34,7 @@ public class ProjektAnlegen extends VerticalPanel{
 	 */
 	private Label marktplatzLabel = new Label ("Select Projektmarktplatz");
 	private Label projektNameLabel = new Label("Projektname: ");
+	private Label projektBeschreibungLabel = new Label("Projektbeschreibung: ");
 	private Label startDateLabel = new Label("Start Datum: ");
 	private Label endDateLabel = new Label("End Datum: ");
 	
@@ -52,6 +54,7 @@ public class ProjektAnlegen extends VerticalPanel{
 	 * Erstellen der TextBoxen
 	 */
 	private TextBox projektNameBox = new TextBox();
+	private TextArea projektBeschreibungArea = new TextArea();
 	/**
 	 * Erstellen DatePicker
 	 */
@@ -66,15 +69,20 @@ public class ProjektAnlegen extends VerticalPanel{
 		mainPanel.add(naviPanel);
 		mainPanel.add(editorPanel);
 		
-		naviPanel.add(naviButton);
+		//naviPanel.add(naviButton);
 		
 		editorPanel.add(attributePanel);
 		editorPanel.add(datePanel);
 		
 		attributePanel.add(marktplatzLabel);
 		attributePanel.add(marktplatzListbox);
+		marktplatzListbox.addItem("IT");
+		marktplatzListbox.addItem("Bau");
+		marktplatzListbox.addItem("Landwirtschaft");
 		attributePanel.add(projektNameLabel);
 		attributePanel.add(projektNameBox);
+		attributePanel.add(projektBeschreibungLabel);
+		attributePanel.add(projektBeschreibungArea);
 		
 		datePanel.add(startPanel);
 		datePanel.add(endPanel);
@@ -102,18 +110,11 @@ public class ProjektAnlegen extends VerticalPanel{
 			case "Anlegen":
 				Window.alert("Projekt angelegt");
 			break;
-			case "Navigation":
-				Window.alert("Weiterleiten zu Navigation");
-				
-				RootPanel.get("stockWatcher").clear();
-		    	RootPanel.get("stockWatcher").add(new Navigation());
-			}
-			
-	    	  
-	    	 
-	    	 //RootPanel.get("stockWather").add(loginButton);
-	    	 //RootPanel.get("stockWatcher").add(showcase); 
-	    	 		    	
+			/**case "Navigation":
+					
+				RootPanel.get("Content").clear();
+		    	RootPanel.get("Navi").add(new Navigation());**/
+			}	    	 		    	
 	     }
 	   };
 }

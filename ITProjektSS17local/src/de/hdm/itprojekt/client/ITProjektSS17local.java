@@ -24,6 +24,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.gui.Navigation;
 import de.hdm.itprojekt.client.gui.ProjektAnlegen;
 //import de.client.ClientSideSettings;
 //import de.hdm.itprojekt.shared.LogOutPopUp;
@@ -37,10 +38,9 @@ public class ITProjektSS17local implements EntryPoint {
 
 	//Zwei Panels fuer die GUI
 		private VerticalPanel loginPanel = new VerticalPanel();
-		private HorizontalPanel naviPanel = new HorizontalPanel();
 		private HorizontalPanel emailPanel = new HorizontalPanel();
 		private HorizontalPanel passwordPanel = new HorizontalPanel();
-		private ProjektAnlegen projektAnlegenPanel = new ProjektAnlegen();
+		
 		
 		
 		//Begruessungstext im Label
@@ -78,7 +78,9 @@ public class ITProjektSS17local implements EntryPoint {
 		  //editorService = ClientSideSettings.getEditorService();
 		  //loginService = ClientSideSettings.getLoginService();
 		  
-		  RootPanel.get("stockList").add(loginPanel);
+		  RootPanel.get("Content").add(loginPanel);
+		  //RootPanel.get("Navi_Container").add(naviPanel);
+		  
 		  loginPanel.add(loginLabel);
 		  
 		  loginPanel.add(emailPanel);
@@ -95,17 +97,11 @@ public class ITProjektSS17local implements EntryPoint {
 		      @Override
 			public void onClick(ClickEvent event) {
 		        
-		    	  loginPanel.clear();
-		    	  loginPanel.add(projektAnlegenPanel);
-		    	 
-		    	 
-		    	 //RootPanel.get("stockWather").add(loginButton);
-		    	 //RootPanel.get("stockWatcher").add(showcase); 
-		    	 		    	
+		    	  RootPanel.get("Content").clear();
+		    	  RootPanel.get("Navi").add(new Navigation());
+		    	 		    	 		    	 		    	
 		     }
-		   });
-		  //RootPanel.get("stockWatcher").clear();
-		  
+		   });		  		  
 	    }
 }		      
 		   
