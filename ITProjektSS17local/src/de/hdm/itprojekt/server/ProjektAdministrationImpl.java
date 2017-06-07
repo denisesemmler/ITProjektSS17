@@ -1,11 +1,16 @@
 package de.hdm.itprojekt.server;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.itprojekt.server.db.AusschreibungMapper;
+import de.hdm.itprojekt.server.db.BeteiligungMapper;
+import de.hdm.itprojekt.server.db.BewerbungMapper;
+import de.hdm.itprojekt.server.db.EigenschaftMapper;
+import de.hdm.itprojekt.server.db.ProfilMapper;
 import de.hdm.itprojekt.server.db.ProjektMapper;
 import de.hdm.itprojekt.server.db.TeilnehmerMapper;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
@@ -22,7 +27,12 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 	private ProjektMapper pMapper = null;
 	private AusschreibungMapper aMapper = null;
+	private ProfilMapper pfMapper = null;
 	private TeilnehmerMapper tMapper = null;
+	private EigenschaftMapper eMapper = null;
+	private BewerbungMapper bMapper = null;
+	private BeteiligungMapper btMapper = null;
+	
 
 
 	public ProjektAdministrationImpl() throws IllegalArgumentException {
@@ -37,9 +47,14 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	public void init() throws IllegalArgumentException {
 		pMapper = ProjektMapper.projektMapper();
 		aMapper = AusschreibungMapper.ausschreibungMapper();
+		pfMapper = ProfilMapper.profilMapper();
 		tMapper = TeilnehmerMapper.teilnehmerMapper();
+		eMapper = EigenschaftMapper.eigenschaftMapper();
+		bMapper = BewerbungMapper.bewerbungMapper();
+		btMapper = BeteiligungMapper.beteiligungMapper();
 	}
 
+	//Methode um ein Projekt anzulegen
 	@Override
 	public Projekt createProjekt(String projektName, String projektBeschreibung, Timestamp startDatum, Timestamp endDatum)
 			throws IllegalArgumentException {
@@ -50,14 +65,15 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		p.setStartDatum(startDatum);
 		p.setEndDatum(endDatum);
 
-		// setzen einer vorläufigen Projekt-Nr diese ist mit der DB konsistent
+		//setzen einer vorläufigen Projekt-Nr diese ist mit der DB konsistent
 		p.setId(1);
 
-		// Objekt in DB speichern
+		//Objekt in DB speichern
 		return this.pMapper.insert(p);
 
 	}
 
+	//Methode um ein Projekt zu bearbeiten
 	@Override
 	public void updateProjekt(Projekt p) throws IllegalArgumentException {
 		pMapper.update(p);
@@ -78,21 +94,47 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 			}
 		}
 	}
-	//delete Ausschreibungsmethode
-	//TODO warten auf Klärung bezüglich Profil
-	private void delete(Ausschreibung a) throws IllegalArgumentException {
-//		Vector<Profil> partnerprofil = this.getProfil(a);
-//				
-//		if(partnerprofil != null) {
-//			for (Profil pp : partnerprofil) {
-//				this.delete(pp);	
-//			}
-//		}
+	//Methode zum Löschen von Ausschreibungen, da das Projekt sonst nicht gelöscht werden kann
+	private void delete(Ausschreibung a) throws IllegalArgumentException {		
+		this.deleteProfil(a);
 		
-		//ausschreibung aus der DB entfernen
+		//Hier wird die Ausschreibung aus der DB entfernt
 		this.aMapper.delete(a);
+	}	
+
+	//Methode zum löschen des Profils, da die Ausschreibung sonst nicht gelöscht werden kann
+	private void deleteProfil(Ausschreibung a) {
+		
+		//Hier wird das Suchprofil zur Ausschreibung von der DB gelesen
+		Profil suchProfil = pfMapper.findById(a.getProfil_idSuchprofil());
+		
+		//Hier werden die Eigenschaften zum Profil gelesen
+		Vector<Eigenschaft> profilEigenschaften= eMapper.findByProfil(suchProfil);
+		
+		//Hier werden die Eigenschaften aus der DB entfernt
+		for (Eigenschaft e : profilEigenschaften){
+			eMapper.delete(e);
+		}
+		
+		//Hier wird eine Liste aller Bewerbungen zur Ausschreibungen von der DB gelesen
+		ArrayList<Bewerbung> bewerbungenZuProfil = bMapper.findByAusschreibungsId(a.getIdAusschreibung());
+		
+		//Hier werden die Bewerbungen aus der DB entfernt, aber erst wenn die dazugehörige Beteiligung entfernt ist
+		for(Bewerbung b : bewerbungenZuProfil){
+			this.deleteBewerbung(b);
+		}
+		
+		//Hier werden die Teilnehmer zum Profil gelesen
+		Teilnehmer teilnehmer = tMapper.findByProfil(suchProfil);
+		teilnehmer.setProfil_idProfil(0);
 	}
 
+	//Methode um die Beteiligung zu löschen, da die Bewerbung vorher nicht gelöscht werden kann
+	private void deleteBewerbung(Bewerbung b) {
+		Beteiligung beteiligung = btMapper.findByBewerbung(b);
+		btMapper.delete(beteiligung);
+		bMapper.delete(b);		
+	}
 
 	/**
 	 * Diese Methode liest alle Ausschreibungen zu einem Projekt.
@@ -102,6 +144,12 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	private Vector<Ausschreibung> getAusschreibung(Projekt p) {
 		return aMapper.findByProjekt(p);
 	}
+	
+
+	
+	
+	
+	
 	
 	public Teilnehmer createTeilnehemr(String name, String zusatz, String emailAdresse, int rolle) throws IllegalArgumentException {
 		
@@ -123,7 +171,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 	@Override
 	public Teilnehmer createTeilnehmer(String name, String zusatz, String emailAdresse, int rolle) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
