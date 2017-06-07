@@ -10,12 +10,13 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
-
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
@@ -23,6 +24,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.gui.ProjektAnlegen;
 //import de.client.ClientSideSettings;
 //import de.hdm.itprojekt.shared.LogOutPopUp;
 import de.hdm.itprojekt.shared.EditorServiceAsync;
@@ -38,6 +40,7 @@ public class ITProjektSS17local implements EntryPoint {
 		private HorizontalPanel naviPanel = new HorizontalPanel();
 		private HorizontalPanel emailPanel = new HorizontalPanel();
 		private HorizontalPanel passwordPanel = new HorizontalPanel();
+		private ProjektAnlegen projektAnlegenPanel = new ProjektAnlegen();
 		
 		
 		//Begruessungstext im Label
@@ -59,7 +62,8 @@ public class ITProjektSS17local implements EntryPoint {
 		TextBox emailTextBox = new TextBox();
 		PasswordTextBox passwordTextBox = new PasswordTextBox();
 		
-		
+		//ProjektAnlegen Panel
+		//HorizontalPanel showcase = new ProjektAnlegen();
 		
 		//Zur Kommunikation mit der Datenbank
 		private EditorServiceAsync editorService;
@@ -87,10 +91,21 @@ public class ITProjektSS17local implements EntryPoint {
 		  
 		  loginPanel.add(loginButton);
 		  
+		  loginButton.addClickHandler(new ClickHandler() {
+		      @Override
+			public void onClick(ClickEvent event) {
+		        
+		    	  loginPanel.clear();
+		    	  loginPanel.add(projektAnlegenPanel);
+		    	 
+		    	 
+		    	 //RootPanel.get("stockWather").add(loginButton);
+		    	 //RootPanel.get("stockWatcher").add(showcase); 
+		    	 		    	
+		     }
+		   });
+		  //RootPanel.get("stockWatcher").clear();
 		  
-	    	  }
-	  
-		  
-
+	    }
 }		      
 		   
