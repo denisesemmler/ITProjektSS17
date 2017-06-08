@@ -1,11 +1,8 @@
-/** Add css rules here for your application. */
 
-
-/** Example rules used by the template application (remove for your app) */
 h1 {
-  font-size: 2em;
+  font-size: 100px;
   font-weight: bold;
-  color: #777777;
+  color: #0000a0;
   margin: 40px 0px 70px;
   text-align: center;
 }
@@ -42,4 +39,44 @@ h1 {
 	border: 0px solid #c7c7c7;
 	border-radius: 3px;
 	-moz-border-radius: 3px;
+}
+.grotte-Button {
+	background-color: #FFF;
+	color: #000000;
+	font-size: 15px;
+	padding: 5px 15px 5px 15px;
+	text-decoration: none;
+	outline-color: #000000;
+	margin-right: 15px;
+	cursor: pointer;
+	cursor: hand;
+	-webkit-box-shadow: inset 0px 0px 5px 3px rgba(225,225,225,0.85);
+	-moz-box-shadow: inset 0px 0px 5px 3px rgba(225,225,225,0.85);
+	box-shadow: inset 0px 0px 5px 3px rgba(225,225,225,0.85);
+	border: 1px solid #8b8b8b;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+.gwt-TextBox{
+	font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+	width: 130px;
+	height: 20px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	margin-right: 7px;
+}
+.Content-Label{
+	width: 130px;
+	padding-right: 20px;
+	padding-top: 4px;
+	margin-bottom: 2px;
+	padding-left: 5px;
+	padding-bottom: 4px;
+	border-bottom: 1px solid #c0c0c0;
+	border-top: 1px solid #c0c0c0;
 }

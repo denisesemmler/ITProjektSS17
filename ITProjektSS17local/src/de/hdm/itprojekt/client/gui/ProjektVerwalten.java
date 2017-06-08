@@ -16,7 +16,7 @@ public class ProjektVerwalten extends VerticalPanel{
 	//Erstellen von Buttons
 	private Button projektAnlegenButton = new Button("Anlegen",
 			new NavigationsButtonHandler());
-	private Button projektAndernButton = new Button("Andern",
+	private Button projektAndernButton = new Button("Bearbeiten",
 			new NavigationsButtonHandler());
 	private Button projektLoschenButton = new Button("Loschen",
 			new NavigationsButtonHandler());
@@ -38,15 +38,13 @@ public class ProjektVerwalten extends VerticalPanel{
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(new ProjektAnlegen());
 			break;
-			case "Andern":
+			case "Bearbeiten":
 				RootPanel.get("Content").clear();
-				//Page zum Ändern
-				Window.alert("Not implemented... yet");
+				RootPanel.get("Content").add(new ProjektBearbeiten());
 				break;
 			case "Loschen":					
 				RootPanel.get("Content").clear();
-		    	//Page zum Löschen
-				Window.alert("Not implemented... yet");
+				RootPanel.get("Content").add(new ProjektLoeschen());
 				break;
 			}	    	 		    	
 	     }

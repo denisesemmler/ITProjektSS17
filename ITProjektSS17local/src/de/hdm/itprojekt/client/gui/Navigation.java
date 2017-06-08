@@ -22,6 +22,7 @@ public class Navigation extends HorizontalPanel{
 			new NavigationsButtonHandler());
 
 	public Navigation(){
+		//CSS Style Zuweisung 
 		this.setStylePrimaryName("Navi");
 		navProjektVerwaltenButton.setStylePrimaryName("navi-button");
 		navAusschreibungVerwaltenButton.setStylePrimaryName("navi-button");
