@@ -1,34 +1,82 @@
-/** Add css rules here for your application. */
 
-
-/** Example rules used by the template application (remove for your app) */
 h1 {
-  font-size: 2em;
+  font-size: 100px;
   font-weight: bold;
-  color: #777777;
+  color: #0000a0;
   margin: 40px 0px 70px;
   text-align: center;
 }
 
-.sendButton {
-  display: block;
-  font-size: 16pt;
+
+#Navi{
+	min-width: 650px;
+	width: auto;
+	padding: 6px; 
+	margin-left: 320px;
+	background-color: #0000a0;
+	margin-top: 56px;
+	height: 36px;
+	border-top: 1px solid #ffffff;
+	border-bottom: 1px solid #ffffff;
+	border-left: 1px solid #ffffff;
 }
 
-/** Most GWT widgets already have a style name defined */
-.gwt-DialogBox {
-  width: 400px;
+.navi-button {
+	background-color: #ffffff;
+	color: #000000;
+	font-size: 15px;
+	padding: 5px 15px 5px 15px;
+	text-decoration: none;
+	width: auto;
+	outline-color: #000000;
+	margin-left: 15px;
+	margin-right: 15px;
+	cursor: pointer;
+	cursor: hand;
+	-webkit-box-shadow: inset 0px 0px 5px 3px rgba(215,215,215,0.85);
+	-moz-box-shadow: inset 0px 0px 5px 3px rgba(215,215,215,0.85);
+	box-shadow: inset 0px 0px 5px 3px rgba(215,215,215,0.85);
+	border: 0px solid #c7c7c7;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
 }
-
-.dialogVPanel {
-  margin: 5px;
+.grotte-Button {
+	background-color: #FFF;
+	color: #000000;
+	font-size: 15px;
+	padding: 5px 15px 5px 15px;
+	text-decoration: none;
+	outline-color: #000000;
+	margin-right: 15px;
+	cursor: pointer;
+	cursor: hand;
+	-webkit-box-shadow: inset 0px 0px 5px 3px rgba(225,225,225,0.85);
+	-moz-box-shadow: inset 0px 0px 5px 3px rgba(225,225,225,0.85);
+	box-shadow: inset 0px 0px 5px 3px rgba(225,225,225,0.85);
+	border: 1px solid #8b8b8b;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
-
-.serverResponseLabelError {
-  color: red;
+.gwt-TextBox{
+	font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+	width: 130px;
+	height: 20px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	margin-right: 7px;
 }
-
-/** Set ids using widget.getElement().setId("idOfElement") */
-#closeButton {
-  margin: 15px 6px 6px;
+.Content-Label{
+	width: 130px;
+	padding-right: 20px;
+	padding-top: 4px;
+	margin-bottom: 2px;
+	padding-left: 5px;
+	padding-bottom: 4px;
+	border-bottom: 1px solid #c0c0c0;
+	border-top: 1px solid #c0c0c0;
 }

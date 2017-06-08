@@ -16,11 +16,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
 
-public class ProjektAnlegen extends VerticalPanel{
-
-	/**
-	 * Erstellen der Panels
-	 */
+public class ProjektBearbeiten extends VerticalPanel{
+	
 	private VerticalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
 	private VerticalPanel attributePanel = new VerticalPanel();
@@ -40,14 +37,14 @@ public class ProjektAnlegen extends VerticalPanel{
 	/**
 	 * Erstellen der ListBox
 	 */
-	private ListBox marktplatzListbox = new ListBox();
+	private ListBox projektListbox = new ListBox();
 	
 	/**
 	 * Erstellen der Buttons
 	 */
-	private Button projektAnlegenButton = new Button("Anlegen",
+	private Button projektSpeichernButton = new Button("Speichern",
 			new NavigationsButtonHandler());
-	
+
 	/**
 	 * Erstellen der TextBoxen
 	 */
@@ -59,18 +56,10 @@ public class ProjektAnlegen extends VerticalPanel{
 	private DatePicker startPicker = new DatePicker();
 	private DatePicker endPicker = new DatePicker();
 	
-	
-	/**
-	 * Konstruktor für Anlegen der GUI
-	 */
-	public ProjektAnlegen() {
+	public ProjektBearbeiten(){
 		
-		//CSS Styling
-		marktplatzLabel.addStyleName("Content-Label");
-		projektNameLabel.addStyleName("Content-Label");
-		projektBeschreibungLabel.addStyleName("Content-Label");
-		startDateLabel.addStyleName("Content-Label");
-		endDateLabel.addStyleName("Content-Label");
+		//CSS Styles
+		projektSpeichernButton.setStylePrimaryName("grotte-button");
 		
 		mainPanel.add(editorPanel);
 		
@@ -78,10 +67,10 @@ public class ProjektAnlegen extends VerticalPanel{
 		editorPanel.add(datePanel);
 		
 		attributePanel.add(marktplatzLabel);
-		attributePanel.add(marktplatzListbox);
-		marktplatzListbox.addItem("IT");
-		marktplatzListbox.addItem("Bau");
-		marktplatzListbox.addItem("Landwirtschaft");
+		attributePanel.add(projektListbox);
+		projektListbox.addItem("Projekt 1 von User");
+		projektListbox.addItem("Projekt 2 von User");
+		projektListbox.addItem("Projekt X von User");
 		attributePanel.add(projektNameLabel);
 		attributePanel.add(projektNameBox);
 		attributePanel.add(projektBeschreibungLabel);
@@ -100,24 +89,22 @@ public class ProjektAnlegen extends VerticalPanel{
 		startPicker.setValue(new Date(), true);
 		endPicker.setValue(new Date(), true);
 		
-		mainPanel.add(projektAnlegenButton);
-		
-	}
+		mainPanel.add(projektSpeichernButton);
 	
+	}
+
 	private class NavigationsButtonHandler implements ClickHandler {
 		public void onClick(ClickEvent event) {
 	        
 			Button active = (Button) event.getSource();
 			
 			switch(active.getText()){
-			case "Anlegen":
-				Window.alert("Projekt angelegt");
-			break;
-			/**case "Navigation":
-					
+			case "Speichern":
+				Window.alert("Projekt gespeichert");
 				RootPanel.get("Content").clear();
-		    	RootPanel.get("Navi").add(new Navigation());**/
-			}	    	 		    	
+			break;
+				    	 		    	
 	     }
 	   };
+	}
 }
