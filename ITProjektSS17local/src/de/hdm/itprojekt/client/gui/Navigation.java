@@ -7,6 +7,9 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
+import de.hdm.itprojekt.client.report.gui.ReportNavigation;
+import de.hdm.itprojekt.client.report.gui.ReportWrapper;
+
 
 public class Navigation extends HorizontalPanel{
 	
@@ -17,6 +20,8 @@ public class Navigation extends HorizontalPanel{
 	private Button navBewerbungVerwaltenButton = new Button("Bewerbungen verwalten",
 			new NavigationsButtonHandler());
 	private Button navProfilVerwaltenButton = new Button("Profil verwalten",
+			new NavigationsButtonHandler());
+	private Button navBerichteButton = new Button("Berichte",
 			new NavigationsButtonHandler());
 	private Button navAbmeldenButton = new Button("Abmelden",
 			new NavigationsButtonHandler());
@@ -29,11 +34,14 @@ public class Navigation extends HorizontalPanel{
 		navBewerbungVerwaltenButton.setStylePrimaryName("navi-button");
 		navProfilVerwaltenButton.setStylePrimaryName("navi-button");
 		navAbmeldenButton.setStylePrimaryName("navi-button");
+		navBerichteButton.setStylePrimaryName("navi-button");
 		
 		this.add(navProjektVerwaltenButton);
 		this.add(navAusschreibungVerwaltenButton);
 		this.add(navBewerbungVerwaltenButton);
 		this.add(navProfilVerwaltenButton);
+		this.add(navProfilVerwaltenButton);
+		this.add(navBerichteButton);
 		this.add(navAbmeldenButton);
 	}
 	
@@ -55,6 +63,10 @@ public class Navigation extends HorizontalPanel{
 				break;
 			case "Profil verwalten":
 				Window.alert("Not implemented... yet");
+				break;
+			case "Berichte":
+				RootPanel.get("Content").clear();
+				RootPanel.get("Content").add(new ReportWrapper());
 				break;
 			case "Abmelden":
 				Window.alert("Not implemented... yet \nBut Hell Yeah.. go fuck yourself!");
