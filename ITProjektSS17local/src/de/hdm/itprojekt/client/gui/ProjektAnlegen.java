@@ -6,6 +6,7 @@ import java.util.Date;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -107,15 +108,32 @@ public class ProjektAnlegen extends VerticalPanel{
 		
 	}
 	
+	private class CreateProjectCallback implements AsyncCallback {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Object result) {
+			RootPanel.get("content").clear();
+			Window.alert("Dat läuft noch nit so!");
+			
+		}
+		
+	}
+	
 	private class CreateProjectClickHandler implements ClickHandler {
 		
 		public void onClick(ClickEvent event) {			
 	        Projekt project = new Projekt();
 	        try{
-	        /**
+	        
 	        ClientSideSettings.getProjektAdministration().
 	        createProjekt(projektNameBox.getText(), projektBeschreibungArea.getText(),
-	        		(startPicker.getValue()),(endPicker.getValue()) );**/
+	        		(startPicker.getValue()),(endPicker.getValue()), new CreateProjectCallback ());
 	        } catch(Exception e){
 	        	Window.alert(e.toString());
 	        	e.printStackTrace();
