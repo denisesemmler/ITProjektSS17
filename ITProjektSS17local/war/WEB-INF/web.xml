@@ -4,21 +4,33 @@
               http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
-
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>de.hdm.itprojekt.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/itprojektss17local/greet</url-pattern>
-  </servlet-mapping>
-  
-  <!-- Default page to serve -->
+         
+      <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>ITProjektSS17local.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
+    
+
+  <!-- pr0ject- Servlets -->
+<servlet>
+    <servlet-name>projectAdministrationImpl</servlet-name>
+    <servlet-class>de.hdm.itprojekt.server.ProjektAdministrationImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>projectAdministrationImpl</servlet-name>
+    <url-pattern>/pr0ject/pr0jectAdmin</url-pattern>
+  </servlet-mapping>
+  
+<servlet>
+    <servlet-name>reportServiceServlet</servlet-name>
+    <servlet-class>de.hdm.itprojekt.server.ReportServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>reportServiceServlet</servlet-name>
+    <url-pattern>/pr0ject/reportgenerator</url-pattern>
+  </servlet-mapping>
+  

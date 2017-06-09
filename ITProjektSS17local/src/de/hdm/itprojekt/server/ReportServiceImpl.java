@@ -9,7 +9,7 @@ import de.hdm.itprojekt.shared.report.AlleAusschreibungen;
 import de.hdm.itprojekt.shared.report.Column;
 import de.hdm.itprojekt.shared.report.Row;
 
-public class ReportGeneratorImpl {
+public class ReportServiceImpl {
 
 	
 	//Verbindung zu Marktplatzadministration fehlt
