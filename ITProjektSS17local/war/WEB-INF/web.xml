@@ -20,7 +20,7 @@
   
   <servlet-mapping>
     <servlet-name>projektAdministrationImpl</servlet-name>
-    <url-pattern>/itprojektSS17local/pr0jectadmin</url-pattern>
+    <url-pattern>/itprojektss17local/projektadministration</url-pattern>
   </servlet-mapping>
   
   <!-- pr0ject ReportGenerator Servlet -->
