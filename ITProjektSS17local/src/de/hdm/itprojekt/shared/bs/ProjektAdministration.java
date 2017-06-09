@@ -28,6 +28,7 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public void deleteProjekt(Projekt p) throws IllegalArgumentException;
 	
+	//Prof. Thies Fragen wann IllegalArgumentException verwendet wird
 	public Teilnehmer createTeilnehmer(String name, String zusatz, String emailAdresse, int rolle);
 
 	

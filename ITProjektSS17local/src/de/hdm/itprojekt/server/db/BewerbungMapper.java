@@ -94,7 +94,7 @@ public class BewerbungMapper {
 	
 	
 	/**
-	 * Suche alle Bewerbungen einer Auschreibung anhand der AusschreibungsID. 
+	 * Suche alle Bewerbungen einer Ausschreibung anhand der AusschreibungsID. 
 	 * Voraussetzung: 
 	 * eine Ausschreibung ist immer einem Teilnehmer zugeordnet!!
 	 *
