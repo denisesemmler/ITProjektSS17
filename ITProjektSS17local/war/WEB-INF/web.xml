@@ -10,19 +10,20 @@
     <welcome-file>ITProjektSS17local.html</welcome-file>
   </welcome-file-list>
 
-</web-app>
-    
 
-  <!-- pr0ject- Servlets -->
+
+  <!-- pr0ject- Servlet -->
 <servlet>
-    <servlet-name>projectAdministrationImpl</servlet-name>
+    <servlet-name>projektAdministrationImpl</servlet-name>
     <servlet-class>de.hdm.itprojekt.server.ProjektAdministrationImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>projectAdministrationImpl</servlet-name>
+    <servlet-name>projektAdministrationImpl</servlet-name>
     <url-pattern>/pr0ject/pr0jectAdmin</url-pattern>
   </servlet-mapping>
+  
+  <!-- pr0ject ReportGenerator Servlet -->
   
 <servlet>
     <servlet-name>reportServiceServlet</servlet-name>
@@ -33,4 +34,7 @@
     <servlet-name>reportServiceServlet</servlet-name>
     <url-pattern>/pr0ject/reportgenerator</url-pattern>
   </servlet-mapping>
+  
+  </web-app>
+    
   
