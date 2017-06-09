@@ -1,10 +1,12 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -14,6 +16,8 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
+
+import de.hdm.itprojekt.shared.bo.Projekt;
 
 
 public class ProjektAnlegen extends VerticalPanel{
@@ -46,7 +50,7 @@ public class ProjektAnlegen extends VerticalPanel{
 	 * Erstellen der Buttons
 	 */
 	private Button projektAnlegenButton = new Button("Anlegen",
-			new NavigationsButtonHandler());
+			new CreateProjectClickHandler());
 	
 	/**
 	 * Erstellen der TextBoxen
@@ -104,9 +108,38 @@ public class ProjektAnlegen extends VerticalPanel{
 		
 	}
 	
-	private class NavigationsButtonHandler implements ClickHandler {
-		public void onClick(ClickEvent event) {
+	private class CreateProjectCallback implements AsyncCallback {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Object result) {
+			RootPanel.get("content").clear();
+			Window.alert("Dat läuft noch nit so!");
+			
+		}
+		
+	}
+	
+	private class CreateProjectClickHandler implements ClickHandler {
+		
+		public void onClick(ClickEvent event) {			
+	        Projekt project = new Projekt();
+	        try{
 	        
+	        ClientSideSettings.getProjektAdministration().
+	        createProjekt(projektNameBox.getText(), projektBeschreibungArea.getText(),
+	        		(startPicker.getValue()),(endPicker.getValue()), new CreateProjectCallback ());
+	        } catch(Exception e){
+	        	Window.alert(e.toString());
+	        	e.printStackTrace();
+	        }
+			
+			//Altes Zeug
 			Button active = (Button) event.getSource();
 			
 			switch(active.getText()){
