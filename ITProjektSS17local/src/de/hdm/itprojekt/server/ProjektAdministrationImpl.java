@@ -67,7 +67,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		p.setTeilnehmer_idTeilnehmer(TeilnehmerID);
 		p.setProjektmarktplatz_idProjektmarkplatz(MarktplatzID);
 		//setzen einer vorläufigen Projekt-Nr diese ist mit der DB konsistent
-		p.setId(1);
+		//p.setId(1);
 
 		//Objekt in DB speichern
 		return this.pMapper.insert(p);
