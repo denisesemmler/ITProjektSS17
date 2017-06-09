@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.server;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -41,7 +42,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	@Override
-	public Projekt createProjekt(String projektName, String projektBeschreibung, Timestamp startDatum, Timestamp endDatum)
+	public Projekt createProjekt(String projektName, String projektBeschreibung, Date startDatum, Date endDatum)
 			throws IllegalArgumentException {
 
 		Projekt p = new Projekt();
