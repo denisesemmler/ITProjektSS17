@@ -22,7 +22,7 @@ public interface ProjektAdministration extends RemoteService {
 	 * Methode zum Anlegen eines Projekts
 	 * 
 	 */
-	public Projekt createProjekt(String projektName, String projektBezeichnung, Date startDatum, Date endDatum) throws IllegalArgumentException;
+	public Projekt createProjekt(String projektName, String projektBeschreibung, Date startDatum, Date endDatum, int TeilnehmerID, int MarktplatzID) throws IllegalArgumentException;
 	
 	public void updateProjekt(Projekt p) throws IllegalArgumentException;
 	

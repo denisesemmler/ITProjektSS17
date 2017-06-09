@@ -12,7 +12,7 @@ public interface ProjektAdministrationAsync {
 
 	void init(AsyncCallback<Void> callback);
 
-	void createProjekt(String projektName, String projektBezeichnung, Date startDatum, Date endDatum,
+	void createProjekt(String projektName, String projektBeschreibung, Date startDatum, Date endDatum, int TeilnehmerID, int MarktplatzID,
 			AsyncCallback<Projekt> callback);
 
 	void updateProjekt(Projekt p, AsyncCallback<Void> callback);
