@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.shared.bo;
 
-import java.sql.Timestamp;				
+import java.sql.Timestamp;
+import java.util.Date;				
 
 /**
  * Umsetzung der Projektklasse. Als Attribute dienen idProjekt, idTeilnehmer und idProjekt
@@ -15,8 +16,8 @@ public class Projekt extends BusinessObjekt{
 	private static final long serialVersionUID = 1L;
 	private String 	name = "";
 	private String 	beschreibung = "";
-	private Timestamp	startDatum;
-	private Timestamp	endDatum;
+	private Date	startDatum;
+	private Date endDatum;
 	private int Projektmarktplatz_idProjektmarkplatz=0;
 
 	/**
@@ -31,25 +32,25 @@ public class Projekt extends BusinessObjekt{
 	/**
 	 * @return the startDatum
 	 */
-	public Timestamp getStartDatum() {
+	public Date getStartDatum() {
 		return startDatum;
 	}
 	/**
 	 * @param startDatum the startDatum to set
 	 */
-	public void setStartDatum(Timestamp startDatum) {
+	public void setStartDatum(Date startDatum) {
 		this.startDatum = startDatum;
 	}
 	/**
 	 * @return the endDatum
 	 */
-	public Timestamp getEndDatum() {
+	public Date getEndDatum() {
 		return endDatum;
 	}
 	/**
 	 * @param endDatum the endDatum to set
 	 */
-	public void setEndDatum(Timestamp endDatum) {
+	public void setEndDatum(Date endDatum) {
 		this.endDatum = endDatum;
 	}
 	/**
