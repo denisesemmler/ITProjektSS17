@@ -193,7 +193,7 @@ public class ProjektMapper {
 						// neues SQL Statement
 						stmt = con.createStatement();
 						// SQL Query ausführen um Datensatz in DB zu schreiben
-						stmt.executeUpdate("INSERT INTO Projekt (idProjekt, name, startdatum, enddatum, beschreibung, Projektmarktplatz_idProjektmarkplatz, Teilnehmer_idTeilnehmer  ) " +
+						stmt.executeUpdate("INSERT INTO Projekt (idProjekt, name, startdatum, enddatum, beschreibung, Projektmarktplatz_idProjektmarktplatz, Teilnehmer_idTeilnehmer  ) " +
 								"VALUES "
 								+ "('" 
 								+ p.getId() 

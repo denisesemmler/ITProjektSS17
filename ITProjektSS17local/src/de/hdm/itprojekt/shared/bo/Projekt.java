@@ -63,7 +63,7 @@ public class Projekt extends BusinessObjekt{
 	 * @param idTeilnehmer the idTeilnehmer to set
 	 */
 	public void setTeilnehmer_idTeilnehmer(int idTeilnehmer) {
-		this.teilnehmer_idTeilnehmer = teilnehmer_idTeilnehmer;
+		this.teilnehmer_idTeilnehmer = idTeilnehmer;
 	}
 	/**
 	 * @return the idProjekt

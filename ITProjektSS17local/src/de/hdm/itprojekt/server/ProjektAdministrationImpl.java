@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.server;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
@@ -62,8 +63,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		Projekt p = new Projekt();
 		p.setName(projektName);
 		p.setBeschreibung(projektBeschreibung);
-		p.setStartDatum(startDatum);
-		p.setEndDatum(endDatum);
+		p.setStartDatum(new java.sql.Date(startDatum.getTime()));
+		p.setEndDatum(new java.sql.Date(endDatum.getTime()));
 		p.setTeilnehmer_idTeilnehmer(TeilnehmerID);
 		p.setProjektmarktplatz_idProjektmarkplatz(MarktplatzID);
 		//setzen einer vorläufigen Projekt-Nr diese ist mit der DB konsistent

@@ -118,7 +118,7 @@ public class ProjektAnlegen extends VerticalPanel{
 
 		
 		public void onSuccess(Object result) {
-			RootPanel.get("content").clear();
+			RootPanel.get("Content").clear();
 			
 			
 		}
