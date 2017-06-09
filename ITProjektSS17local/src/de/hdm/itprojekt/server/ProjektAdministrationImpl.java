@@ -56,7 +56,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 	//Methode um ein Projekt anzulegen
 	@Override
-	public Projekt createProjekt(String projektName, String projektBeschreibung, Date startDatum, Date endDatum)
+	public Projekt createProjekt(String projektName, String projektBeschreibung, Date startDatum, Date endDatum, int TeilnehmerID, int MarktplatzID)
 			throws IllegalArgumentException {
 
 		Projekt p = new Projekt();
@@ -64,7 +64,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		p.setBeschreibung(projektBeschreibung);
 		p.setStartDatum(startDatum);
 		p.setEndDatum(endDatum);
-
+		p.setTeilnehmer_idTeilnehmer(TeilnehmerID);
+		p.setProjektmarktplatz_idProjektmarkplatz(MarktplatzID);
 		//setzen einer vorläufigen Projekt-Nr diese ist mit der DB konsistent
 		p.setId(1);
 

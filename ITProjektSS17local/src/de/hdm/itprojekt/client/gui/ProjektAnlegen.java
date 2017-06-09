@@ -133,7 +133,7 @@ public class ProjektAnlegen extends VerticalPanel{
 	        
 	        ClientSideSettings.getProjektAdministration().
 	        createProjekt(projektNameBox.getText(), projektBeschreibungArea.getText(),
-	        		(startPicker.getValue()),(endPicker.getValue()), new CreateProjectCallback ());
+	        		(startPicker.getValue()),(endPicker.getValue()), /*ClientSideSettings.getCurrentUser().getId()*/1, 1, new CreateProjectCallback ());
 	        } catch(Exception e){
 	        	Window.alert(e.toString());
 	        	e.printStackTrace();
