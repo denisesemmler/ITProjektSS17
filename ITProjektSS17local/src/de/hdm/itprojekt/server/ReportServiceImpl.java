@@ -3,13 +3,15 @@ package de.hdm.itprojekt.server;
 import java.util.Date;
 import java.util.Vector;
 
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bs.ProjektAdministration;
 import de.hdm.itprojekt.shared.report.AlleAusschreibungen;
 import de.hdm.itprojekt.shared.report.Column;
 import de.hdm.itprojekt.shared.report.Row;
 
-public class ReportServiceImpl {
+public class ReportServiceImpl extends RemoteServiceServlet  {
 
 	
 	//Verbindung zu Marktplatzadministration fehlt
