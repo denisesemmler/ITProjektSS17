@@ -33,6 +33,7 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 
 		if(sender == allAds) {
 			this.parent.setReport(new AlleAusschreibungen());
+
 		} else if (sender == adsForProfile){
 			Window.alert("Not yet implemented");
 		} else if (sender == adsForApplication){

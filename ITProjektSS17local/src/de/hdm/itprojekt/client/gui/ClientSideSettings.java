@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.client.gui;
 import java.util.logging.Logger;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
@@ -86,8 +87,7 @@ public class ClientSideSettings extends CommonSettings{
 		  public static ReportServiceAsync getReportGenerator() {
 		    if (reportGenerator == null) {
 		      // Instantiierung von ReportGenerator
-		      reportGenerator = GWT.create(ReportService.class);
-
+		      reportGenerator = (ReportServiceAsync) GWT.create(ReportService.class);
 		      final AsyncCallback<Void> initReportGeneratorCallback = new AsyncCallback<Void>() {
 		        @Override
 				public void onFailure(Throwable caught) {
@@ -104,7 +104,6 @@ public class ClientSideSettings extends CommonSettings{
 
 		      reportGenerator.init(initReportGeneratorCallback);
 		    }
-
 		    // Rückgabe des ReportGenerator
 		    return reportGenerator;
 		  }

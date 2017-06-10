@@ -1,17 +1,36 @@
 package de.hdm.itprojekt.server;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import de.hdm.itprojekt.server.db.AusschreibungMapper;
+import de.hdm.itprojekt.server.db.BeteiligungMapper;
+import de.hdm.itprojekt.server.db.BewerbungMapper;
+import de.hdm.itprojekt.server.db.EigenschaftMapper;
+import de.hdm.itprojekt.server.db.ProfilMapper;
+import de.hdm.itprojekt.server.db.ProjektMapper;
+import de.hdm.itprojekt.server.db.TeilnehmerMapper;
+import de.hdm.itprojekt.shared.ReportService;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bs.ProjektAdministration;
 import de.hdm.itprojekt.shared.report.AlleAusschreibungen;
 import de.hdm.itprojekt.shared.report.Column;
 import de.hdm.itprojekt.shared.report.Row;
 
-public class ReportServiceImpl extends RemoteServiceServlet  {
+public class ReportServiceImpl extends RemoteServiceServlet implements ReportService  {
+	
+	private ProjektMapper pMapper = null;
+	private AusschreibungMapper aMapper = null;
+	private ProfilMapper pfMapper = null;
+	private TeilnehmerMapper tMapper = null;
+	private EigenschaftMapper eMapper = null;
+	private BewerbungMapper bMapper = null;
+	private BeteiligungMapper btMapper = null;
 
 	
 	//Verbindung zu Marktplatzadministration fehlt
@@ -103,6 +122,25 @@ public class ReportServiceImpl extends RemoteServiceServlet  {
 		     */
 		    return result; //Datenstruktur des Reports. Es kann noch nichts ausgegeben werden.
 		  }
+
+	@Override
+	public void init() throws IllegalArgumentException {
+		pMapper = ProjektMapper.projektMapper();
+		aMapper = AusschreibungMapper.ausschreibungMapper();
+		pfMapper = ProfilMapper.profilMapper();
+		tMapper = TeilnehmerMapper.teilnehmerMapper();
+		eMapper = EigenschaftMapper.eigenschaftMapper();
+		bMapper = BewerbungMapper.bewerbungMapper();
+		btMapper = BeteiligungMapper.beteiligungMapper();
+		
+	}
+
+	@Override
+	public List<Ausschreibung> getAllAusschreibungen() {
+		// TODO Auto-generated method stub
+		Window.alert("ReportServiceImpl");
+		return this.aMapper.findAllAusschreibungen();
+	}
 	
 	
 }
