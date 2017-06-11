@@ -25,15 +25,16 @@
   
   <!-- pr0ject ReportGenerator Servlet -->
   
-<servlet>
+  <servlet>
     <servlet-name>reportServiceServlet</servlet-name>
     <servlet-class>de.hdm.itprojekt.server.ReportServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
     <servlet-name>reportServiceServlet</servlet-name>
-    <url-pattern>/itprojektSS17local/reportgenerator</url-pattern>
+    <url-pattern>/itprojektss17local/reportgenerator</url-pattern>
   </servlet-mapping>
+  
   
   </web-app>
     

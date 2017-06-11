@@ -1,6 +1,8 @@
 package de.hdm.itprojekt.shared.report;
 
-public abstract class Report {
+import com.google.gwt.user.client.ui.VerticalPanel;;
+
+public abstract class Report  extends VerticalPanel{
 
 	/**
 	   * Titel des Repors.
