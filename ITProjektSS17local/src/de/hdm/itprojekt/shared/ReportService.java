@@ -10,13 +10,5 @@ import de.hdm.itprojekt.shared.bo.Ausschreibung;
 @RemoteServiceRelativePath("reportgenerator")
 
 public interface ReportService  extends RemoteService{
-	
-	/**
-	 * Initialisierung des objektes mit anschlieﬂendem No Argument Konstruktor
-	 * @throws IllegalArgumentException
-	 */
-	//public void init() throws IllegalArgumentException;
-	
 	List<Ausschreibung> getAllAusschreibungen();
-
 }
