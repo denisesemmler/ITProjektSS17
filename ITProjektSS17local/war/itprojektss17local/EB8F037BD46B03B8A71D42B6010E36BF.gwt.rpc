@@ -3,6 +3,7 @@ com.google.gwt.i18n.shared.impl.DateRecord, true, true, true, true, com.google.g
 com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException, true, true, true, true, com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException/3936916533, 3936916533
 com.google.gwt.user.client.rpc.RpcTokenException, true, true, false, false, com.google.gwt.user.client.rpc.RpcTokenException/2345075298, 2345075298
 com.google.gwt.user.client.rpc.XsrfToken, false, false, true, true, com.google.gwt.user.client.rpc.XsrfToken/4254043109, 4254043109
+de.hdm.itprojekt.shared.bo.Ausschreibung, true, true, true, true, de.hdm.itprojekt.shared.bo.Ausschreibung/4247665687, 4247665687
 de.hdm.itprojekt.shared.bo.BusinessObjekt, true, false, true, false, de.hdm.itprojekt.shared.bo.BusinessObjekt/2179374512, 2179374512
 de.hdm.itprojekt.shared.bo.Projekt, true, true, true, true, de.hdm.itprojekt.shared.bo.Projekt/2614591998, 2614591998
 de.hdm.itprojekt.shared.bo.Teilnehmer, true, true, false, false, de.hdm.itprojekt.shared.bo.Teilnehmer/100949305, 100949305
