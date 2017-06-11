@@ -24,6 +24,11 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 import de.hdm.itprojekt.shared.bs.ProjektAdministration;
 
+/**
+ * 
+ * @author Patricia
+ *
+ */
 @SuppressWarnings("serial")
 public class ProjektAdministrationImpl extends RemoteServiceServlet implements ProjektAdministration {
 
@@ -58,7 +63,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 * Methoden für Projekte
 	 */
 
-	// Methode um ein Projekt anzulegen
+	/**
+	 * Diese Methode implementiert denn UC Projekt anlegen
+	 */
 	@Override
 	public Projekt createProjekt(String projektName, String projektBeschreibung, Date startDatum, Date endDatum,
 			int TeilnehmerID, int MarktplatzID) throws IllegalArgumentException {
@@ -78,7 +85,10 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 	}
 
-	// Methode um ein Projekt zu bearbeiten
+	// Methoden für Projekt
+	/**
+	 * Diese Methode implementiert denn UC Projekt bearbeiten
+	 */
 	@Override
 	public void updateProjekt(Projekt p) throws IllegalArgumentException {
 		pMapper.update(p);
@@ -91,6 +101,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 * 
 	 * @param p
 	 *            ist das Objekt eines Projekts, dass gelöscht werden soll.
+	 * 
+	 *            Implementiert denn UC Projekt löschen
 	 */
 	@Override
 	public void deleteProjekt(Projekt p) throws IllegalArgumentException {
@@ -103,9 +115,10 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 	}
 
-
-	// Methode zum löschen des Profils, da die Ausschreibung sonst nicht
-	// gelöscht werden kann
+	/*
+	 * Methode zum löschen des Profils, da die Ausschreibung sonst nicht
+	 * gelöscht werden kann
+	 */
 	private void deleteProfil(Ausschreibung a) {
 
 		// Hier wird das Suchprofil zur Ausschreibung von der DB gelesen
@@ -134,14 +147,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		teilnehmer.setProfil_idProfil(0);
 	}
 
-	// Methode um die Beteiligung zu löschen, da die Bewerbung vorher nicht
-	// gelöscht werden kann
-	private void deleteBewerbung(Bewerbung b) {
-		Beteiligung beteiligung = btMapper.findByBewerbung(b);
-		btMapper.delete(beteiligung);
-		bMapper.delete(b);
-	}
-
 	/**
 	 * Diese Methode liest alle Ausschreibungen zu einem Projekt.
 	 * 
@@ -153,48 +158,104 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return aMapper.findByProjekt(p);
 	}
 
-	/*
-	 * Methoden für Ausschreibungen
+	// Methoden für Ausschreibung
+	/**
+	 * Diese Methode implementiert denn UC Ausschreibung erstellen
 	 */
-
 	@Override
 	public Ausschreibung createAusschreibung(String beschreibung, Date bewerbungsfrist, String titel,
 			int projekt_idProjekt, int profil_idSuchprofil) throws IllegalArgumentException {
-		
-		//Neues Objekt erstellen
+
+		// Neues Objekt erstellen
 		Ausschreibung ausschreibung = new Ausschreibung();
-		
-		//Werte zum Objekt hinzufügen
+
+		// Werte zum Objekt hinzufügen
 		ausschreibung.setBeschreibung(beschreibung);
-		ausschreibung.setBewerbungsfrist(new Timestamp(bewerbungsfrist.getTime()));
+		// kurze schreibweise einer Typkonvertierung
+		ausschreibung.setBewerbungsfrist(new Timestamp(bewerbungsfrist.getTime())); // Timestamp?
 		ausschreibung.setTitel(titel);
 		ausschreibung.setProjekt_idProjekt(projekt_idProjekt);
 		ausschreibung.setProfil_idSuchprofil(profil_idSuchprofil);
-		
-		//In die DB schreiben
+
+		// In die DB schreiben
 		return aMapper.insert(ausschreibung);
 	}
-	
-	
+
+	/**
+	 * Diese Methode implementiert denn UC Ausschreibung bearbeiten
+	 */
 	@Override
 	public void updateAusschreibung(Ausschreibung a) throws IllegalArgumentException {
-		//Update ohne Prüfung in DB
+		// Update ohne Prüfung in DB
 		aMapper.update(a);
 	}
 
-	// Methode zum Löschen von Ausschreibungen, da das Projekt sonst nicht
-	// gelöscht werden kann
+	/**
+	 * Diese Methode implementiert denn UC Ausschreibung löschen
+	 */
+	/*
+	 * Methode zum Löschen von Ausschreibungen, da das Projekt sonst nicht
+	 * gelöscht werden kann
+	 */
 	public void deleteAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 		this.deleteProfil(a);
-		
+
 		// Hier wird die Ausschreibung aus der DB entfernt
 		this.aMapper.delete(a);
 	}
-	
 
-	/*
-	 * Methoden für Teilnehmer
+	// Methoden für Bewerbung
+	/**
+	 * Diese Methode implementiert denn UC Auf Ausschreibung bewerben
 	 */
+	@Override
+	public Bewerbung createBewerbung(String bewerbungsText, Date erstellDatum, float bewertung, String status,
+			int idProfil, int ausschreibungID) throws IllegalArgumentException {
+
+		// Neues Objekt erstellen
+		Bewerbung bewerbung = new Bewerbung();
+
+		// ausführliche Typkonvertierung
+		Timestamp dbErstellDatum = new Timestamp(erstellDatum.getTime());
+
+		// Werte zum Objekt hinzufügen
+		bewerbung.setBewerbungsText(bewerbungsText);
+		bewerbung.setErstellDatum(dbErstellDatum);// Timestamp?
+		bewerbung.setBewertung(bewertung);
+		bewerbung.setStatus(status);
+		bewerbung.setIdProfil(idProfil);
+		bewerbung.setAusschreibungID(ausschreibungID);
+
+		// in die DB schreiben
+		return bMapper.insert(bewerbung);
+	}
+
+	/**
+	 * Diese Methode implementiert denn UC Bewerbung bearbeiten
+	 */
+	@Override
+	public void updateBewerbung(Bewerbung b) throws IllegalArgumentException {
+		// Update ohne Prüfung in DB
+		bMapper.update(b);
+	}
+
+	/**
+	 * Diese Methode implementiert denn UC Bewerbung zurückziehen
+	 */
+	// Methode um die Beteiligung zu löschen, da die Bewerbung vorher nicht
+	// gelöscht werden kann
+	public void deleteBewerbung(Bewerbung b) {
+		Beteiligung beteiligung = btMapper.findByBewerbung(b);
+		btMapper.delete(beteiligung);
+		bMapper.delete(b);
+	}
+
+	
+	
+	
+	
+	
+	// Methoden für Teilnehmer
 
 	public Teilnehmer createTeilnehemr(String name, String zusatz, String emailAdresse, int rolle)
 			throws IllegalArgumentException {
@@ -216,7 +277,5 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	public Teilnehmer createTeilnehmer(String name, String zusatz, String emailAdresse, int rolle) {
 		return null;
 	}
-
-
 
 }

@@ -6,11 +6,21 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
+
+
+
 /*diese Annotation definiert denn relativen Pfad zum Service, sprich unter der URL /itprojektss17local/projektadministration
  * der entsprende URL muss in den Pfad der Web xml hinterlegt werden.
+ */
+
+/**
+ * 
+ * @author Patricia
+ *
  */
 @RemoteServiceRelativePath("projektadministration")
 public interface ProjektAdministration extends RemoteService {
@@ -39,6 +49,14 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public void deleteAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 	
+	/*
+	 * Methoden zum anlegen von Bewerbungen
+	 */
+	public Bewerbung createBewerbung(String bewerbungstext, Date erstelldatum, float bewertung, String status, int profil_idProfil, int ausschreibung_idAusschreibung) throws IllegalArgumentException;
+	
+	public void updateBewerbung(Bewerbung b) throws IllegalArgumentException;
+	
+	public void deleteBewerbung(Bewerbung b) throws IllegalArgumentException;
 	
 	
 	//Prof. Thies Fragen wann IllegalArgumentException verwendet wird
