@@ -123,7 +123,7 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 		    return result; //Datenstruktur des Reports. Es kann noch nichts ausgegeben werden.
 		  }
 
-	@Override
+	/*@Override
 	public void init() throws IllegalArgumentException {
 		pMapper = ProjektMapper.projektMapper();
 		aMapper = AusschreibungMapper.ausschreibungMapper();
@@ -133,13 +133,12 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 		bMapper = BewerbungMapper.bewerbungMapper();
 		btMapper = BeteiligungMapper.beteiligungMapper();
 		
-	}
+	}*/
 
-	@Override
+	
 	public List<Ausschreibung> getAllAusschreibungen() {
-		// TODO Auto-generated method stub
-		Window.alert("ReportServiceImpl");
-		return this.aMapper.findAllAusschreibungen();
+		//return this.aMapper.findAllAusschreibungen
+		return AusschreibungMapper.ausschreibungMapper().findAllAusschreibungen();
 	}
 	
 	

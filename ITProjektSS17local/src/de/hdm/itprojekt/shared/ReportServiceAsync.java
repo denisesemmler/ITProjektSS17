@@ -9,8 +9,8 @@ import de.hdm.itprojekt.shared.bo.Ausschreibung;
 
 public interface ReportServiceAsync {
 
-	void init(AsyncCallback<Void> initReportGeneratorCallback);
+	//void init(AsyncCallback<Void> initReportGeneratorCallback);
 	
-	void getAllAusschreibungen(AsyncCallback<List<Ausschreibung>> callback) throws IllegalArgumentException;
+	void getAllAusschreibungen(AsyncCallback<List<Ausschreibung>> callback);
 
 }

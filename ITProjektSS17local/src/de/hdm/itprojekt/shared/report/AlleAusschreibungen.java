@@ -14,36 +14,28 @@ import de.hdm.itprojekt.shared.ReportServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 
 public class AlleAusschreibungen extends SimpleReport {
+      
 	public AlleAusschreibungen() {
-		
-		//int total = AusschreibungMapper.ausschreibungMapper().findAllAusschreibungen().size();
-		Label test = new Label("Anzahl Berichte: ");
-		
-        try{
-        	ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
-        	Window.alert((reportGenerator.getClass()) + "");
-        	reportGenerator.getAllAusschreibungen(new AlleAusschreibungenCallback());
-	        
-        } catch(Exception e){
-        	Window.alert(e.toString());
-        	System.out.println(e.toString());
-        	e.printStackTrace();
-        }
-        
+    	ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
+    	final AsyncCallback<List<Ausschreibung>> initReportGeneratorCallback = new AsyncCallback<List<Ausschreibung>>() {
+            @Override
+    		public void onFailure(Throwable caught) {
+              ClientSideSettings.getLogger().severe(
+                  "Der ReportGenerator konnte nicht initialisiert werden!");
+            }
+
+            @Override
+    		public void onSuccess(List<Ausschreibung> result) {
+            	setSize(result.size());
+            	
+            }
+          };
+    	reportGenerator.getAllAusschreibungen(initReportGeneratorCallback);        
+	}
+	
+	
+	private void setSize(int i) {
+		Label test = new Label("Anzahl Berichte: "+i);
 		this.add(test);
 	}
-	
-	private class AlleAusschreibungenCallback implements AsyncCallback<List<Ausschreibung>> {
-		public void onFailure(Throwable caught) {
-			Window.alert("Dat läuft noch nit so!");
-			
-		}		
-
-		@Override
-		public void onSuccess(List<Ausschreibung> result) {
-			Window.alert("läuft");
-			
-		}
-	}
-	
 }

@@ -87,22 +87,7 @@ public class ClientSideSettings extends CommonSettings{
 		  public static ReportServiceAsync getReportGenerator() {
 		    if (reportGenerator == null) {
 		      // Instantiierung von ReportGenerator
-		      reportGenerator = (ReportServiceAsync) GWT.create(ReportService.class);
-		      final AsyncCallback<Void> initReportGeneratorCallback = new AsyncCallback<Void>() {
-		        @Override
-				public void onFailure(Throwable caught) {
-		          ClientSideSettings.getLogger().severe(
-		              "Der ReportGenerator konnte nicht initialisiert werden!");
-		        }
-
-		        @Override
-				public void onSuccess(Void result) {
-		          ClientSideSettings.getLogger().info(
-		              "Der ReportGenerator wurde initialisiert.");
-		        }
-		      };
-
-		      reportGenerator.init(initReportGeneratorCallback);
+		      reportGenerator = GWT.create(ReportService.class);
 		    }
 		    // Rückgabe des ReportGenerator
 		    return reportGenerator;
