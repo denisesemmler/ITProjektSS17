@@ -7,6 +7,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Projekt;
+import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 /**
@@ -17,6 +18,11 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 public interface ProjektAdministrationAsync {
 
 	void init(AsyncCallback<Void> callback);
+	
+	/*
+	 * Für Projektmarktplätze
+	 */
+	void createProjektmarktplatz(String projektmarktplatzBez, AsyncCallback<Projektmarktplatz> callback);
 	
 	/*
 	 * Für Projekte

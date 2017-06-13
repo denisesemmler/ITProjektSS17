@@ -12,7 +12,9 @@ import de.hdm.itprojekt.client.report.gui.ReportWrapper;
 
 
 public class Navigation extends HorizontalPanel{
-	
+
+	private Button navProjektmarktplatzVerwaltenButton = new Button("Projektmarktplätze verwalten",
+			new NavigationsButtonHandler());
 	private Button navProjektVerwaltenButton = new Button("Projekte verwalten",
 			new NavigationsButtonHandler());
 	private Button navAusschreibungVerwaltenButton = new Button("Ausschreibungen verwalten",
@@ -29,6 +31,7 @@ public class Navigation extends HorizontalPanel{
 	public Navigation(){
 		//CSS Style Zuweisung 
 		this.setStylePrimaryName("Navi");
+		navProjektmarktplatzVerwaltenButton.setStylePrimaryName("navi-button");
 		navProjektVerwaltenButton.setStylePrimaryName("navi-button");
 		navAusschreibungVerwaltenButton.setStylePrimaryName("navi-button");
 		navBewerbungVerwaltenButton.setStylePrimaryName("navi-button");
@@ -36,6 +39,7 @@ public class Navigation extends HorizontalPanel{
 		navAbmeldenButton.setStylePrimaryName("navi-button");
 		navBerichteButton.setStylePrimaryName("navi-button");
 		
+		this.add(navProjektmarktplatzVerwaltenButton);
 		this.add(navProjektVerwaltenButton);
 		this.add(navAusschreibungVerwaltenButton);
 		this.add(navBewerbungVerwaltenButton);
@@ -51,6 +55,10 @@ public class Navigation extends HorizontalPanel{
 			Button active = (Button) e.getSource();
 			
 			switch (active.getText()){
+			case "Projektmarktplätze verwalten":
+				RootPanel.get("Content").clear();
+				RootPanel.get("Content").add(new ProjektmarktplatzVerwalten());
+				break;
 			case "Projekte verwalten":
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(new ProjektVerwalten());

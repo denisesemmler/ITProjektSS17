@@ -14,6 +14,7 @@ import de.hdm.itprojekt.server.db.BewerbungMapper;
 import de.hdm.itprojekt.server.db.EigenschaftMapper;
 import de.hdm.itprojekt.server.db.ProfilMapper;
 import de.hdm.itprojekt.server.db.ProjektMapper;
+import de.hdm.itprojekt.server.db.ProjektmarktplatzMapper;
 import de.hdm.itprojekt.server.db.TeilnehmerMapper;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Beteiligung;
@@ -21,6 +22,7 @@ import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Projekt;
+import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 import de.hdm.itprojekt.shared.bs.ProjektAdministration;
 
@@ -31,7 +33,8 @@ import de.hdm.itprojekt.shared.bs.ProjektAdministration;
  */
 @SuppressWarnings("serial")
 public class ProjektAdministrationImpl extends RemoteServiceServlet implements ProjektAdministration {
-
+	
+	private ProjektmarktplatzMapper pmMapper = null;
 	private ProjektMapper pMapper = null;
 	private AusschreibungMapper aMapper = null;
 	private ProfilMapper pfMapper = null;
@@ -50,6 +53,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	// Init ist eine Initialisierungsmethode, diese Methode MUSS für jede
 	// Instanz von "ProjektAdministrationImpl" gerufen werden!
 	public void init() throws IllegalArgumentException {
+		pmMapper = ProjektmarktplatzMapper.projektmarktplatzMapper();
 		pMapper = ProjektMapper.projektMapper();
 		aMapper = AusschreibungMapper.ausschreibungMapper();
 		pfMapper = ProfilMapper.profilMapper();
@@ -276,6 +280,17 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	@Override
 	public Teilnehmer createTeilnehmer(String name, String zusatz, String emailAdresse, int rolle) {
 		return null;
+	}
+	
+	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez) throws IllegalArgumentException {
+
+		Projektmarktplatz pm = new Projektmarktplatz();
+		pm.setBezeichnung(projektmarktplatzBez);
+
+		// Objekt in DB speichern
+		Projektmarktplatz projekt = this.pmMapper.insert(pm);
+		return projekt;
+
 	}
 
 }

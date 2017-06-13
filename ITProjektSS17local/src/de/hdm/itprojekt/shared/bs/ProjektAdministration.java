@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Projekt;
+import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 
@@ -30,6 +31,11 @@ public interface ProjektAdministration extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	public void init() throws IllegalArgumentException;
+	
+	/*
+	 * Methoden zum Anlegen eines Projektmarktplatz
+	 */
+	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez) throws IllegalArgumentException;
 	
 	/*
 	 * Methode zum anlegen eines Projekts
