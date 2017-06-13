@@ -162,7 +162,7 @@ public class TeilnehmerMapper {
 			Statement stmt = con.createStatement();
 			// SQL Query ausführen
 			ResultSet rs = stmt
-					.executeQuery("SELECT * FROM Teilnehmer " + "WHERE emailAddresse = '" + emailAdresse + "'");
+					.executeQuery("SELECT * FROM Teilnehmer " + "WHERE email = '" + emailAdresse + "'");
 			// Wenn der Eintrag gefunden wurde
 			if (rs.next()) {
 				// Neues User Objekt anlegen
