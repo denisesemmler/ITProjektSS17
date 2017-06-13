@@ -68,6 +68,8 @@ public interface ProjektAdministration extends RemoteService {
 	//Prof. Thies Fragen wann IllegalArgumentException verwendet wird
 	public Teilnehmer createTeilnehmer(String name, String zusatz, String emailAdresse, int rolle);
 
+	void setUser(Teilnehmer t);
+
 	
 	
 	

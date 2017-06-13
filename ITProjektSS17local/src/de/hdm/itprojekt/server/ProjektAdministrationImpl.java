@@ -42,6 +42,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	private EigenschaftMapper eMapper = null;
 	private BewerbungMapper bMapper = null;
 	private BeteiligungMapper btMapper = null;
+	private Teilnehmer user;
 
 	public ProjektAdministrationImpl() throws IllegalArgumentException {
 		/*
@@ -260,6 +261,10 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	
 	
 	// Methoden für Teilnehmer
+	
+	public void setUser(Teilnehmer t) {
+		user = t;
+	}
 
 	public Teilnehmer createTeilnehemr(String name, String zusatz, String emailAdresse, int rolle)
 			throws IllegalArgumentException {
