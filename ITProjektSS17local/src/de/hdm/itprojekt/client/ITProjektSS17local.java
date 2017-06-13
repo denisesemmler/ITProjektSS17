@@ -24,12 +24,14 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.Navigation;
 import de.hdm.itprojekt.client.gui.ProjektAnlegen;
 //import de.client.ClientSideSettings;
 //import de.hdm.itprojekt.shared.LogOutPopUp;
 import de.hdm.itprojekt.shared.EditorServiceAsync;
 import de.hdm.itprojekt.shared.LoginServiceAsync;
+import de.hdm.itprojekt.shared.bs.ProjektAdministration;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -66,7 +68,7 @@ public class ITProjektSS17local implements EntryPoint {
 		//HorizontalPanel showcase = new ProjektAnlegen();
 		
 		//Zur Kommunikation mit der Datenbank
-		private EditorServiceAsync editorService;
+		private ProjektAdministrationAsync editorService;
 		private LoginServiceAsync loginService;
 
 	  /**
@@ -75,8 +77,8 @@ public class ITProjektSS17local implements EntryPoint {
 	  public void onModuleLoad() {
 		  
 		  //VlientSideSettings müssen noch erstellt werden in de.hdm.itproject.client
-		  //editorService = ClientSideSettings.getEditorService();
-		  //loginService = ClientSideSettings.getLoginService();
+		  editorService = ClientSideSettings.getProjektAdministration();
+		  loginService = ClientSideSettings.getLoginService();
 		  
 		  RootPanel.get("Content").add(loginPanel);
 		  //RootPanel.get("Navi_Container").add(naviPanel);

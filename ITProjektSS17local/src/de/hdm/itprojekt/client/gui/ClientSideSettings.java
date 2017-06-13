@@ -7,7 +7,6 @@ import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 import de.hdm.itprojekt.shared.bs.ProjektAdministration;
 import de.hdm.itprojekt.shared.bs.ProjektAdministrationAsync;
-import de.shared.LoginServiceAsync;
 
 public class ClientSideSettings extends CommonSettings{
 
