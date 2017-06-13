@@ -288,8 +288,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		pm.setBezeichnung(projektmarktplatzBez);
 
 		// Objekt in DB speichern
-		Projektmarktplatz projekt = this.pmMapper.insert(pm);
-		return projekt;
+		return this.pmMapper.insert(pm);
 
 	}
 
