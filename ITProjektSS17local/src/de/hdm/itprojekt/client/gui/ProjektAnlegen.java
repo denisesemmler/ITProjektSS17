@@ -1,6 +1,6 @@
 package de.hdm.itprojekt.client.gui;
 
-import java.sql.Timestamp;
+
 import java.util.Date;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,10 +17,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
-import de.hdm.itprojekt.shared.bo.Projekt;
-
-
-public class ProjektAnlegen extends VerticalPanel{
+public class ProjektAnlegen extends VerticalPanel {
 
 	/**
 	 * Erstellen der Panels
@@ -31,27 +28,26 @@ public class ProjektAnlegen extends VerticalPanel{
 	private HorizontalPanel datePanel = new HorizontalPanel();
 	private VerticalPanel startPanel = new VerticalPanel();
 	private VerticalPanel endPanel = new VerticalPanel();
-	
+
 	/**
-	 * Erstellen der Labels 
+	 * Erstellen der Labels
 	 */
-	private Label marktplatzLabel = new Label ("Select Projektmarktplatz");
+	private Label marktplatzLabel = new Label("Select Projektmarktplatz");
 	private Label projektNameLabel = new Label("Projektname: ");
 	private Label projektBeschreibungLabel = new Label("Projektbeschreibung: ");
 	private Label startDateLabel = new Label("Start Datum: ");
 	private Label endDateLabel = new Label("End Datum: ");
-	
+
 	/**
 	 * Erstellen der ListBox
 	 */
 	private ListBox marktplatzListbox = new ListBox();
-	
+
 	/**
 	 * Erstellen der Buttons
 	 */
-	private Button projektAnlegenButton = new Button("Anlegen",
-			new CreateProjectClickHandler());
-	
+	private Button projektAnlegenButton = new Button("Anlegen", new CreateProjectClickHandler());
+
 	/**
 	 * Erstellen der TextBoxen
 	 */
@@ -62,25 +58,24 @@ public class ProjektAnlegen extends VerticalPanel{
 	 */
 	private DatePicker startPicker = new DatePicker();
 	private DatePicker endPicker = new DatePicker();
-	
-	
+
 	/**
 	 * Konstruktor für Anlegen der GUI
 	 */
 	public ProjektAnlegen() {
-		
-		//CSS Styling
+
+		// CSS Styling
 		marktplatzLabel.addStyleName("Content-Label");
 		projektNameLabel.addStyleName("Content-Label");
 		projektBeschreibungLabel.addStyleName("Content-Label");
 		startDateLabel.addStyleName("Content-Label");
 		endDateLabel.addStyleName("Content-Label");
-		
+
 		mainPanel.add(editorPanel);
-		
+
 		editorPanel.add(attributePanel);
 		editorPanel.add(datePanel);
-		
+
 		attributePanel.add(marktplatzLabel);
 		attributePanel.add(marktplatzListbox);
 		marktplatzListbox.addItem("IT");
@@ -90,67 +85,66 @@ public class ProjektAnlegen extends VerticalPanel{
 		attributePanel.add(projektNameBox);
 		attributePanel.add(projektBeschreibungLabel);
 		attributePanel.add(projektBeschreibungArea);
-		
+
 		datePanel.add(startPanel);
 		datePanel.add(endPanel);
-		
+
 		startPanel.add(startDateLabel);
 		startPanel.add(startPicker);
-		
+
 		endPanel.add(endDateLabel);
 		endPanel.add(endPicker);
-		
-		//Set default Value 
+
+		// Set default Value
 		startPicker.setValue(new Date(), true);
 		endPicker.setValue(new Date(), true);
-		
+
 		mainPanel.add(projektAnlegenButton);
-		
+
 	}
-	
+
 	private class CreateProjectCallback implements AsyncCallback {
 
-		
 		public void onFailure(Throwable caught) {
 			Window.alert("Dat läuft noch nit so!");
-			
+
 		}
 
-		
 		public void onSuccess(Object result) {
 			RootPanel.get("Content").clear();
-			
-			
+
 		}
-		
+
 	}
-	
+
 	private class CreateProjectClickHandler implements ClickHandler {
-		
-		public void onClick(ClickEvent event) {			
-	        //Projekt project = new Projekt();
-	        try{
-	        
-	        ClientSideSettings.getProjektAdministration().
-	        createProjekt(projektNameBox.getText(), projektBeschreibungArea.getText(),
-	        		(startPicker.getValue()),(endPicker.getValue()), /*ClientSideSettings.getCurrentUser().getId()*/1, 1, new CreateProjectCallback ());
-	        } catch(Exception e){
-	        	Window.alert(e.toString());
-	        	e.printStackTrace();
-	        }
-			
-			//Altes Zeug
+
+		public void onClick(ClickEvent event) {
+			// Projekt project = new Projekt();
+			try {
+
+				ClientSideSettings.getProjektAdministration().createProjekt(projektNameBox.getText(),
+						projektBeschreibungArea.getText(), (startPicker.getValue()), (endPicker.getValue()),
+						/* ClientSideSettings.getCurrentUser().getId() */1, 1, new CreateProjectCallback());
+			} catch (Exception e) {
+				Window.alert(e.toString());
+				e.printStackTrace();
+			}
+
+			// Altes Zeug
 			Button active = (Button) event.getSource();
-			
-			switch(active.getText()){
+
+			switch (active.getText()) {
 			case "Anlegen":
 				Window.alert("Projekt angelegt");
-			break;
-			/**case "Navigation":
-					
-				RootPanel.get("Content").clear();
-		    	RootPanel.get("Navi").add(new Navigation());**/
-			}	    	 		    	
-	     }
-	   };
+				break;
+			/**
+			 * case "Navigation":
+			 * 
+			 * RootPanel.get("Content").clear(); RootPanel.get("Navi").add(new
+			 * Navigation());
+			 **/
+			}
+		}
+	};
 }
