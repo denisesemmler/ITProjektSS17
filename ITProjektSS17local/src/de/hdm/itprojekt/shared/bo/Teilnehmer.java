@@ -26,6 +26,61 @@ public class Teilnehmer extends BusinessObjekt {
 	 * projektleiter auf true gesetzt
 	 */
 	private int	projektLeiter	= 2;
+	
+	/**
+	 * Deklaration der Login-Informationen
+	 */
+	private boolean loggedIn;
+	private String loginUrl, logoutUrl;
+	
+	/**
+	 * Auslesen des LogIn
+	 * 
+	 * @return loggedIn
+	 */
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+	
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
+	}
+	
+	/**
+	 * Auslesen der LogInUrl
+	 * 
+	 * @return loginUrl
+	 */
+	public String getLoginUrl() {
+		return loginUrl;
+	}
+
+	/**
+	 * Setzen der LoginUrl
+	 * 
+	 * @param loginUrl
+	 */
+	public void setLoginUrl(String loginUrl) {
+		this.loginUrl = loginUrl;
+	}
+
+	/**
+	 * Auslesen der LogoutUrl
+	 * 
+	 * @return logoutUrl
+	 */
+	public String getLogoutUrl() {
+		return logoutUrl;
+	}
+
+	/**
+	 * Setzen der LogotUrl
+	 * 
+	 * @param logotUrl
+	 */
+	public void setLogoutUrl(String logoutUrl) {
+		this.logoutUrl = logoutUrl;
+	}
 		
 	/**
 	 * @return the name
@@ -166,7 +221,7 @@ public class Teilnehmer extends BusinessObjekt {
 	public void setProfil_idProfil(int profil_idProfil) {
 		this.profil_idProfil = profil_idProfil;
 	}
-
 	
+
 
 }
