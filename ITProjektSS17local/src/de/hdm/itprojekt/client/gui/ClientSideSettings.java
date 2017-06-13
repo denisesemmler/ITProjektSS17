@@ -7,6 +7,7 @@ import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 import de.hdm.itprojekt.shared.bs.ProjektAdministration;
 import de.hdm.itprojekt.shared.bs.ProjektAdministrationAsync;
+import de.shared.LoginServiceAsync;
 
 public class ClientSideSettings extends CommonSettings{
 
@@ -32,6 +33,7 @@ public class ClientSideSettings extends CommonSettings{
 		   */
 		  
 		  private static ReportServiceAsync reportGenerator = null;
+		  private static LoginServiceAsync loginService = null;
 
 		  /**
 		   * Name des Client-Loggers.
@@ -92,6 +94,15 @@ public class ClientSideSettings extends CommonSettings{
 		    // Rückgabe des ReportGenerator
 		    return reportGenerator;
 		  }
+
+		  public static LoginServiceAsync getLoginService() {
+			    if (loginService == null) {
+			      // Instantiierung von ReportGenerator
+			      loginService = GWT.create(LoginService.class);
+			    }
+			    // Rückgabe des ReportGenerator
+			    return loginService;
+			  }
 
 		public static Teilnehmer getCurrentUser() {
 			return currentUser;
