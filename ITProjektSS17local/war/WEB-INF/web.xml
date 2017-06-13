@@ -35,6 +35,21 @@
     <url-pattern>/itprojektss17local/reportgenerator</url-pattern>
   </servlet-mapping>
   
+     <!-- pr0ject Login Servlet -->
+  <servlet>
+    <servlet-name>loginServlet</servlet-name>
+    <servlet-class>de.hdm.itprojekt.server.login.LoginServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>/itprojektss17local/login</url-pattern>
+  </servlet-mapping>
+  
+<!--  <servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>itprojektss17local/reportgenerator/login</url-pattern>
+  </servlet-mapping> -->
   
   </web-app>
     
