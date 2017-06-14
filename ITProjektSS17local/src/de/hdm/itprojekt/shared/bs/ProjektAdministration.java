@@ -64,6 +64,8 @@ public interface ProjektAdministration extends RemoteService {
 
 	void setUser(Teilnehmer t);
 
+	public Teilnehmer login(String requestUri);
+
 	
 	
 	

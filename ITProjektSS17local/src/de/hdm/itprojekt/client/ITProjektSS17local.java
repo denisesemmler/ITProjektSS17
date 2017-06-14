@@ -75,8 +75,8 @@ public class ITProjektSS17local implements EntryPoint {
 		//HorizontalPanel showcase = new ProjektAnlegen();
 		
 		//Zur Kommunikation mit der Datenbank
-		private ProjektAdministrationAsync pr0jectAdmin;
-		private LoginServiceAsync loginService;
+		private final ProjektAdministrationAsync pr0jectAdmin = ClientSideSettings.getProjektAdministration();
+		private final LoginServiceAsync loginService = ClientSideSettings.getLoginService();
 
 	  /**
 	   * Entry point method.
@@ -84,8 +84,8 @@ public class ITProjektSS17local implements EntryPoint {
 	  public void onModuleLoad() {
 		  
 		  //VlientSideSettings müssen noch erstellt werden in de.hdm.itproject.client
-		  pr0jectAdmin = ClientSideSettings.getProjektAdministration();
-		  loginService = ClientSideSettings.getLoginService();
+		  //pr0jectAdmin = ClientSideSettings.getProjektAdministration();
+		  //loginService = ClientSideSettings.getLoginService();
 		  
 			/*
 			 * Wir rufen die Methode login mit den Uebergabeparametern request Uri &
@@ -106,8 +106,9 @@ public class ITProjektSS17local implements EntryPoint {
 			 */
 		  
 			
-			loginService.login(GWT.getHostPageBaseURL() + "ITProjektSS17local.html",
+			pr0jectAdmin.login(GWT.getHostPageBaseURL() + "ITProjektSS17local.html",
 					new AsyncCallback<Teilnehmer>() {
+				
 						public void onFailure(Throwable caught) {
 							RootPanel.get("Zusatz").add(
 									new Label("Entry.login " + caught.toString()));
@@ -126,7 +127,7 @@ public class ITProjektSS17local implements EntryPoint {
 								} else {
 									RootPanel.get("Inhalt").add(
 											new HTML(
-												"<h2>Willkommen in der Grotte, "
+												"<h2>Willkommen bei pr0ject, "
 															+ result.getName()
 															+ "</h2>"));
 									RootPanel.get("Inhalt").add(

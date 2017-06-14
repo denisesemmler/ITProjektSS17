@@ -6,8 +6,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.server.db.AusschreibungMapper;
 import de.hdm.itprojekt.server.db.BeteiligungMapper;
 import de.hdm.itprojekt.server.db.BewerbungMapper;
@@ -40,6 +44,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	private BewerbungMapper bMapper = null;
 	private BeteiligungMapper btMapper = null;
 	private Teilnehmer user;
+	private static final long serialVersionUID = 1L;
 
 	public ProjektAdministrationImpl() throws IllegalArgumentException {
 		/*
@@ -281,6 +286,41 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	@Override
 	public Teilnehmer createTeilnehmer(String name, String zusatz, String emailAdresse, int rolle) {
 		return null;
+	}
+	
+	public Teilnehmer login(String requestUri) {
+
+		UserService userService = UserServiceFactory.getUserService();
+		User user = userService.getCurrentUser();
+		
+		Teilnehmer logInf = new Teilnehmer();
+
+		if (user != null) {
+			Teilnehmer existingPerson = TeilnehmerMapper.teilnehmerMapper().findByEmail(user.getEmail());
+			
+			
+			if(existingPerson != null){
+				ClientSideSettings.getLogger().severe("Userobjekt E-Mail = " + user.getEmail()
+						+ "  Bestehender User: E-Mail  =" + existingPerson.getEmail());
+
+				existingPerson.setLoggedIn(true);
+				existingPerson.setLogoutUrl(userService.createLogoutURL(requestUri));
+
+				return existingPerson;
+
+			}
+
+			
+			logInf.setLoggedIn(true);
+			//logInf.setName(user.getNickname());
+			logInf.setLogoutUrl(userService.createLogoutURL(requestUri));
+			logInf.setEmail(user.getEmail());
+		} else {
+			logInf.setLoggedIn(false);
+			logInf.setLoginUrl(userService.createLoginURL(requestUri));
+			logInf.setLogoutUrl(userService.createLogoutURL(requestUri));
+		}
+		return logInf;
 	}
 
 }
