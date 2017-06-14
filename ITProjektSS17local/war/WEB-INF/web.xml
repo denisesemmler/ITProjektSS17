@@ -37,12 +37,12 @@
   
      <!-- pr0ject Login Servlet -->
   <servlet>
-    <servlet-name>loginServlet</servlet-name>
+    <servlet-name>loginServiveImpl</servlet-name>
     <servlet-class>de.hdm.itprojekt.server.login.LoginServiceImpl</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>loginServlet</servlet-name>
+    <servlet-name>loginServiveImpl</servlet-name>
     <url-pattern>/itprojektss17local/login</url-pattern>
   </servlet-mapping>
   
