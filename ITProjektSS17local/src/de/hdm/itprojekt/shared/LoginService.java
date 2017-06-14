@@ -12,5 +12,6 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 public interface LoginService  extends RemoteService{
 
 	public Teilnehmer login(String requestUri) throws Exception;
+	
 
 }

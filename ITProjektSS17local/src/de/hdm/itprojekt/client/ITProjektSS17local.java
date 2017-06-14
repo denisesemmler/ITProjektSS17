@@ -106,7 +106,7 @@ public class ITProjektSS17local implements EntryPoint {
 			 */
 		  
 			
-			pr0jectAdmin.login(GWT.getHostPageBaseURL() + "ITProjektSS17local.html",
+			loginService.login(GWT.getHostPageBaseURL() + "ITProjektSS17local.html",
 					new AsyncCallback<Teilnehmer>() {
 				
 						public void onFailure(Throwable caught) {
