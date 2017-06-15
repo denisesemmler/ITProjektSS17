@@ -9,7 +9,8 @@ public class Teilnehmer extends BusinessObjekt {
 
 	private static final long serialVersionUID = 1L;
 	private int idTeilnehmer	= 0;
-	private String name 		= "";
+	private String vorname 		= "";
+	private String nachname		= "";
 	private String zusatz 		= "";
 	private String 	ort			= "";
 	private int plz 			= 0;
@@ -84,17 +85,31 @@ public class Teilnehmer extends BusinessObjekt {
 	}
 		
 	/**
-	 * @return the name
+	 * @return the vorname
 	 */
-	public String getName() {
-		return name;
+	public String getVorname() {
+		return vorname;
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name the vorname to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setVorname(String vorname) {
+		this.vorname = vorname;
+	}
+	
+	/**
+	 * @return the nachname
+	 */
+	public String getNachname() {
+		return nachname;
+	}
+
+	/**
+	 * @param name the nachname to set
+	 */
+	public void setNachname(String nachname) {
+		this.vorname = nachname;
 	}
 
 	/**

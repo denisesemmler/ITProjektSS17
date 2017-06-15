@@ -271,13 +271,18 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		user = t;
 	}
 
-	public Teilnehmer createTeilnehemr(String name, String zusatz, String emailAdresse, int rolle)
+	public Teilnehmer createTeilnehemr(String vorname, String nachname, String zusatz, String strasse, 
+									   int plz, String ort, String emailAdresse, int rolle)
 			throws IllegalArgumentException {
 
 		Teilnehmer teilnehmer = new Teilnehmer();
 
-		teilnehmer.setName(name);
+		teilnehmer.setVorname(vorname);
+		teilnehmer.setNachname(nachname);
 		teilnehmer.setZusatz(zusatz);
+		teilnehmer.setStrasse(strasse);
+		teilnehmer.setPlz(plz);
+		teilnehmer.setOrt(ort);
 		teilnehmer.setEmail(emailAdresse);
 		teilnehmer.setRolle(rolle);
 

@@ -28,6 +28,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.gui.LogOutPopUp;
+import de.hdm.itprojekt.client.gui.AnmeldeFormular;
 import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.Navigation;
 import de.hdm.itprojekt.client.gui.ProjektAnlegen;
@@ -120,7 +121,7 @@ public class ITProjektSS17local implements EntryPoint {
 								if (result.isExisting() == false) {
 									try {
 										RootPanel.get("Content").add(
-												new ProjektAnlegen());
+												new AnmeldeFormular());
 									} catch (Exception e1) {
 										e1.printStackTrace();
 									}
@@ -128,7 +129,7 @@ public class ITProjektSS17local implements EntryPoint {
 									RootPanel.get("Content").add(
 											new HTML(
 												"<h2>Willkommen bei pr0ject, "
-															+ result.getName()
+															+ result.getVorname()
 															+ "</h2>"));
 									RootPanel.get("Content").add(
 											new ProjektLoeschen());
