@@ -15,7 +15,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class ProjektmarktplatzLoeschen extends VerticalPanel{
 	
 	private VerticalPanel mainPanel = this;
-	private Label marktplatzNameLabel = new Label("Projektname: ");
+	private Label marktplatzNameLabel = new Label("Marktplatzname: ");
 	private ListBox marktplatzListbox = new ListBox();
 
 	private Button loeschenButton = new Button("Löschen", new DeleteClickHandler());

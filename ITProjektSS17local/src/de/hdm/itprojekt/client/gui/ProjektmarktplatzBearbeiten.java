@@ -36,7 +36,7 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel{
 		
 		
 		marktplatzListbox.addItem("Auslesen Funktion fehlt noch");
-		
+		editorPanel.add(speichernButton);
 		
 		
 	}
