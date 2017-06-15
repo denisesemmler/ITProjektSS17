@@ -80,7 +80,7 @@ public interface ProjektAdministration extends RemoteService {
 	 * Methoden zum anlegen von Teilnehmern
 	 */
 	public Teilnehmer createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
-			String emailAdresse, int rolle) throws IllegalArgumentException;
+			String emailAdresse, int rolle, int ProfilID, int projektleiter) throws IllegalArgumentException;
 
 	
 	
