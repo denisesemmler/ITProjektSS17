@@ -16,16 +16,18 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class AnmeldeFormular extends VerticalPanel{
 	
+		private VerticalPanel mainPanel = this;
+		VerticalPanel labelsPanel = new VerticalPanel();
 		private Label firstNameLabel = new Label("Vorname: "); 
 	 	private TextBox firstNameBox = new TextBox(); 
 	 	private Label lastNameLabel = new Label("Nachname: ");
 	 	private TextBox lastNameBox = new TextBox(); 
-	 	private Label zusatzLabel = new Label("Ort: ");
+	 	private Label zusatzLabel = new Label("Zusatz: ");
 	 	private TextBox zusatzBox = new TextBox(); 
 	 	private Label strasseLabel = new Label("Straße: ");
 	 	private TextBox strasseBox = new TextBox(); 
 	 	private Label plzLabel = new Label("PLZ: ");
-	 	private IntegerBox plzBox = new IntegerBox(); 
+	 	private TextBox plzBox = new TextBox(); 
 	 	private Label ortLabel = new Label("Ort: ");
 	 	private TextBox ortBox = new TextBox(); 
 	 	private Button speichern = new Button("Speichern", new CreateTeilnehmerClickHandler());
@@ -40,15 +42,27 @@ public class AnmeldeFormular extends VerticalPanel{
 	 		plzLabel.addStyleName("Content-label");
 	 		ortLabel.addStyleName("Content-label");
 	 		
-	 		VerticalPanel labelsPanel = new VerticalPanel();
+	 		mainPanel.add(labelsPanel);
 	 		
-	 		
+	 		//Elemente hinzufügen
+	 		labelsPanel.add(firstNameLabel);
 	 		labelsPanel.add(firstNameBox);
+	 		
+	 		labelsPanel.add(lastNameLabel);
 	 		labelsPanel.add(lastNameBox);
+	 		
+	 		labelsPanel.add(zusatzLabel);
 	 		labelsPanel.add(zusatzBox);
+	 		
+	 		labelsPanel.add(strasseLabel);
 	 		labelsPanel.add(strasseBox);
+	 		
+	 		labelsPanel.add(plzLabel);
 	 		labelsPanel.add(plzBox);
+	 		
+	 		labelsPanel.add(ortLabel);
 	 		labelsPanel.add(ortBox);
+	 		
 	 		labelsPanel.add(speichern);
 	 	}
 	 	
@@ -59,9 +73,8 @@ public class AnmeldeFormular extends VerticalPanel{
 			public void onClick(ClickEvent event) {
 				// Projekt project = new Projekt();
 				try {
-
 					ClientSideSettings.getProjektAdministration().createTeilnehmer(firstNameBox.getText(),
-							lastNameBox.getText(), zusatzBox.getText(), strasseBox.getText(), plzBox.getValue(),
+							lastNameBox.getText(), zusatzBox.getText(), strasseBox.getText(), Integer.parseInt(plzBox.getText()),
 							ortBox.getText(), ClientSideSettings.getCurrentUser().getEmail(), 1, new CreateTeilnehmerCallback());
 				} catch (Exception e) {
 					Window.alert(e.toString());
