@@ -193,7 +193,17 @@ public class ProjektmarktplatzMapper {
 					// neues SQL Statement
 					stmt = con.createStatement();
 					// SQL Query ausf�hren um Datensatz in DB zu schreiben
-					stmt.executeUpdate("INSERT INTO Projektmarktplatz (idProjektmarktplatz, bezeichnung, ) " +
+					stmt.executeUpdate("INSERT INTO Projektmarktplatz (idProjektmarktplatz, bezeichnung, teilnehmer_idTeilnehmer) " +
+							"VALUES "
+							+ "('" 
+							+ pm.getIdProjektmarktplatz() 
+							+ "', '" 
+							+ pm.getBezeichnung()
+							+ "', '" 
+							+ pm.getTeilnehmer_idTeilnehmer()
+							+ "')");	
+					
+					System.out.println("INSERT INTO Projektmarktplatz (idProjektmarktplatz, bezeichnung, teilnehmer_idTeilnehmer) " +
 							"VALUES "
 							+ "('" 
 							+ pm.getId() 
@@ -201,16 +211,6 @@ public class ProjektmarktplatzMapper {
 							+ pm.getBezeichnung()
 							+ "', '" 
 							+ pm.getTeilnehmer_idTeilnehmer()
-							+ "', '" 
-							+ "')");	
-					
-					System.out.println("INSERT INTO Projektmarktplatz (idProjektmarktplatz, bezeichnung) " +
-							"VALUES "
-							+ "('" 
-							+ pm.getId() 
-							+ "', '" 
-							+ pm.getBezeichnung()
-							+ "', '" 
 							+ "')");	
 				}
 			}

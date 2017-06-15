@@ -68,6 +68,25 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		bMapper = BewerbungMapper.bewerbungMapper();
 		btMapper = BeteiligungMapper.beteiligungMapper();
 	}
+	
+	/*
+	 * Methoden für Projektmarktplätze
+	 */
+
+	/**
+	 * Diese Methode implementiert denn UC Projektmarktplatz anlegen
+	 */
+	@Override
+	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez, int idTeilnehmer) throws IllegalArgumentException {
+
+		Projektmarktplatz pm = new Projektmarktplatz();
+		
+		pm.setBezeichnung(projektmarktplatzBez);
+		pm.setTeilnehmer_idTeilnehmer(idTeilnehmer);
+
+		// Objekt in DB speichern
+		return this.pmMapper.insert(pm);
+	}
 
 	/*
 	 * Methoden für Projekte
@@ -264,7 +283,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	
 	
 	
-	
+	//TODO
 	// Methoden für Teilnehmer
 	
 	public void setUser(Teilnehmer t) {
@@ -288,7 +307,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	@Override
-	public Teilnehmer createTeilnehmer(String name, String zusatz, String emailAdresse, int rolle) {
+	public Teilnehmer createTeilnehmer(String name, String zusatz, String emailAdresse, int rolle)
+			throws IllegalArgumentException {
 		return null;
 	}
 	
@@ -300,11 +320,11 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		Teilnehmer logInf = new Teilnehmer();
 
 		if (user != null) {
-			Teilnehmer existingPerson = TeilnehmerMapper.teilnehmerMapper().findByEmail(user.getEmail());
+			Teilnehmer existingPerson = tMapper.findByEmail(user.getEmail());
 			
 			
 			if(existingPerson != null){
-				ClientSideSettings.getLogger().severe("Userobjekt E-Mail = " + user.getEmail()
+				ClientSideSettings.getLogger().info("Userobjekt E-Mail = " + user.getEmail()
 						+ "  Bestehender User: E-Mail  =" + existingPerson.getEmail());
 
 				existingPerson.setLoggedIn(true);
@@ -327,14 +347,4 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return logInf;
 	}
 	
-	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez) throws IllegalArgumentException {
-
-		Projektmarktplatz pm = new Projektmarktplatz();
-		pm.setBezeichnung(projektmarktplatzBez);
-
-		// Objekt in DB speichern
-		return this.pmMapper.insert(pm);
-
-	}
-
 }
