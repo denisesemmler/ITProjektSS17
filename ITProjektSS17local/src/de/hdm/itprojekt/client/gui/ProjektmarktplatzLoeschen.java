@@ -18,7 +18,7 @@ public class ProjektmarktplatzLoeschen extends VerticalPanel{
 	private Label marktplatzNameLabel = new Label("Projektname: ");
 	private ListBox marktplatzListbox = new ListBox();
 
-	private Button loeschenButton = new Button("Anlegen", new DeleteClickHandler());
+	private Button loeschenButton = new Button("Löschen", new DeleteClickHandler());
 
 	
 	
