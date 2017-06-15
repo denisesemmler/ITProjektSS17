@@ -109,7 +109,7 @@ public class Teilnehmer extends BusinessObjekt {
 	 * @param name the nachname to set
 	 */
 	public void setNachname(String nachname) {
-		this.vorname = nachname;
+		this.nachname = nachname;
 	}
 
 	/**
