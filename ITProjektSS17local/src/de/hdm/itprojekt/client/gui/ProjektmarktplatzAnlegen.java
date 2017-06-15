@@ -57,7 +57,7 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel{
 			try {
 
 				ClientSideSettings.getProjektAdministration().
-				createProjektmarktplatz(projektmarktplatzNameBox.getText(),
+				createProjektmarktplatz(projektmarktplatzNameBox.getText(), 1, /* ClientSideSettings.getCurrentUser().getId() */
 						new CreateProjektmarktplatzCallback());
 			} catch (Exception e) {
 				Window.alert(e.toString());

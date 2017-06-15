@@ -77,10 +77,12 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 * Diese Methode implementiert denn UC Projektmarktplatz anlegen
 	 */
 	@Override
-	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez) throws IllegalArgumentException {
+	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez, int idTeilnehmer) throws IllegalArgumentException {
 
 		Projektmarktplatz pm = new Projektmarktplatz();
+		
 		pm.setBezeichnung(projektmarktplatzBez);
+		pm.setTeilnehmer_idTeilnehmer(idTeilnehmer);
 
 		// Objekt in DB speichern
 		return this.pmMapper.insert(pm);
@@ -318,11 +320,11 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		Teilnehmer logInf = new Teilnehmer();
 
 		if (user != null) {
-			Teilnehmer existingPerson = TeilnehmerMapper.teilnehmerMapper().findByEmail(user.getEmail());
+			Teilnehmer existingPerson = tMapper.findByEmail(user.getEmail());
 			
 			
 			if(existingPerson != null){
-				ClientSideSettings.getLogger().severe("Userobjekt E-Mail = " + user.getEmail()
+				ClientSideSettings.getLogger().info("Userobjekt E-Mail = " + user.getEmail()
 						+ "  Bestehender User: E-Mail  =" + existingPerson.getEmail());
 
 				existingPerson.setLoggedIn(true);

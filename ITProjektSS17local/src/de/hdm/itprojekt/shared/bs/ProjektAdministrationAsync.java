@@ -24,7 +24,7 @@ public interface ProjektAdministrationAsync {
 	/*
 	 * Für Projektmarktplätze
 	 */
-	void createProjektmarktplatz(String projektmarktplatzBez, AsyncCallback<Projektmarktplatz> callback);
+	void createProjektmarktplatz(String projektmarktplatzBez, int idTeilnehmer, AsyncCallback<Projektmarktplatz> callback);
 	
 	/*
 	 * Für Projekte

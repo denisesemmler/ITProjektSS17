@@ -35,7 +35,7 @@ public interface ProjektAdministration extends RemoteService {
 	/*
 	 * Methoden zum Anlegen eines Projektmarktplatz
 	 */
-	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez) throws IllegalArgumentException;
+	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez, int idTeilnehmer) throws IllegalArgumentException;
 	
 	/*
 	 * Methode zum anlegen eines Projekts
