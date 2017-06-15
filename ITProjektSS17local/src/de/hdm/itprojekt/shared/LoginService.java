@@ -11,6 +11,7 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 @RemoteServiceRelativePath("login")
 public interface LoginService  extends RemoteService{
 
-	Teilnehmer login(String requestUri) throws Exception;
+	public Teilnehmer login(String requestUri) throws Exception;
+	
 
 }

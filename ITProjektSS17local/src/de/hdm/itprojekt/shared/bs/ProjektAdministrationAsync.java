@@ -10,6 +10,8 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
+
+
 /**
  * 
  * @author Patricia
@@ -60,9 +62,13 @@ public interface ProjektAdministrationAsync {
 	/*
 	 * Für Teilnehmer
 	 */
+	
+	void setUser(Teilnehmer t, AsyncCallback callback);
+	
 	void createTeilnehmer(String name, String zusatz, String emailAdresse, int rolle,
 			AsyncCallback<Teilnehmer> asyncCallback);
 
+	void login(String requestUri, AsyncCallback<Teilnehmer>callback);
 
 
 

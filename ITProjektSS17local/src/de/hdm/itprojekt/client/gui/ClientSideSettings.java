@@ -32,6 +32,7 @@ public class ClientSideSettings extends CommonSettings{
 		   */
 		  
 		  private static ReportServiceAsync reportGenerator = null;
+		  private static LoginServiceAsync loginService = null;
 
 		  /**
 		   * Name des Client-Loggers.
@@ -92,6 +93,15 @@ public class ClientSideSettings extends CommonSettings{
 		    // Rückgabe des ReportGenerator
 		    return reportGenerator;
 		  }
+
+		  public static LoginServiceAsync getLoginService() {
+			    if (loginService == null) {
+			      // Instantiierung von ReportGenerator
+			      loginService = GWT.create(LoginService.class);
+			    }
+			    // Rückgabe des ReportGenerator
+			    return loginService;
+			  }
 
 		public static Teilnehmer getCurrentUser() {
 			return currentUser;

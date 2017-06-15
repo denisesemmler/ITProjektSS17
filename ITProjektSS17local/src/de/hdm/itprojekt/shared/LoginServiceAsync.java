@@ -15,5 +15,5 @@ public interface LoginServiceAsync {
 	 * @see de.server.login.LoginServiceImpl#login(String);
 	 */
 	void login(String requestUri, AsyncCallback<Teilnehmer>callback);
-
+	
 }
