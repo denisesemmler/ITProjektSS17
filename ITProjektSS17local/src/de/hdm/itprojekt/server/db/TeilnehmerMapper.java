@@ -73,7 +73,7 @@ public class TeilnehmerMapper {
 				// Id, name, zusatz Email und Rolle mit den Daten aus der DB
 				// füllen
 				t.setIdTeilnehmer(rs.getInt("idTeilnehmer"));
-				t.setVorname("vorname");
+				t.setVorname(rs.getString("vorname"));
 				t.setNachname(rs.getString("nachname"));
 				t.setZusatz(rs.getString("zusatz"));
 				t.setEmail(rs.getString("email"));
@@ -126,7 +126,7 @@ public class TeilnehmerMapper {
 				// ... Id, Vorname, Nachname und Email mit den Daten aus der DB
 				// fÃ¼llen
 				t.setIdTeilnehmer(rs.getInt("idTeilnehmer"));
-				t.setVorname("vorname");
+				t.setVorname(rs.getString("vorname"));
 				t.setNachname(rs.getString("nachname"));
 				t.setZusatz(rs.getString("zusatz"));
 				t.setEmail(rs.getString("email"));
@@ -171,7 +171,7 @@ public class TeilnehmerMapper {
 				Teilnehmer t = new Teilnehmer();
 				// Das Objekt mit Daten aus der DB füllen
 				t.setIdTeilnehmer(rs.getInt("idTeilnehmer"));
-				t.setVorname("vorname");
+				t.setVorname(rs.getString("vorname"));
 				t.setNachname(rs.getString("nachname"));
 				t.setZusatz(rs.getString("zusatz"));
 				t.setEmail(rs.getString("email"));
@@ -212,7 +212,7 @@ public class TeilnehmerMapper {
 			while (rs.next()) {
 				Teilnehmer t = new Teilnehmer();
 				t.setIdTeilnehmer(rs.getInt("idTeilnehmer"));
-				t.setVorname("vorname");
+				t.setVorname(rs.getString("vorname"));
 				t.setNachname(rs.getString("nachname"));
 				t.setZusatz(rs.getString("zusatz"));
 				t.setEmail(rs.getString("email"));
@@ -355,7 +355,7 @@ public class TeilnehmerMapper {
 				Teilnehmer t = new Teilnehmer();
 				// Das Objekt mit Daten aus der DB füllen
 				t.setIdTeilnehmer(rs.getInt("idTeilnehmer"));
-				t.setVorname("vorname");
+				t.setVorname(rs.getString("vorname"));
 				t.setNachname(rs.getString("nachname"));
 				t.setZusatz(rs.getString("zusatz"));
 				t.setEmail(rs.getString("email"));
