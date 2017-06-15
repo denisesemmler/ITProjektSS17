@@ -116,7 +116,8 @@ public class ITProjektSS17local implements EntryPoint {
 						}
 
 						public void onSuccess(Teilnehmer result) {
-							pr0jectAdmin.setUser(result, new SetUserCallback());
+							ClientSideSettings.setCurrentUser(result);
+							
 							if (result.isLoggedIn()) {
 								if (result.isExisting() == false) {
 									try {
