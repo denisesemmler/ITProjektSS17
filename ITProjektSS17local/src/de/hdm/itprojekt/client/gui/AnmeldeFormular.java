@@ -73,11 +73,11 @@ public class AnmeldeFormular extends VerticalPanel{
 	 	private class CreateTeilnehmerClickHandler implements ClickHandler {
 
 			public void onClick(ClickEvent event) {
-				//Teilnehmer neuerTeilnehmer = new Teilnehmer();
+				Teilnehmer neuerTeilnehmer = new Teilnehmer();
 				try {
 					ClientSideSettings.getProjektAdministration().createTeilnehmer(firstNameBox.getText(),
 							lastNameBox.getText(), zusatzBox.getText(), strasseBox.getText(), Integer.parseInt(plzBox.getText()),
-							ortBox.getText(), "phmueller93@gmail.com" /*neuerTeilnehmer.getEmail()*/, 1, 1, 2,  new CreateTeilnehmerCallback());
+							ortBox.getText(), /*"phmueller93@gmail.com"*/ neuerTeilnehmer.getEmail(), 1, 1, 2,  new CreateTeilnehmerCallback());
 				} catch (Exception e) {
 					Window.alert(e.toString());
 					e.printStackTrace();
