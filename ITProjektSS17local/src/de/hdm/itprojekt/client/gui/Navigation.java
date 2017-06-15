@@ -68,7 +68,8 @@ public class Navigation extends HorizontalPanel{
 				Window.alert("Not implemented... yet");
 				break;
 			case "Profil verwalten":
-				Window.alert("Not implemented... yet");
+				RootPanel.get("Content").clear();
+				RootPanel.get("Content").add(new ProfilVerwalten());
 				break;
 			case "Berichte":
 				RootPanel.get("Content").clear();
