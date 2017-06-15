@@ -271,6 +271,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		user = t;
 	}
 
+	@Override
 	public Teilnehmer createTeilnehemr(String vorname, String nachname, String zusatz, String strasse, 
 									   int plz, String ort, String emailAdresse, int rolle)
 			throws IllegalArgumentException {
@@ -286,9 +287,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		teilnehmer.setEmail(emailAdresse);
 		teilnehmer.setRolle(rolle);
 
-		Teilnehmer t = this.tMapper.insert(teilnehmer);
+		//Teilnehmer t = this.tMapper.insert(teilnehmer);
 
-		return t;
+		return this.tMapper.insert(teilnehmer);
 
 	}
 
@@ -338,5 +339,12 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return this.pmMapper.insert(pm);
 
 	}
+
+	/*@Override
+	public void createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
+			String emailAdresse, int rolle) {
+		// TODO Auto-generated method stub
+		
+	}*/
 
 }
