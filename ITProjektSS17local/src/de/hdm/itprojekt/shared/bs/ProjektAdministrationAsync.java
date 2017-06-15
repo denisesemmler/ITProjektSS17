@@ -67,7 +67,7 @@ public interface ProjektAdministrationAsync {
 
 	void login(String requestUri, AsyncCallback<Teilnehmer>callback);
 
-	void createTeilnehemr(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
+	void createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
 			String emailAdresse, int rolle, AsyncCallback<Teilnehmer> callback);
 
 

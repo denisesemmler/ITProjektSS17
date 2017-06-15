@@ -272,7 +272,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	@Override
-	public Teilnehmer createTeilnehemr(String vorname, String nachname, String zusatz, String strasse, 
+	public Teilnehmer createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, 
 									   int plz, String ort, String emailAdresse, int rolle)
 			throws IllegalArgumentException {
 

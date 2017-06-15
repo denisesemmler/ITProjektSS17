@@ -72,7 +72,7 @@ public interface ProjektAdministration extends RemoteService {
 
 	public Teilnehmer login(String requestUri);
 
-	public Teilnehmer createTeilnehemr(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
+	public Teilnehmer createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
 			String emailAdresse, int rolle) throws IllegalArgumentException;
 
 	
