@@ -56,7 +56,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	@Override
-	// Init ist eine Initialisierungsmethode, diese Methode MUSS f�r jede
+
+	// Init ist eine Initialisierungsmethode, diese Methode MUSS für jede
+
 	// Instanz von "ProjektAdministrationImpl" gerufen werden!
 	public void init() throws IllegalArgumentException {
 		pmMapper = ProjektmarktplatzMapper.projektmarktplatzMapper();
@@ -70,7 +72,11 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 	
 	/*
+<<<<<<< HEAD
 	 * Methoden f�r Projektmarktpl�tze
+=======
+	 * Methoden für Projektmarktplätze
+>>>>>>> branch 'Philipp' of https://github.com/denisesemmler/ITProjektSS17.git
 	 */
 
 	/**
@@ -89,7 +95,11 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	/*
+<<<<<<< HEAD
 	 * Methoden f�r Projekte
+=======
+	 * Methoden für Projekte
+>>>>>>> branch 'Philipp' of https://github.com/denisesemmler/ITProjektSS17.git
 	 */
 
 	/**
@@ -106,7 +116,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		p.setEndDatum(new java.sql.Date(endDatum.getTime()));
 		p.setTeilnehmer_idTeilnehmer(TeilnehmerID);
 		p.setProjektmarktplatz_idProjektmarkplatz(MarktplatzID);
-		// setzen einer vorl�ufigen Projekt-Nr diese ist mit der DB konsistent
+
+		// setzen einer vorläufigen Projekt-Nr diese ist mit der DB konsistent
+
 		// p.setId(1);
 
 		// Objekt in DB speichern
@@ -114,7 +126,10 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 	}
 
-	// Methoden f�r Projekt
+
+
+	// Methoden für Projekt
+
 	/**
 	 * Diese Methode implementiert denn UC Projekt bearbeiten
 	 */
@@ -124,14 +139,26 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Diese Methode l�scht ein Projekt mit all ihren Abh�ngigkeiten (gem��
+=======
+	 * Diese Methode löscht ein Projekt mit all ihren Abhängigkeiten (gemäß
+>>>>>>> branch 'Philipp' of https://github.com/denisesemmler/ITProjektSS17.git
 	 * tablesV3). Diese sind: {@link Ausschreibung}, {@link Profil},
 	 * {@link Eigenschaft}, {@link Bewerbung}, {@link Beteiligung}
 	 * 
 	 * @param p
+<<<<<<< HEAD
 	 *            ist das Objekt eines Projekts, dass gel�scht werden soll.
+=======
+	 *            ist das Objekt eines Projekts, dass gelöscht werden soll.
+>>>>>>> branch 'Philipp' of https://github.com/denisesemmler/ITProjektSS17.git
 	 * 
+<<<<<<< HEAD
 	 *            Implementiert denn UC Projekt l�schen
+=======
+	 *            Implementiert denn UC Projekt löschen
+>>>>>>> branch 'Philipp' of https://github.com/denisesemmler/ITProjektSS17.git
 	 */
 	@Override
 	public void deleteProjekt(Projekt p) throws IllegalArgumentException {
@@ -145,8 +172,13 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	/*
+<<<<<<< HEAD
 	 * Methode zum l�schen des Profils, da die Ausschreibung sonst nicht
 	 * gel�scht werden kann
+=======
+	 * Methode zum löschen des Profils, da die Ausschreibung sonst nicht
+	 * gelöscht werden kann
+>>>>>>> branch 'Philipp' of https://github.com/denisesemmler/ITProjektSS17.git
 	 */
 	private void deleteProfil(Ausschreibung a) {
 
@@ -166,7 +198,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		ArrayList<Bewerbung> bewerbungenZuProfil = bMapper.findByAusschreibungsId(a.getIdAusschreibung());
 
 		// Hier werden die Bewerbungen aus der DB entfernt, aber erst wenn die
-		// dazugeh�rige Beteiligung entfernt ist
+
+		// dazugehörige Beteiligung entfernt ist
+
 		for (Bewerbung b : bewerbungenZuProfil) {
 			this.deleteBewerbung(b);
 		}
@@ -181,13 +215,18 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 * 
 	 * @param p
 	 *            das Projekt zu dem alle Ausschreibungen gelesen werden sollen.
+<<<<<<< HEAD
 	 * @return Vector aller Ausschreibungen zum �bergebenen Projekt p.
+=======
+	 * @return Vector aller Ausschreibungen zum übergebenen Projekt p.
+>>>>>>> branch 'Philipp' of https://github.com/denisesemmler/ITProjektSS17.git
 	 */
 	private Vector<Ausschreibung> getAusschreibung(Projekt p) {
 		return aMapper.findByProjekt(p);
 	}
 
-	// Methoden f�r Ausschreibung
+	// Methoden für Ausschreibung
+
 	/**
 	 * Diese Methode implementiert denn UC Ausschreibung erstellen
 	 */
@@ -198,7 +237,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		// Neues Objekt erstellen
 		Ausschreibung ausschreibung = new Ausschreibung();
 
-		// Werte zum Objekt hinzuf�gen
+
+		// Werte zum Objekt hinzufügen
+
 		ausschreibung.setBeschreibung(beschreibung);
 		// kurze schreibweise einer Typkonvertierung
 		ausschreibung.setBewerbungsfrist(new Timestamp(bewerbungsfrist.getTime())); // Timestamp?
@@ -215,16 +256,24 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 */
 	@Override
 	public void updateAusschreibung(Ausschreibung a) throws IllegalArgumentException {
-		// Update ohne Pr�fung in DB
+
+		// Update ohne Prüfung in DB
+
 		aMapper.update(a);
 	}
 
 	/**
+
 	 * Diese Methode implementiert denn UC Ausschreibung l�schen
+
+	 * Diese Methode implementiert denn UC Ausschreibung löschen
+
 	 */
 	/*
-	 * Methode zum L�schen von Ausschreibungen, da das Projekt sonst nicht
-	 * gel�scht werden kann
+
+	 * Methode zum Löschen von Ausschreibungen, da das Projekt sonst nicht
+	 * gelöscht werden kann
+
 	 */
 	public void deleteAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 		this.deleteProfil(a);
@@ -233,7 +282,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		this.aMapper.delete(a);
 	}
 
-	// Methoden f�r Bewerbung
+
+	// Methoden für Bewerbung
+
 	/**
 	 * Diese Methode implementiert denn UC Auf Ausschreibung bewerben
 	 */
@@ -244,10 +295,15 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		// Neues Objekt erstellen
 		Bewerbung bewerbung = new Bewerbung();
 
-		// ausf�hrliche Typkonvertierung
+		// ausführliche Typkonvertierung
+
 		Timestamp dbErstellDatum = new Timestamp(erstellDatum.getTime());
 
+
 		// Werte zum Objekt hinzuf�gen
+
+		// Werte zum Objekt hinzufügen
+
 		bewerbung.setBewerbungsText(bewerbungsText);
 		bewerbung.setErstellDatum(dbErstellDatum);// Timestamp?
 		bewerbung.setBewertung(bewertung);
@@ -264,15 +320,24 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 */
 	@Override
 	public void updateBewerbung(Bewerbung b) throws IllegalArgumentException {
-		// Update ohne Pr�fung in DB
+
+		// Update ohne Prüfung in DB
+
 		bMapper.update(b);
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Diese Methode implementiert denn UC Bewerbung zur�ckziehen
+=======
+	 * Diese Methode implementiert denn UC Bewerbung zurückziehen
+
 	 */
-	// Methode um die Beteiligung zu l�schen, da die Bewerbung vorher nicht
-	// gel�scht werden kann
+
+
+	// Methode um die Beteiligung zu löschen, da die Bewerbung vorher nicht
+	// gelöscht werden kann
+
 	public void deleteBewerbung(Bewerbung b) {
 		Beteiligung beteiligung = btMapper.findByBewerbung(b);
 		btMapper.delete(beteiligung);
@@ -284,7 +349,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	
 	
 	//TODO
-	// Methoden f�r Teilnehmer
+
+	// Methoden für Teilnehmer
+
 	
 	public void setUser(Teilnehmer t) {
 		user = t;
@@ -311,7 +378,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return this.tMapper.insert(teilnehmer);
 
 	}
-
 
 	
 	public Teilnehmer login(String requestUri) {
@@ -358,5 +424,14 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return this.pmMapper.insert(pm);
 
 	}
+
+
+	/*@Override
+	public void createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
+			String emailAdresse, int rolle) {
+		// TODO Auto-generated method stub
+		
+	}*/
+
 
 }
