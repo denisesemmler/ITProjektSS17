@@ -35,7 +35,6 @@ public class Navigation extends HorizontalPanel{
 		navAusschreibungVerwaltenButton.setStylePrimaryName("navi-button");
 		navBewerbungVerwaltenButton.setStylePrimaryName("navi-button");
 		navProfilVerwaltenButton.setStylePrimaryName("navi-button");
-		navAbmeldenButton.setStylePrimaryName("navi-button");
 		navBerichteButton.setStylePrimaryName("navi-button");
 		
 		this.add(navProjektmarktplatzVerwaltenButton);
