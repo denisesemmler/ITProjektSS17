@@ -25,8 +25,7 @@ public class Navigation extends HorizontalPanel{
 			new NavigationsButtonHandler());
 	private Button navBerichteButton = new Button("Berichte",
 			new NavigationsButtonHandler());
-	private Button navAbmeldenButton = new Button("Abmelden",
-			new NavigationsButtonHandler());
+
 
 	public Navigation(){
 		//CSS Style Zuweisung 
@@ -46,7 +45,7 @@ public class Navigation extends HorizontalPanel{
 		this.add(navProfilVerwaltenButton);
 		this.add(navProfilVerwaltenButton);
 		this.add(navBerichteButton);
-		this.add(navAbmeldenButton);
+		
 	}
 	
 	private class NavigationsButtonHandler implements ClickHandler {
@@ -75,9 +74,6 @@ public class Navigation extends HorizontalPanel{
 			case "Berichte":
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(new ReportWrapper());
-				break;
-			case "Abmelden":
-				Window.alert("Not implemented... yet \nBut Hell Yeah.. go fuck yourself!");
 				break;
 			
 			}
