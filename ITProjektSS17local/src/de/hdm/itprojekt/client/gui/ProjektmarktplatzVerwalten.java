@@ -40,11 +40,11 @@ public class ProjektmarktplatzVerwalten extends VerticalPanel{
 			break;
 			case "Bearbeiten":
 				RootPanel.get("Content").clear();
-				//RootPanel.get("Content").add(new ProjektmarktplatzBearbeiten());
+				RootPanel.get("Content").add(new ProjektmarktplatzBearbeiten());
 				break;
 			case "Loschen":					
 				RootPanel.get("Content").clear();
-				//RootPanel.get("Content").add(new ProjektmarktplatzLoeschen());
+				RootPanel.get("Content").add(new ProjektmarktplatzLoeschen());
 				break;
 			}	    	 		    	
 	     }
