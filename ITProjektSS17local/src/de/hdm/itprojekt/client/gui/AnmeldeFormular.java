@@ -12,6 +12,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.shared.bo.Teilnehmer;
+
 
 
 public class AnmeldeFormular extends VerticalPanel{
@@ -71,11 +73,11 @@ public class AnmeldeFormular extends VerticalPanel{
 	 	private class CreateTeilnehmerClickHandler implements ClickHandler {
 
 			public void onClick(ClickEvent event) {
-				// Projekt project = new Projekt();
+				//Teilnehmer neuerTeilnehmer = new Teilnehmer();
 				try {
 					ClientSideSettings.getProjektAdministration().createTeilnehmer(firstNameBox.getText(),
 							lastNameBox.getText(), zusatzBox.getText(), strasseBox.getText(), Integer.parseInt(plzBox.getText()),
-							ortBox.getText(), ClientSideSettings.getCurrentUser().getEmail(), 1, new CreateTeilnehmerCallback());
+							ortBox.getText(), "phmueller93@gmail.com" /*neuerTeilnehmer.getEmail()*/, 1, 1, 2,  new CreateTeilnehmerCallback());
 				} catch (Exception e) {
 					Window.alert(e.toString());
 					e.printStackTrace();
