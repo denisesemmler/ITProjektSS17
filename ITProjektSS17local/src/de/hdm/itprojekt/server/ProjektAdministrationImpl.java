@@ -292,10 +292,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 	}
 
-	@Override
-	public Teilnehmer createTeilnehmer(String name, String zusatz, String emailAdresse, int rolle) {
-		return null;
-	}
+
 	
 	public Teilnehmer login(String requestUri) {
 
