@@ -34,6 +34,8 @@ public class AnmeldeFormular extends VerticalPanel{
 	 	private TextBox ortBox = new TextBox(); 
 	 	private Button speichern = new Button("Speichern", new CreateTeilnehmerClickHandler());
 	 	
+	 	Teilnehmer neuerTeilnehmer = new Teilnehmer();
+	 	
 	 	public AnmeldeFormular() {
 	 		
 	 		//CSS Styling
@@ -73,7 +75,7 @@ public class AnmeldeFormular extends VerticalPanel{
 	 	private class CreateTeilnehmerClickHandler implements ClickHandler {
 
 			public void onClick(ClickEvent event) {
-				Teilnehmer neuerTeilnehmer = new Teilnehmer();
+				
 				try {
 					ClientSideSettings.getProjektAdministration().createTeilnehmer(firstNameBox.getText(),
 							lastNameBox.getText(), zusatzBox.getText(), strasseBox.getText(), Integer.parseInt(plzBox.getText()),
