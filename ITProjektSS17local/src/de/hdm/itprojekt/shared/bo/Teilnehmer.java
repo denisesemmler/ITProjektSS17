@@ -32,6 +32,7 @@ public class Teilnehmer extends BusinessObjekt {
 	 */
 	private boolean loggedIn;
 	private String loginUrl, logoutUrl;
+	private boolean existing;
 	
 	/**
 	 * Auslesen des LogIn
@@ -220,6 +221,14 @@ public class Teilnehmer extends BusinessObjekt {
 	 */
 	public void setProfil_idProfil(int profil_idProfil) {
 		this.profil_idProfil = profil_idProfil;
+	}
+	
+	public boolean isExisting() {
+		return existing;
+	}
+	
+	public void setExisting(boolean existing) {
+		this.existing = existing;
 	}
 	
 

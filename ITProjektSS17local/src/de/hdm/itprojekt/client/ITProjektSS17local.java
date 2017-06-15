@@ -117,20 +117,20 @@ public class ITProjektSS17local implements EntryPoint {
 						public void onSuccess(Teilnehmer result) {
 							pr0jectAdmin.setUser(result, new SetUserCallback());
 							if (result.isLoggedIn()) {
-								if (result.getName() == "null") {
+								if (result.isExisting() == false) {
 									try {
-										RootPanel.get("Inhalt").add(
+										RootPanel.get("Content").add(
 												new ProjektAnlegen());
 									} catch (Exception e1) {
 										e1.printStackTrace();
 									}
 								} else {
-									RootPanel.get("Inhalt").add(
+									RootPanel.get("Content").add(
 											new HTML(
 												"<h2>Willkommen bei pr0ject, "
 															+ result.getName()
 															+ "</h2>"));
-									RootPanel.get("Inhalt").add(
+									RootPanel.get("Content").add(
 											new ProjektLoeschen());
 								}
 

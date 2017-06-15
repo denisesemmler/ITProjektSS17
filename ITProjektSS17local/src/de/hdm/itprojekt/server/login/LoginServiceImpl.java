@@ -4,6 +4,7 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.server.db.TeilnehmerMapper;
@@ -38,7 +39,7 @@ public class LoginServiceImpl  extends RemoteServiceServlet implements LoginServ
 
 				existingPerson.setLoggedIn(true);
 				existingPerson.setLogoutUrl(userService.createLogoutURL(requestUri));
-
+				existingPerson.setExisting(true);
 				return existingPerson;
 
 			}
@@ -48,6 +49,7 @@ public class LoginServiceImpl  extends RemoteServiceServlet implements LoginServ
 			//logInf.setName(user.getNickname());
 			logInf.setLogoutUrl(userService.createLogoutURL(requestUri));
 			logInf.setEmail(user.getEmail());
+			logInf.setExisting(false);
 		} else {
 			logInf.setLoggedIn(false);
 			logInf.setLoginUrl(userService.createLoginURL(requestUri));
