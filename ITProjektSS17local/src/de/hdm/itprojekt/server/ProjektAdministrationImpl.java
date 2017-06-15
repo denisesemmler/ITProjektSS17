@@ -345,14 +345,4 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return logInf;
 	}
 	
-	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez) throws IllegalArgumentException {
-
-		Projektmarktplatz pm = new Projektmarktplatz();
-		pm.setBezeichnung(projektmarktplatzBez);
-
-		// Objekt in DB speichern
-		return this.pmMapper.insert(pm);
-
-	}
-
 }
