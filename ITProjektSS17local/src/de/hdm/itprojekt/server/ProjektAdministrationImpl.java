@@ -56,7 +56,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	@Override
-	// Init ist eine Initialisierungsmethode, diese Methode MUSS für jede
+	// Init ist eine Initialisierungsmethode, diese Methode MUSS fÃ¼r jede
 	// Instanz von "ProjektAdministrationImpl" gerufen werden!
 	public void init() throws IllegalArgumentException {
 		pmMapper = ProjektmarktplatzMapper.projektmarktplatzMapper();
@@ -68,9 +68,28 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		bMapper = BewerbungMapper.bewerbungMapper();
 		btMapper = BeteiligungMapper.beteiligungMapper();
 	}
+	
+	/*
+	 * Methoden fÃ¼r ProjektmarktplÃ¤tze
+	 */
+
+	/**
+	 * Diese Methode implementiert denn UC Projektmarktplatz anlegen
+	 */
+	@Override
+	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez, int idTeilnehmer) throws IllegalArgumentException {
+
+		Projektmarktplatz pm = new Projektmarktplatz();
+		
+		pm.setBezeichnung(projektmarktplatzBez);
+		pm.setTeilnehmer_idTeilnehmer(idTeilnehmer);
+
+		// Objekt in DB speichern
+		return this.pmMapper.insert(pm);
+	}
 
 	/*
-	 * Methoden für Projekte
+	 * Methoden fÃ¼r Projekte
 	 */
 
 	/**
@@ -87,7 +106,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		p.setEndDatum(new java.sql.Date(endDatum.getTime()));
 		p.setTeilnehmer_idTeilnehmer(TeilnehmerID);
 		p.setProjektmarktplatz_idProjektmarkplatz(MarktplatzID);
-		// setzen einer vorläufigen Projekt-Nr diese ist mit der DB konsistent
+		// setzen einer vorlÃ¤ufigen Projekt-Nr diese ist mit der DB konsistent
 		// p.setId(1);
 
 		// Objekt in DB speichern
@@ -95,7 +114,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 	}
 
-	// Methoden für Projekt
+	// Methoden fÃ¼r Projekt
 	/**
 	 * Diese Methode implementiert denn UC Projekt bearbeiten
 	 */
@@ -105,14 +124,14 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	/**
-	 * Diese Methode löscht ein Projekt mit all ihren Abhängigkeiten (gemäß
+	 * Diese Methode lÃ¶scht ein Projekt mit all ihren AbhÃ¤ngigkeiten (gemÃ¤ÃŸ
 	 * tablesV3). Diese sind: {@link Ausschreibung}, {@link Profil},
 	 * {@link Eigenschaft}, {@link Bewerbung}, {@link Beteiligung}
 	 * 
 	 * @param p
-	 *            ist das Objekt eines Projekts, dass gelöscht werden soll.
+	 *            ist das Objekt eines Projekts, dass gelÃ¶scht werden soll.
 	 * 
-	 *            Implementiert denn UC Projekt löschen
+	 *            Implementiert denn UC Projekt lÃ¶schen
 	 */
 	@Override
 	public void deleteProjekt(Projekt p) throws IllegalArgumentException {
@@ -126,8 +145,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	/*
-	 * Methode zum löschen des Profils, da die Ausschreibung sonst nicht
-	 * gelöscht werden kann
+	 * Methode zum lÃ¶schen des Profils, da die Ausschreibung sonst nicht
+	 * gelÃ¶scht werden kann
 	 */
 	private void deleteProfil(Ausschreibung a) {
 
@@ -147,7 +166,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		ArrayList<Bewerbung> bewerbungenZuProfil = bMapper.findByAusschreibungsId(a.getIdAusschreibung());
 
 		// Hier werden die Bewerbungen aus der DB entfernt, aber erst wenn die
-		// dazugehörige Beteiligung entfernt ist
+		// dazugehÃ¶rige Beteiligung entfernt ist
 		for (Bewerbung b : bewerbungenZuProfil) {
 			this.deleteBewerbung(b);
 		}
@@ -162,13 +181,13 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 * 
 	 * @param p
 	 *            das Projekt zu dem alle Ausschreibungen gelesen werden sollen.
-	 * @return Vector aller Ausschreibungen zum übergebenen Projekt p.
+	 * @return Vector aller Ausschreibungen zum Ã¼bergebenen Projekt p.
 	 */
 	private Vector<Ausschreibung> getAusschreibung(Projekt p) {
 		return aMapper.findByProjekt(p);
 	}
 
-	// Methoden für Ausschreibung
+	// Methoden fÃ¼r Ausschreibung
 	/**
 	 * Diese Methode implementiert denn UC Ausschreibung erstellen
 	 */
@@ -179,7 +198,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		// Neues Objekt erstellen
 		Ausschreibung ausschreibung = new Ausschreibung();
 
-		// Werte zum Objekt hinzufügen
+		// Werte zum Objekt hinzufÃ¼gen
 		ausschreibung.setBeschreibung(beschreibung);
 		// kurze schreibweise einer Typkonvertierung
 		ausschreibung.setBewerbungsfrist(new Timestamp(bewerbungsfrist.getTime())); // Timestamp?
@@ -196,16 +215,16 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 */
 	@Override
 	public void updateAusschreibung(Ausschreibung a) throws IllegalArgumentException {
-		// Update ohne Prüfung in DB
+		// Update ohne PrÃ¼fung in DB
 		aMapper.update(a);
 	}
 
 	/**
-	 * Diese Methode implementiert denn UC Ausschreibung löschen
+	 * Diese Methode implementiert denn UC Ausschreibung lÃ¶schen
 	 */
 	/*
-	 * Methode zum Löschen von Ausschreibungen, da das Projekt sonst nicht
-	 * gelöscht werden kann
+	 * Methode zum LÃ¶schen von Ausschreibungen, da das Projekt sonst nicht
+	 * gelÃ¶scht werden kann
 	 */
 	public void deleteAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 		this.deleteProfil(a);
@@ -214,7 +233,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		this.aMapper.delete(a);
 	}
 
-	// Methoden für Bewerbung
+	// Methoden fÃ¼r Bewerbung
 	/**
 	 * Diese Methode implementiert denn UC Auf Ausschreibung bewerben
 	 */
@@ -225,10 +244,10 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		// Neues Objekt erstellen
 		Bewerbung bewerbung = new Bewerbung();
 
-		// ausführliche Typkonvertierung
+		// ausfÃ¼hrliche Typkonvertierung
 		Timestamp dbErstellDatum = new Timestamp(erstellDatum.getTime());
 
-		// Werte zum Objekt hinzufügen
+		// Werte zum Objekt hinzufÃ¼gen
 		bewerbung.setBewerbungsText(bewerbungsText);
 		bewerbung.setErstellDatum(dbErstellDatum);// Timestamp?
 		bewerbung.setBewertung(bewertung);
@@ -245,15 +264,15 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 */
 	@Override
 	public void updateBewerbung(Bewerbung b) throws IllegalArgumentException {
-		// Update ohne Prüfung in DB
+		// Update ohne PrÃ¼fung in DB
 		bMapper.update(b);
 	}
 
 	/**
-	 * Diese Methode implementiert denn UC Bewerbung zurückziehen
+	 * Diese Methode implementiert denn UC Bewerbung zurÃ¼ckziehen
 	 */
-	// Methode um die Beteiligung zu löschen, da die Bewerbung vorher nicht
-	// gelöscht werden kann
+	// Methode um die Beteiligung zu lÃ¶schen, da die Bewerbung vorher nicht
+	// gelÃ¶scht werden kann
 	public void deleteBewerbung(Bewerbung b) {
 		Beteiligung beteiligung = btMapper.findByBewerbung(b);
 		btMapper.delete(beteiligung);
@@ -264,8 +283,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	
 	
 	
-	
-	// Methoden für Teilnehmer
+	//TODO
+	// Methoden fÃ¼r Teilnehmer
 	
 	public void setUser(Teilnehmer t) {
 		user = t;
@@ -292,8 +311,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return this.tMapper.insert(teilnehmer);
 
 	}
-
-
 	
 	public Teilnehmer login(String requestUri) {
 
@@ -303,11 +320,11 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		Teilnehmer logInf = new Teilnehmer();
 
 		if (user != null) {
-			Teilnehmer existingPerson = TeilnehmerMapper.teilnehmerMapper().findByEmail(user.getEmail());
+			Teilnehmer existingPerson = tMapper.findByEmail(user.getEmail());
 			
 			
 			if(existingPerson != null){
-				ClientSideSettings.getLogger().severe("Userobjekt E-Mail = " + user.getEmail()
+				ClientSideSettings.getLogger().info("Userobjekt E-Mail = " + user.getEmail()
 						+ "  Bestehender User: E-Mail  =" + existingPerson.getEmail());
 
 				existingPerson.setLoggedIn(true);
@@ -330,6 +347,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return logInf;
 	}
 	
+
 	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez) throws IllegalArgumentException {
 
 		Projektmarktplatz pm = new Projektmarktplatz();
@@ -346,5 +364,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		// TODO Auto-generated method stub
 		
 	}*/
+
 
 }

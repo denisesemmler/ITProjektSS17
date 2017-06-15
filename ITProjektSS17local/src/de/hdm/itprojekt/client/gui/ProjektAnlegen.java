@@ -120,7 +120,7 @@ public class ProjektAnlegen extends VerticalPanel {
 	private class CreateProjectClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
-			// Projekt project = new Projekt();
+			
 			try {
 
 				ClientSideSettings.getProjektAdministration().createProjekt(projektNameBox.getText(),
@@ -129,21 +129,6 @@ public class ProjektAnlegen extends VerticalPanel {
 			} catch (Exception e) {
 				Window.alert(e.toString());
 				e.printStackTrace();
-			}
-
-			// Altes Zeug
-			Button active = (Button) event.getSource();
-
-			switch (active.getText()) {
-			case "Anlegen":
-				Window.alert("Projekt angelegt");
-				break;
-			/**
-			 * case "Navigation":
-			 * 
-			 * RootPanel.get("Content").clear(); RootPanel.get("Navi").add(new
-			 * Navigation());
-			 **/
 			}
 		}
 	};
