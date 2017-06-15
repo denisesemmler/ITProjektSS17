@@ -62,6 +62,23 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		bMapper = BewerbungMapper.bewerbungMapper();
 		btMapper = BeteiligungMapper.beteiligungMapper();
 	}
+	
+	/*
+	 * Methoden für Projektmarktplätze
+	 */
+
+	/**
+	 * Diese Methode implementiert denn UC Projektmarktplatz anlegen
+	 */
+	@Override
+	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez) throws IllegalArgumentException {
+
+		Projektmarktplatz pm = new Projektmarktplatz();
+		pm.setBezeichnung(projektmarktplatzBez);
+
+		// Objekt in DB speichern
+		return this.pmMapper.insert(pm);
+	}
 
 	/*
 	 * Methoden für Projekte
@@ -258,9 +275,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	
 	
 	
-	
+	//TODO
 	// Methoden für Teilnehmer
-
 	public Teilnehmer createTeilnehemr(String name, String zusatz, String emailAdresse, int rolle)
 			throws IllegalArgumentException {
 
@@ -278,18 +294,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	@Override
-	public Teilnehmer createTeilnehmer(String name, String zusatz, String emailAdresse, int rolle) {
+	public Teilnehmer createTeilnehmer(String name, String zusatz, String emailAdresse, int rolle)
+			throws IllegalArgumentException {
 		return null;
-	}
-	
-	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez) throws IllegalArgumentException {
-
-		Projektmarktplatz pm = new Projektmarktplatz();
-		pm.setBezeichnung(projektmarktplatzBez);
-
-		// Objekt in DB speichern
-		return this.pmMapper.insert(pm);
-
 	}
 
 }
