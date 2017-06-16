@@ -12,11 +12,11 @@ public class ProjektMapper {
 		/**
 		 * <p>
 		 * Mapper-Klasse zur Abbildung von <code>Projekten</code> Objekten auf die Datenbank.
-		 * Über das Mapping können sowohl Objekte als auch deren Attribute in die Datenbank 
+		 * ï¿½ber das Mapping kï¿½nnen sowohl Objekte als auch deren Attribute in die Datenbank 
 		 * geschrieben werden, als auch von der Datenbank ausgelesen werden.
 		 * </p>
 		 * <p>
-		 * Es werden Methoden zum Erstellen, Ãndern, Löschen und Ausgeben von Nutzern
+		 * Es werden Methoden zum Erstellen, ï¿½ndern, Lï¿½schen und Ausgeben von Nutzern
 		 * bereitgestellt.
 		 * </p>
 		 * @author Philipp
@@ -48,23 +48,24 @@ public class ProjektMapper {
 			/**
 			 * Suche eines Projekts anhand seiner einzigartigen ID.
 			 * 
-			 * @param id - Primärschlüssel von Projekts
-			 * @return Projekt Objekt, das die gesuchte ID enthält
+			 * @param id - Primï¿½rschlï¿½ssel von Projekts
+			 * @return Projekt Objekt, das die gesuchte ID enthï¿½lt
 			 */
 			public Projekt findById(int id) {
-				// Datenbankverbindung öffnen
+				// Datenbankverbindung ï¿½ffnen
 				Connection con = DBConnection.connection();
 				
 				try {
 					// Neues SQL Statement anlegen
 					Statement stmt = con.createStatement();
-					// SQL Query ausführen
-					ResultSet rs = stmt.executeQuery("SELECT * FROM Projekt WHERE idProjekt = " + id);
+					// SQL Query ausfï¿½hren
+					ResultSet rs = stmt.executeQuery("SELECT * FROM Projekt " +
+							"WHERE idProjekt = " + id);
 					// Bei Treffer 
 					if(rs.next()) {
 						// Neues Projekt Objekt erzeugen
 						Projekt p = new Projekt();
-						// Id, Projektname, Projektbeschreibung, startdatum und enddatum den Daten aus der DB füllen
+						// Id, Projektname, Projektbeschreibung, startdatum und enddatum den Daten aus der DB fï¿½llen
 						p.setIdProjekt(rs.getInt("idProjekt"));
 						p.setName(rs.getString("name"));
 						p.setBeschreibung(rs.getString("beschreibung"));
@@ -72,7 +73,7 @@ public class ProjektMapper {
 						p.setEndDatum(rs.getTimestamp("enddatum"));
 						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("Projektmarktplatz_idProjektmarktplatz"));
 						p.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
-						// Objekt zurückgeben
+						// Objekt zurï¿½ckgeben
 						return p;
 					}
 				} 
@@ -81,13 +82,13 @@ public class ProjektMapper {
 					e.printStackTrace();
 					return null;
 				}
-				// Falls nichts gefunden wurde null zurückgeben
+				// Falls nichts gefunden wurde null zurï¿½ckgeben
 				return null;
 			}
 			
 			/**
 			 * Suche eines Projekt anhand seines Namens.
-			 * Da der Projektname nicht eindeutig ist, können mehrere 
+			 * Da der Projektname nicht eindeutig ist, kï¿½nnen mehrere 
 			 * Ergebnisse ausgegeben werden. Alle gefundenen Projekte werden in einem
 			 * Vektor gespeichert.
 			 * 
@@ -115,7 +116,7 @@ public class ProjektMapper {
 						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getTimestamp("startdatum"));
 						p.setEndDatum(rs.getTimestamp("enddatum"));
-						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("Projektmarktplatz_idProjektmarkplatz"));
+						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("Projektmarktplatz_idProjektmarktplatz"));
 						p.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 						// ... Objekt dem Ergebnisvektor hinzufÃ¼gen
 						result.add(p);
@@ -173,25 +174,25 @@ public class ProjektMapper {
 			/**
 			 * Neues Porjekt in der Datenbank anlegen.
 			 * 
-			 * @param p Projekt Objekt, das in die Datenbank eingefügt werden soll
+			 * @param p Projekt Objekt, das in die Datenbank eingefï¿½gt werden soll
 			 */
 			public Projekt insert(Projekt p) {
 				
-				// Datenbankverbindung öffnen
+				// Datenbankverbindung ï¿½ffnen
 				Connection con = DBConnection.connection();
 				System.out.println("dbconnection: " + con);
 				
 				try {
 					// neues SQL Statement anlegen
 					Statement stmt = con.createStatement();
-					// SQL Query ausführen um die höchste id zu erhalten
+					// SQL Query ausfï¿½hren um die hï¿½chste id zu erhalten
 					ResultSet rs = stmt.executeQuery("SELECT MAX(idProjekt) AS maxId FROM Projekt");
 					if(rs.next()) {
-						// id um 1 erhöhen, damit ein neuer Eintrag erzeugt wird
+						// id um 1 erhï¿½hen, damit ein neuer Eintrag erzeugt wird
 						p.setId(rs.getInt("maxId") + 1);
 						// neues SQL Statement
 						stmt = con.createStatement();
-						// SQL Query ausführen um Datensatz in DB zu schreiben
+						// SQL Query ausfï¿½hren um Datensatz in DB zu schreiben
 						stmt.executeUpdate("INSERT INTO Projekt (idProjekt, name, startdatum, enddatum, beschreibung, Projektmarktplatz_idProjektmarktplatz, Teilnehmer_idTeilnehmer  ) " +
 								"VALUES "
 								+ "('" 
@@ -238,18 +239,18 @@ public class ProjektMapper {
 			}
 			
 			/**
-			 *Projektdaten eines bestehenden Projekts in der Datenbank ändern
+			 *Projektdaten eines bestehenden Projekts in der Datenbank ï¿½ndern
 			 * 
-			 * @param p das bereits geänderte Projektobjekt
+			 * @param p das bereits geï¿½nderte Projektobjekt
 			 */
 			public Projekt update(Projekt p) {
-				// Datenbankverbindung öffnen
+				// Datenbankverbindung ï¿½ffnen
 				Connection con = DBConnection.connection();
 				
 				try {
 					// neues SQL Statement anlegen
 					Statement stmt = con.createStatement();
-					// SQL Query ausführen
+					// SQL Query ausfï¿½hren
 					stmt.executeUpdate("UPDATE Projekt "
 							+ "SET name = '" 
 							+ p.getName()
@@ -284,18 +285,18 @@ public class ProjektMapper {
 			}
 			
 			/**
-			 * Diese Methode löscht ein Projekt in der Datenbank die dazugehÃ¶rigen Projekt-Referenzen in allen Tabellen
+			 * Diese Methode lï¿½scht ein Projekt in der Datenbank die dazugehÃ¶rigen Projekt-Referenzen in allen Tabellen
 			 * 
-			 * @param p das zu löschende Projekt
+			 * @param p das zu lï¿½schende Projekt
 			 */
 			public void delete(Projekt p) {
-				// Datenbankverbindung öffnen
+				// Datenbankverbindung ï¿½ffnen
 				Connection con = DBConnection.connection();
 			
 				try {
 				// neues SQL Statement anlegen
 				Statement stmt = con.createStatement();
-				// SQL Query ausführen
+				// SQL Query ausfï¿½hren
 				stmt.executeUpdate("DELETE FROM Projekt WHERE idProjekt = " + p.getId());
 			}
 				// Error Handling
@@ -303,6 +304,52 @@ public class ProjektMapper {
 					e.printStackTrace();
 				}
 			}
+		
+//Methode von Patricia hinzugefÃ¼gt
+			public ArrayList<Projekt> findAllProjektmarktplatzById(int id) {
+				// Datenbankverbindung ï¿½ffnen
+				Connection con = DBConnection.connection();
+				
+				//ArrayList Ergebniss-Liste anlegen
+				ArrayList<Projekt> result = new ArrayList<Projekt>();
+				
+				try {
+					// Neues SQL Statement anlegen
+					Statement stmt = con.createStatement();
+					
+					// SQL Query ausfï¿½hren
+					ResultSet rs = stmt.executeQuery("SELECT * FROM Projekt " +
+							"WHERE Projektmarktplatz_idProjektmarktplatz = " + id);
+					
+					// Bei Treffer 
+					while(rs.next()) {
+						
+						// Neues Projekt Objekt erzeugen
+						Projekt p = new Projekt();
+						
+						// Id, Projektname, Projektbeschreibung, startdatum und enddatum den Daten aus der DB fï¿½llen
+						p.setIdProjekt(rs.getInt("idProjekt"));
+						p.setName(rs.getString("name"));
+						p.setBeschreibung(rs.getString("beschreibung"));
+						p.setStartDatum(rs.getTimestamp("startdatum"));
+						p.setEndDatum(rs.getTimestamp("enddatum"));
+						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("projektmarktplatz_idProjektmarkplatz"));
+						p.setTeilnehmer_idTeilnehmer(rs.getInt("teilnehmer_idTeilnehmer"));
+						
+						// Objekt muss zu result hinzugefÃ¼gt werden
+						result.add(p);
+					}
+				} 
+				// Error Handling
+				catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}
+				// Ergebnis wird zurÃ¼ckgegeben
+				return result;
+			}
+			
+			
 			
 		}
 
