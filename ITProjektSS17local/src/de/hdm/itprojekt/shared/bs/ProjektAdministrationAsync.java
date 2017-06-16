@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.shared.bs;
 
 import java.util.Date;
+import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -29,6 +30,8 @@ public interface ProjektAdministrationAsync {
 	void updateProjektmarktplatz(Projektmarktplatz pm, AsyncCallback<Void> callback);
 	
 	void deleteProjektmarktplatz(Projektmarktplatz pm, AsyncCallback<Void> callback);
+	
+	void findProjekteByProjektmarktplatzId(int projektmarktplatzId, AsyncCallback<List<Projekt>> callback);
 	
 	/*
 	 * F�r Projekte
@@ -64,12 +67,13 @@ public interface ProjektAdministrationAsync {
 	 * F�r Teilnehmer
 	 */
 	
-	void setUser(Teilnehmer t, AsyncCallback callback);
+	void setUser(Teilnehmer t, AsyncCallback<Void> callback);
 
 	void login(String requestUri, AsyncCallback<Teilnehmer> callback);
 
 	void createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
 			String emailAdresse, int rolle, int ProfilID, int projektleiter, AsyncCallback<Teilnehmer> callback);
+
 
 
 

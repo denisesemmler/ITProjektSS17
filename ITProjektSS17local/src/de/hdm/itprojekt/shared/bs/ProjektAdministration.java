@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.shared.bs;
 
 import java.util.Date;
+import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -40,6 +41,8 @@ public interface ProjektAdministration extends RemoteService {
 	public void updateProjektmarktplatz(Projektmarktplatz pm) throws IllegalArgumentException;
 	
 	public void deleteProjektmarktplatz(Projektmarktplatz pm) throws IllegalArgumentException;
+	
+	public List<Projekt> findProjekteByProjektmarktplatzId(int projektmarktplatzId) throws IllegalArgumentException;
 	
 	/*
 	 * Methode zum anlegen eines Projekts

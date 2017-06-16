@@ -117,6 +117,24 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		this.pmMapper.delete(pm);
 	}
 
+	
+	/**
+	 * Diese Methode implementiert denn UC alle Projekte zum jeweiligen Projektmarktplatz in der GUI anzuzeigen
+	 */
+	@Override
+	public List<Projekt> findProjekteByProjektmarktplatzId(int projektmarktplatzId) throws IllegalArgumentException {
+		
+		//Alle Projekte zum Projektmarktplatz werden hier "gemerkt"
+		List<Projekt> projekte = pMapper.findAllProjektmarktplatzById(projektmarktplatzId);
+		
+		//Rückgabe an den Aufrufer
+		return projekte;
+	}
+	
+	
+	
+	
+	
 	/*
 	 * Methoden für Projekte
 	 */
@@ -385,4 +403,5 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		return logInf;
 	}
+
 }
