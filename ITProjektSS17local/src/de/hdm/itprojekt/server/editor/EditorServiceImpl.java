@@ -4,7 +4,6 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.itprojekt.server.db.AusschreibungMapper;
 import de.hdm.itprojekt.server.db.BeteiligungMapper;
-import de.hdm.itprojekt.server.db.EigenschaftMapper;
 import de.hdm.itprojekt.server.db.ProfilMapper;
 import de.hdm.itprojekt.server.db.ProjektMapper;
 import de.hdm.itprojekt.server.db.ProjektmarktplatzMapper;
