@@ -117,7 +117,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		this.pmMapper.delete(pm);
 	}
 
-	
 	/**
 	 * Diese Methode implementiert denn UC alle Projekte zum jeweiligen Projektmarktplatz in der GUI anzuzeigen
 	 */
@@ -130,10 +129,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		//Rückgabe an den Aufrufer
 		return projekte;
 	}
-	
-	
-	
-	
 	
 	/*
 	 * Methoden für Projekte
@@ -165,8 +160,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 	}
 
-
-
 	// Methoden für Projekt
 	/**
 	 * Diese Methode implementiert denn UC Projekt bearbeiten
@@ -187,7 +180,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 */
 	@Override
 	public void deleteProjekt(Projekt p) throws IllegalArgumentException {
-		Vector<Ausschreibung> ausschreibung = this.getAusschreibung(p);
+		Vector<Ausschreibung> ausschreibung = this.getAusschreibungByProjektId(p.getIdProjekt());
 
 		if (ausschreibung != null) {
 			for (Ausschreibung a : ausschreibung) {
@@ -195,7 +188,21 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 			}
 		}
 	}
-
+	
+	/**
+	 * Diese Methode implementiert denn UC alle Ausschreibungen zum jeweiligen Projekt in der GUI anzuzeigen
+	 */
+	@Override
+	public Vector<Ausschreibung> findAusschreibungByProjektId(int projektId) throws IllegalArgumentException {
+		
+		//Alle Ausschreibungen zum Projekt werden hier "gemerkt"
+		Vector<Ausschreibung> ausschreibungen = getAusschreibungByProjektId(projektId);
+		
+		//Rückgabe
+		return ausschreibungen;
+	}
+	
+	
 	/*
 	 * Methode zum löschen des Profils, da die Ausschreibung sonst nicht
 	 * gelöscht werden kann
@@ -232,11 +239,12 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 	/**
 	 * Diese Methode liest alle Ausschreibungen zu einem Projekt.
-	 * @param p
+	 * @param projektId
 	 * @return Vector aller Ausschreibungen zum übergebenen Projekt p.
 	 */
-	private Vector<Ausschreibung> getAusschreibung(Projekt p) {
-		return aMapper.findByProjekt(p);
+	private Vector<Ausschreibung> getAusschreibungByProjektId(int projektId) {
+		return aMapper.findByProjekt(projektId);
+		
 	}
 
 	// Methoden für Ausschreibung
@@ -403,5 +411,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		return logInf;
 	}
+
 
 }

@@ -15,11 +15,11 @@ public class AusschreibungMapper {
 			/**
 			 * <p>
 			 * Mapper-Klasse zur Abbildung von <code>Ausschreibungen</code> Objekten auf die Datenbank.
-			 * Über das Mapping können sowohl Objekte als auch deren Attribute in die Datenbank 
+			 * ï¿½ber das Mapping kï¿½nnen sowohl Objekte als auch deren Attribute in die Datenbank 
 			 * geschrieben werden, als auch von der Datenbank ausgelesen werden.
 			 * </p>
 			 * <p>
-			 * Es werden Methoden zum Erstellen, Ãndern, Löschen und Ausgeben von Nutzern
+			 * Es werden Methoden zum Erstellen, ï¿½ndern, Lï¿½schen und Ausgeben von Nutzern
 			 * bereitgestellt.
 			 * </p>
 			 * @author Philipp
@@ -49,24 +49,24 @@ public class AusschreibungMapper {
 				/**
 				 * Suche einer Ausschreibung anhand seiner einzigartigen ID.
 				 * 
-				 * @param id - Primärschlüssel von Ausschreibung
-				 * @return Ausschreibungs Objekt, das die gesuchte ID enthält
+				 * @param id - Primï¿½rschlï¿½ssel von Ausschreibung
+				 * @return Ausschreibungs Objekt, das die gesuchte ID enthï¿½lt
 				 */
 				public Ausschreibung findById(int id) {
-					// Datenbankverbindung öffnen
+					// Datenbankverbindung ï¿½ffnen
 					Connection con = DBConnection.connection();
 					
 					try {
 						// Neues SQL Statement anlegen
 						Statement stmt = con.createStatement();
-						// SQL Query ausführen
+						// SQL Query ausfï¿½hren
 						ResultSet rs = stmt.executeQuery("SELECT * FROM Ausschreibung " +
 								"WHERE idAusschreibung = " + id);
 						// Bei Treffer 
 						if(rs.next()) {
 							// Neues Ausschreibung Objekt erzeugen
 							Ausschreibung a = new Ausschreibung();
-							// Id, Bezeichnung, Ausschreibungsbeschreibung, und bewberungsfrist den Daten aus der DB füllen.
+							// Id, Bezeichnung, Ausschreibungsbeschreibung, und bewberungsfrist den Daten aus der DB fï¿½llen.
 							a.setIdAusschreibung(rs.getInt("idAusschreibung"));
 							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
@@ -74,7 +74,7 @@ public class AusschreibungMapper {
 							a.setStatus(rs.getString("status"));
 							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
 							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
-							// Objekt zurückgeben
+							// Objekt zurï¿½ckgeben
 							return a;
 						}
 					} 
@@ -83,13 +83,13 @@ public class AusschreibungMapper {
 						e.printStackTrace();
 						return null;
 					}
-					// Falls nichts gefunden wurde null zurückgeben
+					// Falls nichts gefunden wurde null zurï¿½ckgeben
 					return null;
 				}
 				
 				/**
 				 * Suche einer Ausschreibung anhand seines Namens.
-				 * Da der Ausschreibungsname nicht eindeutig ist, können mehrere 
+				 * Da der Ausschreibungsname nicht eindeutig ist, kï¿½nnen mehrere 
 				 * Ergebnisse ausgegeben werden. Alle gefundenen Ausschreibungen werden in einem
 				 * Vektor gespeichert.
 				 * 
@@ -175,25 +175,25 @@ public class AusschreibungMapper {
 				/**
 				 * Neue Ausschreibung in der Datenbank anlegen.
 				 * 
-				 * @param a Ausschreibung Objekt, das in die Datenbank eingefügt werden soll
+				 * @param a Ausschreibung Objekt, das in die Datenbank eingefï¿½gt werden soll
 				 */
 				public Ausschreibung insert(Ausschreibung a) {
 					
-					// Datenbankverbindung öffnen
+					// Datenbankverbindung ï¿½ffnen
 					Connection con = DBConnection.connection();
 					System.out.println("dbconnection: " + con);
 					
 					try {
 						// neues SQL Statement anlegen
 						Statement stmt = con.createStatement();
-						// SQL Query ausführen um die höchste id zu erhalten
+						// SQL Query ausfï¿½hren um die hï¿½chste id zu erhalten
 						ResultSet rs = stmt.executeQuery("SELECT MAX(idAusschreibung) AS maxId FROM Ausschreibung");
 						if(rs.next()) {
-							// id um 1 erhöhen, damit ein neuer Eintrag erzeugt wird
+							// id um 1 erhï¿½hen, damit ein neuer Eintrag erzeugt wird
 							a.setIdAusschreibung(rs.getInt("maxId") + 1);
 							// neues SQL Statement
 							stmt = con.createStatement();
-							// SQL Query ausführen um Datensatz in DB zu schreiben
+							// SQL Query ausfï¿½hren um Datensatz in DB zu schreiben
 							stmt.executeUpdate("INSERT INTO Ausschreibung (idAusschreibung, titel, beschreibung, bewerbungsfrist, status, Projekt_idProjekt, Profil_idSuchprofil) " +
 									"VALUES "
 									+ "('" 
@@ -239,18 +239,18 @@ public class AusschreibungMapper {
 				}
 				
 				/**
-				 *Ausschreibungsdaten eines bestehenden Ausschreibung in der Datenbank ändern
+				 *Ausschreibungsdaten eines bestehenden Ausschreibung in der Datenbank ï¿½ndern
 				 * 
-				 * @param a das bereits geänderte Ausschreibungsobjekt
+				 * @param a das bereits geï¿½nderte Ausschreibungsobjekt
 				 */
 				public Ausschreibung update(Ausschreibung a) {
-					// Datenbankverbindung öffnen
+					// Datenbankverbindung ï¿½ffnen
 					Connection con = DBConnection.connection();
 					
 					try {
 						// neues SQL Statement anlegen
 						Statement stmt = con.createStatement();
-						// SQL Query ausführen
+						// SQL Query ausfï¿½hren
 						stmt.executeUpdate("UPDATE Ausschreibung "
 								+ "SET titel = '" 
 								+ a.getTitel()
@@ -286,18 +286,18 @@ public class AusschreibungMapper {
 				}
 				
 				/**
-				 * Diese Methode löscht eine Ausschreibung in der Datenbank die dazugehörigen Ausschreibung-Referenzen in allen Tabellen
+				 * Diese Methode lï¿½scht eine Ausschreibung in der Datenbank die dazugehï¿½rigen Ausschreibung-Referenzen in allen Tabellen
 				 * 
-				 * @param a die zu löschende Ausschreibung
+				 * @param a die zu lï¿½schende Ausschreibung
 				 */
 				public void delete(Ausschreibung a) {
-					// Datenbankverbindung öffnen
+					// Datenbankverbindung ï¿½ffnen
 					Connection con = DBConnection.connection();
 				
 					try {
 					// neues SQL Statement anlegen
 					Statement stmt = con.createStatement();
-					// SQL Query ausführen
+					// SQL Query ausfï¿½hren
 					stmt.executeUpdate("DELETE FROM Ausschreibung WHERE idAusschreibung = " + a.getIdAusschreibung());
 				}
 					// Error Handling
@@ -306,8 +306,8 @@ public class AusschreibungMapper {
 					}
 				}
 				
-//@Philipp --> Methode hinzugefügt von Patricia
-				public Vector<Ausschreibung> findByProjekt(Projekt p) {
+//@Philipp --> Methode hinzugefï¿½gt von Patricia
+				public Vector<Ausschreibung> findByProjekt(int projektId) {
 					// Datenbankverbindung 
 					Connection con = DBConnection.connection();
 					//Ergebnis-ArrayList anlegen
@@ -318,7 +318,7 @@ public class AusschreibungMapper {
 						Statement stmt = con.createStatement();
 						// SQL Query ausfÃ¼hren
 						ResultSet rs = stmt.executeQuery("SELECT * FROM Ausschreibung " +
-								"WHERE Projekt_idProjekt = '" + p.getIdProjekt() +"'");
+								"WHERE Projekt_idProjekt = '" + projektId +"'");
 						// FÃ¼r jeden gefundenen Treffer...
 						while (rs.next()) {
 							// ... neues Ausschreibungs Objekt anlegen

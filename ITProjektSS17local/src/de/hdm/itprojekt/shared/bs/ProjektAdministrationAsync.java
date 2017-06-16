@@ -43,6 +43,8 @@ public interface ProjektAdministrationAsync {
 
 	void deleteProjekt(Projekt p, AsyncCallback<Void> callback);
 
+	void findAusschreibungByProjektId(int projektId, AsyncCallback<List<Ausschreibung>> callback);
+	
 	/*
 	 * F�r Ausschreibungen
 	 */
@@ -73,6 +75,7 @@ public interface ProjektAdministrationAsync {
 
 	void createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
 			String emailAdresse, int rolle, int ProfilID, int projektleiter, AsyncCallback<Teilnehmer> callback);
+
 
 
 

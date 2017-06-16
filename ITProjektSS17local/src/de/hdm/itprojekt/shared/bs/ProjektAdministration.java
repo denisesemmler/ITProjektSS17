@@ -3,6 +3,8 @@ package de.hdm.itprojekt.shared.bs;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.bcel.generic.LLOAD;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -52,6 +54,8 @@ public interface ProjektAdministration extends RemoteService {
 	public void updateProjekt(Projekt p) throws IllegalArgumentException;
 	
 	public void deleteProjekt(Projekt p) throws IllegalArgumentException;
+	
+	public List<Ausschreibung> findAusschreibungByProjektId(int projektId) throws IllegalArgumentException;
 	
 	/*
 	 * Methoden zum anlegen von Ausschreibungen
