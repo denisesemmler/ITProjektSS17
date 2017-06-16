@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.bcel.generic.LLOAD;
-
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 

@@ -7,7 +7,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import de.hdm.itprojekt.client.report.gui.ReportNavigation;
 import de.hdm.itprojekt.client.report.gui.ReportWrapper;
 
 

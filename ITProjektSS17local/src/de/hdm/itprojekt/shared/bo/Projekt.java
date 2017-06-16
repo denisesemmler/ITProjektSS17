@@ -1,6 +1,5 @@
 package de.hdm.itprojekt.shared.bo;
 
-import java.sql.Timestamp;
 import java.util.Date;				
 
 /**

@@ -4,13 +4,10 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-import de.hdm.itprojekt.client.gui.ProjektVerwalten;
 import de.hdm.itprojekt.shared.report.AlleAusschreibungen;
-import de.hdm.itprojekt.shared.report.Report;
 
 public class ReportNavigation extends VerticalPanel implements ClickHandler{
 	private Button allAds  = new Button("Alle Ausschreibungen", this);

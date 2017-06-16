@@ -71,8 +71,8 @@ public class ProjektMapper {
 						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getTimestamp("startdatum"));
 						p.setEndDatum(rs.getTimestamp("enddatum"));
-						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("projektmarktplatz_idProjektmarkplatz"));
-						p.setTeilnehmer_idTeilnehmer(rs.getInt("teilnehmer_idTeilnehmer"));
+						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("Projektmarktplatz_idProjektmarktplatz"));
+						p.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 						// Objekt zur�ckgeben
 						return p;
 					}
@@ -116,8 +116,8 @@ public class ProjektMapper {
 						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getTimestamp("startdatum"));
 						p.setEndDatum(rs.getTimestamp("enddatum"));
-						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("projektmarktplatz_idProjektmarkplatz"));
-						p.setTeilnehmer_idTeilnehmer(rs.getInt("teilnehmer_idTeilnehmer"));
+						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("Projektmarktplatz_idProjektmarktplatz"));
+						p.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 						// ... Objekt dem Ergebnisvektor hinzufügen
 						result.add(p);
 					}
