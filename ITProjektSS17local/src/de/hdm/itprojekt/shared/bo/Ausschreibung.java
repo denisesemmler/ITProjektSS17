@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.shared.bo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Ausschreibung extends BusinessObjekt {
 	
@@ -14,7 +15,20 @@ public class Ausschreibung extends BusinessObjekt {
 	private int Profil_idSuchprofil 	= 0;
 	private String status				= "laufend";
 	
+	public Ausschreibung() {
+		
+	}
 	
+	public Ausschreibung(Ausschreibung ausschreibung) {
+		this.setTitel(ausschreibung.getTitel());
+		this.setBeschreibung(ausschreibung.getBeschreibung());
+		this.setBewerbungsfrist(ausschreibung.getBewerbungsfrist());
+		this.setProjekt_idProjekt(ausschreibung.getProjekt_idProjekt());
+		this.setProfil_idSuchprofil(ausschreibung.getProfil_idSuchprofil());
+		this.setStatus(ausschreibung.getStatus());
+		
+	}
+
 	/**
 	 * 
 	 * @return
