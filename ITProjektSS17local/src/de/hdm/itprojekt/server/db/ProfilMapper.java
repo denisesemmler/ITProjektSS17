@@ -4,11 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Vector;
-
 //import de.hdm.itprojekt.profil.server.db.DBConnection;
 import de.hdm.itprojekt.server.db.ProfilMapper;
-import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Profil;
 
 /**

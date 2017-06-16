@@ -1,7 +1,5 @@
 package de.hdm.itprojekt.shared.bo.reports;
 
-import java.util.List;
-
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 
 public class AusschreibungReport extends Ausschreibung{

@@ -1,23 +1,15 @@
 package de.hdm.itprojekt.client;
 
 
-import java.util.ArrayList;
-
-
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyDownEvent;
-import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 
-import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -31,14 +23,9 @@ import de.hdm.itprojekt.client.gui.LogOutPopUp;
 import de.hdm.itprojekt.client.gui.AnmeldeFormular;
 import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.Navigation;
-import de.hdm.itprojekt.client.gui.ProjektAnlegen;
 import de.hdm.itprojekt.client.gui.ProjektLoeschen;
-//import de.client.ClientSideSettings;
-//import de.hdm.itprojekt.shared.LogOutPopUp;
-import de.hdm.itprojekt.shared.EditorServiceAsync;
 import de.hdm.itprojekt.shared.LoginServiceAsync;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
-import de.hdm.itprojekt.shared.bs.ProjektAdministration;
 import de.hdm.itprojekt.shared.bs.ProjektAdministrationAsync;
 
 /**

@@ -1,8 +1,6 @@
 package de.hdm.itprojekt.client.gui;
 import java.util.logging.Logger;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import de.hdm.itprojekt.shared.*;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 import de.hdm.itprojekt.shared.bs.ProjektAdministration;

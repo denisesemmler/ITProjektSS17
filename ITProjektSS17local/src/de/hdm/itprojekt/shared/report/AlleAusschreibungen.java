@@ -11,7 +11,6 @@ import com.google.gwt.user.client.ui.Label;
 import de.hdm.itprojekt.client.gui.ClientSideSettings;
 
 import de.hdm.itprojekt.shared.ReportServiceAsync;
-import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 
 public class AlleAusschreibungen extends SimpleReport {
