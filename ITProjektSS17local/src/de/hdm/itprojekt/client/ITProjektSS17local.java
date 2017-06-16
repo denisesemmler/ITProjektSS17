@@ -129,7 +129,7 @@ public class ITProjektSS17local implements EntryPoint {
 								} else {
 									RootPanel.get("Content").add(
 											new HTML(
-												"<h2>Willkommen bei pr0ject, "
+												"<h2>Willkommen bei Pr0ject, "
 															+ result.getVorname()
 															+ "</h2>"));
 									RootPanel.get("Content").add(
