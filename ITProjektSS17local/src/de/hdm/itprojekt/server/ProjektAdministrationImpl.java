@@ -298,6 +298,18 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		this.aMapper.delete(a);
 	}
 
+	/**
+	 * Diese Methode implementiert denn UC alle Bewerbungen zu jeweiligen Ausschreibung in der GUI anzuzeigen
+	 */
+	@Override
+	public List<Bewerbung> findBewerbungenByAusschreibungId(int ausschreibungId) throws IllegalArgumentException {
+		
+		//Alle Bewerbungen zu der jew. Ausschreibung werden hier "gemerkt"
+				List<Bewerbung> bewerbungen = bMapper.findByAusschreibungsId(ausschreibungId);
+				
+				//Rückgabe an den Aufrufer
+				return bewerbungen;
+	}
 
 	// Methoden für Bewerbung
 	/**
@@ -411,6 +423,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		return logInf;
 	}
+
 
 
 }

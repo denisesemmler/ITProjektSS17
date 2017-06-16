@@ -2,6 +2,7 @@ package de.hdm.itprojekt.shared.bs;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 import org.apache.bcel.generic.LLOAD;
 
@@ -55,7 +56,7 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public void deleteProjekt(Projekt p) throws IllegalArgumentException;
 	
-	public List<Ausschreibung> findAusschreibungByProjektId(int projektId) throws IllegalArgumentException;
+	public Vector<Ausschreibung> findAusschreibungByProjektId(int projektId) throws IllegalArgumentException;
 	
 	/*
 	 * Methoden zum anlegen von Ausschreibungen
@@ -65,6 +66,8 @@ public interface ProjektAdministration extends RemoteService {
 	public void updateAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 	
 	public void deleteAusschreibung(Ausschreibung a) throws IllegalArgumentException;
+	
+	public List<Bewerbung> findBewerbungenByAusschreibungId(int AuscchreibungId) throws IllegalArgumentException;
 	
 	/*
 	 * Methoden zum anlegen von Bewerbungen
