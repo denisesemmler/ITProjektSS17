@@ -37,6 +37,10 @@ public interface ProjektAdministration extends RemoteService {
 	 */
 	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez, int idTeilnehmer) throws IllegalArgumentException;
 	
+	public void updateProjektmarktplatz(Projektmarktplatz pm) throws IllegalArgumentException;
+	
+	public void deleteProjektmarktplatz(Projektmarktplatz pm) throws IllegalArgumentException;
+	
 	/*
 	 * Methode zum anlegen eines Projekts
 	 */
@@ -64,18 +68,14 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public void deleteBewerbung(Bewerbung b) throws IllegalArgumentException;
 	
-	
-
-	//Prof. Thies Fragen wann IllegalArgumentException verwendet wird
-
-
 	/*
 	 * Methoden zum anlegen von Teilnehmern
-*/
+	 */
 
 	void setUser(Teilnehmer t);
 
 	public Teilnehmer login(String requestUri);
+	
 	/*
 	 * Methoden zum anlegen von Teilnehmern
 	 */

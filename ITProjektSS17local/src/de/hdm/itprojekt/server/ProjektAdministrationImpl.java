@@ -1,9 +1,9 @@
 package de.hdm.itprojekt.server;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 import com.google.appengine.api.users.User;
@@ -56,10 +56,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	@Override
-
-	// Init ist eine Initialisierungsmethode, diese Methode MUSS für jede
-
-	// Instanz von "ProjektAdministrationImpl" gerufen werden!
+	/* Init ist eine Initialisierungsmethode, diese Methode MUSS für jede
+	 * Instanz von "ProjektAdministrationImpl" gerufen werden!
+	 */ 
 	public void init() throws IllegalArgumentException {
 		pmMapper = ProjektmarktplatzMapper.projektmarktplatzMapper();
 		pMapper = ProjektMapper.projektMapper();
@@ -72,11 +71,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 	
 	/*
-<<<<<<< HEAD
-	 * Methoden f�r Projektmarktpl�tze
-=======
 	 * Methoden für Projektmarktplätze
->>>>>>> branch 'Philipp' of https://github.com/denisesemmler/ITProjektSS17.git
 	 */
 
 	/**
@@ -85,21 +80,45 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	@Override
 	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez, int idTeilnehmer) throws IllegalArgumentException {
 
+		//Neues Objekt wird erstellt
 		Projektmarktplatz pm = new Projektmarktplatz();
 		
+		//Werte die über die Gui reinkommen werden in das Objekt gesteckt
 		pm.setBezeichnung(projektmarktplatzBez);
 		pm.setTeilnehmer_idTeilnehmer(idTeilnehmer);
 
-		// Objekt in DB speichern
+		// Objekt mit Werten wird in DB gespeichert
 		return this.pmMapper.insert(pm);
+	}
+	
+	/**
+	 * Diese Methode implementiert denn UC Projektmarktplatz bearbeiten
+	 */
+	@Override
+	public void updateProjektmarktplatz(Projektmarktplatz pm) throws IllegalArgumentException {
+		pmMapper.update(pm);
+	}
+	
+	/**
+	 * Diese Methode implementiert denn UC Projektmarktplatz löschen
+	 */
+	@Override
+	public void deleteProjektmarktplatz(Projektmarktplatz pm) throws IllegalArgumentException {
+		
+		//Alle Projekte zum Projektmarktplatz werden hier "gemerkt"
+		List<Projekt> projekte = pMapper.findAllProjektmarktplatzById(pm.getIdProjektmarktplatz());
+		
+		//Alle Projektzeilen löschen
+		for (Projekt projekt : projekte){
+			this.deleteProjekt(projekt);
+		}
+		
+		//Projektmarktplatz aus DB entfernen
+		this.pmMapper.delete(pm);
 	}
 
 	/*
-<<<<<<< HEAD
-	 * Methoden f�r Projekte
-=======
 	 * Methoden für Projekte
->>>>>>> branch 'Philipp' of https://github.com/denisesemmler/ITProjektSS17.git
 	 */
 
 	/**
@@ -108,8 +127,11 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	@Override
 	public Projekt createProjekt(String projektName, String projektBeschreibung, Date startDatum, Date endDatum,
 			int TeilnehmerID, int MarktplatzID) throws IllegalArgumentException {
-
+		
+		//Neues Objekt
 		Projekt p = new Projekt();
+		
+		//Werte werden hinzugefügt
 		p.setName(projektName);
 		p.setBeschreibung(projektBeschreibung);
 		p.setStartDatum(new java.sql.Date(startDatum.getTime()));
@@ -118,7 +140,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		p.setProjektmarktplatz_idProjektmarkplatz(MarktplatzID);
 
 		// setzen einer vorläufigen Projekt-Nr diese ist mit der DB konsistent
-
 		// p.setId(1);
 
 		// Objekt in DB speichern
@@ -129,7 +150,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 
 	// Methoden für Projekt
-
 	/**
 	 * Diese Methode implementiert denn UC Projekt bearbeiten
 	 */
@@ -139,26 +159,13 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Diese Methode l�scht ein Projekt mit all ihren Abh�ngigkeiten (gem��
-=======
 	 * Diese Methode löscht ein Projekt mit all ihren Abhängigkeiten (gemäß
->>>>>>> branch 'Philipp' of https://github.com/denisesemmler/ITProjektSS17.git
 	 * tablesV3). Diese sind: {@link Ausschreibung}, {@link Profil},
 	 * {@link Eigenschaft}, {@link Bewerbung}, {@link Beteiligung}
-	 * 
 	 * @param p
-<<<<<<< HEAD
-	 *            ist das Objekt eines Projekts, dass gel�scht werden soll.
-=======
 	 *            ist das Objekt eines Projekts, dass gelöscht werden soll.
->>>>>>> branch 'Philipp' of https://github.com/denisesemmler/ITProjektSS17.git
 	 * 
-<<<<<<< HEAD
-	 *            Implementiert denn UC Projekt l�schen
-=======
 	 *            Implementiert denn UC Projekt löschen
->>>>>>> branch 'Philipp' of https://github.com/denisesemmler/ITProjektSS17.git
 	 */
 	@Override
 	public void deleteProjekt(Projekt p) throws IllegalArgumentException {
@@ -172,13 +179,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	/*
-<<<<<<< HEAD
-	 * Methode zum l�schen des Profils, da die Ausschreibung sonst nicht
-	 * gel�scht werden kann
-=======
 	 * Methode zum löschen des Profils, da die Ausschreibung sonst nicht
 	 * gelöscht werden kann
->>>>>>> branch 'Philipp' of https://github.com/denisesemmler/ITProjektSS17.git
 	 */
 	private void deleteProfil(Ausschreibung a) {
 
@@ -193,14 +195,14 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 			eMapper.delete(e);
 		}
 
-		// Hier wird eine Liste aller Bewerbungen zur Ausschreibungen von der DB
-		// gelesen
+		/*
+		 *  Hier wird eine Liste aller Bewerbungen zur Ausschreibungen von der DB gelesen
+		 */  
 		ArrayList<Bewerbung> bewerbungenZuProfil = bMapper.findByAusschreibungsId(a.getIdAusschreibung());
 
-		// Hier werden die Bewerbungen aus der DB entfernt, aber erst wenn die
-
-		// dazugehörige Beteiligung entfernt ist
-
+		/*
+		 *  Hier werden die Bewerbungen aus der DB entfernt, aber erst wenn die dazugehörige Beteiligung entfernt ist
+		 */
 		for (Bewerbung b : bewerbungenZuProfil) {
 			this.deleteBewerbung(b);
 		}
@@ -212,21 +214,14 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 	/**
 	 * Diese Methode liest alle Ausschreibungen zu einem Projekt.
-	 * 
 	 * @param p
-	 *            das Projekt zu dem alle Ausschreibungen gelesen werden sollen.
-<<<<<<< HEAD
-	 * @return Vector aller Ausschreibungen zum �bergebenen Projekt p.
-=======
 	 * @return Vector aller Ausschreibungen zum übergebenen Projekt p.
->>>>>>> branch 'Philipp' of https://github.com/denisesemmler/ITProjektSS17.git
 	 */
 	private Vector<Ausschreibung> getAusschreibung(Projekt p) {
 		return aMapper.findByProjekt(p);
 	}
 
 	// Methoden für Ausschreibung
-
 	/**
 	 * Diese Methode implementiert denn UC Ausschreibung erstellen
 	 */
@@ -239,8 +234,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 
 		// Werte zum Objekt hinzufügen
-
 		ausschreibung.setBeschreibung(beschreibung);
+		
 		// kurze schreibweise einer Typkonvertierung
 		ausschreibung.setBewerbungsfrist(new Timestamp(bewerbungsfrist.getTime())); // Timestamp?
 		ausschreibung.setTitel(titel);
@@ -258,22 +253,17 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	public void updateAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 
 		// Update ohne Prüfung in DB
-
 		aMapper.update(a);
 	}
 
 	/**
-
 	 * Diese Methode implementiert denn UC Ausschreibung l�schen
-
 	 * Diese Methode implementiert denn UC Ausschreibung löschen
-
 	 */
+	
 	/*
-
 	 * Methode zum Löschen von Ausschreibungen, da das Projekt sonst nicht
 	 * gelöscht werden kann
-
 	 */
 	public void deleteAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 		this.deleteProfil(a);
@@ -284,7 +274,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 
 	// Methoden für Bewerbung
-
 	/**
 	 * Diese Methode implementiert denn UC Auf Ausschreibung bewerben
 	 */
@@ -296,14 +285,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		Bewerbung bewerbung = new Bewerbung();
 
 		// ausführliche Typkonvertierung
-
 		Timestamp dbErstellDatum = new Timestamp(erstellDatum.getTime());
 
-
-		// Werte zum Objekt hinzuf�gen
-
 		// Werte zum Objekt hinzufügen
-
 		bewerbung.setBewerbungsText(bewerbungsText);
 		bewerbung.setErstellDatum(dbErstellDatum);// Timestamp?
 		bewerbung.setBewertung(bewertung);
@@ -322,22 +306,16 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	public void updateBewerbung(Bewerbung b) throws IllegalArgumentException {
 
 		// Update ohne Prüfung in DB
-
 		bMapper.update(b);
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Diese Methode implementiert denn UC Bewerbung zur�ckziehen
-=======
 	 * Diese Methode implementiert denn UC Bewerbung zurückziehen
-
 	 */
-
-
-	// Methode um die Beteiligung zu löschen, da die Bewerbung vorher nicht
-	// gelöscht werden kann
-
+	
+	/*
+	 *  Methode um die Beteiligung zu löschen, da die Bewerbung vorher nicht(non-Javadoc) gelöscht werden kann
+	 */
 	public void deleteBewerbung(Bewerbung b) {
 		Beteiligung beteiligung = btMapper.findByBewerbung(b);
 		btMapper.delete(beteiligung);
@@ -345,14 +323,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	
-	
-	
-	
-	//TODO
-
 	// Methoden für Teilnehmer
-
-	
 	public void setUser(Teilnehmer t) {
 		user = t;
 	}
@@ -401,10 +372,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 				existingPerson.setLogoutUrl(userService.createLogoutURL(requestUri));
 
 				return existingPerson;
-
 			}
 
-			
 			logInf.setLoggedIn(true);
 			//logInf.setName(user.getNickname());
 			logInf.setLogoutUrl(userService.createLogoutURL(requestUri));
@@ -416,24 +385,4 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		return logInf;
 	}
-
-	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez) throws IllegalArgumentException {
-
-		Projektmarktplatz pm = new Projektmarktplatz();
-		pm.setBezeichnung(projektmarktplatzBez);
-
-		// Objekt in DB speichern
-		return this.pmMapper.insert(pm);
-
-	}
-
-
-	/*@Override
-	public void createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
-			String emailAdresse, int rolle) {
-		// TODO Auto-generated method stub
-		
-	}*/
-
-
 }

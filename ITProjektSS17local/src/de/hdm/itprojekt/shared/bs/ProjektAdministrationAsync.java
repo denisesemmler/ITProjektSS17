@@ -22,12 +22,16 @@ public interface ProjektAdministrationAsync {
 	void init(AsyncCallback<Void> callback);
 	
 	/*
-	 * Für Projektmarktplätze
+	 * Fï¿½r Projektmarktplï¿½tze
 	 */
 	void createProjektmarktplatz(String projektmarktplatzBez, int idTeilnehmer, AsyncCallback<Projektmarktplatz> callback);
 	
+	void updateProjektmarktplatz(Projektmarktplatz pm, AsyncCallback<Void> callback);
+	
+	void deleteProjektmarktplatz(Projektmarktplatz pm, AsyncCallback<Void> callback);
+	
 	/*
-	 * Für Projekte
+	 * Fï¿½r Projekte
 	 */
 	void createProjekt(String projektName, String projektBeschreibung, Date startDatum, Date endDatum, int TeilnehmerID,
 			int MarktplatzID, AsyncCallback<Projekt> callback);
@@ -37,7 +41,7 @@ public interface ProjektAdministrationAsync {
 	void deleteProjekt(Projekt p, AsyncCallback<Void> callback);
 
 	/*
-	 * Für Ausschreibungen
+	 * Fï¿½r Ausschreibungen
 	 */
 	void createAusschreibung(String beschreibung, Date bewerbungsfrist, String titel, int projekt_idProjekt,
 			int profil_idSuchprofil, AsyncCallback<Ausschreibung> callback);
@@ -47,7 +51,7 @@ public interface ProjektAdministrationAsync {
 	void deleteAusschreibung(Ausschreibung a, AsyncCallback<Void> callback);
 	
 	/*
-	 * Für Bewerbungen
+	 * Fï¿½r Bewerbungen
 	 */
 	void createBewerbung(String bewerbungstext, Date erstelldatum, float bewertung, String status, int profil_idProfil,
 			int ausschreibung_idAusschreibung, AsyncCallback<Bewerbung> callback);
@@ -56,19 +60,18 @@ public interface ProjektAdministrationAsync {
 	
 	void deleteBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 	
-	
-	
-	
 	/*
-	 * Für Teilnehmer
+	 * Fï¿½r Teilnehmer
 	 */
 	
 	void setUser(Teilnehmer t, AsyncCallback callback);
 
-	void login(String requestUri, AsyncCallback<Teilnehmer>callback);
+	void login(String requestUri, AsyncCallback<Teilnehmer> callback);
 
 	void createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
 			String emailAdresse, int rolle, int ProfilID, int projektleiter, AsyncCallback<Teilnehmer> callback);
+
+
 
 
 
