@@ -5,6 +5,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.Label;
@@ -47,6 +48,10 @@ public class AnmeldeFormular extends VerticalPanel{
 	 		ortLabel.addStyleName("Content-label");
 	 		
 	 		mainPanel.add(labelsPanel);
+	 		
+	 		labelsPanel.add(new HTML(
+					"<p>Willkommen bei Pr0ject, es scheint als ob du noch nicht bei uns angemeldet bist, "
+					+ "bitte gebe deine Daten hier ein!</p><br />"));
 	 		
 	 		//Elemente hinzufügen
 	 		labelsPanel.add(firstNameLabel);
@@ -110,6 +115,7 @@ public class AnmeldeFormular extends VerticalPanel{
 			}
 
 			public void onSuccess(Object result) {
+				Window.alert("Deine Daten wurden gespeichert!");
 				RootPanel.get("Content").clear();
 
 			}
