@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Beteiligung;
@@ -15,12 +14,12 @@ import de.hdm.itprojekt.shared.bo.Bewerbung;
 
 /**
  * p> Mapper-Klasse zur Abbildung von <code>Beteiligung</code> Objekten auf die
- * Datenbank. Über das Mapping können sowohl Objekte als auch deren Attribute in
+ * Datenbank. ï¿½ber das Mapping kï¿½nnen sowohl Objekte als auch deren Attribute in
  * die Datenbank geschrieben werden, als auch von der Datenbank ausgelesen
  * werden.
  * </p>
  * <p>
- * Es werden Methoden zum Erstellen, Ãndern, Löschen und Ausgeben von
+ * Es werden Methoden zum Erstellen, ï¿½ndern, Lï¿½schen und Ausgeben von
  * Beteiligungen * bereitgestellt.
  * </p>
  * 
@@ -56,28 +55,37 @@ public class BeteiligungMapper {
 	 * Suche einer Beteiligung anhand seiner einzigartigen ID.
 	 * 
 	 * @param id
-	 *            - Primärschlüssel von Beteiligung
-	 * @return Beteiligung Objekt, das die gesuchte ID enthält
+	 *            - Primï¿½rschlï¿½ssel von Beteiligung
+	 * @return Beteiligung Objekt, das die gesuchte ID enthï¿½lt
 	 */
 	public Beteiligung findById(int id) {
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 
 		try {
 			// Neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen
+			
+			// SQL Query ausfï¿½hren
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Beteiligung " + "WHERE idBeteiligung = " + id);
+			
 			// Bei Treffer
 			if (rs.next()) {
+				
 				// Neues Beteiligung Objekt erzeugen
 				Beteiligung b = new Beteiligung();
-				// Id, stellungname mit den Daten aus der DB füllen
-				b.setIdBeteiligung(rs.getInt("idBeteiligung"));
+				
+				// Id, stellungname mit den Daten aus der DB fï¿½llen
+				b.setId(rs.getInt("idBeteiligung"));
 				b.setStellungnahme(rs.getString("stellungnahme"));
 				b.setProjektID(rs.getInt("Projekt_idProjekt"));
 				b.setBewerbungID(rs.getInt("Bewerbung_idBewerbung"));
-				// Objekt zurückgeben
+				b.setManntage(rs.getInt("manntage"));
+				b.setStartdatum(rs.getDate("startdatum"));
+				b.setEnddatum(rs.getDate("enddatum"));
+				
+				
+				// Objekt zurï¿½ckgeben
 				return b;
 			}
 		}
@@ -86,13 +94,13 @@ public class BeteiligungMapper {
 			e.printStackTrace();
 			return null;
 		}
-		// Falls nichts gefunden wurde null zurückgeben
+		// Falls nichts gefunden wurde null zurï¿½ckgeben
 		return null;
 	}
 
 	/**
 	 * Suche Beteiligungen anhand eines Projektnamens. Da Projekt mehrere
-	 * Beteiligungen enthalten können, können mehrere Ergebnisse ausgegeben
+	 * Beteiligungen enthalten kï¿½nnen, kï¿½nnen mehrere Ergebnisse ausgegeben
 	 * werden. Alle gefundenen Beteilungen werden in einem Vektor gespeichert.
 	 * 
 	 * @param projektname
@@ -108,18 +116,25 @@ public class BeteiligungMapper {
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
+			
 			// SQL Query ausfÃ¼hren
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Beteiligung " + "WHERE name = '" + projektName + "'");
+			
 			// FÃ¼r jeden gefundenen Treffer...
 			while (rs.next()) {
 				// ... neues User Objekt anlegen
 				Beteiligung b = new Beteiligung();
+				
 				// ... Id, Projetname, Bewertung und Beschreibung mit den Daten
-				// aus der DB füllen
-				b.setIdBeteiligung(rs.getInt("idBeteiligung"));
+				// aus der DB fï¿½llen
+				b.setId(rs.getInt("idBeteiligung"));
 				b.setProjektID(rs.getInt("Projekt_idProjekt"));
 				b.setBewerbungID(rs.getInt("Bewerbung_idBewerbung"));
 				b.setStellungnahme(rs.getString("stellungnahme"));
+				b.setManntage(rs.getInt("manntage"));
+				b.setStartdatum(rs.getDate("startdatum"));
+				b.setEnddatum(rs.getDate("enddatum"));
+				
 				// ... Objekt dem Ergebnisvektor hinzufÃ¼gen
 				result.add(b);
 			}
@@ -128,34 +143,42 @@ public class BeteiligungMapper {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// Ergebnis zurückgeben
+		// Ergebnis zurï¿½ckgeben
 		return result;
 	}
 
 	/**
-	 * Ausgabe aller Beteiligung Datensätze
+	 * Ausgabe aller Beteiligung Datensï¿½tze
 	 * 
 	 * @return Vektor mit allen Beteiligung
 	 */
 	public Vector<Beteiligung> findAllBeteiligung() {
-		// Datenbankverbindung öffnen
+		
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
+		
 		// Ergebnis-ArrayList anlegen
 		Vector<Beteiligung> result = new Vector<Beteiligung>();
 
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
+			
 			// SQL Query ausfÃ¼hren
 			// TODO evtl. OrderBy ergÃ¤nzen
 			ResultSet rs = stmt.executeQuery("SELECT * " + "FROM Beteiligung");
+			
 			// FÃ¼r jeden Eintrag neues User Objekt erzeugen
 			while (rs.next()) {
 				Beteiligung b = new Beteiligung();
-				b.setIdBeteiligung(rs.getInt("idBeteiligung"));
+				b.setId(rs.getInt("idBeteiligung"));
 				b.setStellungnahme(rs.getString("stellungnahme"));
 				b.setProjektID(rs.getInt("Projekt_idProjekt"));
 				b.setBewerbungID(rs.getInt("Bewerbung_idBewerbung"));
+				b.setManntage(rs.getInt("manntage"));
+				b.setStartdatum(rs.getDate("startdatum"));
+				b.setEnddatum(rs.getDate("enddatum"));
+				
 				// Teilnehmer dem Ergebnisvektor hinzufÃ¼gen
 				result.add(b);
 			}
@@ -164,7 +187,7 @@ public class BeteiligungMapper {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// Ergebnisvektor zurückgeben
+		// Ergebnisvektor zurï¿½ckgeben
 		return result;
 	}
 
@@ -172,34 +195,40 @@ public class BeteiligungMapper {
 	 * Neue Beteiligung in der Datenbank anlegen.
 	 * 
 	 * @param b
-	 *            Beteiligung Objekt, das in die Datenbank eingefügt werden soll
+	 *            Beteiligung Objekt, das in die Datenbank eingefï¿½gt werden soll
 	 */
 	public Beteiligung insert(Beteiligung b) {
 
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 		System.out.println("dbconnection: " + con);
 
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen um die höchste id zu erhalten
+			
+			// SQL Query ausfï¿½hren um die hï¿½chste id zu erhalten
 			ResultSet rs = stmt.executeQuery("SELECT MAX(idBeteiligung) AS maxId FROM Beteiligung");
 			if (rs.next()) {
-				// id um 1 erhöhen, damit ein neuer Eintrag erzeugt wird
-				b.setIdBeteiligung(rs.getInt("maxId") + 1);
+				
+				// id um 1 erhï¿½hen, damit ein neuer Eintrag erzeugt wird
+				b.setId(rs.getInt("maxId") + 1);
+				
 				// neues SQL Statement
 				stmt = con.createStatement();
-				// SQL Query ausführen um Datensatz in DB zu schreiben
+				
+				// SQL Query ausfï¿½hren um Datensatz in DB zu schreiben
 				stmt.executeUpdate(
-						"INSERT INTO Beteiligung (idBeteiligung, bewertung, stellungnahme, ausschreibender, bewerbender) "
-								+ "VALUES " + "('" + b.getIdBeteiligung() + "', '" + b.getBewerbungID() + "', '"
-								+ b.getStellungnahme() + "', '" + b.getProjektID() + "')");
+						"INSERT INTO Beteiligung (id, bewerbungId, stellungnahme, projektId, manntage, startdatum, enddatum)"
+								+ "VALUES " + "('" + b.getId() + "', '" + b.getBewerbungID() + "', '"
+								+ b.getStellungnahme() + "', '" + b.getProjektID() + "', '" 
+								+ b.getManntage() + "', '" + b.getStartdatum() + "', '" + b.getEnddatum() +"')");
 
 				System.out.println(
-						"INSERT INTO Beteiligung (idBeteiligung, bewertung, stellungnahme, ausschreibender, bewerbender) "
-								+ "VALUES " + "('" + b.getIdBeteiligung() + "', '" + b.getBewerbungID() + "', '"
-								+ b.getStellungnahme() + "', '" + b.getProjektID() + "')");
+						"INSERT INTO Beteiligung (id, bewerbungId, stellungnahme, projektId, manntage, startdatum, enddatum)"
+								+ "VALUES " + "('" + b.getId() + "', '" + b.getBewerbungID() + "', '"
+								+ b.getStellungnahme() + "', '" + b.getProjektID() + "', '" 
+								+ b.getManntage() + "', '" + b.getStartdatum() + "', '" + b.getEnddatum() +"')");
 			}
 		}
 		// Error Handling
@@ -210,21 +239,24 @@ public class BeteiligungMapper {
 	}
 
 	/**
-	 * Diese Methode löscht einen Beteiligung in der Datenbank die dazugehörigen
+	 * Diese Methode lï¿½scht einen Beteiligung in der Datenbank die dazugehï¿½rigen
 	 * Beteiligung-Referenzen in allen Tabellen
 	 * 
 	 * @param u
-	 *            die zu löschende Beteiligung
+	 *            die zu lï¿½schende Beteiligung
 	 */
 	public void delete(Beteiligung b) {
-		// Datenbankverbindung öffnen
+		
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 
 		try {
+			
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen
-			stmt.executeUpdate("DELETE FROM Beteiligung WHERE idBeteiligung = " + b.getIdBeteiligung());
+			
+			// SQL Query ausfï¿½hren
+			stmt.executeUpdate("DELETE FROM Beteiligung WHERE idBeteiligung = " + b.getId());
 		}
 		// Error Handling
 		catch (SQLException e) {
@@ -236,24 +268,32 @@ public class BeteiligungMapper {
 	
 	//Suche der Beteiligung anhand seiner einzigartigen ID
 	public Beteiligung findByBewerbung(Bewerbung b) {
+		
 		// Datenbankverbindung
 		Connection con = DBConnection.connection();
 
 		try {
+			
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
+			
 			// SQL Query ausfÃ¼hren
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Beteiligung " + "WHERE Bewerbung_idBewerbung = " + b.getIdBewerbung());
+			
 			// FÃ¼r jeden gefundenen Treffer...
 			if (rs.next()) {
+				
 				// ... neues User Objekt anlegen
 				Beteiligung beteiligung = new Beteiligung();
-				// ... Id, Projetname, Bewertung und Beschreibung mit den Daten
-				// aus der DB füllen
-				beteiligung.setIdBeteiligung(rs.getInt("idBeteiligung"));
+				
+				// ... Id, Projektname, Bewertung und Beschreibung mit den Daten aus der DB fï¿½llen
+				beteiligung.setId(rs.getInt("idBeteiligung"));
 				beteiligung.setProjektID(rs.getInt("Projekt_idProjekt"));
 				beteiligung.setBewerbungID(rs.getInt("Bewerbung_idBewerbung"));
 				beteiligung.setStellungnahme(rs.getString("stellungnahme"));
+				beteiligung.setManntage(rs.getInt("manntage"));
+				beteiligung.setStartdatum(rs.getDate("startdatum"));
+				beteiligung.setEnddatum(rs.getDate("enddatum"));
 				
 				return beteiligung;
 			
@@ -263,7 +303,7 @@ public class BeteiligungMapper {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// Ergebnis zurückgeben
+		// Ergebnis zurï¿½ckgeben
 		return null;
 	}
 
