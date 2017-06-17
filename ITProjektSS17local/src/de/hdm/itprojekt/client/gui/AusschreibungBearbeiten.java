@@ -9,8 +9,6 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
-import de.client.ClientSideSettings;
-import de.client.gui.MeinProfilEditor.ProfilEigenschaftenCallback;
 
 public class AusschreibungBearbeiten extends VerticalPanel {
 	
@@ -30,7 +28,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 	
 		private Label ausschreibungTitelLabel = new Label ("Titel der Ausschreibung: ");
 		private Label stellenbeschreibungLabel = new Label ("Stellenbeschreibung: ");
-		private Label bewerbungsfristLabel = new Label ("Bewerbungsfrist ändern: ");
+		private Label bewerbungsfristLabel = new Label ("Bewerbungsfrist ï¿½ndern: ");
 		
 		
 		private TextBox ausschreibungTitelBox = new TextBox(); 
@@ -45,7 +43,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 		private Button ausschreibungAndernButton = new Button("Aenderungen speichern", new SpeichernClickHandler());
 		
 		/**
-		 * Konstruktor für Anlegen der GUI
+		 * Konstruktor fï¿½r Anlegen der GUI
 		 */
 		public AusschreibungBearbeiten() {
 		
@@ -75,7 +73,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 		private class GetMarktplatzCallback implements AsyncCallback {
 
 			public void onFailure(Throwable caught) {
-				Window.alert("Suchen läuft noch nit so!");
+				Window.alert("Suchen lï¿½uft noch nit so!");
 
 			}
 
@@ -84,7 +82,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 				
 				//RootPanel.get("Content").clear();
 				//Entweder hier oder unten...
-				//TODO Konstruktor für nächste Klasse (Projekt Suchen)
+				//TODO Konstruktor fï¿½r nï¿½chste Klasse (Projekt Suchen)
 
 			}
 
@@ -94,7 +92,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 
 			public void onClick(ClickEvent event) {
 				
-				//TODO Konstruktor für nächste Klasse (Projekt Suchen)
+				//TODO Konstruktor fï¿½r nï¿½chste Klasse (Projekt Suchen)
 				
 			}
 		};
