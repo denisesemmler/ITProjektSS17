@@ -18,7 +18,7 @@ public class ProjektmarktplatzMapper {
 
 
 /*
- * Test für Installation
+ * Test fï¿½r Installation
  */
 	
 	/**
@@ -145,7 +145,7 @@ public class ProjektmarktplatzMapper {
 		public Vector<Projektmarktplatz> findAllProjektmarkplaetze() {
 			// Datenbankverbindung Ã¶ffnen
 			Connection con = DBConnection.connection();
-			//Ergebnis-ArrayList anlegen
+			//Ergebnis-Vector anlegen
 			Vector<Projektmarktplatz> result = new Vector<Projektmarktplatz>();
 			
 			try {
