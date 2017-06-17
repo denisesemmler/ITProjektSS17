@@ -130,6 +130,18 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return projekte;
 	}
 	
+	/**
+	 * Diese Methode implementiert denn UC alle Projektmarktplätze in der GUI anzuzeigen
+	 */
+	@Override
+	public Vector<Projektmarktplatz> findAllProjektmarktplatz() throws IllegalArgumentException {
+		//Alle Projektmarktplätze werden hier "gemerkt"
+		Vector<Projektmarktplatz> projektmarktplatz = pmMapper.findAllProjektmarkplaetze();
+		
+		//Rückgabe an den Aufrufer
+		return projektmarktplatz;
+	}
+	
 	/*
 	 * Methoden für Projekte
 	 */
@@ -423,6 +435,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		return logInf;
 	}
+
 
 
 

@@ -34,6 +34,8 @@ public interface ProjektAdministrationAsync {
 	
 	void findProjekteByProjektmarktplatzId(int projektmarktplatzId, AsyncCallback<Vector<Projekt>> callback);
 	
+	void findAllProjektmarktplatz(AsyncCallback<Vector<Projektmarktplatz>> callback);
+	
 	/*
 	 * F�r Projekte
 	 */
