@@ -287,7 +287,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		ausschreibung.setBeschreibung(beschreibung);
 		
 		// kurze schreibweise einer Typkonvertierung
-		ausschreibung.setBewerbungsfrist(new Timestamp(bewerbungsfrist.getTime())); // Timestamp?
+		ausschreibung.setBewerbungsfrist(new java.sql.Date(bewerbungsfrist.getTime())); // Timestamp?
 		ausschreibung.setTitel(titel);
 		ausschreibung.setProjekt_idProjekt(projekt_idProjekt);
 		ausschreibung.setProfil_idSuchprofil(profil_idSuchprofil);
