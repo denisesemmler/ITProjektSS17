@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
@@ -108,11 +109,11 @@ public class TeilnehmerMapper {
 	 *            zusatz des gesuchten Teilnehmer
 	 * @return Vektor mit allen zu den Suchparametern gefundenen Teilnehmer
 	 */
-	public ArrayList<Teilnehmer> findByName(String name, String lastName) {
+	public Vector<Teilnehmer> findByName(String name, String lastName) {
 		// Datenbankverbindung
 		Connection con = DBConnection.connection();
 		// Ergebnis-ArrayList anlegen
-		ArrayList<Teilnehmer> result = new ArrayList<Teilnehmer>();
+		Vector<Teilnehmer> result = new Vector<Teilnehmer>();
 
 		try {
 			// neues SQL Statement anlegen
@@ -196,11 +197,11 @@ public class TeilnehmerMapper {
 	 * 
 	 * @return Vektor mit allen registrierten Teilnehmer
 	 */
-	public ArrayList<Teilnehmer> findAllTeilnehmer() {
+	public Vector<Teilnehmer> findAllTeilnehmer() {
 		// Datenbankverbindung öffnen
 		Connection con = DBConnection.connection();
 		// Ergebnis-ArrayList anlegen
-		ArrayList<Teilnehmer> result = new ArrayList<Teilnehmer>();
+		Vector<Teilnehmer> result = new Vector<Teilnehmer>();
 
 		try {
 			// neues SQL Statement anlegen
