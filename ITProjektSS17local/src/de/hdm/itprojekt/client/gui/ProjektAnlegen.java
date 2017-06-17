@@ -149,9 +149,7 @@ public class ProjektAnlegen extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 			//Projektmarktplatz ID
-			int id = marktplatzListbox.getSelectedIndex();
-			String ids = ""+ id;
-			Window.alert(ids);
+			int id = marktplatzListbox.getSelectedIndex() +1;
 			
 			try {
 
