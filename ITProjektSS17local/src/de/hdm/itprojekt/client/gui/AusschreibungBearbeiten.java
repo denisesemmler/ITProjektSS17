@@ -9,7 +9,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -17,150 +16,139 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
-import de.client.ClientSideSettings;
-import de.client.gui.MeinProfilEditor.ProfilEigenschaftenCallback;
-
+import de.hdm.itprojekt.shared.bo.Ausschreibung;
 
 public class AusschreibungBearbeiten extends VerticalPanel {
-	
-	
 
-	private Vector <Ausschreibung> aVector = new Vector<Ausschreibung>();
-		/**
-		 * Erstellen der Panels
-		 */
-		private VerticalPanel mainPanel = this;
-		private VerticalPanel editorPanel = new VerticalPanel();
-		private VerticalPanel attributePanel = new VerticalPanel();
+	private Vector<Ausschreibung> aVector = new Vector<Ausschreibung>();
+	/**
+	 * Erstellen der Panels
+	 */
+	private VerticalPanel mainPanel = this;
+	private VerticalPanel editorPanel = new VerticalPanel();
+	private VerticalPanel attributePanel = new VerticalPanel();
 
-		/**
-		 * Erstellen der Labels
-		 */
-		private Label ausschreibungLabel = new Label ("Zu ändernde Ausschreibung");
-		private Label ausschreibungTitelLabel = new Label ("Titel der Ausschreibung: ");
-		private Label stellenbeschreibungLabel = new Label ("Stellenbeschreibung: ");
-		private Label bewerbungsfristLabel = new Label ("Bewerbungsfrist ï¿½ndern: ");
-		
-		private ListBox ausschreibungListbox = new ListBox();
-		
-		private TextBox ausschreibungTitelBox = new TextBox(); 
-		private TextBox stellenbeschreibungBox = new TextBox();
-		
-		private DatePicker bewerbungsfrist = new DatePicker();
-	
+	/**
+	 * Erstellen der Labels
+	 */
+	private Label ausschreibungLabel = new Label("Zu ï¿½ndernde Ausschreibung");
+	private Label ausschreibungTitelLabel = new Label("Titel der Ausschreibung: ");
+	private Label stellenbeschreibungLabel = new Label("Stellenbeschreibung: ");
+	private Label bewerbungsfristLabel = new Label("Bewerbungsfrist ï¿½ndern: ");
 
-		/**
-		 * Erstellen der Buttons
-		 */
-		private Button ausschreibungAndernButton = new Button("Aenderungen speichern", new SpeichernClickHandler());
-		
-		/**
-		 * Konstruktor fï¿½r Anlegen der GUI
-		 */
-		public AusschreibungBearbeiten() {
-		
-			// CSS Styling
-			ausschreibungTitelLabel.addStyleName("Content-Label");
-			stellenbeschreibungLabel.addStyleName("Content-Label");
-			bewerbungsfristLabel.addStyleName("Content-label");
+	private ListBox ausschreibungListbox = new ListBox();
 
-			mainPanel.add(editorPanel);
+	private TextBox ausschreibungTitelBox = new TextBox();
+	private TextBox stellenbeschreibungBox = new TextBox();
 
-			editorPanel.add(attributePanel);
-			
-			attributePanel.add(ausschreibungLabel);
-			attributePanel.add(ausschreibungListbox);
-			ausschreibungListbox.addChangeHandler(new OnChangeHandler());
-			
-			attributePanel.add(ausschreibungTitelLabel);
-			attributePanel.add(ausschreibungTitelBox);
-		
-			
-			attributePanel.add(stellenbeschreibungLabel);
-			attributePanel.add(stellenbeschreibungBox);
-			
-			attributePanel.add(bewerbungsfristLabel);
-			attributePanel.add(bewerbungsfrist);
-			
-			mainPanel.add(ausschreibungAndernButton);
-			
+	private DatePicker bewerbungsfrist = new DatePicker();
+
+	/**
+	 * Erstellen der Buttons
+	 */
+	private Button ausschreibungAndernButton = new Button("Aenderungen speichern", new SpeichernClickHandler());
+
+	/**
+	 * Konstruktor fï¿½r Anlegen der GUI
+	 */
+	public AusschreibungBearbeiten() {
+
+		// CSS Styling
+		ausschreibungTitelLabel.addStyleName("Content-Label");
+		stellenbeschreibungLabel.addStyleName("Content-Label");
+		bewerbungsfristLabel.addStyleName("Content-label");
+
+		mainPanel.add(editorPanel);
+
+		editorPanel.add(attributePanel);
+
+		attributePanel.add(ausschreibungLabel);
+		attributePanel.add(ausschreibungListbox);
+		ausschreibungListbox.addChangeHandler(new OnChangeHandler());
+
+		attributePanel.add(ausschreibungTitelLabel);
+		attributePanel.add(ausschreibungTitelBox);
+
+		attributePanel.add(stellenbeschreibungLabel);
+		attributePanel.add(stellenbeschreibungBox);
+
+		attributePanel.add(bewerbungsfristLabel);
+		attributePanel.add(bewerbungsfrist);
+
+		mainPanel.add(ausschreibungAndernButton);
+
+		try {
+			ClientSideSettings.getProjektAdministration().findAllAusschreibungen(new GetAllAusschreibungenCallback());
+		} catch (Exception e) {
+			Window.alert(e.toString());
+			e.printStackTrace();
+		}
+	}
+
+	private class OnChangeHandler implements ChangeHandler {
+
+		@Override
+		public void onChange(ChangeEvent event) {
 			try {
-				ClientSideSettings.getProjektAdministration().findAllAusschreibungen(new GetAllAusschreibungenCallback());
+				ausschreibungTitelBox.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getTitel());
 			} catch (Exception e) {
 				Window.alert(e.toString());
 				e.printStackTrace();
 			}
-		}
-		
-		private class OnChangeHandler implements ChangeHandler {
-				Window.alert("Suchen läuft noch nit so!");
-
-			@Override
-			public void onChange(ChangeEvent event) {
-				try {
-					ausschreibungTitelBox.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getTitel());
-				} catch (Exception e){
-					Window.alert(e.toString());
-					e.printStackTrace();
-				}
-				
-			}
-			
-		}
-		
-		private class GetAllAusschreibungenCallback implements AsyncCallback<Vector<Ausschreibung>> {
-				//TODO Konstruktor für nächste Klasse (Projekt Suchen)
-
-			public void onFailure(Throwable caught) {
-				Window.alert("Läuft garnit");
-			}
-
-			public void onSuccess(Vector<Ausschreibung> result) {
-				for (Ausschreibung a : result) {
-					ausschreibungListbox.addItem(a.getTitel());	
-				}
-				for (int i = 0; i < result.size(); i++){
-					Ausschreibung aus = result.elementAt(i);
-					aVector.add(aus);
-				}
-				ausschreibungTitelBox.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getTitel());
-				
-			}
-		}
-
-		private class SpeichernClickHandler implements ClickHandler {
-
-			public void onClick(ClickEvent event) {
-				try {
-					int id = aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getId();
-					Ausschreibung a = new Ausschreibung();
-					a.setId(id);
-					a.setTitel(ausschreibungTitelBox.getText());
-					ClientSideSettings.getProjektAdministration().updateAusschreibung(a, new SpeichernCallback());
-
-				//TODO Konstruktor für nächste Klasse (Projekt Suchen)
-					Window.alert(e.toString());
-					e.printStackTrace();
-				}
-			}
-		};
-
-		private class SpeichernCallback implements AsyncCallback {
-
-			public void onFailure(Throwable caught) {
-				Window.alert("Dat läuft noch nit so!");
-
-			}
-
-			public void onSuccess(Object result) {
-				RootPanel.get("Content").clear();
-
-			}
 
 		}
-		
-
 
 	}
 
+	private class GetAllAusschreibungenCallback implements AsyncCallback<Vector<Ausschreibung>> {
+		// TODO Konstruktor fï¿½r nï¿½chste Klasse (Projekt Suchen)
 
+		public void onFailure(Throwable caught) {
+			Window.alert("Lï¿½uft garnit");
+		}
+
+		public void onSuccess(Vector<Ausschreibung> result) {
+			for (Ausschreibung a : result) {
+				ausschreibungListbox.addItem(a.getTitel());
+			}
+			for (int i = 0; i < result.size(); i++) {
+				Ausschreibung aus = result.elementAt(i);
+				aVector.add(aus);
+			}
+			ausschreibungTitelBox.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getTitel());
+
+		}
+	}
+
+	private class SpeichernClickHandler implements ClickHandler {
+
+		public void onClick(ClickEvent event) {
+			try {
+				int id = aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getId();
+				Ausschreibung a = new Ausschreibung();
+				a.setId(id);
+				a.setTitel(ausschreibungTitelBox.getText());
+				ClientSideSettings.getProjektAdministration().updateAusschreibung(a, new SpeichernCallback());
+			} catch (Exception e) {
+				// TODO Konstruktor fï¿½r nï¿½chste Klasse (Projekt Suchen)
+				Window.alert(e.toString());
+				e.printStackTrace();
+			}
+		}
+	};
+
+	private class SpeichernCallback implements AsyncCallback {
+
+		public void onFailure(Throwable caught) {
+			Window.alert("Dat lï¿½uft noch nit so!");
+
+		}
+
+		public void onSuccess(Object result) {
+			RootPanel.get("Content").clear();
+
+		}
+
+	}
+
+}
