@@ -106,7 +106,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	public void deleteProjektmarktplatz(Projektmarktplatz pm) throws IllegalArgumentException {
 		
 		//Alle Projekte zum Projektmarktplatz werden hier "gemerkt"
-		List<Projekt> projekte = pMapper.findAllProjektmarktplatzById(pm.getIdProjektmarktplatz());
+		Vector<Projekt> projekte = pMapper.findAllProjektmarktplatzById(pm.getIdProjektmarktplatz());
 		
 		//Alle Projektzeilen löschen
 		for (Projekt projekt : projekte){
@@ -121,10 +121,10 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 * Diese Methode implementiert denn UC alle Projekte zum jeweiligen Projektmarktplatz in der GUI anzuzeigen
 	 */
 	@Override
-	public List<Projekt> findProjekteByProjektmarktplatzId(int projektmarktplatzId) throws IllegalArgumentException {
+	public Vector<Projekt> findProjekteByProjektmarktplatzId(int projektmarktplatzId) throws IllegalArgumentException {
 		
 		//Alle Projekte zum Projektmarktplatz werden hier "gemerkt"
-		List<Projekt> projekte = pMapper.findAllProjektmarktplatzById(projektmarktplatzId);
+		Vector<Projekt> projekte = pMapper.findAllProjektmarktplatzById(projektmarktplatzId);
 		
 		//Rückgabe an den Aufrufer
 		return projekte;
@@ -223,7 +223,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		/*
 		 *  Hier wird eine Liste aller Bewerbungen zur Ausschreibungen von der DB gelesen
 		 */  
-		ArrayList<Bewerbung> bewerbungenZuProfil = bMapper.findByAusschreibungsId(a.getIdAusschreibung());
+		Vector<Bewerbung> bewerbungenZuProfil = bMapper.findByAusschreibungsId(a.getIdAusschreibung());
 
 		/*
 		 *  Hier werden die Bewerbungen aus der DB entfernt, aber erst wenn die dazugehörige Beteiligung entfernt ist
@@ -302,7 +302,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 * Diese Methode implementiert denn UC alle Bewerbungen zu jeweiligen Ausschreibung in der GUI anzuzeigen
 	 */
 	@Override
-	public List<Bewerbung> findBewerbungenByAusschreibungId(int ausschreibungId) throws IllegalArgumentException {
+	public Vector<Bewerbung> findBewerbungenByAusschreibungId(int ausschreibungId) throws IllegalArgumentException {
 		
 		//Alle Bewerbungen zu der jew. Ausschreibung werden hier "gemerkt"
 				List<Bewerbung> bewerbungen = bMapper.findByAusschreibungsId(ausschreibungId);

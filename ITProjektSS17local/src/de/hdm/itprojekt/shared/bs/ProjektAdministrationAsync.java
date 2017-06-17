@@ -32,7 +32,7 @@ public interface ProjektAdministrationAsync {
 	
 	void deleteProjektmarktplatz(Projektmarktplatz pm, AsyncCallback<Void> callback);
 	
-	void findProjekteByProjektmarktplatzId(int projektmarktplatzId, AsyncCallback<List<Projekt>> callback);
+	void findProjekteByProjektmarktplatzId(int projektmarktplatzId, AsyncCallback<Vector<Projekt>> callback);
 	
 	/*
 	 * F�r Projekte
@@ -56,7 +56,7 @@ public interface ProjektAdministrationAsync {
 	
 	void deleteAusschreibung(Ausschreibung a, AsyncCallback<Void> callback);
 	
-	void findBewerbungenByAusschreibungId(int AuscchreibungId, AsyncCallback<List<Bewerbung>> callback);
+	void findBewerbungenByAusschreibungId(int AuscchreibungId, AsyncCallback<Vector<Bewerbung>> callback);
 	
 	/*
 	 * F�r Bewerbungen

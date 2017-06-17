@@ -43,7 +43,7 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public void deleteProjektmarktplatz(Projektmarktplatz pm) throws IllegalArgumentException;
 	
-	public List<Projekt> findProjekteByProjektmarktplatzId(int projektmarktplatzId) throws IllegalArgumentException;
+	public Vector<Projekt> findProjekteByProjektmarktplatzId(int projektmarktplatzId) throws IllegalArgumentException;
 	
 	/*
 	 * Methode zum anlegen eines Projekts
@@ -65,7 +65,7 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public void deleteAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 	
-	public List<Bewerbung> findBewerbungenByAusschreibungId(int AuscchreibungId) throws IllegalArgumentException;
+	public Vector<Bewerbung> findBewerbungenByAusschreibungId(int AuscchreibungId) throws IllegalArgumentException;
 	
 	/*
 	 * Methoden zum anlegen von Bewerbungen
