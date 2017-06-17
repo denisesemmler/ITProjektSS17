@@ -95,11 +95,11 @@ public class AusschreibungMapper {
 				 * @param name Ausschreibungsname der gesuchten Ausschreibung
 				 * @return Vektor mit allen zu den Suchparametern gefundenen Ausschreibungen.
 				 */
-				public ArrayList<Ausschreibung> findByName(String name) {
+				public Vector<Ausschreibung> findByName(String name) {
 					// Datenbankverbindung 
 					Connection con = DBConnection.connection();
 					//Ergebnis-ArrayList anlegen
-					ArrayList<Ausschreibung> result = new ArrayList<Ausschreibung>();
+					Vector<Ausschreibung> result = new Vector<Ausschreibung>();
 					
 					try {
 						// neues SQL Statement anlegen
@@ -136,11 +136,11 @@ public class AusschreibungMapper {
 				 * @return Vektor mit allen Ausschreibungen
 				 */
 				
-				public ArrayList<Ausschreibung> findAllAusschreibungen() {		// 3) Abfrage von allen Ausschreibungen
+				public Vector<Ausschreibung> findAllAusschreibungen() {		// 3) Abfrage von allen Ausschreibungen
 					// Datenbankverbindung öffnen
 					Connection con = DBConnection.connection();
 					//Ergebnis-ArrayList anlegen
-					ArrayList<Ausschreibung> result = new ArrayList<Ausschreibung>();
+					Vector<Ausschreibung> result = new Vector<Ausschreibung>();
 					
 					try {
 						// neues SQL Statement anlegen

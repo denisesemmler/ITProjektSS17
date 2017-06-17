@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Beteiligung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
@@ -98,11 +99,11 @@ public class BeteiligungMapper {
 	 *            name des gesuchten Projektes
 	 * @return Vektor mit allen zu den Suchparametern gefundenen Beteiligungen
 	 */
-	public ArrayList<Beteiligung> findByName(String projektName) {
+	public Vector<Beteiligung> findByName(String projektName) {
 		// Datenbankverbindung
 		Connection con = DBConnection.connection();
 		// Ergebnis-ArrayList anlegen
-		ArrayList<Beteiligung> result = new ArrayList<Beteiligung>();
+		Vector<Beteiligung> result = new Vector<Beteiligung>();
 
 		try {
 			// neues SQL Statement anlegen
@@ -136,11 +137,11 @@ public class BeteiligungMapper {
 	 * 
 	 * @return Vektor mit allen Beteiligung
 	 */
-	public ArrayList<Beteiligung> findAllBeteiligung() {
+	public Vector<Beteiligung> findAllBeteiligung() {
 		// Datenbankverbindung öffnen
 		Connection con = DBConnection.connection();
 		// Ergebnis-ArrayList anlegen
-		ArrayList<Beteiligung> result = new ArrayList<Beteiligung>();
+		Vector<Beteiligung> result = new Vector<Beteiligung>();
 
 		try {
 			// neues SQL Statement anlegen
