@@ -16,11 +16,11 @@ import de.hdm.itprojekt.shared.bo.Bewerbung;
 	/**
 	 * <p>
 	 * Mapper-Klasse zur Abbildung von <code>Bewerbung</code> Objekten auf die Datenbank.
-	 * Über das Mapping können sowohl Objekte als auch deren Attribute in die Datenbank 
+	 * ï¿½ber das Mapping kï¿½nnen sowohl Objekte als auch deren Attribute in die Datenbank 
 	 * geschrieben werden, als auch von der Datenbank ausgelesen werden.
 	 * </p>
 	 * <p>
-	 * Es werden Methoden zum Erstellen, Ãndern, Löschen und Ausgeben von Bewerbungen
+	 * Es werden Methoden zum Erstellen, ï¿½ndern, Lï¿½schen und Ausgeben von Bewerbungen
 	 * bereitgestellt.
 	 * 
  * @author denisesemmler
@@ -54,24 +54,24 @@ public class BewerbungMapper {
 	/**
 	 * Suche einer Bewerbung anhand seiner eindeutigen ID.
 	 * 
-	 * @param id - Primärschlüssel von Bewerbung
-	 * @return Bewerbungs Objekt, das die gesuchte ID enthält
+	 * @param id - Primï¿½rschlï¿½ssel von Bewerbung
+	 * @return Bewerbungs Objekt, das die gesuchte ID enthï¿½lt
 	 */
 	public Bewerbung findById(int id) {
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 		
 		try {
 			// Neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen
+			// SQL Query ausfï¿½hren
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Bewerbung " +
 					"WHERE idBewerbung = " + id);
 			// Bei Treffer 
 			if(rs.next()) {
 				// Neues Bewerbung Objekt erzeugen
 				Bewerbung b = new Bewerbung();
-				// Id, name, zusatz Email und Rolle mit den Daten aus der DB füllen
+				// Id, name, zusatz Email und Rolle mit den Daten aus der DB fï¿½llen
 				b.setId(rs.getInt("idBewerbung"));
 				b.setBewerbungsText(rs.getString("bewerbungstext"));
 				b.setErstellDatum(rs.getTimestamp("erstellDatum"));
@@ -79,7 +79,7 @@ public class BewerbungMapper {
 				b.setStatus(rs.getString("status"));
 				b.setBewertung(rs.getFloat("bewertung"));
 				b.setIdProfil(rs.getInt("Profil_idProfil"));
-				// Objekt zurückgeben
+				// Objekt zurï¿½ckgeben
 				return b;
 			}
 		} 
@@ -88,7 +88,7 @@ public class BewerbungMapper {
 			e.printStackTrace();
 			return null;
 		}
-		// Falls nichts gefunden wurde null zurückgeben
+		// Falls nichts gefunden wurde null zurï¿½ckgeben
 		return null;
 	}
 	
@@ -99,7 +99,7 @@ public class BewerbungMapper {
 	 * Voraussetzung: 
 	 * eine Ausschreibung ist immer einem Teilnehmer zugeordnet!!
 	 *
-	 * Es können mehrere Ergebnisse ausgegeben werden. Alle gefundenen Bewerbungen werden in einem
+	 * Es kï¿½nnen mehrere Ergebnisse ausgegeben werden. Alle gefundenen Bewerbungen werden in einem
 	 * Vektor gespeichert.
 	 * 
 	 * @param 
@@ -115,18 +115,18 @@ public class BewerbungMapper {
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen
+			// SQL Query ausfï¿½hren
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Bewerbung " +
 					"WHERE AusschreibungID = '" + ausschreibungsID +"'");
-			// Für jeden gefundenen Treffer...
+			// Fï¿½r jeden gefundenen Treffer...
 			while (rs.next()) {
 				// ... neues Bewerbung Objekt anlegen
 				Bewerbung b = new Bewerbung();
-				// Id, bewerbungstext, und Erstelldatum mit den Daten aus der DB füllen
+				// Id, bewerbungstext, und Erstelldatum mit den Daten aus der DB fï¿½llen
 				b.setId(rs.getInt("idBewerbung"));
 				b.setBewerbungsText(rs.getString("bewerbungstext"));
 				b.setErstellDatum(rs.getTimestamp("erstellDatum"));
-				// ... Objekt dem Ergebnisvektor hinzufügen
+				// ... Objekt dem Ergebnisvektor hinzufï¿½gen
 				result.add(b);
 			}
 		}
@@ -140,33 +140,37 @@ public class BewerbungMapper {
 
 	
 	/**
-	 * Ausgabe aller Teilnehmer Datensätze
+	 * Ausgabe aller Teilnehmer Datensï¿½tze
 	 * 
 	 * Suche alle Bewerbungen anhand der Teilnehmer ID 
 	 * 
 	 * @return Vektor mit allen registrierten Teilnehmer
 	 */
-	public Vector<Bewerbung> findByTeilnehmerId(int teilnehmerId) {
+	public Vector<Bewerbung> findBewerbungByTeilnehmerId(int teilnehmerId) {
 		// Datenbankverbindung 
 		Connection con = DBConnection.connection();
-		//Ergebnis-ArrayList anlegen
+		//Ergebnis-Vector anlegen
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
 		
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen
+			
+			// SQL Query ausfï¿½hren
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Bewerbung " +
 					"WHERE teilnehmerId = '" + teilnehmerId+ "'");
-			// Für jeden gefundenen Treffer...
+			
+			// Fï¿½r jeden gefundenen Treffer...
 			while (rs.next()) {
+				
 				// ... neues Bewerbung Objekt anlegen
 				Bewerbung b = new Bewerbung();
-				// Id, bewerbungstext, und Erstelldatum mit den Daten aus der DB füllen
+				
+				// Id, bewerbungstext, und Erstelldatum mit den Daten aus der DB fï¿½llen
 				b.setId(rs.getInt("idBewerbung"));
 				b.setBewerbungsText(rs.getString("bewerbungstext"));
 				b.setErstellDatum(rs.getTimestamp("erstellDatum"));
-				// ... Objekt dem Ergebnisvektor hinzufügen
+				// ... Objekt dem Ergebnisvektor hinzufï¿½gen
 				result.add(b);
 			}
 		}
@@ -174,32 +178,32 @@ public class BewerbungMapper {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// Ergebnis zurückgeben
+		// Ergebnis zurï¿½ckgeben
 		return result;
 	}
 	
 	/**
 	 * Neuer Bewerbung in der Datenbank anlegen.
 	 * 
-	 * @param b Bewerbung Objekt, das in die Datenbank eingefügt werden soll
+	 * @param b Bewerbung Objekt, das in die Datenbank eingefï¿½gt werden soll
 	 */
 	public Bewerbung insert(Bewerbung b) {
 		
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 		System.out.println("dbconnection: " + con);
 		
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen um die höchste id zu erhalten
+			// SQL Query ausfï¿½hren um die hï¿½chste id zu erhalten
 			ResultSet rs = stmt.executeQuery("SELECT MAX(idBewerbung) AS maxId FROM Bewerbung");
 			if(rs.next()) {
-				// id um 1 erhöhen, damit ein neuer Eintrag erzeugt wird
+				// id um 1 erhï¿½hen, damit ein neuer Eintrag erzeugt wird
 				b.setId(rs.getInt("maxId") + 1);
 				// neues SQL Statement
 				stmt = con.createStatement();
-				// SQL Query ausführen um Datensatz in DB zu schreiben
+				// SQL Query ausfï¿½hren um Datensatz in DB zu schreiben
 				stmt.executeUpdate("INSERT INTO Bewerbung (idBewerbung, bewerbungstext, erstelldatum, idTeilnehmer, AusschreibungsID) " +
 						"VALUES "
 						+ "('" 
@@ -242,18 +246,18 @@ public class BewerbungMapper {
 	}
 	
 	/**
-	 *Bewerbungsdaten einer bestehenden Bewerbung in der Datenbank ändern
+	 *Bewerbungsdaten einer bestehenden Bewerbung in der Datenbank ï¿½ndern
 	 * 
-	 * @param u das bereits geänderte Bewerbungobjekt
+	 * @param u das bereits geï¿½nderte Bewerbungobjekt
 	 */
 	public Bewerbung update(Bewerbung b) {
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 		
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen
+			// SQL Query ausfï¿½hren
 			stmt.executeUpdate("UPDATE Bewerbung "
 					+ "SET bewerbungstext = '" 
 					+ b.getBewerbungsText()
@@ -278,18 +282,18 @@ public class BewerbungMapper {
 	}
 	
 	/**
-	 * Diese Methode löscht einer Bewerbung in der Datenbank die dazugehörigen Teilnehmer-Referenzen in allen Tabellen
+	 * Diese Methode lï¿½scht einer Bewerbung in der Datenbank die dazugehï¿½rigen Teilnehmer-Referenzen in allen Tabellen
 	 * 
-	 * @param u der zu löschende Bewerbung
+	 * @param u der zu lï¿½schende Bewerbung
 	 */
 	public void delete(Bewerbung b) {
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 	
 		try {
 		// neues SQL Statement anlegen
 		Statement stmt = con.createStatement();
-		// SQL Query ausführen
+		// SQL Query ausfï¿½hren
 		stmt.executeUpdate("DELETE FROM Bewerbung WHERE idBewerbung = " + b.getId());
 	}
 		// Error Handling
