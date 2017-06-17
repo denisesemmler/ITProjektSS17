@@ -61,7 +61,8 @@ public class Navigation extends HorizontalPanel{
 				RootPanel.get("Content").add(new ProjektVerwalten());
 				break;
 			case "Ausschreibungen verwalten":
-				Window.alert("Not implemented... yet");
+				RootPanel.get("Content").clear();
+				RootPanel.get("Content").add(new AusschreibungVerwalten());
 				break;
 			case "Bewerbungen verwalten":
 				Window.alert("Not implemented... yet");
