@@ -305,7 +305,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	public Vector<Bewerbung> findBewerbungenByAusschreibungId(int ausschreibungId) throws IllegalArgumentException {
 		
 		//Alle Bewerbungen zu der jew. Ausschreibung werden hier "gemerkt"
-				List<Bewerbung> bewerbungen = bMapper.findByAusschreibungsId(ausschreibungId);
+				Vector<Bewerbung> bewerbungen = bMapper.findByAusschreibungsId(ausschreibungId);
 				
 				//Rückgabe an den Aufrufer
 				return bewerbungen;
