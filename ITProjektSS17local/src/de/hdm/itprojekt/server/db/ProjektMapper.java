@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
+
 import de.hdm.itprojekt.shared.bo.Projekt;
 
 
@@ -95,11 +97,11 @@ public class ProjektMapper {
 			 * @param name Projektname des gesuchten Projekts
 			 * @return Vektor mit allen zu den Suchparametern gefundenen Projekten.
 			 */
-			public ArrayList<Projekt> findByName(String name) {
+			public Vector<Projekt> findByName(String name) {
 				// Datenbankverbindung 
 				Connection con = DBConnection.connection();
 				//Ergebnis-ArrayList anlegen
-				ArrayList<Projekt> result = new ArrayList<Projekt>();
+				Vector<Projekt> result = new Vector<Projekt>();
 				
 				try {
 					// neues SQL Statement anlegen
@@ -136,11 +138,11 @@ public class ProjektMapper {
 			 * @return Vektor mit allen Projekten
 			 */
 			
-			public ArrayList<Projekt> findAllProjekte() {
+			public Vector<Projekt> findAllProjekte() {
 				// Datenbankverbindung öffnen
 				Connection con = DBConnection.connection();
 				//Ergebnis-ArrayList anlegen
-				ArrayList<Projekt> result = new ArrayList<Projekt>();
+				Vector<Projekt> result = new Vector<Projekt>();
 				
 				try {
 					// neues SQL Statement anlegen
@@ -306,12 +308,12 @@ public class ProjektMapper {
 			}
 		
 //Methode von Patricia hinzugefügt
-			public ArrayList<Projekt> findAllProjektmarktplatzById(int id) {
+			public Vector<Projekt> findAllProjektmarktplatzById(int id) {
 				// Datenbankverbindung �ffnen
 				Connection con = DBConnection.connection();
 				
 				//ArrayList Ergebniss-Liste anlegen
-				ArrayList<Projekt> result = new ArrayList<Projekt>();
+				Vector<Projekt> result = new Vector<Projekt>();
 				
 				try {
 					// Neues SQL Statement anlegen

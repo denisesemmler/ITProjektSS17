@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 /**
@@ -105,11 +106,11 @@ public class BewerbungMapper {
 	 * @param lastName zusatz des gesuchten Teilnehmer
 	 * @return Vektor mit allen zu den Suchparametern gefundenen Teilnehmer
 	 */
-	public ArrayList<Bewerbung> findByAusschreibungsId(int ausschreibungsID) {
+	public Vector<Bewerbung> findByAusschreibungsId(int ausschreibungsID) {
 		// Datenbankverbindung 
 		Connection con = DBConnection.connection();
 		//Ergebnis-ArrayList anlegen
-		ArrayList<Bewerbung> result = new ArrayList<Bewerbung>();
+		Vector<Bewerbung> result = new Vector<Bewerbung>();
 		
 		try {
 			// neues SQL Statement anlegen
@@ -145,11 +146,11 @@ public class BewerbungMapper {
 	 * 
 	 * @return Vektor mit allen registrierten Teilnehmer
 	 */
-	public ArrayList<Bewerbung> findByTeilnehmerId(int teilnehmerId) {
+	public Vector<Bewerbung> findByTeilnehmerId(int teilnehmerId) {
 		// Datenbankverbindung 
 		Connection con = DBConnection.connection();
 		//Ergebnis-ArrayList anlegen
-		ArrayList<Bewerbung> result = new ArrayList<Bewerbung>();
+		Vector<Bewerbung> result = new Vector<Bewerbung>();
 		
 		try {
 			// neues SQL Statement anlegen
