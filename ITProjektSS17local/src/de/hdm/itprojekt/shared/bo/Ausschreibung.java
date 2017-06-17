@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.shared.bo;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class Ausschreibung extends BusinessObjekt {
 	
@@ -9,7 +10,7 @@ public class Ausschreibung extends BusinessObjekt {
 	private int idAusschreibung 		= 0;
 	private String titel				= "";
 	private String beschreibung 		= "";
-	private Timestamp bewerbungsfrist 	= null;
+	private Date bewerbungsfrist 	= null;
 	private int Projekt_idProjekt		= 0;
 	private int Profil_idSuchprofil 	= 0;
 	private String status				= "laufend";
@@ -49,7 +50,7 @@ public class Ausschreibung extends BusinessObjekt {
 	 * 
 	 * @return
 	 */
-	public Timestamp getBewerbungsfrist() {
+	public Date getBewerbungsfrist() {
 		return bewerbungsfrist;
 	}
 	/**
@@ -57,7 +58,7 @@ public class Ausschreibung extends BusinessObjekt {
 	 * @param bewerbungsfrist
 	 */
 	
-	public void setBewerbungsfrist(Timestamp bewerbungsfrist) {
+	public void setBewerbungsfrist(Date bewerbungsfrist) {
 		this.bewerbungsfrist = bewerbungsfrist;
 	}
 	/**

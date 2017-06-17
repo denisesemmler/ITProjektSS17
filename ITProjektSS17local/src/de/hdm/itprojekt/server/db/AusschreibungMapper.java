@@ -70,7 +70,7 @@ public class AusschreibungMapper {
 							a.setId(rs.getInt("idAusschreibung"));
 							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
-							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
+							a.setBewerbungsfrist(rs.getDate("bewerbungsfrist"));
 							a.setStatus(rs.getString("status"));
 							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
 							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
@@ -115,7 +115,7 @@ public class AusschreibungMapper {
 							a.setId(rs.getInt("idAusschreibung"));
 							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
-							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
+							a.setBewerbungsfrist(rs.getDate("bewerbungsfrist"));
 							a.setStatus(rs.getString("status"));
 							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
 							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
@@ -156,7 +156,7 @@ public class AusschreibungMapper {
 							a.setId(rs.getInt("idAusschreibung"));
 							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
-							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
+							a.setBewerbungsfrist(rs.getDate("bewerbungsfrist"));
 							a.setStatus(rs.getString("status"));
 							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
 							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
@@ -326,7 +326,7 @@ public class AusschreibungMapper {
 							a.setId(rs.getInt("idAusschreibung"));
 							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
-							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
+							a.setBewerbungsfrist(rs.getDate("bewerbungsfrist"));
 							a.setStatus(rs.getString("status"));
 							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
 							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
@@ -369,7 +369,7 @@ public class AusschreibungMapper {
 							a.setId(rs.getInt("idAusschreibung"));
 							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
-							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
+							a.setBewerbungsfrist(rs.getDate("bewerbungsfrist"));
 							a.setStatus(rs.getString("status"));
 							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
 							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
