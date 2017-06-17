@@ -100,7 +100,7 @@ public class ProjektMapper {
 			public Vector<Projekt> findByName(String name) {
 				// Datenbankverbindung 
 				Connection con = DBConnection.connection();
-				//Ergebnis-ArrayList anlegen
+				//Ergebnis-Vector anlegen
 				Vector<Projekt> result = new Vector<Projekt>();
 				
 				try {
@@ -141,7 +141,7 @@ public class ProjektMapper {
 			public Vector<Projekt> findAllProjekte() {
 				// Datenbankverbindung öffnen
 				Connection con = DBConnection.connection();
-				//Ergebnis-ArrayList anlegen
+				//Ergebnis-Vector anlegen
 				Vector<Projekt> result = new Vector<Projekt>();
 				
 				try {

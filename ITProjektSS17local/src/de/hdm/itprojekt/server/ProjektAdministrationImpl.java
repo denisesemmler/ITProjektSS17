@@ -307,7 +307,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	/**
-	 * Diese Methode implementiert denn UC Ausschreibung l�schen
 	 * Diese Methode implementiert denn UC Ausschreibung löschen
 	 */
 	
@@ -322,6 +321,21 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		this.aMapper.delete(a);
 	}
 
+	/**
+	 * Diese Methode implementiert denn UC alle Uassschreibung nach TeilnehmerId in der GUI anzuzeigen
+	 */
+	@Override
+	public Vector<Ausschreibung> findAllAusschreibungByTeilnehmerId(int teilnehmerId) throws IllegalArgumentException {
+		
+		//Alle Projekt zur Teilnehmerid werden hier "gemerkt"
+				Vector<Ausschreibung> ausschreibungenZuTeilnehmer = aMapper.findAllAusschreibungByTeilnehmerId(teilnehmerId);
+				
+				//Rückgabe
+				return ausschreibungenZuTeilnehmer;
+	}
+	
+	
+	
 	/**
 	 * Diese Methode implementiert denn UC alle Bewerbungen zu jeweiligen Ausschreibung in der GUI anzuzeigen
 	 */
@@ -447,6 +461,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		return logInf;
 	}
+
 
 
 
