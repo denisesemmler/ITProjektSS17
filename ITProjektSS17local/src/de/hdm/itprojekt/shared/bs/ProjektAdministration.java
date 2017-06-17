@@ -72,6 +72,7 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public Vector<Ausschreibung> findAllAusschreibungByTeilnehmerId(int teilnehmerId) throws IllegalArgumentException;
 	
+	public Vector<Ausschreibung> findAllAusschreibungen() throws IllegalArgumentException;
 	/*
 	 * Methoden zum anlegen von Bewerbungen
 	 */
@@ -96,6 +97,8 @@ public interface ProjektAdministration extends RemoteService {
 	 */
 	public Teilnehmer createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
 			String emailAdresse, int rolle, int ProfilID, int projektleiter) throws IllegalArgumentException;
+
+	
 
 	
 	

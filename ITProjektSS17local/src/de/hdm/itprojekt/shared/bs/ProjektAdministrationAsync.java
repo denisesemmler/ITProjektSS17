@@ -63,6 +63,8 @@ public interface ProjektAdministrationAsync {
 	
 	void findAllAusschreibungByTeilnehmerId(int teilnehmerId, AsyncCallback<Vector<Ausschreibung>> callback);
 	
+	void findAllAusschreibungen(AsyncCallback<Vector<Ausschreibung>> callback);
+
 	/*
 	 * F�r Bewerbungen
 	 */
@@ -85,6 +87,7 @@ public interface ProjektAdministrationAsync {
 	void createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
 			String emailAdresse, int rolle, int ProfilID, int projektleiter, AsyncCallback<Teilnehmer> callback);
 
+	
 
 
 

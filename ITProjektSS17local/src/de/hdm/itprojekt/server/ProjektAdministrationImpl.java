@@ -320,7 +320,21 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		// Hier wird die Ausschreibung aus der DB entfernt
 		this.aMapper.delete(a);
 	}
-
+	
+	/*
+	 * Methode zum Anzeigen aller Ausschreibungen
+	 */
+	@Override
+	public Vector<Ausschreibung> findAllAusschreibungen() throws IllegalArgumentException {
+		
+		//Alle Projekt zur Teilnehmerid werden hier "gemerkt"
+				Vector<Ausschreibung> ausschreibungen = aMapper.findAllAusschreibungen();
+				
+				//Rückgabe
+				return ausschreibungen;
+	}
+	
+	
 	/**
 	 * Diese Methode implementiert denn UC alle Uassschreibung nach TeilnehmerId in der GUI anzuzeigen
 	 */
