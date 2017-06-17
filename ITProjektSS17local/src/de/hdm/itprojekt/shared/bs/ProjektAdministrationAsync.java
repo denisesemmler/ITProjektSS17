@@ -1,7 +1,6 @@
 package de.hdm.itprojekt.shared.bs;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -48,6 +47,8 @@ public interface ProjektAdministrationAsync {
 
 	void findAusschreibungByProjektId(int projektId, AsyncCallback<Vector<Ausschreibung>> callback);
 	
+	void findAllProjektByTeilnehmerId(int id, AsyncCallback<Vector<Projekt>> callback);
+	
 	/*
 	 * F�r Ausschreibungen
 	 */
@@ -80,6 +81,7 @@ public interface ProjektAdministrationAsync {
 
 	void createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
 			String emailAdresse, int rolle, int ProfilID, int projektleiter, AsyncCallback<Teilnehmer> callback);
+
 
 
 

@@ -312,7 +312,7 @@ public class ProjektMapper {
 				// Datenbankverbindung �ffnen
 				Connection con = DBConnection.connection();
 				
-				//ArrayList Ergebniss-Liste anlegen
+				//Vector Ergebniss-Liste anlegen
 				Vector<Projekt> result = new Vector<Projekt>();
 				
 				try {
@@ -322,6 +322,50 @@ public class ProjektMapper {
 					// SQL Query ausf�hren
 					ResultSet rs = stmt.executeQuery("SELECT * FROM Projekt " +
 							"WHERE Projektmarktplatz_idProjektmarktplatz = " + id);
+					
+					// Bei Treffer 
+					while(rs.next()) {
+						
+						// Neues Projekt Objekt erzeugen
+						Projekt p = new Projekt();
+						
+						// Id, Projektname, Projektbeschreibung, startdatum und enddatum den Daten aus der DB f�llen
+						p.setIdProjekt(rs.getInt("idProjekt"));
+						p.setName(rs.getString("name"));
+						p.setBeschreibung(rs.getString("beschreibung"));
+						p.setStartDatum(rs.getTimestamp("startdatum"));
+						p.setEndDatum(rs.getTimestamp("enddatum"));
+						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("projektmarktplatz_idProjektmarkplatz"));
+						p.setTeilnehmer_idTeilnehmer(rs.getInt("teilnehmer_idTeilnehmer"));
+						
+						// Objekt muss zu result hinzugefügt werden
+						result.add(p);
+					}
+				} 
+				// Error Handling
+				catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}
+				// Ergebnis wird zurückgegeben
+				return result;
+			}
+
+//Methode von Patricia hinzugefügt
+			public Vector<Projekt> findAllProjektByTeilnehmerId(int teilnehmerId) {
+				// Datenbankverbindung �ffnen
+				Connection con = DBConnection.connection();
+				
+				//Vector Ergebniss-Liste anlegen
+				Vector<Projekt> result = new Vector<Projekt>();
+				
+				try {
+					// Neues SQL Statement anlegen
+					Statement stmt = con.createStatement();
+					
+					// SQL Query ausf�hren
+					ResultSet rs = stmt.executeQuery("SELECT * FROM Projekt " +
+							"WHERE Teilnehmer_idTeilnehmer = " + teilnehmerId);
 					
 					// Bei Treffer 
 					while(rs.next()) {

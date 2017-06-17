@@ -1,7 +1,6 @@
 package de.hdm.itprojekt.shared.bs;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -57,6 +56,8 @@ public interface ProjektAdministration extends RemoteService {
 	public void deleteProjekt(Projekt p) throws IllegalArgumentException;
 	
 	public Vector<Ausschreibung> findAusschreibungByProjektId(int projektId) throws IllegalArgumentException;
+	
+	public Vector<Projekt> findAllProjektByTeilnehmerId (int teilnehmerId)  throws IllegalArgumentException;
 	
 	/*
 	 * Methoden zum anlegen von Ausschreibungen

@@ -1,9 +1,7 @@
 package de.hdm.itprojekt.server;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Vector;
 
 import com.google.appengine.api.users.User;
@@ -213,6 +211,20 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		//Rückgabe
 		return ausschreibungen;
 	}
+	
+	/**
+	 * Diese Methode implementiert denn UC alle Projekte zur jeweiligen TeilnehmerId in der GUI anzuzeigen
+	 */
+	@Override
+	public Vector<Projekt> findAllProjektByTeilnehmerId(int teilnehmerId) throws IllegalArgumentException {
+		
+		//Alle Projekt zur Teilnehmerid werden hier "gemerkt"
+		Vector<Projekt> projekteZuTeilnehmer = pMapper.findAllProjektByTeilnehmerId(teilnehmerId);
+		
+		//Rückgabe
+		return projekteZuTeilnehmer;
+	}
+	
 	
 	
 	/*
@@ -435,6 +447,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		return logInf;
 	}
+
 
 
 
