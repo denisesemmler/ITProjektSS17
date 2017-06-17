@@ -67,7 +67,7 @@ public class AusschreibungMapper {
 							// Neues Ausschreibung Objekt erzeugen
 							Ausschreibung a = new Ausschreibung();
 							// Id, Bezeichnung, Ausschreibungsbeschreibung, und bewberungsfrist den Daten aus der DB f�llen.
-							a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+							a.setId(rs.getInt("idAusschreibung"));
 							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
 							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
@@ -112,7 +112,7 @@ public class AusschreibungMapper {
 						while (rs.next()) {
 							// ... neues Ausschreibungs Objekt anlegen
 							Ausschreibung a = new Ausschreibung();
-							a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+							a.setId(rs.getInt("idAusschreibung"));
 							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
 							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
@@ -153,7 +153,7 @@ public class AusschreibungMapper {
 						// Für jeden Eintrag neues Ausschreibungs Objekt erzeugen
 						while(rs.next()) {
 							Ausschreibung a = new Ausschreibung();
-							a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+							a.setId(rs.getInt("idAusschreibung"));
 							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
 							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
@@ -190,14 +190,14 @@ public class AusschreibungMapper {
 						ResultSet rs = stmt.executeQuery("SELECT MAX(idAusschreibung) AS maxId FROM Ausschreibung");
 						if(rs.next()) {
 							// id um 1 erh�hen, damit ein neuer Eintrag erzeugt wird
-							a.setIdAusschreibung(rs.getInt("maxId") + 1);
+							a.setId(rs.getInt("maxId") + 1);
 							// neues SQL Statement
 							stmt = con.createStatement();
 							// SQL Query ausf�hren um Datensatz in DB zu schreiben
 							stmt.executeUpdate("INSERT INTO Ausschreibung (idAusschreibung, titel, beschreibung, bewerbungsfrist, status, Projekt_idProjekt, Profil_idSuchprofil) " +
 									"VALUES "
 									+ "('" 
-									+ a.getIdAusschreibung() 
+									+ a.getId() 
 									+ "', '" 
 									+ a.getTitel()
 									+ "', '" 
@@ -215,7 +215,7 @@ public class AusschreibungMapper {
 							System.out.println("INSERT INTO Ausschreibung (idAusschreibung, titel, beschreibung, bewerbungsfrist, status, Projekt_idProjekt, Profil_idSuchprofil) " +
 									"VALUES "
 									+ "('" 
-									+ a.getIdAusschreibung() 
+									+ a.getId() 
 									+ "', '" 
 									+ a.getTitel()
 									+ "', '" 
@@ -261,7 +261,7 @@ public class AusschreibungMapper {
 								+ "', status= '" 
 								+ a.getStatus()
 								+ "' WHERE idAusschreibung = " 
-								+ a.getIdAusschreibung());
+								+ a.getId());
 						
 						
 						System.out.println("UPDATE Ausschreibung "
@@ -274,7 +274,7 @@ public class AusschreibungMapper {
 								+ "', status= '" 
 								+ a.getStatus()
 								+ "' WHERE idAusschreibung = " 
-								+ a.getIdAusschreibung());
+								+ a.getId());
 						
 					}
 					// Error Handling
@@ -298,7 +298,7 @@ public class AusschreibungMapper {
 					// neues SQL Statement anlegen
 					Statement stmt = con.createStatement();
 					// SQL Query ausf�hren
-					stmt.executeUpdate("DELETE FROM Ausschreibung WHERE idAusschreibung = " + a.getIdAusschreibung());
+					stmt.executeUpdate("DELETE FROM Ausschreibung WHERE idAusschreibung = " + a.getId());
 				}
 					// Error Handling
 					catch (SQLException e) {
@@ -323,7 +323,7 @@ public class AusschreibungMapper {
 						while (rs.next()) {
 							// ... neues Ausschreibungs Objekt anlegen
 							Ausschreibung a = new Ausschreibung();
-							a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+							a.setId(rs.getInt("idAusschreibung"));
 							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
 							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
@@ -366,7 +366,7 @@ public class AusschreibungMapper {
 							
 							// Id, Projektname, Projektbeschreibung, startdatum und enddatum den Daten aus der DB f�llen
 							
-							a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+							a.setId(rs.getInt("idAusschreibung"));
 							a.setTitel(rs.getString("titel"));
 							a.setBeschreibung(rs.getString("beschreibung"));
 							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
