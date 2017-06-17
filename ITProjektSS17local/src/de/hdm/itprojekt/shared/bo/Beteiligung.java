@@ -1,7 +1,9 @@
 package de.hdm.itprojekt.shared.bo;
 
+import java.util.Date;
+
 /**
- * Klasse Beteiligung um Verträge zwischen  Bewerbung und Ausschreibenden zu ermöglichen
+ * Klasse Beteiligung um Vertrï¿½ge zwischen  Bewerbung und Ausschreibenden zu ermï¿½glichen
  * @author Denise
  *
  */
@@ -13,16 +15,21 @@ public class Beteiligung extends BusinessObjekt {
 	/**
 	 * Attribute erstellen 
 	 */
-	private int idBeteiligung 		= 0;
 	private String stellungnahme 	= "";
+	private int manntage;
+	private Date startdatum; 
+	private Date enddatum;
+	
+	
+	
 	
 	/**
-	 * Fremdschlüsselbeziehung zu Projekt
+	 * Fremdschlï¿½sselbeziehung zu Projekt
 	 */
 	public int projektID;
 	
 	/**
-	 * Fremdschlüsselbeziehung zu Bewerbung zum Abrufen der Bewertung
+	 * Fremdschlï¿½sselbeziehung zu Bewerbung zum Abrufen der Bewertung
 	 */
 	private int bewerbungID;
 	
@@ -39,21 +46,6 @@ public class Beteiligung extends BusinessObjekt {
 	public void setStellungnahme(String stellungnahme) {
 		this.stellungnahme = stellungnahme;
 	}
-	
-
-	/**
-	 * @return the idBeteiligung
-	 */
-	public int getIdBeteiligung() {
-		return idBeteiligung;
-	}
-	/**
-	 * @param idBeteiligung the idBeteiligung to set
-	 */
-	public void setIdBeteiligung(int idBeteiligung) {
-		this.idBeteiligung = idBeteiligung;
-	}
-
 	
 
 	/**
@@ -74,11 +66,60 @@ public class Beteiligung extends BusinessObjekt {
 	public int getBewerbungID() {
 		return bewerbungID;
 	}
+	
+	
 	/**
 	 * @param bewerbungID the bewerbungID to set
 	 */
 	public void setBewerbungID(int bewerbungID) {
 		this.bewerbungID = bewerbungID;
+	}
+	
+	
+	
+	
+	/**
+	 * @return Manntage wird ausgegeben
+	 */
+		public int getManntage() {
+		return manntage;
+	}
+		
+	/**
+	 * @param Manntage wird gesetzt
+	 */	
+	public void setManntage(int manntage) {
+		this.manntage = manntage;
+	}
+	
+	
+	/**
+	 * @return Startdatum wird aausgegeben
+	 */
+	public Date getStartdatum() {
+		return startdatum;
+	}
+	
+	/**
+	 * @param Startdatum wird gesetzt
+	 */
+	public void setStartdatum(Date startdatum) {
+		this.startdatum = startdatum;
+	}
+	
+	
+	/**
+	 * @return Enddatum wird ausgegeben
+	 */
+	public Date getEnddatum() {
+		return enddatum;
+	}
+	
+	/**
+	 * @param Enddatum wird gesetzt
+	 */
+	public void setEnddatum(Date enddatum) {
+		this.enddatum = enddatum;
 	}
 	
 	

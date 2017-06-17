@@ -122,7 +122,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 					aVector.add(aus);
 				}
 				ausschreibungTitelBox.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getTitel());
-
+				
 			}
 		}
 
