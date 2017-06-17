@@ -9,6 +9,9 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
+import de.client.ClientSideSettings;
+import de.client.gui.MeinProfilEditor.ProfilEigenschaftenCallback;
+
 public class AusschreibungBearbeiten extends VerticalPanel {
 	
 	
@@ -41,9 +44,6 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 		 */
 		private Button ausschreibungAndernButton = new Button("Aenderungen speichern", new SpeichernClickHandler());
 		
-
-		
-		
 		/**
 		 * Konstruktor für Anlegen der GUI
 		 */
@@ -60,6 +60,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 			
 			attributePanel.add(ausschreibungTitelLabel);
 			attributePanel.add(ausschreibungTitelBox);
+			ausschreibungTitelBox.setText("Hallo i bims");
 			
 			attributePanel.add(stellenbeschreibungLabel);
 			attributePanel.add(stellenbeschreibungBox);
