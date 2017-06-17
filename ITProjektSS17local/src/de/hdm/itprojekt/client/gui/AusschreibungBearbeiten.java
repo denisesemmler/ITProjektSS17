@@ -98,6 +98,8 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 			public void onChange(ChangeEvent event) {
 				try {
 					ausschreibungTitelBox.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getTitel());
+					stellenbeschreibungBox.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBeschreibung());
+					bewerbungsfrist.setValue(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
 				} catch (Exception e){
 					Window.alert(e.toString());
 					e.printStackTrace();
@@ -122,6 +124,8 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 					aVector.add(aus);
 				}
 				ausschreibungTitelBox.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getTitel());
+				stellenbeschreibungBox.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBeschreibung());
+				bewerbungsfrist.setValue(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
 				
 			}
 		}
@@ -134,6 +138,8 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 					Ausschreibung a = new Ausschreibung();
 					a.setId(id);
 					a.setTitel(ausschreibungTitelBox.getText());
+					a.setBeschreibung(stellenbeschreibungBox.getText());
+					a.setBewerbungsfrist(new java.sql.Date((bewerbungsfrist.getValue()).getTime()));
 					ClientSideSettings.getProjektAdministration().updateAusschreibung(a, new SpeichernCallback());
 
 				} catch (Exception e) {
