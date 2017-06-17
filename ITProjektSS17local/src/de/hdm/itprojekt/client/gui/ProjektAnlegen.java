@@ -148,12 +148,16 @@ public class ProjektAnlegen extends VerticalPanel {
 	private class CreateProjectClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
-
+			//Projektmarktplatz ID
+			int id = marktplatzListbox.getSelectedIndex();
+			String ids = ""+ id;
+			Window.alert(ids);
+			
 			try {
 
 				ClientSideSettings.getProjektAdministration().createProjekt(projektNameBox.getText(),
 						projektBeschreibungArea.getText(), (startPicker.getValue()), (endPicker.getValue()),
-						/* ClientSideSettings.getCurrentUser().getId() */1, 1, new CreateProjectCallback());
+						/* ClientSideSettings.getCurrentUser().getId() */1, id, new CreateProjectCallback());
 			} catch (Exception e) {
 				Window.alert(e.toString());
 				e.printStackTrace();
