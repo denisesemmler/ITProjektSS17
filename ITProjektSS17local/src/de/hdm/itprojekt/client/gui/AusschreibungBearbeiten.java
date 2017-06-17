@@ -17,8 +17,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
-import de.hdm.itprojekt.shared.bo.Ausschreibung;
-import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
+import de.client.ClientSideSettings;
+import de.client.gui.MeinProfilEditor.ProfilEigenschaftenCallback;
 
 
 public class AusschreibungBearbeiten extends VerticalPanel {
@@ -39,7 +39,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 		private Label ausschreibungLabel = new Label ("Zu ändernde Ausschreibung");
 		private Label ausschreibungTitelLabel = new Label ("Titel der Ausschreibung: ");
 		private Label stellenbeschreibungLabel = new Label ("Stellenbeschreibung: ");
-		private Label bewerbungsfristLabel = new Label ("Bewerbungsfrist ändern: ");
+		private Label bewerbungsfristLabel = new Label ("Bewerbungsfrist ï¿½ndern: ");
 		
 		private ListBox ausschreibungListbox = new ListBox();
 		
@@ -55,7 +55,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 		private Button ausschreibungAndernButton = new Button("Aenderungen speichern", new SpeichernClickHandler());
 		
 		/**
-		 * Konstruktor für Anlegen der GUI
+		 * Konstruktor fï¿½r Anlegen der GUI
 		 */
 		public AusschreibungBearbeiten() {
 		
@@ -93,6 +93,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 		}
 		
 		private class OnChangeHandler implements ChangeHandler {
+				Window.alert("Suchen läuft noch nit so!");
 
 			@Override
 			public void onChange(ChangeEvent event) {
@@ -108,6 +109,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 		}
 		
 		private class GetAllAusschreibungenCallback implements AsyncCallback<Vector<Ausschreibung>> {
+				//TODO Konstruktor für nächste Klasse (Projekt Suchen)
 
 			public void onFailure(Throwable caught) {
 				Window.alert("Läuft garnit");
@@ -136,7 +138,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 					a.setTitel(ausschreibungTitelBox.getText());
 					ClientSideSettings.getProjektAdministration().updateAusschreibung(a, new SpeichernCallback());
 
-				} catch (Exception e) {
+				//TODO Konstruktor für nächste Klasse (Projekt Suchen)
 					Window.alert(e.toString());
 					e.printStackTrace();
 				}
