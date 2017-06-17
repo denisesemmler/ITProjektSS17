@@ -399,6 +399,21 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	
+	
+	/**
+	 * Diese Methode implementiert denn UC Bewerbung nach TeilnehmerId in der GUI anzuzeigen
+	 */
+	@Override
+	public Vector<Bewerbung> findBewerbungByTeilnehmerid(int teilnehmerId) throws IllegalArgumentException {
+		
+		//Alle Bewerbungen zu der jew. TeilnehmerId werden hier "gemerkt"
+		Vector<Bewerbung> bewerbungenZuTeilnehmer = bMapper.findBewerbungByTeilnehmerId(teilnehmerId);
+		
+		return bewerbungenZuTeilnehmer;
+	}
+	
+	
+	
 	// Methoden für Teilnehmer
 	public void setUser(Teilnehmer t) {
 		user = t;
@@ -461,6 +476,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		return logInf;
 	}
+
 
 
 

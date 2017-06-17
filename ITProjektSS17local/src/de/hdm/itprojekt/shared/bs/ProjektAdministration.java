@@ -81,6 +81,8 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public void deleteBewerbung(Bewerbung b) throws IllegalArgumentException;
 	
+	public Vector<Bewerbung> findBewerbungByTeilnehmerid(int tilnehmerId) throws IllegalArgumentException;
+	
 	/*
 	 * Methoden zum anlegen von Teilnehmern
 	 */

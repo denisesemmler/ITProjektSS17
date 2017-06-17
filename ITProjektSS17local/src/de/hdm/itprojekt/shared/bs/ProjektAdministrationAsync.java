@@ -73,16 +73,18 @@ public interface ProjektAdministrationAsync {
 	
 	void deleteBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 	
+	void findBewerbungByTeilnehmerid(int tilnehmerId, AsyncCallback<Vector<Bewerbung>> callback);
+	
 	/*
 	 * F�r Teilnehmer
 	 */
-	
 	void setUser(Teilnehmer t, AsyncCallback<Void> callback);
 
 	void login(String requestUri, AsyncCallback<Teilnehmer> callback);
 
 	void createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
 			String emailAdresse, int rolle, int ProfilID, int projektleiter, AsyncCallback<Teilnehmer> callback);
+
 
 
 
