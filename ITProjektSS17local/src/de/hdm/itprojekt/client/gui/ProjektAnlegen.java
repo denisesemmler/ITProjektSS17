@@ -20,10 +20,9 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
-import de.client.gui.FindLove.CheckProfilHandler;
-import de.client.gui.FindLove.FremdesPAClickHandler;
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
-import de.shared.BO.Profil;
+
+
 
 public class ProjektAnlegen extends VerticalPanel {
 
