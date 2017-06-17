@@ -1,7 +1,6 @@
 package de.hdm.itprojekt.shared.bs;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -34,6 +33,8 @@ public interface ProjektAdministrationAsync {
 	
 	void findProjekteByProjektmarktplatzId(int projektmarktplatzId, AsyncCallback<Vector<Projekt>> callback);
 	
+	void findAllProjektmarktplatz(AsyncCallback<Vector<Projektmarktplatz>> callback);
+	
 	/*
 	 * F�r Projekte
 	 */
@@ -45,6 +46,8 @@ public interface ProjektAdministrationAsync {
 	void deleteProjekt(Projekt p, AsyncCallback<Void> callback);
 
 	void findAusschreibungByProjektId(int projektId, AsyncCallback<Vector<Ausschreibung>> callback);
+	
+	void findAllProjektByTeilnehmerId(int id, AsyncCallback<Vector<Projekt>> callback);
 	
 	/*
 	 * F�r Ausschreibungen
@@ -58,6 +61,8 @@ public interface ProjektAdministrationAsync {
 	
 	void findBewerbungenByAusschreibungId(int AuscchreibungId, AsyncCallback<Vector<Bewerbung>> callback);
 	
+	void findAllAusschreibungByTeilnehmerId(int teilnehmerId, AsyncCallback<Vector<Ausschreibung>> callback);
+	
 	/*
 	 * F�r Bewerbungen
 	 */
@@ -68,16 +73,20 @@ public interface ProjektAdministrationAsync {
 	
 	void deleteBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 	
+	void findBewerbungByTeilnehmerid(int tilnehmerId, AsyncCallback<Vector<Bewerbung>> callback);
+	
 	/*
 	 * F�r Teilnehmer
 	 */
-	
 	void setUser(Teilnehmer t, AsyncCallback<Void> callback);
 
 	void login(String requestUri, AsyncCallback<Teilnehmer> callback);
 
 	void createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
 			String emailAdresse, int rolle, int ProfilID, int projektleiter, AsyncCallback<Teilnehmer> callback);
+
+
+
 
 
 

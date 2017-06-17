@@ -1,9 +1,7 @@
 package de.hdm.itprojekt.server;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Vector;
 
 import com.google.appengine.api.users.User;
@@ -130,6 +128,18 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return projekte;
 	}
 	
+	/**
+	 * Diese Methode implementiert denn UC alle Projektmarktplätze in der GUI anzuzeigen
+	 */
+	@Override
+	public Vector<Projektmarktplatz> findAllProjektmarktplatz() throws IllegalArgumentException {
+		//Alle Projektmarktplätze werden hier "gemerkt"
+		Vector<Projektmarktplatz> projektmarktplatz = pmMapper.findAllProjektmarkplaetze();
+		
+		//Rückgabe an den Aufrufer
+		return projektmarktplatz;
+	}
+	
 	/*
 	 * Methoden für Projekte
 	 */
@@ -201,6 +211,20 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		//Rückgabe
 		return ausschreibungen;
 	}
+	
+	/**
+	 * Diese Methode implementiert denn UC alle Projekte zur jeweiligen TeilnehmerId in der GUI anzuzeigen
+	 */
+	@Override
+	public Vector<Projekt> findAllProjektByTeilnehmerId(int teilnehmerId) throws IllegalArgumentException {
+		
+		//Alle Projekt zur Teilnehmerid werden hier "gemerkt"
+		Vector<Projekt> projekteZuTeilnehmer = pMapper.findAllProjektByTeilnehmerId(teilnehmerId);
+		
+		//Rückgabe
+		return projekteZuTeilnehmer;
+	}
+	
 	
 	
 	/*
@@ -283,7 +307,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	/**
-	 * Diese Methode implementiert denn UC Ausschreibung l�schen
 	 * Diese Methode implementiert denn UC Ausschreibung löschen
 	 */
 	
@@ -298,6 +321,21 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		this.aMapper.delete(a);
 	}
 
+	/**
+	 * Diese Methode implementiert denn UC alle Uassschreibung nach TeilnehmerId in der GUI anzuzeigen
+	 */
+	@Override
+	public Vector<Ausschreibung> findAllAusschreibungByTeilnehmerId(int teilnehmerId) throws IllegalArgumentException {
+		
+		//Alle Projekt zur Teilnehmerid werden hier "gemerkt"
+				Vector<Ausschreibung> ausschreibungenZuTeilnehmer = aMapper.findAllAusschreibungByTeilnehmerId(teilnehmerId);
+				
+				//Rückgabe
+				return ausschreibungenZuTeilnehmer;
+	}
+	
+	
+	
 	/**
 	 * Diese Methode implementiert denn UC alle Bewerbungen zu jeweiligen Ausschreibung in der GUI anzuzeigen
 	 */
@@ -361,6 +399,21 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	
+	
+	/**
+	 * Diese Methode implementiert denn UC Bewerbung nach TeilnehmerId in der GUI anzuzeigen
+	 */
+	@Override
+	public Vector<Bewerbung> findBewerbungByTeilnehmerid(int teilnehmerId) throws IllegalArgumentException {
+		
+		//Alle Bewerbungen zu der jew. TeilnehmerId werden hier "gemerkt"
+		Vector<Bewerbung> bewerbungenZuTeilnehmer = bMapper.findBewerbungByTeilnehmerId(teilnehmerId);
+		
+		return bewerbungenZuTeilnehmer;
+	}
+	
+	
+	
 	// Methoden für Teilnehmer
 	public void setUser(Teilnehmer t) {
 		user = t;
@@ -423,6 +476,10 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		return logInf;
 	}
+
+
+
+
 
 
 

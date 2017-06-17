@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class AusschreibungMapper {
 	
@@ -98,7 +99,7 @@ public class AusschreibungMapper {
 				public Vector<Ausschreibung> findByName(String name) {
 					// Datenbankverbindung 
 					Connection con = DBConnection.connection();
-					//Ergebnis-ArrayList anlegen
+					//Ergebnis-Vector anlegen
 					Vector<Ausschreibung> result = new Vector<Ausschreibung>();
 					
 					try {
@@ -309,7 +310,7 @@ public class AusschreibungMapper {
 				public Vector<Ausschreibung> findByProjekt(int projektId) {
 					// Datenbankverbindung 
 					Connection con = DBConnection.connection();
-					//Ergebnis-ArrayList anlegen
+					//Ergebnis-Vector anlegen
 					Vector<Ausschreibung> result = new Vector<Ausschreibung>();
 					
 					try {
@@ -340,6 +341,54 @@ public class AusschreibungMapper {
 					// Ergebnis zurückgeben
 					return result;
 				}
+				
+//Methode von Patricia hinzugefügt
+				public Vector<Ausschreibung> findAllAusschreibungByTeilnehmerId(int teilnehmerId) {
+					// Datenbankverbindung �ffnen
+					Connection con = DBConnection.connection();
+					
+					//Vector Ergebniss-Liste anlegen
+					Vector<Ausschreibung> result = new Vector<Ausschreibung>();
+					
+					try {
+						// Neues SQL Statement anlegen
+						Statement stmt = con.createStatement();
+						
+						// SQL Query ausf�hren
+						ResultSet rs = stmt.executeQuery("SELECT * FROM Ausschreibung " +
+								"WHERE Teilnehmer_idTeilnehmer = " + teilnehmerId);
+						
+						// Bei Treffer 
+						while(rs.next()) {
+							
+							// Neues Projekt Objekt erzeugen
+							Ausschreibung a = new Ausschreibung();
+							
+							// Id, Projektname, Projektbeschreibung, startdatum und enddatum den Daten aus der DB f�llen
+							
+							a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+							a.setTitel(rs.getString("titel"));
+							a.setBeschreibung(rs.getString("beschreibung"));
+							a.setBewerbungsfrist(rs.getTimestamp("bewerbungsfrist"));
+							a.setStatus(rs.getString("status"));
+							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
+							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
+							
+							// ... Objekt dem Ergebnisvektor hinzufügen
+							result.add(a);
+						}
+					} 
+					// Error Handling
+					catch (SQLException e) {
+						e.printStackTrace();
+						return null;
+					}
+					// Ergebnis wird zurückgegeben
+					return result;
+				}
+				
+				
+				
 				
 			}
 

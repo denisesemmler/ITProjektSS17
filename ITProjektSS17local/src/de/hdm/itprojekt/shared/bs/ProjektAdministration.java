@@ -1,7 +1,6 @@
 package de.hdm.itprojekt.shared.bs;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -45,6 +44,8 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public Vector<Projekt> findProjekteByProjektmarktplatzId(int projektmarktplatzId) throws IllegalArgumentException;
 	
+	public Vector<Projektmarktplatz> findAllProjektmarktplatz() throws IllegalArgumentException;
+	
 	/*
 	 * Methode zum anlegen eines Projekts
 	 */
@@ -55,6 +56,8 @@ public interface ProjektAdministration extends RemoteService {
 	public void deleteProjekt(Projekt p) throws IllegalArgumentException;
 	
 	public Vector<Ausschreibung> findAusschreibungByProjektId(int projektId) throws IllegalArgumentException;
+	
+	public Vector<Projekt> findAllProjektByTeilnehmerId (int teilnehmerId)  throws IllegalArgumentException;
 	
 	/*
 	 * Methoden zum anlegen von Ausschreibungen
@@ -67,6 +70,8 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public Vector<Bewerbung> findBewerbungenByAusschreibungId(int AuscchreibungId) throws IllegalArgumentException;
 	
+	public Vector<Ausschreibung> findAllAusschreibungByTeilnehmerId(int teilnehmerId) throws IllegalArgumentException;
+	
 	/*
 	 * Methoden zum anlegen von Bewerbungen
 	 */
@@ -75,6 +80,8 @@ public interface ProjektAdministration extends RemoteService {
 	public void updateBewerbung(Bewerbung b) throws IllegalArgumentException;
 	
 	public void deleteBewerbung(Bewerbung b) throws IllegalArgumentException;
+	
+	public Vector<Bewerbung> findBewerbungByTeilnehmerid(int tilnehmerId) throws IllegalArgumentException;
 	
 	/*
 	 * Methoden zum anlegen von Teilnehmern
