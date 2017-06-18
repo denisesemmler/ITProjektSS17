@@ -3,12 +3,16 @@ package de.hdm.itprojekt.client.gui;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
+
+import de.hdm.itprojekt.client.gui.ProjektAnlegen.CreateProjectCallback;
 
 
 
@@ -104,10 +108,31 @@ public class AusschreibungAnlegen extends VerticalPanel{
 		private class AnlegenClickHandler implements ClickHandler {
 
 			public void onClick(ClickEvent event) {
-				
-				//TODO Konstruktor für nächste Klasse (Projekt Suchen)
+				try {
+
+					ClientSideSettings.getProjektAdministration().createAusschreibung(stellenbeschreibungBox.getText(),
+							bewerbungsfrist.getValue(), ausschreibungTitelBox.getText(), "laufend", 1, 2, new CreateAusschreibungCallback());
+				} catch (Exception e) {
+					Window.alert(e.toString());
+					e.printStackTrace();
+				}
 				
 			}
 		};
+
+		private class CreateAusschreibungCallback implements AsyncCallback {
+
+			public void onFailure(Throwable caught) {
+				Window.alert("Dat läuft noch nit so!");
+
+			}
+
+			public void onSuccess(Object result) {
+				RootPanel.get("Content").clear();
+				Window.alert("Ausschreibung angelegt!");
+
+			}
+
+		}
 
 }
