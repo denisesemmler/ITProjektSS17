@@ -428,6 +428,44 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 	
 	
+	/**
+	 * Diese Methode implementiert denn UC Bewertung erstellen + Beteiligung
+	 */
+	@Override
+	public void bewertungZurBewerbung(int bewerbungId, float bewertung, int beteiligungId, String stellungnahme, int projektId, int manntage, Date startdatum, Date enddatum) throws IllegalArgumentException {
+		
+		//Bewerbung mittels BewerbungsId aus der DB holen
+		Bewerbung bewerbungAusDb = bMapper.findById(bewerbungId);
+		
+		//Bewertung an Bewerbung hinzufügen
+		bewerbungAusDb.setBewertung(bewertung);
+		
+		//Ergebnis in die DB updaten
+		bMapper.update(bewerbungAusDb);
+		
+		//Beteiligung ab Bewertung 1, sonst nix.
+		if(bewertung == 1){
+			
+			//Neues Objekt
+			Beteiligung beteiligungNachBewerbung = new Beteiligung();
+			
+			//Hier wird das Objekt mit Daten befüllt
+			beteiligungNachBewerbung.setStellungnahme(stellungnahme);
+			beteiligungNachBewerbung.setProjektID(projektId);
+			beteiligungNachBewerbung.setBewerbungID(bewerbungId);
+			beteiligungNachBewerbung.setManntage(manntage);
+			beteiligungNachBewerbung.setStartdatum(startdatum);
+			beteiligungNachBewerbung.setEnddatum(enddatum);
+			
+			//Befülltes Objekt in DB speichern
+			btMapper.insert(beteiligungNachBewerbung);
+			
+		}
+		
+	}
+	
+	
+	
 	
 	// Methoden für Teilnehmer
 	public void setUser(Teilnehmer t) {
@@ -491,6 +529,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		return logInf;
 	}
+
 
 
 

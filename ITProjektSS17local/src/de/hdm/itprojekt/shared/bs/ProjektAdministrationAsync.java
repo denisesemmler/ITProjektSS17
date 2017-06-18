@@ -74,6 +74,9 @@ public interface ProjektAdministrationAsync {
 	
 	void findBewerbungByTeilnehmerid(int teilnehmerId, AsyncCallback<Vector<Bewerbung>> callback);
 	
+	void bewertungZurBewerbung(int bewerbungId, float bewertung, int beteiligungId, String stellungnahme, int projektId,
+			int manntage, Date startdatum, Date enddatum, AsyncCallback<Void> callback);
+	
 	/*
 	 * F�r Teilnehmer
 	 */
@@ -83,6 +86,7 @@ public interface ProjektAdministrationAsync {
 
 	void createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
 			String emailAdresse, int rolle, int ProfilID, int projektleiter, AsyncCallback<Teilnehmer> callback);
+
 
 	
 
