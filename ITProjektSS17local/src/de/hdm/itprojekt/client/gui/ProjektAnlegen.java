@@ -26,6 +26,8 @@ import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 
 public class ProjektAnlegen extends VerticalPanel {
 
+	
+	private Vector <Projektmarktplatz> pmVector = new Vector <Projektmarktplatz>();
 	/**
 	 * Erstellen der Panels
 	 */
@@ -124,9 +126,11 @@ public class ProjektAnlegen extends VerticalPanel {
 		}
 
 		public void onSuccess(Vector<Projektmarktplatz> result) {
-			Window.alert("Lüppt");
-			for(Projektmarktplatz p:result){
-				marktplatzListbox.addItem(p.getBezeichnung());
+			
+			for (int i = 0; i < result.size(); i++){
+				Projektmarktplatz pm1 = result.elementAt(i);
+				pmVector.add(pm1);
+				marktplatzListbox.addItem(pm1.getBezeichnung());
 			}
 		}
 	}
@@ -149,8 +153,7 @@ public class ProjektAnlegen extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 			//Projektmarktplatz ID
-			int id = marktplatzListbox.getSelectedIndex() +1;
-			
+			int id = pmVector.elementAt(marktplatzListbox.getSelectedIndex()).getId();	
 			try {
 
 				ClientSideSettings.getProjektAdministration().createProjekt(projektNameBox.getText(),

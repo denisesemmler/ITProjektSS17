@@ -116,12 +116,11 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 			}
 
 			public void onSuccess(Vector<Ausschreibung> result) {
-				for (Ausschreibung a : result) {
-					ausschreibungListbox.addItem(a.getTitel());	
-				}
+			
 				for (int i = 0; i < result.size(); i++){
 					Ausschreibung aus = result.elementAt(i);
 					aVector.add(aus);
+					ausschreibungListbox.addItem(aus.getTitel());	
 				}
 				ausschreibungTitelBox.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getTitel());
 				stellenbeschreibungBox.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBeschreibung());

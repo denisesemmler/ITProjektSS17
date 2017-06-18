@@ -76,12 +76,11 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 		}
 
 		public void onSuccess(Vector<Projektmarktplatz> result) {
-			for (Projektmarktplatz p : result) {
-				marktplatzListbox.addItem(p.getBezeichnung());	
-			}
+			
 			for (int i = 0; i < result.size(); i++){
 				Projektmarktplatz pm1 = result.elementAt(i);
 				pmVector.add(pm1);
+				marktplatzListbox.addItem(pm1.getBezeichnung());	
 			}
 			marktplatzNameBox.setText(pmVector.elementAt(marktplatzListbox.getSelectedIndex()).getBezeichnung());
 			
