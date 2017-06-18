@@ -6,10 +6,13 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import de.hdm.itprojekt.client.ITProjektSS17local;
 
 
 
@@ -17,6 +20,8 @@ public class AnmeldeFormular extends VerticalPanel{
 	
 		private VerticalPanel mainPanel = this;
 		VerticalPanel labelsPanel = new VerticalPanel();
+		private HorizontalPanel naviPanel = new HorizontalPanel();
+		
 		private Label firstNameLabel = new Label("Vorname: "); 
 	 	private TextBox firstNameBox = new TextBox(); 
 	 	private Label lastNameLabel = new Label("Nachname: ");
@@ -81,6 +86,7 @@ public class AnmeldeFormular extends VerticalPanel{
 					ClientSideSettings.getProjektAdministration().createTeilnehmer(firstNameBox.getText(),
 							lastNameBox.getText(), zusatzBox.getText(), strasseBox.getText(), Integer.parseInt(plzBox.getText()),
 							ortBox.getText(), ClientSideSettings.getCurrentUser().getEmail(), 1, 1, 2,  new CreateTeilnehmerCallback());
+					ClientSideSettings.getCurrentUser().setExisting(true);
 				} catch (Exception e) {
 					Window.alert(e.toString());
 					e.printStackTrace();
@@ -113,7 +119,10 @@ public class AnmeldeFormular extends VerticalPanel{
 			public void onSuccess(Object result) {
 				Window.alert("Deine Daten wurden gespeichert!");
 				RootPanel.get("Content").clear();
-
+				RootPanel.get("Navi").clear();
+				naviPanel.add(new Navigation());
+				RootPanel.get("Navi").add(naviPanel);
+				
 			}
 
 		}

@@ -23,6 +23,7 @@ import de.hdm.itprojekt.client.gui.LogOutPopUp;
 import de.hdm.itprojekt.client.gui.AnmeldeFormular;
 import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.Navigation;
+import de.hdm.itprojekt.client.gui.NavigationLogin;
 import de.hdm.itprojekt.client.gui.ProjektLoeschen;
 import de.hdm.itprojekt.shared.LoginServiceAsync;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
@@ -137,35 +138,13 @@ public class ITProjektSS17local implements EntryPoint {
 								logOutLink.setHref(result.getLogoutUrl());
 								logOutUrl = logOutLink.getHref();
 								logOutButton.setStylePrimaryName("navi-button");
-								
-								logOutButton.addClickHandler(new ClickHandler() {
-									public void onClick(ClickEvent e) {
-										getLogOutPop().setPopupPositionAndShow(
-												new PopupPanel.PositionCallback() {
-													public void setPosition(
-															int offsetWidth,
-															int offsetHeight) {
-														int left = logOutButton
-															.getAbsoluteLeft()-80;
-														int top = logOutButton
-															.getAbsoluteTop()+45;
-														getLogOutPop()
-																.setPopupPosition(
-																		left, top);
-														getLogOutPop().show();
-													}
-
-												});
-									}
-								});
-								
+																					
 								/*
 								 * Eine neue Instanz der Klasse Navigation wird
 								 * erstellt und dem RootPanel angefuegt
 								 */
 								
 								naviPanel.add(new Navigation());
-								naviPanel.add(logOutButton);
 								naviPanel.addStyleName("navi-panel");
 								RootPanel.get("Navi").add(naviPanel);
 								
@@ -233,13 +212,6 @@ public class ITProjektSS17local implements EntryPoint {
 	    
 }
 
-	  public static LogOutPopUp getLogOutPop() {
-			return logOutPop;
-		}
-
-		public static void setLogOutPop(LogOutPopUp hideIt) {
-			logOutPop = hideIt;
-		}
 
 /*
  * Hier wird der AsyncCallback der nach dem setzten des aktuellen User
