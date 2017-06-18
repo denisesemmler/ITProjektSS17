@@ -1,6 +1,5 @@
 package de.hdm.itprojekt.shared.bo;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class Ausschreibung extends BusinessObjekt {
@@ -10,7 +9,7 @@ public class Ausschreibung extends BusinessObjekt {
 	private int idAusschreibung 		= 0;
 	private String titel				= "";
 	private String beschreibung 		= "";
-	private Date bewerbungsfrist 	= null;
+	private Date bewerbungsfrist 		= null;
 	private int Projekt_idProjekt		= 0;
 	private int Profil_idSuchprofil 	= 0;
 	private int Teilnehmer_idTeilnehmer = 0;

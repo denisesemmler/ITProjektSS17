@@ -13,18 +13,32 @@ import java.util.Date;
 public class Projekt extends BusinessObjekt{
 	
 	private static final long serialVersionUID = 1L;
-	private String 	name = "";
-	private String 	beschreibung = "";
-	private Date	startDatum;
-	private Date endDatum;
-	private int projektmarktplatz_idProjektmarkplatz=0;
+	private String 	name 									= "";
+	private String 	beschreibung 							= "";
+	private Date	startDatum 								= null;
+	private Date 	endDatum 								= null;
+	private int 	Projektmarktplatz_idProjektmarkplatz	= 0;
 
 	/**
 	 * Fremschlüsselbeziehung zu Teilnehmer
 	 */
-	private int teilnehmer_idTeilnehmer;
+	private int 	Teilnehmer_idTeilnehmer 				= 0;
 	
-
+	public Projekt(){
+		
+	}
+	
+	public Projekt(Projekt projekt){
+		this.setId(projekt.getId());
+		this.setName(projekt.getName());
+		this.setBeschreibung(projekt.getBeschreibung());
+		this.setStartDatum(projekt.getStartDatum());
+		this.setEndDatum(projekt.getEndDatum());
+		this.setProjektmarktplatz_idProjektmarkplatz(projekt.Projektmarktplatz_idProjektmarkplatz);
+		this.setTeilnehmer_idTeilnehmer(projekt.Teilnehmer_idTeilnehmer);
+	}
+	
+	
 	/**
 	 * @return the startDatum
 	 */
@@ -53,13 +67,13 @@ public class Projekt extends BusinessObjekt{
 	 * @return the idTeilnehmer
 	 */
 	public int getTeilnehmer_idTeilnehmer() {
-		return teilnehmer_idTeilnehmer;
+		return Teilnehmer_idTeilnehmer;
 	}
 	/**
 	 * @param idTeilnehmer the idTeilnehmer to set
 	 */
-	public void setTeilnehmer_idTeilnehmer(int idTeilnehmer) {
-		this.teilnehmer_idTeilnehmer = idTeilnehmer;
+	public void setTeilnehmer_idTeilnehmer(int teilnehmer_idTeilnehmer) {
+		Teilnehmer_idTeilnehmer = teilnehmer_idTeilnehmer;
 	}
 	/**
 	 * @return the idProjekt
@@ -93,13 +107,13 @@ public class Projekt extends BusinessObjekt{
 	 * @return the projektmarktplatz_idProjektmarkplatz
 	 */
 	public int getProjektmarktplatz_idProjektmarkplatz() {
-		return projektmarktplatz_idProjektmarkplatz;
+		return Projektmarktplatz_idProjektmarkplatz;
 	}
 	/**
 	 * @param projektmarktplatz_idProjektmarkplatz the projektmarktplatz_idProjektmarkplatz to set
 	 */
 	public void setProjektmarktplatz_idProjektmarkplatz(int projektmarktplatz_idProjektmarkplatz) {
-		this.projektmarktplatz_idProjektmarkplatz = projektmarktplatz_idProjektmarkplatz;
+		Projektmarktplatz_idProjektmarkplatz = projektmarktplatz_idProjektmarkplatz;
 	}
 	
 	

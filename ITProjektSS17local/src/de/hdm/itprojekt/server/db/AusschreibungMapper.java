@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
-import de.hdm.itprojekt.shared.bo.Projekt;
+
 
 public class AusschreibungMapper {
 	

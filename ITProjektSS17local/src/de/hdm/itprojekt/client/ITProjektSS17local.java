@@ -119,8 +119,8 @@ public class ITProjektSS17local implements EntryPoint {
 												"<h2>Willkommen bei Pr0ject, "
 															+ result.getVorname()
 															+ "</h2>"));
-									RootPanel.get("Content").add(
-											new ProjektLoeschen());
+									//RootPanel.get("Content").add(
+										//	new ProjektLoeschen());
 								}
 
 								/*

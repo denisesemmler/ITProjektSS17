@@ -16,16 +16,21 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class ProjektLoeschen extends VerticalPanel {
 
+	private Vector<Projekt> pVector = new Vector<Projekt>();
+	
 	private VerticalPanel mainPanel = this;
+	
 	private Label projektNameLabel = new Label("Projektname: ");
 	private ListBox projektListbox = new ListBox();
 
-	private Vector<Projekt> pVector = new Vector<Projekt>();
+	
 
 	private Button projektLoeschenButton = new Button("Loeschen", new DeleteClickHandler());
 
 	public ProjektLoeschen() {
 		projektNameLabel.addStyleName("Content-label");
+		
+		
 		mainPanel.add(projektNameLabel);
 		mainPanel.add(projektListbox);
 		mainPanel.add(projektLoeschenButton);
@@ -60,8 +65,8 @@ public class ProjektLoeschen extends VerticalPanel {
 		}
 
 		public void onSuccess(Vector<Projekt> result) {
-			Window.alert("Joo Sucess");
-			Window.alert(ClientSideSettings.getCurrentUser().getVorname());
+			//Window.alert("Joo Sucess");
+			//Window.alert(ClientSideSettings.getCurrentUser().getVorname());
 			for (int i = 0; i < result.size(); i++) {
 				Projekt p1 = result.elementAt(i);
 				pVector.add(p1);

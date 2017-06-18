@@ -364,7 +364,8 @@ public class ProjektMapper {
 					Statement stmt = con.createStatement();
 					
 					// SQL Query ausf�hren
-					ResultSet rs = stmt.executeQuery("SELECT * FROM Projekt WHERE Teilnehmer_idTeilnehmer=" + teilnehmerId);
+					ResultSet rs = stmt.executeQuery("SELECT * FROM Projekt " +
+							"WHERE Teilnehmer_idTeilnehmer = " + teilnehmerId);
 					
 					
 					// Bei Treffer 
