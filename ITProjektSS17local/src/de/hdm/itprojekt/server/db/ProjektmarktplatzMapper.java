@@ -198,7 +198,7 @@ public class ProjektmarktplatzMapper {
 					stmt.executeUpdate("INSERT INTO Projektmarktplatz (idProjektmarktplatz, bezeichnung, teilnehmer_idTeilnehmer) " +
 							"VALUES "
 							+ "('" 
-							+ pm.getIdProjektmarktplatz() 
+							+ pm.getId() 
 							+ "', '" 
 							+ pm.getBezeichnung()
 							+ "', '" 
