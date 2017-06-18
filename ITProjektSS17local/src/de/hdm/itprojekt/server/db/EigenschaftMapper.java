@@ -153,7 +153,7 @@ public class EigenschaftMapper {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
 			// SQL Query ausführen
-			stmt.executeUpdate("DELETE FROM Eigenschaft WHERE idEigenschaft = " + e.getIdEigenschaft());
+			stmt.executeUpdate("DELETE FROM Eigenschaft WHERE idEigenschaft = " + e.getId());
 		}
 		// Error Handling
 		catch (SQLException ex) {
