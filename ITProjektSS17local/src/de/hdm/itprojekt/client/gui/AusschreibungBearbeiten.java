@@ -85,7 +85,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 			mainPanel.add(ausschreibungAndernButton);
 			
 			try {
-				ClientSideSettings.getProjektAdministration().findAllAusschreibungen(new GetAllAusschreibungenCallback());
+				ClientSideSettings.getProjektAdministration().findAllAusschreibungByTeilnehmerId(ClientSideSettings.getCurrentUser().getId(),new GetAllAusschreibungenCallback());
 			} catch (Exception e) {
 				Window.alert(e.toString());
 				e.printStackTrace();
