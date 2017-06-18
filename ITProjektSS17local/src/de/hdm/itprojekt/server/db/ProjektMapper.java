@@ -333,8 +333,8 @@ public class ProjektMapper {
 						p.setId(rs.getInt("idProjekt"));
 						p.setName(rs.getString("name"));
 						p.setBeschreibung(rs.getString("beschreibung"));
-						p.setStartDatum(rs.getTimestamp("startdatum"));
-						p.setEndDatum(rs.getTimestamp("enddatum"));
+						p.setStartDatum(rs.getDate("startdatum"));
+						p.setEndDatum(rs.getDate("enddatum"));
 						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("projektmarktplatz_idProjektmarkplatz"));
 						p.setTeilnehmer_idTeilnehmer(rs.getInt("teilnehmer_idTeilnehmer"));
 						
@@ -364,8 +364,8 @@ public class ProjektMapper {
 					Statement stmt = con.createStatement();
 					
 					// SQL Query ausf�hren
-					ResultSet rs = stmt.executeQuery("SELECT * FROM Projekt " +
-							"WHERE Teilnehmer_idTeilnehmer=" + teilnehmerId);
+					ResultSet rs = stmt.executeQuery("SELECT * FROM Projekt WHERE Teilnehmer_idTeilnehmer=" + teilnehmerId);
+					
 					
 					// Bei Treffer 
 					while(rs.next()) {
@@ -377,8 +377,8 @@ public class ProjektMapper {
 						p.setId(rs.getInt("idProjekt"));
 						p.setName(rs.getString("name"));
 						p.setBeschreibung(rs.getString("beschreibung"));
-						p.setStartDatum(rs.getTimestamp("startdatum"));
-						p.setEndDatum(rs.getTimestamp("enddatum"));
+						p.setStartDatum(rs.getDate("startdatum"));
+						p.setEndDatum(rs.getDate("enddatum"));
 						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("Projektmarktplatz_idProjektmarkplatz"));
 						p.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 						

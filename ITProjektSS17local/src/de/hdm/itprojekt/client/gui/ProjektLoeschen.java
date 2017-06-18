@@ -59,12 +59,11 @@ public class ProjektLoeschen extends VerticalPanel {
 		}
 
 		public void onSuccess(Vector<Projekt> result) {
-			for (Projekt p : result) {
-				projektListbox.addItem(p.getName());
-			}
+			
 			for (int i = 0; i < result.size(); i++) {
 				Projekt p1 = result.elementAt(i);
 				pVector.add(p1);
+				projektListbox.addItem(p1.getName());
 			}
 		}
 	}
