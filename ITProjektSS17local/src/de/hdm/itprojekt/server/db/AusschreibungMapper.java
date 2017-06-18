@@ -74,6 +74,7 @@ public class AusschreibungMapper {
 							a.setStatus(rs.getString("status"));
 							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
 							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
+							a.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 							// Objekt zur�ckgeben
 							return a;
 						}
@@ -119,6 +120,7 @@ public class AusschreibungMapper {
 							a.setStatus(rs.getString("status"));
 							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
 							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
+							a.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 							// ... Objekt dem Ergebnisvektor hinzufügen
 							result.add(a);
 						}
@@ -160,6 +162,7 @@ public class AusschreibungMapper {
 							a.setStatus(rs.getString("status"));
 							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
 							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
+							a.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 							// ... Objekt dem Ergebnisvektor hinzufügen
 							result.add(a);
 						}
@@ -194,7 +197,7 @@ public class AusschreibungMapper {
 							// neues SQL Statement
 							stmt = con.createStatement();
 							// SQL Query ausf�hren um Datensatz in DB zu schreiben
-							stmt.executeUpdate("INSERT INTO Ausschreibung (idAusschreibung, titel, beschreibung, bewerbungsfrist, status, Projekt_idProjekt, Profil_idSuchprofil) " +
+							stmt.executeUpdate("INSERT INTO Ausschreibung (idAusschreibung, titel, beschreibung, bewerbungsfrist, status, Projekt_idProjekt, Profil_idSuchprofil, Teilnehmer_idTeilnehmer) " +
 									"VALUES "
 									+ "('" 
 									+ a.getId() 
@@ -210,9 +213,11 @@ public class AusschreibungMapper {
 									+ a.getProjekt_idProjekt()
 									+ "', '" 
 									+ a.getProfil_idSuchprofil()
+									+ "', '" 
+									+ a.getTeilnehmer_idTeilnehmer()
 									+ "')");	
 							
-							System.out.println("INSERT INTO Ausschreibung (idAusschreibung, titel, beschreibung, bewerbungsfrist, status, Projekt_idProjekt, Profil_idSuchprofil) " +
+							System.out.println("INSERT INTO Ausschreibung (idAusschreibung, titel, beschreibung, bewerbungsfrist, status, Projekt_idProjekt, Profil_idSuchprofil, , Teilnehmer_idTeilnehmer) " +
 									"VALUES "
 									+ "('" 
 									+ a.getId() 
@@ -228,6 +233,8 @@ public class AusschreibungMapper {
 									+ a.getProjekt_idProjekt()
 									+ "', '" 
 									+ a.getProfil_idSuchprofil()
+									+ "', '" 
+									+ a.getTeilnehmer_idTeilnehmer()
 									+ "')");	
 						}
 					}
@@ -330,6 +337,7 @@ public class AusschreibungMapper {
 							a.setStatus(rs.getString("status"));
 							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
 							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
+							a.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 							// ... Objekt dem Ergebnisvektor hinzufügen
 							result.add(a);
 						}
@@ -373,7 +381,7 @@ public class AusschreibungMapper {
 							a.setStatus(rs.getString("status"));
 							a.setProjekt_idProjekt(rs.getInt("Projekt_idProjekt"));
 							a.setProfil_idSuchprofil(rs.getInt("Profil_idSuchprofil"));
-							
+							a.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 							// ... Objekt dem Ergebnisvektor hinzufügen
 							result.add(a);
 						}

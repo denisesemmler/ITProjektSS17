@@ -50,7 +50,8 @@ public interface ProjektAdministrationAsync {
 	void findAllProjektByTeilnehmerId(int teilnehmerId, AsyncCallback<Vector<Projekt>> callback);
 	
 	void createAusschreibung(String beschreibung, Date bewerbungsfrist, String titel, String status,
-			int projekt_idProjekt, int profil_idSuchprofil, AsyncCallback<Ausschreibung> callback);
+			int projekt_idProjekt, int profil_idSuchprofil, int teilnehmer_idTeilnehmer,
+			AsyncCallback<Ausschreibung> callback);
 	
 	void updateAusschreibung(Ausschreibung a, AsyncCallback<Void> callback);
 	

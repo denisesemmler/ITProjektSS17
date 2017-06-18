@@ -13,6 +13,7 @@ public class Ausschreibung extends BusinessObjekt {
 	private Date bewerbungsfrist 	= null;
 	private int Projekt_idProjekt		= 0;
 	private int Profil_idSuchprofil 	= 0;
+	private int Teilnehmer_idTeilnehmer = 0;
 	private String status				= "laufend";
 	
 	public Ausschreibung() {
@@ -120,6 +121,14 @@ public class Ausschreibung extends BusinessObjekt {
 	 */
 	public void setIdAusschreibung(int idAusschreibung) {
 		this.idAusschreibung = idAusschreibung;
+	}
+
+	public int getTeilnehmer_idTeilnehmer() {
+		return Teilnehmer_idTeilnehmer;
+	}
+
+	public void setTeilnehmer_idTeilnehmer(int teilnehmer_idTeilnehmer) {
+		Teilnehmer_idTeilnehmer = teilnehmer_idTeilnehmer;
 	}
 	
 	

@@ -110,7 +110,7 @@ public class AusschreibungAnlegen extends VerticalPanel{
 				try {
 
 					ClientSideSettings.getProjektAdministration().createAusschreibung(stellenbeschreibungBox.getText(),
-							bewerbungsfrist.getValue(), ausschreibungTitelBox.getText(), "laufend", 1, 2, new CreateAusschreibungCallback());
+							bewerbungsfrist.getValue(), ausschreibungTitelBox.getText(), "laufend", 1, 2, ClientSideSettings.getCurrentUser().getId(), new CreateAusschreibungCallback());
 				} catch (Exception e) {
 					Window.alert(e.toString());
 					e.printStackTrace();

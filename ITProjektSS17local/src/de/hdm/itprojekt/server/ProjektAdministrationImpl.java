@@ -277,7 +277,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 */
 	@Override
 	public Ausschreibung createAusschreibung(String beschreibung, Date bewerbungsfrist, String titel, String status,
-			int projekt_idProjekt, int profil_idSuchprofil) throws IllegalArgumentException {
+			int projekt_idProjekt, int profil_idSuchprofil, int teilnehmer_idTeilnehmer) throws IllegalArgumentException {
 
 		// Neues Objekt erstellen
 		Ausschreibung ausschreibung = new Ausschreibung();
@@ -292,6 +292,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		ausschreibung.setStatus(status);
 		ausschreibung.setProjekt_idProjekt(projekt_idProjekt);
 		ausschreibung.setProfil_idSuchprofil(profil_idSuchprofil);
+		ausschreibung.setTeilnehmer_idTeilnehmer(teilnehmer_idTeilnehmer);
 
 		// In die DB schreiben
 		return aMapper.insert(ausschreibung);
