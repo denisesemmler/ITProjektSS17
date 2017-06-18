@@ -84,6 +84,10 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public Vector<Bewerbung> findBewerbungByTeilnehmerid(int tilnehmerId) throws IllegalArgumentException;
 	
+	public void bewertungZurBewerbung(int bewerbungId, float bewertung, int beteiligungId, String stellungnahme, int projektId, int manntage, Date startdatum, Date enddatum) throws IllegalArgumentException;
+	
+	
+	
 	/*
 	 * Methoden zum anlegen von Teilnehmern
 	 */
