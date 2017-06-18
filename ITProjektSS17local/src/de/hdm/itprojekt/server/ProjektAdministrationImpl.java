@@ -276,7 +276,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 * Diese Methode implementiert denn UC Ausschreibung erstellen
 	 */
 	@Override
-	public Ausschreibung createAusschreibung(String beschreibung, Date bewerbungsfrist, String titel,
+	public Ausschreibung createAusschreibung(String beschreibung, Date bewerbungsfrist, String titel, String status,
 			int projekt_idProjekt, int profil_idSuchprofil) throws IllegalArgumentException {
 
 		// Neues Objekt erstellen
@@ -289,6 +289,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		// kurze schreibweise einer Typkonvertierung
 		ausschreibung.setBewerbungsfrist(new java.sql.Date(bewerbungsfrist.getTime())); // Timestamp?
 		ausschreibung.setTitel(titel);
+		ausschreibung.setStatus(status);
 		ausschreibung.setProjekt_idProjekt(projekt_idProjekt);
 		ausschreibung.setProfil_idSuchprofil(profil_idSuchprofil);
 

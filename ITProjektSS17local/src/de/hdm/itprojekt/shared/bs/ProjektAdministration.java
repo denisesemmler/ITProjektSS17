@@ -62,7 +62,7 @@ public interface ProjektAdministration extends RemoteService {
 	/*
 	 * Methoden zum anlegen von Ausschreibungen
 	 */
-	public Ausschreibung createAusschreibung(String beschreibung, Date bewerbungsfrist, String titel, int projekt_idProjekt, int profil_idSuchprofil) throws IllegalArgumentException;
+	public Ausschreibung createAusschreibung(String beschreibung, Date bewerbungsfrist, String titel, String status, int projekt_idProjekt, int profil_idSuchprofil) throws IllegalArgumentException;
 	
 	public void updateAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 	
