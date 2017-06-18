@@ -12,7 +12,6 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
-import de.hdm.itprojekt.client.gui.ProjektAnlegen.CreateProjectCallback;
 
 
 
