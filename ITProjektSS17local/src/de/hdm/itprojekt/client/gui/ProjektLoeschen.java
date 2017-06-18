@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.bo.Projekt;
@@ -21,7 +22,10 @@ public class ProjektLoeschen extends VerticalPanel {
 	private VerticalPanel mainPanel = this;
 	
 	private Label projektNameLabel = new Label("Projektname: ");
+	
 	private ListBox projektListbox = new ListBox();
+	
+	
 
 	
 
@@ -33,10 +37,12 @@ public class ProjektLoeschen extends VerticalPanel {
 		
 		mainPanel.add(projektNameLabel);
 		mainPanel.add(projektListbox);
+		
+
 		mainPanel.add(projektLoeschenButton);
 
 		try {
-			ClientSideSettings.getProjektAdministration().findAllProjektByTeilnehmerId(/*ClientSideSettings.getCurrentUser().getId()*/1,
+			ClientSideSettings.getProjektAdministration().findAllProjektByTeilnehmerId(1,
 					new GetAllProjekteByIDCallback());
 		} catch (Exception e) {
 			Window.alert(e.toString());
@@ -72,6 +78,7 @@ public class ProjektLoeschen extends VerticalPanel {
 				pVector.add(p1);
 				projektListbox.addItem(p1.getName());
 			}
+			
 		}
 	}
 
