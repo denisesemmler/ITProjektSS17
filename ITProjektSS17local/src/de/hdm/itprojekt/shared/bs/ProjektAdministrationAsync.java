@@ -47,7 +47,7 @@ public interface ProjektAdministrationAsync {
 
 	void findAusschreibungByProjektId(int projektId, AsyncCallback<Vector<Ausschreibung>> callback);
 	
-	void findAllProjektByTeilnehmerId(int id, AsyncCallback<Vector<Projekt>> callback);
+	void findAllProjektByTeilnehmerId(int teilnehmerId, AsyncCallback<Vector<Projekt>> callback);
 	
 	void createAusschreibung(String beschreibung, Date bewerbungsfrist, String titel, String status,
 			int projekt_idProjekt, int profil_idSuchprofil, AsyncCallback<Ausschreibung> callback);
@@ -56,7 +56,7 @@ public interface ProjektAdministrationAsync {
 	
 	void deleteAusschreibung(Ausschreibung a, AsyncCallback<Void> callback);
 	
-	void findBewerbungenByAusschreibungId(int AuscchreibungId, AsyncCallback<Vector<Bewerbung>> callback);
+	void findBewerbungenByAusschreibungId(int AusschreibungId, AsyncCallback<Vector<Bewerbung>> callback);
 	
 	void findAllAusschreibungByTeilnehmerId(int teilnehmerId, AsyncCallback<Vector<Ausschreibung>> callback);
 	
@@ -72,7 +72,7 @@ public interface ProjektAdministrationAsync {
 	
 	void deleteBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 	
-	void findBewerbungByTeilnehmerid(int tilnehmerId, AsyncCallback<Vector<Bewerbung>> callback);
+	void findBewerbungByTeilnehmerid(int teilnehmerId, AsyncCallback<Vector<Bewerbung>> callback);
 	
 	/*
 	 * F�r Teilnehmer

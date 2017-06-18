@@ -25,12 +25,13 @@ public class ProjektLoeschen extends VerticalPanel {
 	private Button projektLoeschenButton = new Button("Loeschen", new DeleteClickHandler());
 
 	public ProjektLoeschen() {
+		projektNameLabel.addStyleName("Content-label");
 		mainPanel.add(projektNameLabel);
 		mainPanel.add(projektListbox);
 		mainPanel.add(projektLoeschenButton);
 
 		try {
-			ClientSideSettings.getProjektAdministration().findAllProjektByTeilnehmerId(/*ClientSideSettings.getCurrentUser().getId()*/1 ,
+			ClientSideSettings.getProjektAdministration().findAllProjektByTeilnehmerId(/*ClientSideSettings.getCurrentUser().getId()*/1,
 					new GetAllProjekteByIDCallback());
 		} catch (Exception e) {
 			Window.alert(e.toString());
@@ -55,11 +56,12 @@ public class ProjektLoeschen extends VerticalPanel {
 	private class GetAllProjekteByIDCallback implements AsyncCallback<Vector<Projekt>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Läuft garnit");
+			Window.alert("Nein das falsch");
 		}
 
 		public void onSuccess(Vector<Projekt> result) {
-			
+			Window.alert("Joo Sucess");
+			Window.alert(ClientSideSettings.getCurrentUser().getVorname());
 			for (int i = 0; i < result.size(); i++) {
 				Projekt p1 = result.elementAt(i);
 				pVector.add(p1);

@@ -335,8 +335,8 @@ public class ProjektMapper {
 						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getDate("startdatum"));
 						p.setEndDatum(rs.getDate("enddatum"));
-						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("projektmarktplatz_idProjektmarkplatz"));
-						p.setTeilnehmer_idTeilnehmer(rs.getInt("teilnehmer_idTeilnehmer"));
+						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("Projektmarktplatz_idProjektmarkplatz"));
+						p.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 						
 						// Objekt muss zu result hinzugefügt werden
 						result.add(p);
@@ -369,10 +369,8 @@ public class ProjektMapper {
 					
 					// Bei Treffer 
 					while(rs.next()) {
-						
 						// Neues Projekt Objekt erzeugen
 						Projekt p = new Projekt();
-						
 						// Id, Projektname, Projektbeschreibung, startdatum und enddatum den Daten aus der DB f�llen
 						p.setId(rs.getInt("idProjekt"));
 						p.setName(rs.getString("name"));
