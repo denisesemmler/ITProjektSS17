@@ -2,6 +2,8 @@ package de.hdm.itprojekt.client.gui;
 
 import java.util.Vector;
 
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -38,6 +40,7 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 		mainPanel.add(editorPanel);
 		editorPanel.add(marktplatzLabel);
 		editorPanel.add(marktplatzListbox);
+		marktplatzListbox.addChangeHandler(new OnChangeHandler());
 		editorPanel.add(marktplatzNameLabel);
 		editorPanel.add(marktplatzNameBox);
 
@@ -102,5 +105,21 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 			}
 		}
 	};
+	
+	private class OnChangeHandler implements ChangeHandler {
+
+		@Override
+		public void onChange(ChangeEvent event) {
+			try {
+				marktplatzNameBox.setText(pmVector.elementAt(marktplatzListbox.getSelectedIndex()).getBezeichnung());
+				
+			} catch (Exception e){
+				Window.alert(e.toString());
+				e.printStackTrace();
+			}
+			
+		}
+		
+	}
 
 }
