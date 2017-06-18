@@ -61,9 +61,9 @@ import de.hdm.itprojekt.client.ITProjektSS17local;
 		public class HideClickHandler implements ClickHandler {
 			public void onClick(ClickEvent e) {
 
-				LogOutPopUp hideIt = ITProjektSS17local.getLogOutPop();
+				LogOutPopUp hideIt = Navigation.getLogOutPop();
 				hideIt.hide();
-				ITProjektSS17local.setLogOutPop(hideIt);
+				Navigation.setLogOutPop(hideIt);
 			}
 		}
 
