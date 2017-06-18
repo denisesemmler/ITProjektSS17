@@ -190,7 +190,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 */
 	@Override
 	public void deleteProjekt(Projekt p) throws IllegalArgumentException {
-		Vector<Ausschreibung> ausschreibung = this.getAusschreibungByProjektId(p.getIdProjekt());
+		Vector<Ausschreibung> ausschreibung = this.getAusschreibungByProjektId(p.getId());
 
 		if (ausschreibung != null) {
 			for (Ausschreibung a : ausschreibung) {

@@ -17,17 +17,14 @@ public class Projekt extends BusinessObjekt{
 	private String 	beschreibung = "";
 	private Date	startDatum;
 	private Date endDatum;
-	private int Projektmarktplatz_idProjektmarkplatz=0;
+	private int projektmarktplatz_idProjektmarkplatz=0;
 
 	/**
 	 * Fremschlüsselbeziehung zu Teilnehmer
 	 */
 	private int teilnehmer_idTeilnehmer;
 	
-	/**
-	 * Fremschlüsselbeziehung zu Projekt
-	 */
-	private int idProjekt;
+
 	/**
 	 * @return the startDatum
 	 */
@@ -67,15 +64,7 @@ public class Projekt extends BusinessObjekt{
 	/**
 	 * @return the idProjekt
 	 */
-	public int getIdProjekt() {
-		return idProjekt;
-	}
-	/**
-	 * @param idProjekt the idProjekt to set
-	 */
-	public void setIdProjekt(int idProjekt) {
-		this.idProjekt = idProjekt;
-	}
+	
 	/**
 	 * @return the name
 	 */
@@ -104,13 +93,13 @@ public class Projekt extends BusinessObjekt{
 	 * @return the projektmarktplatz_idProjektmarkplatz
 	 */
 	public int getProjektmarktplatz_idProjektmarkplatz() {
-		return Projektmarktplatz_idProjektmarkplatz;
+		return projektmarktplatz_idProjektmarkplatz;
 	}
 	/**
 	 * @param projektmarktplatz_idProjektmarkplatz the projektmarktplatz_idProjektmarkplatz to set
 	 */
 	public void setProjektmarktplatz_idProjektmarkplatz(int projektmarktplatz_idProjektmarkplatz) {
-		Projektmarktplatz_idProjektmarkplatz = projektmarktplatz_idProjektmarkplatz;
+		this.projektmarktplatz_idProjektmarkplatz = projektmarktplatz_idProjektmarkplatz;
 	}
 	
 	

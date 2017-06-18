@@ -365,7 +365,7 @@ public class ProjektMapper {
 					
 					// SQL Query ausf�hren
 					ResultSet rs = stmt.executeQuery("SELECT * FROM Projekt " +
-							"WHERE Teilnehmer_idTeilnehmer = " + teilnehmerId);
+							"WHERE Teilnehmer_idTeilnehmer=" + teilnehmerId);
 					
 					// Bei Treffer 
 					while(rs.next()) {
@@ -379,8 +379,8 @@ public class ProjektMapper {
 						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getTimestamp("startdatum"));
 						p.setEndDatum(rs.getTimestamp("enddatum"));
-						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("projektmarktplatz_idProjektmarkplatz"));
-						p.setTeilnehmer_idTeilnehmer(rs.getInt("teilnehmer_idTeilnehmer"));
+						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("Projektmarktplatz_idProjektmarkplatz"));
+						p.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 						
 						// Objekt muss zu result hinzugefügt werden
 						result.add(p);
