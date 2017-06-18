@@ -76,7 +76,7 @@ public class ProjektmarktplatzLoeschen extends VerticalPanel {
 				int id = pmVector.elementAt(marktplatzListbox.getSelectedIndex()).getId();
 				Projektmarktplatz pm = new Projektmarktplatz();
 				pm.setId(id);
-				ClientSideSettings.getProjektAdministration().updateProjektmarktplatz(pm, new DeleteCallback());
+				ClientSideSettings.getProjektAdministration().deleteProjektmarktplatz(pm, new DeleteCallback());
 
 			} catch (Exception e) {
 				Window.alert(e.toString());
