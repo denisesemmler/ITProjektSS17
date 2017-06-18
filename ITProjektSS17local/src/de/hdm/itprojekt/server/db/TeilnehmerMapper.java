@@ -73,7 +73,7 @@ public class TeilnehmerMapper {
 				Teilnehmer t = new Teilnehmer();
 				// Id, name, zusatz Email und Rolle mit den Daten aus der DB
 				// füllen
-				t.setIdTeilnehmer(rs.getInt("idTeilnehmer"));
+				t.setId(rs.getInt("idTeilnehmer"));
 				t.setVorname(rs.getString("vorname"));
 				t.setNachname(rs.getString("nachname"));
 				t.setZusatz(rs.getString("zusatz"));
@@ -126,7 +126,7 @@ public class TeilnehmerMapper {
 				Teilnehmer t = new Teilnehmer();
 				// ... Id, Vorname, Nachname und Email mit den Daten aus der DB
 				// fÃ¼llen
-				t.setIdTeilnehmer(rs.getInt("idTeilnehmer"));
+				t.setId(rs.getInt("idTeilnehmer"));
 				t.setVorname(rs.getString("vorname"));
 				t.setNachname(rs.getString("nachname"));
 				t.setZusatz(rs.getString("zusatz"));
@@ -171,7 +171,7 @@ public class TeilnehmerMapper {
 				// Neues User Objekt anlegen
 				Teilnehmer t = new Teilnehmer();
 				// Das Objekt mit Daten aus der DB füllen
-				t.setIdTeilnehmer(rs.getInt("idTeilnehmer"));
+				t.setId(rs.getInt("idTeilnehmer"));
 				t.setVorname(rs.getString("vorname"));
 				t.setNachname(rs.getString("nachname"));
 				t.setZusatz(rs.getString("zusatz"));
@@ -212,7 +212,7 @@ public class TeilnehmerMapper {
 			// FÃ¼r jeden Eintrag neues User Objekt erzeugen
 			while (rs.next()) {
 				Teilnehmer t = new Teilnehmer();
-				t.setIdTeilnehmer(rs.getInt("idTeilnehmer"));
+				t.setId(rs.getInt("idTeilnehmer"));
 				t.setVorname(rs.getString("vorname"));
 				t.setNachname(rs.getString("nachname"));
 				t.setZusatz(rs.getString("zusatz"));
@@ -299,13 +299,13 @@ public class TeilnehmerMapper {
 					+ "', rolle = '" + t.getRolle() + "',email = '" + t.getEmail() + "',ort = '" + t.getOrt()
 					+ "', plz = '" + t.getPlz() + "',strasse = '" + t.getStrasse() + "',Profil_idProfil = '"
 					+ t.getProfil_idProfil() + "', projektleiter = '" + t.getProjektLeiter() + "' WHERE idTeilnehmer = "
-					+ t.getIdTeilnehmer());
+					+ t.getId());
 
 			System.out.println("UPDATE Teilnehmer " + "SET vorname = '" + t.getVorname() + "', nachname = '" + t.getNachname() + "', zusatz = '" + t.getZusatz()
 					+ "', rolle = '" + t.getRolle() + "',email = '" + t.getEmail() + "',ort = '" + t.getOrt()
 					+ "', plz = '" + t.getPlz() + "',strasse = '" + t.getStrasse() + "',Profil_idProfil = '"
 					+ t.getProfil_idProfil() + "', projektleiter = '" + t.getProjektLeiter() + "' WHERE idTeilnehmer = "
-					+ t.getIdTeilnehmer());
+					+ t.getId());
 
 		}
 		// Error Handling
@@ -355,7 +355,7 @@ public class TeilnehmerMapper {
 				// Neues User Objekt anlegen
 				Teilnehmer t = new Teilnehmer();
 				// Das Objekt mit Daten aus der DB füllen
-				t.setIdTeilnehmer(rs.getInt("idTeilnehmer"));
+				t.setId(rs.getInt("idTeilnehmer"));
 				t.setVorname(rs.getString("vorname"));
 				t.setNachname(rs.getString("nachname"));
 				t.setZusatz(rs.getString("zusatz"));
