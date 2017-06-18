@@ -330,7 +330,7 @@ public class ProjektMapper {
 						Projekt p = new Projekt();
 						
 						// Id, Projektname, Projektbeschreibung, startdatum und enddatum den Daten aus der DB f�llen
-						p.setIdProjekt(rs.getInt("idProjekt"));
+						p.setId(rs.getInt("idProjekt"));
 						p.setName(rs.getString("name"));
 						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getTimestamp("startdatum"));
@@ -374,7 +374,7 @@ public class ProjektMapper {
 						Projekt p = new Projekt();
 						
 						// Id, Projektname, Projektbeschreibung, startdatum und enddatum den Daten aus der DB f�llen
-						p.setIdProjekt(rs.getInt("idProjekt"));
+						p.setId(rs.getInt("idProjekt"));
 						p.setName(rs.getString("name"));
 						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getTimestamp("startdatum"));
