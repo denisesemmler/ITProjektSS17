@@ -73,7 +73,7 @@ public class ProjektMapper {
 						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getTimestamp("startdatum"));
 						p.setEndDatum(rs.getTimestamp("enddatum"));
-						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("Projektmarktplatz_idProjektmarktplatz"));
+						p.setProjektmarktplatz_idProjektmarktplatz(rs.getInt("Projektmarktplatz_idProjektmarktplatz"));
 						p.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 						// Objekt zur�ckgeben
 						return p;
@@ -118,7 +118,7 @@ public class ProjektMapper {
 						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getTimestamp("startdatum"));
 						p.setEndDatum(rs.getTimestamp("enddatum"));
-						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("Projektmarktplatz_idProjektmarktplatz"));
+						p.setProjektmarktplatz_idProjektmarktplatz(rs.getInt("Projektmarktplatz_idProjektmarktplatz"));
 						p.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 						// ... Objekt dem Ergebnisvektor hinzufügen
 						result.add(p);
@@ -159,7 +159,7 @@ public class ProjektMapper {
 						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getTimestamp("startdatum"));
 						p.setEndDatum(rs.getTimestamp("enddatum"));
-						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("projektmarktplatz_idProjektmarkplatz"));
+						p.setProjektmarktplatz_idProjektmarktplatz(rs.getInt("projektmarktplatz_idProjektmarktplatz"));
 						p.setTeilnehmer_idTeilnehmer(rs.getInt("teilnehmer_idTeilnehmer"));
 						// ... Objekt dem Ergebnisvektor hinzufügen
 						result.add(p);
@@ -208,12 +208,12 @@ public class ProjektMapper {
 								+ "', '" 
 								+ p.getBeschreibung()
 								+ "', '" 
-								+ p.getProjektmarktplatz_idProjektmarkplatz()
+								+ p.getProjektmarktplatz_idProjektmarktplatz()
 								+ "', '" 
 								+ p.getTeilnehmer_idTeilnehmer()
 								+ "')");	
 						
-						System.out.println("INSERT INTO Projekt (idProjekt, name, startdatum, enddatum, beschreibung, Projektmarktplatz_idProjektmarkplatz, Teilnehmer_idTeilnehmer  ) " +
+						System.out.println("INSERT INTO Projekt (idProjekt, name, startdatum, enddatum, beschreibung, Projektmarktplatz_idProjektmarktplatz, Teilnehmer_idTeilnehmer  ) " +
 								"VALUES "
 								+ "('" 
 								+ p.getId() 
@@ -224,9 +224,7 @@ public class ProjektMapper {
 								+ "', '" 
 								+ p.getEndDatum()
 								+ "', '" 
-								+ p.getBeschreibung()
-								+ "', '" 
-								+ p.getProjektmarktplatz_idProjektmarkplatz()
+								+ p.getProjektmarktplatz_idProjektmarktplatz()
 								+ "', '" 
 								+ p.getTeilnehmer_idTeilnehmer()
 								+ "')");	
@@ -335,7 +333,7 @@ public class ProjektMapper {
 						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getDate("startdatum"));
 						p.setEndDatum(rs.getDate("enddatum"));
-						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("Projektmarktplatz_idProjektmarkplatz"));
+						p.setProjektmarktplatz_idProjektmarktplatz(rs.getInt("Projektmarktplatz_idProjektmarktplatz"));
 						p.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 						
 						// Objekt muss zu result hinzugefügt werden
@@ -378,7 +376,7 @@ public class ProjektMapper {
 						p.setBeschreibung(rs.getString("beschreibung"));
 						p.setStartDatum(rs.getDate("startdatum"));
 						p.setEndDatum(rs.getDate("enddatum"));
-						p.setProjektmarktplatz_idProjektmarkplatz(rs.getInt("Projektmarktplatz_idProjektmarkplatz"));
+						p.setProjektmarktplatz_idProjektmarktplatz(rs.getInt("Projektmarktplatz_idProjektmarktplatz"));
 						p.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 						
 						// Objekt muss zu result hinzugefügt werden

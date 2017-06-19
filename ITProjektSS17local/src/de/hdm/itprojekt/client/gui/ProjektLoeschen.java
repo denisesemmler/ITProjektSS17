@@ -87,9 +87,9 @@ public class ProjektLoeschen extends VerticalPanel {
 		public void onClick(ClickEvent event) {
 
 			try {
-				int id = pVector.elementAt(projektListbox.getSelectedIndex()).getId();
-				Projekt p = new Projekt();
-				p.setId(id);
+				//int id = pVector.elementAt(projektListbox.getSelectedIndex()).getId();
+				Projekt p = pVector.elementAt(projektListbox.getSelectedIndex());
+				//p.setId(id);
 				ClientSideSettings.getProjektAdministration().deleteProjekt(p, new DeleteCallback());
 
 			} catch (Exception e) {

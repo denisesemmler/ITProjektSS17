@@ -160,7 +160,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		p.setStartDatum(new java.sql.Date(startDatum.getTime()));
 		p.setEndDatum(new java.sql.Date(endDatum.getTime()));
 		p.setTeilnehmer_idTeilnehmer(TeilnehmerID);
-		p.setProjektmarktplatz_idProjektmarkplatz(MarktplatzID);
+		p.setProjektmarktplatz_idProjektmarktplatz(MarktplatzID);
 
 		// setzen einer vorläufigen Projekt-Nr diese ist mit der DB konsistent
 		// p.setId(1);
@@ -197,6 +197,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 				this.deleteAusschreibung(a);
 			}
 		}
+		pMapper.delete(p);
 	}
 	
 	/**
