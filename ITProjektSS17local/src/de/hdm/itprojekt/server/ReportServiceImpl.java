@@ -28,4 +28,9 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 		}
 		return report;
 	}	
+	
+	//TBD
+	public List<AusschreibungReport> getAllAusschreibungenUser(String user) {
+		return this.getAllAusschreibungen();
+	}	
 }

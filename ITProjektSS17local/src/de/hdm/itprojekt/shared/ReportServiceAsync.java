@@ -8,4 +8,5 @@ import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 
 public interface ReportServiceAsync {
 	void getAllAusschreibungen(AsyncCallback<List<AusschreibungReport>> callback);
+	void getAllAusschreibungenUser(String user, AsyncCallback<List<AusschreibungReport>> callback);
 }
