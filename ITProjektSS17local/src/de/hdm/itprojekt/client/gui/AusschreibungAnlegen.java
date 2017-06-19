@@ -1,5 +1,7 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.util.Vector;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -13,12 +15,15 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
 
+import de.hdm.itprojekt.shared.bo.Projekt;
+
+
 
 
 
 public class AusschreibungAnlegen extends VerticalPanel{
 	
-
+		private Vector<Projekt> pVector = new Vector<Projekt>();
 
 		/**
 		 * Erstellen der Panels
@@ -71,7 +76,7 @@ public class AusschreibungAnlegen extends VerticalPanel{
 
 			attributePanel.add(projektLabel);
 			attributePanel.add(projektListbox);
-			projektListbox.addItem("IT");
+		
 			
 			attributePanel.add(ausschreibungTitelLabel);
 			attributePanel.add(ausschreibungTitelBox);
@@ -83,8 +88,16 @@ public class AusschreibungAnlegen extends VerticalPanel{
 			attributePanel.add(bewerbungsfrist);
 			
 			mainPanel.add(ausschreibungAnlegenButton);
-
+			
+			try {
+				ClientSideSettings.getProjektAdministration().findAllProjektByTeilnehmerId(ClientSideSettings.getCurrentUser().getId(),new GetAllProjekteByIDCallback());
+			} catch (Exception e) {
+				Window.alert(e.toString());
+				e.printStackTrace();
+			}
 		}
+
+		
 	/**
 		private class GetMarktplatzCallback implements AsyncCallback {
 
@@ -108,9 +121,9 @@ public class AusschreibungAnlegen extends VerticalPanel{
 
 			public void onClick(ClickEvent event) {
 				try {
-
+					int pid = pVector.elementAt(projektListbox.getSelectedIndex()).getId();	
 					ClientSideSettings.getProjektAdministration().createAusschreibung(stellenbeschreibungBox.getText(),
-							bewerbungsfrist.getValue(), ausschreibungTitelBox.getText(), "laufend", 1, 2, ClientSideSettings.getCurrentUser().getId(), new CreateAusschreibungCallback());
+							bewerbungsfrist.getValue(), ausschreibungTitelBox.getText(), "laufend", pid, 2, ClientSideSettings.getCurrentUser().getId(), new CreateAusschreibungCallback());
 				} catch (Exception e) {
 					Window.alert(e.toString());
 					e.printStackTrace();
@@ -132,6 +145,24 @@ public class AusschreibungAnlegen extends VerticalPanel{
 
 			}
 
+		}
+		
+		private class GetAllProjekteByIDCallback implements AsyncCallback<Vector<Projekt>> {
+
+			public void onFailure(Throwable caught) {
+				Window.alert("Nein das falsch");
+			}
+
+			public void onSuccess(Vector<Projekt> result) {
+				//Window.alert("Joo Sucess");
+				//Window.alert(ClientSideSettings.getCurrentUser().getVorname());
+				for (int i = 0; i < result.size(); i++) {
+					Projekt p1 = result.elementAt(i);
+					pVector.add(p1);
+					projektListbox.addItem(p1.getName());
+				}
+				
+			}
 		}
 
 }
