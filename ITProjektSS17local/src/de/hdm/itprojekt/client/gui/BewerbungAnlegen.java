@@ -1,14 +1,18 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.util.Vector;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 
+import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 
 public class BewerbungAnlegen extends VerticalPanel {
 
@@ -32,27 +36,14 @@ public class BewerbungAnlegen extends VerticalPanel {
 	/**
 	 * Erstellen der Buttons
 	 */
-	private Button marktplatzSuchenButton = new Button("Suchen", new SuchenClickHandler());
+	private Button marktplatzSuchenButton = new Button("Projekte suchen", new SuchenClickHandler());
 
-	
+	private Vector <Projektmarktplatz> pmVector = new Vector<Projektmarktplatz>();
 	
 	/**
 	 * Konstruktor für Anlegen der GUI
 	 */
 	public BewerbungAnlegen() {
-		
-		try {
-			//Marktpätze aus DB lesen
-			/**
-			 * ClientSideSettings.getProjektAdministration().createProjekt(projektNameBox.getText(),
-					projektBeschreibungArea.getText(), (startPicker.getValue()), (endPicker.getValue()),
-					 ClientSideSettings.getCurrentUser().getId() 1, 1, new CreateProjectCallback());
-			 */
-			
-		} catch (Exception e) {
-			Window.alert(e.toString());
-			e.printStackTrace();
-		}
 
 		// CSS Styling
 		marktplatzLabel.addStyleName("Content-Label");
@@ -63,37 +54,40 @@ public class BewerbungAnlegen extends VerticalPanel {
 
 		attributePanel.add(marktplatzLabel);
 		attributePanel.add(marktplatzListbox);
-		marktplatzListbox.addItem("IT");
-		marktplatzListbox.addItem("Bau");
-		marktplatzListbox.addItem("Landwirtschaft");
 		mainPanel.add(marktplatzSuchenButton);
 
+		try {
+			ClientSideSettings.getProjektAdministration().findAllProjektmarktplatz(new GetAllMarktplatzCallback());
+		} catch (Exception e) {
+			Window.alert(e.toString());
+			e.printStackTrace();
+		}
+
 	}
-/**
-	private class GetMarktplatzCallback implements AsyncCallback {
+
+	private class GetAllMarktplatzCallback implements AsyncCallback<Vector<Projektmarktplatz>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Suchen läuft noch nit so!");
-
+			Window.alert("Läuft garnit");
 		}
 
-		public void onSuccess(Projektmarktplatz result) {
-			
-			
-			//RootPanel.get("Content").clear();
-			//Entweder hier oder unten...
-			//TODO Konstruktor für nächste Klasse (Projekt Suchen)
+		public void onSuccess(Vector<Projektmarktplatz> result) {
+
+			for (int i = 0; i < result.size(); i++) {
+				Projektmarktplatz pm1 = result.elementAt(i);
+				pmVector.add(pm1);
+				marktplatzListbox.addItem(pm1.getBezeichnung());
+			}
 
 		}
-
 	}
-*/
+
 	private class SuchenClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
-			
-			//TODO Konstruktor für nächste Klasse (Projekt Suchen)
-			
+
+			// TODO Konstruktor für nächste Klasse (Projekt Suchen)
+
 		}
 	};
 }
