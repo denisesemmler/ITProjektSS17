@@ -318,7 +318,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 * gelöscht werden kann
 	 */
 	public void deleteAusschreibung(Ausschreibung a) throws IllegalArgumentException {
-		this.deleteProfil(a);
+		//this.deleteProfil(a);
 
 		// Hier wird die Ausschreibung aus der DB entfernt
 		this.aMapper.delete(a);

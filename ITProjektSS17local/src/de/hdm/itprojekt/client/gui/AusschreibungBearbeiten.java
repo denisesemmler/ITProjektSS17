@@ -25,7 +25,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 	
 	
 
-	private Vector <Ausschreibung> aVector = new Vector<Ausschreibung>();
+		private Vector <Ausschreibung> aVector = new Vector<Ausschreibung>();
 		/**
 		 * Erstellen der Panels
 		 */
