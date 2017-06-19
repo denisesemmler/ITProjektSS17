@@ -82,7 +82,7 @@ public class TeilnehmerMapper {
 				t.setOrt(rs.getString("ort"));
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
-				t.setProfil_idProfil(rs.getInt("profil_idProfil"));
+				t.setProfil_idProfil(rs.getInt("Profil_idProfil"));
 				t.setProjektLeiter(rs.getInt("projektleiter"));
 
 				// Objekt zur�ckgeben
@@ -135,7 +135,7 @@ public class TeilnehmerMapper {
 				t.setOrt(rs.getString("ort"));
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
-				t.setProfil_idProfil(rs.getInt("profil_idProfil"));
+				t.setProfil_idProfil(rs.getInt("Profil_idProfil"));
 				t.setProjektLeiter(rs.getInt("projektleiter"));
 				// ... Objekt dem Ergebnisvektor hinzufügen
 				result.add(t);
@@ -180,7 +180,7 @@ public class TeilnehmerMapper {
 				t.setOrt(rs.getString("ort"));
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
-				t.setProfil_idProfil(rs.getInt("profil_idProfil"));
+				t.setProfil_idProfil(rs.getInt("Profil_idProfil"));
 				t.setProjektLeiter(rs.getInt("projektleiter"));
 
 				return t;
@@ -221,7 +221,7 @@ public class TeilnehmerMapper {
 				t.setOrt(rs.getString("ort"));
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
-				t.setProfil_idProfil(rs.getInt("profil_idProfil"));
+				t.setProfil_idProfil(rs.getInt("Profil_idProfil"));
 				t.setProjektLeiter(rs.getInt("projektleiter"));
 				// Teilnehmer dem Ergebnisvektor hinzufügen
 				result.add(t);
@@ -364,7 +364,7 @@ public class TeilnehmerMapper {
 				t.setOrt(rs.getString("ort"));
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
-				t.setProfil_idProfil(rs.getInt("profil_idProfil"));
+				t.setProfil_idProfil(rs.getInt("Profil_idProfil"));
 				t.setProjektLeiter(rs.getInt("projektleiter"));
 
 				return t;
