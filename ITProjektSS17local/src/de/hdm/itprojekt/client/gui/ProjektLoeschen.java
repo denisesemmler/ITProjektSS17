@@ -42,7 +42,7 @@ public class ProjektLoeschen extends VerticalPanel {
 		mainPanel.add(projektLoeschenButton);
 
 		try {
-			ClientSideSettings.getProjektAdministration().findAllProjektByTeilnehmerId(1,
+			ClientSideSettings.getProjektAdministration().findAllProjektByTeilnehmerId(ClientSideSettings.getCurrentUser().getId(),
 					new GetAllProjekteByIDCallback());
 		} catch (Exception e) {
 			Window.alert(e.toString());
