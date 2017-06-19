@@ -1,10 +1,14 @@
 package de.hdm.itprojekt.client.gui;
 
 import java.util.Date;
+import java.util.Vector;
 
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -15,8 +19,13 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
+import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Projekt;
+
 
 public class ProjektBearbeiten extends VerticalPanel{
+	
+	private Vector<Projekt> pVector = new Vector<Projekt>();
 	
 	private VerticalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
@@ -28,7 +37,7 @@ public class ProjektBearbeiten extends VerticalPanel{
 	/**
 	 * Erstellen der Labels 
 	 */
-	private Label marktplatzLabel = new Label ("Select Projektmarktplatz");
+	private Label marktplatzLabel = new Label ("Projekt auswaehlen: ");
 	private Label projektNameLabel = new Label("Projektname: ");
 	private Label projektBeschreibungLabel = new Label("Projektbeschreibung: ");
 	private Label startDateLabel = new Label("Start Datum: ");
@@ -43,7 +52,7 @@ public class ProjektBearbeiten extends VerticalPanel{
 	 * Erstellen der Buttons
 	 */
 	private Button projektSpeichernButton = new Button("Speichern",
-			new NavigationsButtonHandler());
+			new SpeichernButtonHandler());
 
 	/**
 	 * Erstellen der TextBoxen
@@ -68,9 +77,7 @@ public class ProjektBearbeiten extends VerticalPanel{
 		
 		attributePanel.add(marktplatzLabel);
 		attributePanel.add(projektListbox);
-		projektListbox.addItem("Projekt 1 von User");
-		projektListbox.addItem("Projekt 2 von User");
-		projektListbox.addItem("Projekt X von User");
+		projektListbox.addChangeHandler(new OnChangeHandler());
 		attributePanel.add(projektNameLabel);
 		attributePanel.add(projektNameBox);
 		attributePanel.add(projektBeschreibungLabel);
@@ -90,21 +97,85 @@ public class ProjektBearbeiten extends VerticalPanel{
 		endPicker.setValue(new Date(), true);
 		
 		mainPanel.add(projektSpeichernButton);
+		
+		try {
+			ClientSideSettings.getProjektAdministration().findAllProjektByTeilnehmerId(ClientSideSettings.getCurrentUser().getId(),
+					new GetAllProjekteByIDCallback());
+		} catch (Exception e) {
+			Window.alert(e.toString());
+			e.printStackTrace();
+		}
 	
 	}
+	
+	private class GetAllProjekteByIDCallback implements AsyncCallback<Vector<Projekt>> {
 
-	private class NavigationsButtonHandler implements ClickHandler {
-		public void onClick(ClickEvent event) {
-	        
-			Button active = (Button) event.getSource();
+		public void onFailure(Throwable caught) {
+			Window.alert("Läuft garnit");
+		}
+
+		public void onSuccess(Vector<Projekt> result) {
+		
+			for (int i = 0; i < result.size(); i++){
+				Projekt p1 = result.elementAt(i);
+				pVector.add(p1);
+				projektListbox.addItem(p1.getName());	
+			}
+			projektNameBox.setText(pVector.elementAt(projektListbox.getSelectedIndex()).getName());
+			projektBeschreibungArea.setText(pVector.elementAt(projektListbox.getSelectedIndex()).getBeschreibung());
+			startPicker.setValue(pVector.elementAt(projektListbox.getSelectedIndex()).getStartDatum());
+			endPicker.setValue(pVector.elementAt(projektListbox.getSelectedIndex()).getEndDatum());
+		}
+	}
+
+	private class OnChangeHandler implements ChangeHandler {
+
+		@Override
+		public void onChange(ChangeEvent event) {
+			try {
+				projektNameBox.setText(pVector.elementAt(projektListbox.getSelectedIndex()).getName());
+				projektBeschreibungArea.setText(pVector.elementAt(projektListbox.getSelectedIndex()).getBeschreibung());
+				startPicker.setValue(pVector.elementAt(projektListbox.getSelectedIndex()).getStartDatum());
+				endPicker.setValue(pVector.elementAt(projektListbox.getSelectedIndex()).getEndDatum());
+			} catch (Exception e){
+				Window.alert(e.toString());
+				e.printStackTrace();
+			}
 			
-			switch(active.getText()){
-			case "Speichern":
-				Window.alert("Projekt gespeichert");
-				RootPanel.get("Content").clear();
-			break;
-				    	 		    	
-	     }
-	   };
+		}
+		
+	}
+	private class SpeichernButtonHandler implements ClickHandler {
+		public void onClick(ClickEvent event) {
+			try {
+				int id = pVector.elementAt(projektListbox.getSelectedIndex()).getId();
+				Projekt p = new Projekt();
+				p.setId(id);
+				p.setName(projektNameBox.getText());
+				p.setBeschreibung(projektBeschreibungArea.getText());
+				p.setStartDatum(new java.sql.Date((startPicker.getValue()).getTime()));
+				p.setEndDatum(new java.sql.Date((endPicker.getValue()).getTime()));
+				ClientSideSettings.getProjektAdministration().updateProjekt(p, new SpeichernCallback());
+
+			} catch (Exception e) {
+				Window.alert(e.toString());
+				e.printStackTrace();
+			}
+		}
+	};
+	
+	private class SpeichernCallback implements AsyncCallback {
+
+		public void onFailure(Throwable caught) {
+			Window.alert("Dat läuft noch nit so!");
+
+		}
+
+		public void onSuccess(Object result) {
+			RootPanel.get("Content").clear();
+
+		}
+
 	}
 }
+
