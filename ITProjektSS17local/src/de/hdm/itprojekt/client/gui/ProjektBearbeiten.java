@@ -124,7 +124,9 @@ public class ProjektBearbeiten extends VerticalPanel{
 			projektNameBox.setText(pVector.elementAt(projektListbox.getSelectedIndex()).getName());
 			projektBeschreibungArea.setText(pVector.elementAt(projektListbox.getSelectedIndex()).getBeschreibung());
 			startPicker.setValue(pVector.elementAt(projektListbox.getSelectedIndex()).getStartDatum());
+			startPicker.setCurrentMonth(pVector.elementAt(projektListbox.getSelectedIndex()).getStartDatum());
 			endPicker.setValue(pVector.elementAt(projektListbox.getSelectedIndex()).getEndDatum());
+			endPicker.setCurrentMonth(pVector.elementAt(projektListbox.getSelectedIndex()).getEndDatum());
 		}
 	}
 
@@ -136,7 +138,9 @@ public class ProjektBearbeiten extends VerticalPanel{
 				projektNameBox.setText(pVector.elementAt(projektListbox.getSelectedIndex()).getName());
 				projektBeschreibungArea.setText(pVector.elementAt(projektListbox.getSelectedIndex()).getBeschreibung());
 				startPicker.setValue(pVector.elementAt(projektListbox.getSelectedIndex()).getStartDatum());
+				startPicker.setCurrentMonth(pVector.elementAt(projektListbox.getSelectedIndex()).getStartDatum());
 				endPicker.setValue(pVector.elementAt(projektListbox.getSelectedIndex()).getEndDatum());
+				endPicker.setCurrentMonth(pVector.elementAt(projektListbox.getSelectedIndex()).getEndDatum());
 			} catch (Exception e){
 				Window.alert(e.toString());
 				e.printStackTrace();
