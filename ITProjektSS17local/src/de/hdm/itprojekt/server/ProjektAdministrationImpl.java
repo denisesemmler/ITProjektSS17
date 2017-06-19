@@ -497,7 +497,12 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return this.tMapper.insert(teilnehmer);
 
 	}
-
+	@Override
+	public void updateTeilnehmer(Teilnehmer t) throws IllegalArgumentException {
+		
+		tMapper.update(t);
+	}
+										
 	
 	public Teilnehmer login(String requestUri) {
 

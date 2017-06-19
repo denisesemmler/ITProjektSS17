@@ -88,6 +88,8 @@ public interface ProjektAdministrationAsync {
 	void createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,
 			String emailAdresse, int rolle, int ProfilID, int projektleiter, AsyncCallback<Teilnehmer> callback);
 
+	void updateTeilnehmer(Teilnehmer t, AsyncCallback<Void> callback);
+
 
 	
 

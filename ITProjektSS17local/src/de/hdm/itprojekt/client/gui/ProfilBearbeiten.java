@@ -10,6 +10,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.shared.bo.Teilnehmer;
+
 
 public class ProfilBearbeiten extends VerticalPanel{
 
@@ -45,21 +47,27 @@ public class ProfilBearbeiten extends VerticalPanel{
  		//Elemente hinzufügen
  		labelsPanel.add(firstNameLabel);
  		labelsPanel.add(firstNameBox);
+ 		firstNameBox.setText(ClientSideSettings.getCurrentUser().getVorname());
  		
  		labelsPanel.add(lastNameLabel);
  		labelsPanel.add(lastNameBox);
+ 		lastNameBox.setText(ClientSideSettings.getCurrentUser().getNachname());
  		
  		labelsPanel.add(zusatzLabel);
  		labelsPanel.add(zusatzBox);
+ 		zusatzBox.setText(ClientSideSettings.getCurrentUser().getZusatz());
  		
  		labelsPanel.add(strasseLabel);
  		labelsPanel.add(strasseBox);
+ 		strasseBox.setText(ClientSideSettings.getCurrentUser().getStrasse());
  		
  		labelsPanel.add(plzLabel);
  		labelsPanel.add(plzBox);
+ 		plzBox.setText(Integer.toString(ClientSideSettings.getCurrentUser().getPlz()));
  		
  		labelsPanel.add(ortLabel);
  		labelsPanel.add(ortBox);
+ 		ortBox.setText(ClientSideSettings.getCurrentUser().getOrt());
  		
  		labelsPanel.add(speichern);
  	}
@@ -70,9 +78,14 @@ public class ProfilBearbeiten extends VerticalPanel{
 
 		public void onClick(ClickEvent event) {
 			try {
-				/*ClientSideSettings.getProjektAdministration().createTeilnehmer(firstNameBox.getText(),
-						lastNameBox.getText(), zusatzBox.getText(), strasseBox.getText(), Integer.parseInt(plzBox.getText()),
-						ortBox.getText(), ClientSideSettings.getCurrentUser().getEmail(), 1, new CreateTeilnehmerCallback());*/
+				Teilnehmer t = ClientSideSettings.getCurrentUser();
+				t.setVorname(firstNameBox.getText());
+				t.setNachname(lastNameBox.getText());
+				t.setZusatz(zusatzBox.getText());
+				t.setStrasse(strasseBox.getText());
+				t.setPlz(Integer.parseInt(plzBox.getText()));
+				t.setOrt(ortBox.getText());
+				ClientSideSettings.getProjektAdministration().updateTeilnehmer(t, new UpdateTeilnehmerCallback());
 			} catch (Exception e) {
 				Window.alert(e.toString());
 				e.printStackTrace();
@@ -89,7 +102,7 @@ public class ProfilBearbeiten extends VerticalPanel{
 
 		public void onSuccess(Object result) {
 			RootPanel.get("Content").clear();
-
+			Window.alert("Dein Profil wurde aktualisiert!");
 		}
 
 	}
