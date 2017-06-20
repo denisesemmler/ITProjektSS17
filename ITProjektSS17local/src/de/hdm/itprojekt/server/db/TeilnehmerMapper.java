@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
-
-import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 /**
@@ -82,7 +80,6 @@ public class TeilnehmerMapper {
 				t.setOrt(rs.getString("ort"));
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
-				t.setProfil_idProfil(rs.getInt("Profil_idProfil"));
 				t.setProjektLeiter(rs.getInt("projektleiter"));
 
 				// Objekt zurückgeben
@@ -135,7 +132,6 @@ public class TeilnehmerMapper {
 				t.setOrt(rs.getString("ort"));
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
-				t.setProfil_idProfil(rs.getInt("Profil_idProfil"));
 				t.setProjektLeiter(rs.getInt("projektleiter"));
 				// ... Objekt dem Ergebnisvektor hinzufÃ¼gen
 				result.add(t);
@@ -180,7 +176,6 @@ public class TeilnehmerMapper {
 				t.setOrt(rs.getString("ort"));
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
-				t.setProfil_idProfil(rs.getInt("Profil_idProfil"));
 				t.setProjektLeiter(rs.getInt("projektleiter"));
 
 				return t;
@@ -221,7 +216,6 @@ public class TeilnehmerMapper {
 				t.setOrt(rs.getString("ort"));
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
-				t.setProfil_idProfil(rs.getInt("Profil_idProfil"));
 				t.setProjektLeiter(rs.getInt("projektleiter"));
 				// Teilnehmer dem Ergebnisvektor hinzufÃ¼gen
 				result.add(t);
@@ -259,17 +253,17 @@ public class TeilnehmerMapper {
 				stmt = con.createStatement();
 				// SQL Query ausführen um Datensatz in DB zu schreiben
 				stmt.executeUpdate(
-						"INSERT INTO Teilnehmer (vorname, nachname, zusatz, email, rolle, ort, plz, strasse, Profil_idProfil, projektleiter) "
+						"INSERT INTO Teilnehmer (vorname, nachname, zusatz, email, rolle, ort, plz, strasse, projektleiter) "
 								+ "VALUES " + "('" + t.getVorname() + "', '" + t.getNachname() + "', '" + t.getZusatz()
 								+ "', '" + t.getEmail() + "', '" + t.getRolle() + "', '" + t.getOrt() + "', '"
-								+ t.getPlz() + "', '" + t.getStrasse() + "', '" + t.getProfil_idProfil() + "', '"
+								+ t.getPlz() + "', '" + t.getStrasse() + "', '" + 
 								+ t.getProjektLeiter() + "')");
 
 				System.out.println(
-						"vorname, nachname, zusatz, email, rolle, ort, plz, strasse, Profil_idProfil, projektleiter) "
+						"vorname, nachname, zusatz, email, rolle, ort, plz, strasse, projektleiter) "
 								+ "VALUES " + "('" + t.getVorname() + "', '" + t.getNachname() + "', '" + t.getZusatz()
 								+ "', '" + t.getEmail() + "', '" + t.getRolle() + "', '" + t.getOrt() + "', '"
-								+ t.getPlz() + "', '" + t.getStrasse() + "', '" + t.getProfil_idProfil() + "', '"
+								+ t.getPlz() + "', '" + t.getStrasse() + "', '" +
 								+ t.getProjektLeiter() + "')");
 
 			}
@@ -297,14 +291,12 @@ public class TeilnehmerMapper {
 			// SQL Query ausführen
 			stmt.executeUpdate("UPDATE Teilnehmer " + "SET vorname = '" + t.getVorname() + "', nachname = '" + t.getNachname() + "', zusatz = '" + t.getZusatz()
 					+ "', rolle = '" + t.getRolle() + "',email = '" + t.getEmail() + "',ort = '" + t.getOrt()
-					+ "', plz = '" + t.getPlz() + "',strasse = '" + t.getStrasse() + "',Profil_idProfil = '"
-					+ t.getProfil_idProfil() + "', projektleiter = '" + t.getProjektLeiter() + "' WHERE idTeilnehmer = "
+					+ "', plz = '" + t.getPlz() + "',strasse = '" + t.getStrasse() +  "', projektleiter = '" + t.getProjektLeiter() + "' WHERE idTeilnehmer = "
 					+ t.getId());
 
 			System.out.println("UPDATE Teilnehmer " + "SET vorname = '" + t.getVorname() + "', nachname = '" + t.getNachname() + "', zusatz = '" + t.getZusatz()
 					+ "', rolle = '" + t.getRolle() + "',email = '" + t.getEmail() + "',ort = '" + t.getOrt()
-					+ "', plz = '" + t.getPlz() + "',strasse = '" + t.getStrasse() + "',Profil_idProfil = '"
-					+ t.getProfil_idProfil() + "', projektleiter = '" + t.getProjektLeiter() + "' WHERE idTeilnehmer = "
+					+ "', plz = '" + t.getPlz() + "',strasse = '" + t.getStrasse() + "', projektleiter = '" + t.getProjektLeiter() + "' WHERE idTeilnehmer = "
 					+ t.getId());
 
 		}
@@ -340,7 +332,7 @@ public class TeilnehmerMapper {
 	}
 
 	//Suche von Teilnehmrn anhand der ID
-	public Teilnehmer findByProfil(Profil suchProfil) {
+	/*public Teilnehmer findByProfil(Profil suchProfil) {
 		// Datenbankverbindung Ã¶ffnen
 		Connection con = DBConnection.connection();
 
@@ -374,6 +366,6 @@ public class TeilnehmerMapper {
 			return null;
 		}
 		return null;
-	}
+	}*/
 
 }

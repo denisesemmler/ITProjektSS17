@@ -266,9 +266,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 			this.deleteBewerbung(b);
 		}
 
-		// Hier werden die Teilnehmer zum Profil gelesen
-		Teilnehmer teilnehmer = tMapper.findByProfil(suchProfil);
-		teilnehmer.setProfil_idProfil(0);
+		
 	}
 
 	/**
@@ -485,7 +483,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 
 	@Override
 	public Teilnehmer createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, 
-									   int plz, String ort, String emailAdresse, int rolle, int ProfilID, int projektleiter)
+									   int plz, String ort, String emailAdresse, int rolle, int projektleiter)
 			throws IllegalArgumentException {
 
 		Teilnehmer teilnehmer = new Teilnehmer();
@@ -498,7 +496,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		teilnehmer.setOrt(ort);
 		teilnehmer.setEmail(emailAdresse);
 		teilnehmer.setRolle(rolle);
-		teilnehmer.setProfil_idProfil(ProfilID);
 		teilnehmer.setProjektLeiter(projektleiter);
 
 		//Teilnehmer t = this.tMapper.insert(teilnehmer);
