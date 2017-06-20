@@ -11,4 +11,5 @@ import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 
 public interface ReportService  extends RemoteService{
 	List<AusschreibungReport> getAllAusschreibungen();
+	List<AusschreibungReport> getAllAusschreibungenUser(String user);
 }

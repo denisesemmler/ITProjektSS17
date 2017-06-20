@@ -1,6 +1,5 @@
 package de.hdm.itprojekt.shared.report;
 
-
 import java.util.List;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -8,16 +7,15 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
-import de.hdm.itprojekt.client.gui.ClientSideSettings;
 
+import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.shared.ReportServiceAsync;
 import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 
-public class AlleAusschreibungen extends SimpleReport {
-      
-	public AlleAusschreibungen() {
-		super("Alle Ausschreibungen");
-    	ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
+public class AlleAusschreibungenNutzer extends SimpleReport{
+	public AlleAusschreibungenNutzer() {
+		super("Alle Ausschreibungen für Nutzer ...");
+ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
     	
     	final AsyncCallback<List<AusschreibungReport>> initReportGeneratorCallback = new AsyncCallback<List<AusschreibungReport>>() {
             @Override
