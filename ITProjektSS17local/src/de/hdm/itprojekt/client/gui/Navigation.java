@@ -14,6 +14,7 @@ import de.hdm.itprojekt.client.gui.LogOutPopUp;
 
 public class Navigation extends HorizontalPanel {
 
+	private Button navStarseiteButton = new Button ("Start", new NavigationsButtonHandler());
 	private Button navProjektmarktplatzVerwaltenButton = new Button("Projektmarktplätze verwalten",
 			new NavigationsButtonHandler());
 	private Button navProjektVerwaltenButton = new Button("Projekte verwalten", new NavigationsButtonHandler());
@@ -28,6 +29,7 @@ public class Navigation extends HorizontalPanel {
 	public Navigation() {
 		// CSS Style Zuweisung
 		this.setStylePrimaryName("Navi");
+		navStarseiteButton.setStylePrimaryName("navi-button");
 		navProjektmarktplatzVerwaltenButton.setStylePrimaryName("navi-button");
 		navProjektVerwaltenButton.setStylePrimaryName("navi-button");
 		navAusschreibungVerwaltenButton.setStylePrimaryName("navi-button");
@@ -37,6 +39,7 @@ public class Navigation extends HorizontalPanel {
 		logOutButton.setStylePrimaryName("navi-button");
 
 		if (ClientSideSettings.getCurrentUser().isExisting()) {
+			this.add(navStarseiteButton);
 			this.add(navProjektmarktplatzVerwaltenButton);
 			this.add(navProjektVerwaltenButton);
 			this.add(navAusschreibungVerwaltenButton);
@@ -55,6 +58,10 @@ public class Navigation extends HorizontalPanel {
 			Button active = (Button) e.getSource();
 
 			switch (active.getText()) {
+			case "Start":
+				RootPanel.get("Content").clear();
+				RootPanel.get("Content").add(new ProfilAnzeigen());
+				break;
 			case "Projektmarktplätze verwalten":
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(new ProjektmarktplatzVerwalten());
