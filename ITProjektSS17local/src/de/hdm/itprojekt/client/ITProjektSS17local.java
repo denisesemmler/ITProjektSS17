@@ -23,6 +23,7 @@ import de.hdm.itprojekt.client.gui.LogOutPopUp;
 import de.hdm.itprojekt.client.gui.AnmeldeFormular;
 import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.Navigation;
+import de.hdm.itprojekt.client.gui.ProfilAnzeigen;
 import de.hdm.itprojekt.client.gui.ProjektLoeschen;
 import de.hdm.itprojekt.shared.LoginServiceAsync;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
@@ -119,8 +120,8 @@ public class ITProjektSS17local implements EntryPoint {
 												"<h2>Willkommen bei Pr0ject, "
 															+ result.getVorname()
 															+ "</h2>"));
-									//RootPanel.get("Content").add(
-										//	new ProjektLoeschen());
+									RootPanel.get("Content").add(
+											new ProfilAnzeigen());
 								}
 
 								/*
