@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -34,6 +35,12 @@ public class AnmeldeFormular extends VerticalPanel{
 	 	private TextBox plzBox = new TextBox(); 
 	 	private Label ortLabel = new Label("Ort: ");
 	 	private TextBox ortBox = new TextBox(); 
+	 	private Label eigenschaftLabel = new Label("Deine Fähigkeiten: ");
+	 	private Label schulabschlussLabel = new Label ("Höchster Schulabschluss: ");
+	 	private Label berufserfahrungLabel = new Label ("Berufserfahrung: ");
+	 	
+	 	private ListBox schulabschlussListBox = new ListBox();
+	 	private ListBox berufserfahrungListBox = new ListBox();
 	 	private Button speichern = new Button("Speichern", new CreateTeilnehmerClickHandler());
 	 	
 	 	//Teilnehmer neuerTeilnehmer = null;
@@ -49,7 +56,7 @@ public class AnmeldeFormular extends VerticalPanel{
 	 		ortLabel.addStyleName("Content-label");
 	 		firstNameBox.addStyleName("gwt-TextBox");
 	 		lastNameBox.addStyleName("gwt-TextBox");
-	 		
+	 		eigenschaftLabel.addStyleName("labeluberschrift");
 	 		
 	 		mainPanel.add(labelsPanel);
 	 		
@@ -75,6 +82,26 @@ public class AnmeldeFormular extends VerticalPanel{
 	 		
 	 		labelsPanel.add(ortLabel);
 	 		labelsPanel.add(ortBox);
+	 		
+	 		labelsPanel.add(eigenschaftLabel);
+	 		labelsPanel.add(schulabschlussLabel);
+	 		
+	 		labelsPanel.add(schulabschlussListBox);	 		
+	 		schulabschlussListBox.addItem("Hauptschulabschluss");
+	 		schulabschlussListBox.addItem("Mittlere Reife");
+	 		schulabschlussListBox.addItem("Fachhochschulreife");
+	 		schulabschlussListBox.addItem("Abitur");
+	 		schulabschlussListBox.addItem("Bachelor");
+	 		schulabschlussListBox.addItem("Master");
+	 		
+	 		labelsPanel.add(berufserfahrungLabel);
+	 		labelsPanel.add(berufserfahrungListBox);
+	 		berufserfahrungListBox.addItem("weniger als 1 Jahr");
+	 		berufserfahrungListBox.addItem("1 - 5 Jahre");
+	 		berufserfahrungListBox.addItem("6 - 10 Jahre");
+	 		berufserfahrungListBox.addItem("mehr als 10 Jahre"); 		
+	 		
+	 		
 	 		
 	 		labelsPanel.add(speichern);
 	 	}
