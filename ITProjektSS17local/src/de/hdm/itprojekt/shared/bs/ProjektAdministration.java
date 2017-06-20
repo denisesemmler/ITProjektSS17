@@ -46,6 +46,8 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public Vector<Projektmarktplatz> findAllProjektmarktplatz() throws IllegalArgumentException;
 	
+	public Vector<Projektmarktplatz> findProjektmarktplatzByTeilnehmerId(int teilnehmerId) throws IllegalArgumentException;
+	
 	/*
 	 * Methode zum anlegen eines Projekts
 	 */
@@ -103,6 +105,7 @@ public interface ProjektAdministration extends RemoteService {
 			String emailAdresse, int rolle, int ProfilID, int projektleiter) throws IllegalArgumentException;
 
 	public void updateTeilnehmer(Teilnehmer t) throws IllegalArgumentException;
+
 	
 
 	

@@ -63,36 +63,36 @@ public class ProjektmarktplatzMapper {
 		 * @param id - Prim�rschl�ssel von Projektmarktplatz
 		 * @return Projektmarktplatz Objekt, das die gesuchte ID enth�lt
 		 */
-		public Projektmarktplatz findByTeilnehmerId(int teilnehmerId) {
+		public Vector<Projektmarktplatz> findByTeilnehmerId(int teilnehmerId) {
 			// Datenbankverbindung �ffnen
 			Connection con = DBConnection.connection();
+			//Ergebnis-ArrayList anlegen
+			Vector<Projektmarktplatz> result = new Vector<Projektmarktplatz>();
 			
 			try {
-				// Neues SQL Statement anlegen
+				// neues SQL Statement anlegen
 				Statement stmt = con.createStatement();
-				// SQL Query ausf�hren
+				// SQL Query ausführen
 				ResultSet rs = stmt.executeQuery("SELECT * FROM Projektmarktplatz " +
 						"WHERE Teilnehmer_idTeilnehmer = " + teilnehmerId);
-				// Bei Treffer 
-				if(rs.next()) {
-					// Neues Projektmarktplatz Objekt erzeugen
+				// Für jeden gefundenen Treffer...
+				while (rs.next()) {
+					// ... neues Projektmarkplatz Objekt anlegen
 					Projektmarktplatz pm = new Projektmarktplatz();
-					// Id und Bezeichnung mit den Daten aus der DB f�llen
+					// ... Id und Bezeichnung mit den Daten aus der DB füllen
 					pm.setId(rs.getInt("idProjektmarktplatz"));
 					pm.setBezeichnung(rs.getString("bezeichnung"));
 					pm.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
-				
-					// Objekt zur�ckgeben
-					return pm;
+					// ... Objekt dem Ergebnisvektor hinzufügen
+					result.add(pm);
 				}
-			} 
+			}
 			// Error Handling
 			catch (SQLException e) {
 				e.printStackTrace();
-				return null;
 			}
-			// Falls nichts gefunden wurde null zur�ckgeben
-			return null;
+			// Ergebnis zurückgeben
+			return result;
 		}
 		
 		public Projektmarktplatz findById(int id) {

@@ -35,8 +35,7 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 	public ProjektmarktplatzBearbeiten() {
 
 		// CSS Styles
-		speichernButton.setStylePrimaryName("grotte-button");
-
+		
 		mainPanel.add(editorPanel);
 		editorPanel.add(marktplatzLabel);
 		editorPanel.add(marktplatzListbox);
@@ -47,7 +46,7 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 		editorPanel.add(speichernButton);
 
 		try {
-			ClientSideSettings.getProjektAdministration().findAllProjektmarktplatz(new GetAllMarktplatzCallback());
+			ClientSideSettings.getProjektAdministration().findProjektmarktplatzByTeilnehmerId(ClientSideSettings.getCurrentUser().getId(), new GetAllMarktplatzCallback());
 		} catch (Exception e) {
 			Window.alert(e.toString());
 			e.printStackTrace();

@@ -35,6 +35,8 @@ public interface ProjektAdministrationAsync {
 	
 	void findAllProjektmarktplatz(AsyncCallback<Vector<Projektmarktplatz>> callback);
 	
+	void findProjektmarktplatzByTeilnehmerId(int teilnehmerId, AsyncCallback<Vector<Projektmarktplatz>> callback);
+
 	/*
 	 * F�r Projekte
 	 */
@@ -90,6 +92,7 @@ public interface ProjektAdministrationAsync {
 
 	void updateTeilnehmer(Teilnehmer t, AsyncCallback<Void> callback);
 
+	
 
 	
 

@@ -140,6 +140,15 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return projektmarktplatz;
 	}
 	
+	@Override
+	public Vector<Projektmarktplatz> findProjektmarktplatzByTeilnehmerId(int teilnehmerId) throws IllegalArgumentException {
+		//Alle Projektmarktplätze werden hier "gemerkt"
+		Vector<Projektmarktplatz> projektmarktplatz = pmMapper.findByTeilnehmerId(teilnehmerId);
+		
+		//Rückgabe an den Aufrufer
+		return projektmarktplatz;
+	}
+	
 	/*
 	 * Methoden für Projekte
 	 */
