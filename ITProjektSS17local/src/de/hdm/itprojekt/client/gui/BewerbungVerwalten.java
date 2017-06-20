@@ -31,7 +31,7 @@ public class BewerbungVerwalten extends VerticalPanel {
 			switch (active.getText()) {
 			case "Anlegen":
 				RootPanel.get("Content").clear();
-				RootPanel.get("Content").add(new BewerbungAnlegen());
+				RootPanel.get("Content").add(new AusschreibungAnzeigen());
 				break;
 			case "Bearbeiten":
 				RootPanel.get("Content").clear();

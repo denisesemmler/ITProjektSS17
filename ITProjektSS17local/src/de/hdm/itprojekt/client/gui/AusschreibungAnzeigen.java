@@ -16,7 +16,7 @@ import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 
-public class BewerbungAnlegen extends VerticalPanel {
+public class AusschreibungAnzeigen extends VerticalPanel {
 
 	/**
 	 * Erstellen der Panels
@@ -53,7 +53,7 @@ public class BewerbungAnlegen extends VerticalPanel {
 	/**
 	 * Konstruktor für Anlegen der GUI
 	 */
-	public BewerbungAnlegen() {
+	public AusschreibungAnzeigen() {
 
 		// CSS Styling
 		marktplatzLabel.addStyleName("Content-Label");
