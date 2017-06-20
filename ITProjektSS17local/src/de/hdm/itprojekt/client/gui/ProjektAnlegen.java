@@ -79,6 +79,8 @@ public class ProjektAnlegen extends VerticalPanel {
 		projektBeschreibungLabel.addStyleName("Content-Label");
 		startDateLabel.addStyleName("Content-Label");
 		endDateLabel.addStyleName("Content-Label");
+		projektNameBox.addStyleName("gwt-TextBox");
+		projektBeschreibungArea.addStyleName("textarea");
 
 		mainPanel.add(editorPanel);
 

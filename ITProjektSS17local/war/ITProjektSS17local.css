@@ -60,7 +60,7 @@ h1 {
 }
 .gwt-TextBox{
 	font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
-	width: 130px;
+	width: 250px;
 	height: 20px;
 	padding-left: 4px;
 	padding-right: 4px;
@@ -70,6 +70,11 @@ h1 {
 	margin-bottom: 2px;
 	margin-right: 7px;
 }
+.textarea{
+	font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+	width: 250px;
+}
+
 .Content-Label{
 	width: 130px;
 	padding-right: 20px;
@@ -79,4 +84,8 @@ h1 {
 	padding-bottom: 4px;
 	border-bottom: 1px solid #c0c0c0;
 	border-top: 1px solid #c0c0c0;
+}
+.label1{
+	margin-right: 50px;
+	margin-botton: 20px;
 }

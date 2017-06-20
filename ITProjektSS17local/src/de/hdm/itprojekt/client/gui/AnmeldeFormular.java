@@ -47,6 +47,9 @@ public class AnmeldeFormular extends VerticalPanel{
 	 		strasseLabel.addStyleName("Content-label");
 	 		plzLabel.addStyleName("Content-label");
 	 		ortLabel.addStyleName("Content-label");
+	 		firstNameBox.addStyleName("gwt-TextBox");
+	 		lastNameBox.addStyleName("gwt-TextBox");
+	 		
 	 		
 	 		mainPanel.add(labelsPanel);
 	 		
