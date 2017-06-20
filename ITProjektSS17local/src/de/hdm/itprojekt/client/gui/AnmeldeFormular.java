@@ -244,6 +244,25 @@ public class AnmeldeFormular extends VerticalPanel{
 
 			public void onSuccess(Object result) {
 				Window.alert("Deine Daten wurden gespeichert!");
+				ClientSideSettings.getProjektAdministration().createProfil(/*ClientSideSettings.getCurrentUser().getId()*/36, new CreateProfilCallback());
+				/*RootPanel.get("Content").clear();
+				RootPanel.get("Navi").clear();
+				naviPanel.add(new Navigation());
+				RootPanel.get("Navi").add(naviPanel);*/
+				
+			}
+
+		}
+		
+		private class CreateProfilCallback implements AsyncCallback {
+
+			public void onFailure(Throwable caught) {
+				Window.alert("Dat läuft noch nit so Profil!");
+
+			}
+
+			public void onSuccess(Object result) {
+				Window.alert("Dein Profil wurde angelegt!");
 				RootPanel.get("Content").clear();
 				RootPanel.get("Navi").clear();
 				naviPanel.add(new Navigation());

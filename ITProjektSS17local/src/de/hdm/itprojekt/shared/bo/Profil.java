@@ -15,13 +15,15 @@ public class Profil extends BusinessObjekt {
 
 
 	private static final long serialVersionUID = 1L;
-	private int idProfil =0;
-	private Date erstellDatum;
-	private Date aenderungsDatum;
-	private Eigenschaft e		= new Eigenschaft("","");
-	private int Teilnehmer_idTeilnehmer;
+	private int idProfil = 0;
+	private Date erstellDatum = null;
+	private Date aenderungsDatum = null;
 	
-
+	private int Teilnehmer_idTeilnehmer = 0;
+	
+public Profil(){
+	
+}
 /**
  * @return the idProfil
  */
@@ -67,21 +69,6 @@ public void setAenderungsDatum(Date aenderungsDatum) {
 	this.aenderungsDatum = aenderungsDatum;
 }
 
-
-/**
- * @return the e
- */
-public Eigenschaft getE() {
-	return e;
-}
-
-
-/**
- * @param e the e to set
- */
-public void setE(Eigenschaft e) {
-	this.e = e;
-}
 
 public int getTeilnehmer_idTeilnehmer() {
 	return Teilnehmer_idTeilnehmer;

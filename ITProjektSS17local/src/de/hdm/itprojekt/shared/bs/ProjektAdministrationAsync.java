@@ -7,6 +7,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
@@ -91,6 +92,8 @@ public interface ProjektAdministrationAsync {
 			String emailAdresse, int rolle, int projektleiter, AsyncCallback<Teilnehmer> callback);
 
 	void updateTeilnehmer(Teilnehmer t, AsyncCallback<Void> callback);
+
+	void createProfil(int teilnehmerId, AsyncCallback<Profil> callback);
 
 	
 

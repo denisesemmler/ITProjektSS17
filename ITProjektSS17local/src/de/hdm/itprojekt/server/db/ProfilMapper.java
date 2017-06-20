@@ -74,12 +74,12 @@ public class ProfilMapper {
 				stmt = con.createStatement();
 				// SQL Query ausführen um Datensatz in DB zu schreiben
 				stmt.executeUpdate(
-						"INSERT INTO Teilnehmer (erstelldatum, Teilnehmer_idTeilnehmer) "
-								+ "VALUES " + "('" + p.getErstellDatum() + "', '" + p.getTeilnehmer_idTeilnehmer() + "')");
+						"INSERT INTO Profil (idProfil, erstelldatum, Teilnehmer_idTeilnehmer) "
+								+ "VALUES " + "('" + p.getId() + "', '"  + p.getErstellDatum() + "', '" + p.getTeilnehmer_idTeilnehmer() + "')");
 
 				System.out.println(
-						"erstelldatum, Teilnehmer_idTeilnehmer) "
-								+ "VALUES " + "('" + p.getErstellDatum() + "', '" + p.getTeilnehmer_idTeilnehmer() + "')");
+						"idProfil, erstelldatum, Teilnehmer_idTeilnehmer) "
+								+ "VALUES " + "('" + p.getId() + "', '"  + p.getErstellDatum() + "', '" + p.getTeilnehmer_idTeilnehmer() + "')");
 
 			}
 		}
