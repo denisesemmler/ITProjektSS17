@@ -13,15 +13,22 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm.itprojekt.client.ITProjektSS17local;
 
 
 
 public class AnmeldeFormular extends VerticalPanel{
 	
 		private VerticalPanel mainPanel = this;
-		VerticalPanel labelsPanel = new VerticalPanel();
+		private VerticalPanel labelsPanel = new VerticalPanel();
 		private HorizontalPanel naviPanel = new HorizontalPanel();
+		private HorizontalPanel msoffice = new HorizontalPanel();
+		private HorizontalPanel msproject = new HorizontalPanel();
+		private HorizontalPanel sap = new HorizontalPanel();
+		private HorizontalPanel aris = new HorizontalPanel();
+		private HorizontalPanel java = new HorizontalPanel();
+		private HorizontalPanel c = new HorizontalPanel();
+		private HorizontalPanel catia = new HorizontalPanel();
+		private HorizontalPanel sql = new HorizontalPanel();
 		
 		private Label firstNameLabel = new Label("Vorname: "); 
 	 	private TextBox firstNameBox = new TextBox(); 
@@ -38,9 +45,26 @@ public class AnmeldeFormular extends VerticalPanel{
 	 	private Label eigenschaftLabel = new Label("Deine Fähigkeiten: ");
 	 	private Label schulabschlussLabel = new Label ("Höchster Schulabschluss: ");
 	 	private Label berufserfahrungLabel = new Label ("Berufserfahrung: ");
+	 	private Label msofficeLabel = new Label ("Microsoft Office: ");
+	 	private Label msprojectLabel = new Label ("Microsoft Project: ");
+	 	private Label sapLabel = new Label ("SAP/ERP: ");
+	 	private Label arisLabel = new Label ("ARIS: ");
+	 	private Label javaLabel = new Label ("Java: ");
+	 	private Label cLabel = new Label ("C/C++: ");
+	 	private Label catiaLabel = new Label ("CATIA: ");
+	 	private Label sqlLabel = new Label ("SQL/DB : ");
 	 	
 	 	private ListBox schulabschlussListBox = new ListBox();
 	 	private ListBox berufserfahrungListBox = new ListBox();
+	 	private ListBox msofficeListBox = new ListBox();
+	 	private ListBox msprojectListBox = new ListBox();
+	 	private ListBox sapListBox = new ListBox();
+	 	private ListBox arisListBox = new ListBox();
+	 	private ListBox javaListBox = new ListBox();
+	 	private ListBox cListBox = new ListBox();
+	 	private ListBox catiaListBox = new ListBox();
+	 	private ListBox sqlListBox = new ListBox();
+	 	
 	 	private Button speichern = new Button("Speichern", new CreateTeilnehmerClickHandler());
 	 	
 	 	//Teilnehmer neuerTeilnehmer = null;
@@ -57,6 +81,14 @@ public class AnmeldeFormular extends VerticalPanel{
 	 		firstNameBox.addStyleName("gwt-TextBox");
 	 		lastNameBox.addStyleName("gwt-TextBox");
 	 		eigenschaftLabel.addStyleName("labeluberschrift");
+	 		msofficeLabel.addStyleName("labelkennt");
+	 		msprojectLabel.addStyleName("labelkennt");
+	 		sapLabel.addStyleName("labelkennt");
+	 		arisLabel.addStyleName("labelkennt");
+	 		javaLabel.addStyleName("labelkennt");
+	 		cLabel.addStyleName("labelkennt");
+	 		catiaLabel.addStyleName("labelkennt");
+	 		sqlLabel.addStyleName("labelkennt");
 	 		
 	 		mainPanel.add(labelsPanel);
 	 		
@@ -101,7 +133,70 @@ public class AnmeldeFormular extends VerticalPanel{
 	 		berufserfahrungListBox.addItem("6 - 10 Jahre");
 	 		berufserfahrungListBox.addItem("mehr als 10 Jahre"); 		
 	 		
+	 		labelsPanel.add(msoffice);
+	 		labelsPanel.add(msproject);
+	 		labelsPanel.add(sap);
+	 		labelsPanel.add(aris);
+	 		labelsPanel.add(java);
+	 		labelsPanel.add(c);
+	 		labelsPanel.add(catia);
+	 		labelsPanel.add(sql);	 		
 	 		
+	 		msoffice.add(msofficeLabel);
+	 		msoffice.add(msofficeListBox);
+	 		
+	 		msproject.add(msprojectLabel);
+	 		msproject.add(msprojectListBox);
+	 		
+	 		sap.add(sapLabel);
+	 		sap.add(sapListBox);
+	 		
+	 		aris.add(arisLabel);
+	 		aris.add(arisListBox);
+	 		
+	 		java.add(javaLabel);
+	 		java.add(javaListBox);
+	 		
+	 		c.add(cLabel);
+	 		c.add(cListBox);
+	 		
+	 		catia.add(catiaLabel);
+	 		catia.add(catiaListBox);
+	 		
+	 		sql.add(sqlLabel);
+	 		sql.add(sqlListBox);		 		 		
+	 		
+	 		msofficeListBox.addItem("Keine Kenntnisse");
+	 		msofficeListBox.addItem("Wenig Kenntnisse");
+	 		msofficeListBox.addItem("Gute Kenntnisse");
+	 		
+	 		msprojectListBox.addItem("Keine Kenntnisse");
+	 		msprojectListBox.addItem("Wenig Kenntnisse");
+	 		msprojectListBox.addItem("Gute Kenntnisse");
+	 		
+	 		sapListBox.addItem("Keine Kenntnisse");
+	 		sapListBox.addItem("Wenig Kenntnisse");
+	 		sapListBox.addItem("Gute Kenntnisse");
+	 		
+	 		arisListBox.addItem("Keine Kenntnisse");
+	 		arisListBox.addItem("Wenig Kenntnisse");
+	 		arisListBox.addItem("Gute Kenntnisse");
+	 		
+	 		javaListBox.addItem("Keine Kenntnisse");
+	 		javaListBox.addItem("Wenig Kenntnisse");
+	 		javaListBox.addItem("Gute Kenntnisse");
+	 		
+	 		cListBox.addItem("Keine Kenntnisse");
+	 		cListBox.addItem("Wenig Kenntnisse");
+	 		cListBox.addItem("Gute Kenntnisse");
+	 		
+	 		catiaListBox.addItem("Keine Kenntnisse");
+	 		catiaListBox.addItem("Wenig Kenntnisse");
+	 		catiaListBox.addItem("Gute Kenntnisse");
+	 		
+	 		sqlListBox.addItem("Keine Kenntnisse");
+	 		sqlListBox.addItem("Wenig Kenntnisse");
+	 		sqlListBox.addItem("Gute Kenntnisse");
 	 		
 	 		labelsPanel.add(speichern);
 	 	}
@@ -115,8 +210,9 @@ public class AnmeldeFormular extends VerticalPanel{
 				try {
 					ClientSideSettings.getProjektAdministration().createTeilnehmer(firstNameBox.getText(),
 							lastNameBox.getText(), zusatzBox.getText(), strasseBox.getText(), Integer.parseInt(plzBox.getText()),
-							ortBox.getText(), ClientSideSettings.getCurrentUser().getEmail(), 1, 1, 2,  new CreateTeilnehmerCallback());
+							ortBox.getText(), ClientSideSettings.getCurrentUser().getEmail(), 1, 2,  new CreateTeilnehmerCallback());
 					ClientSideSettings.getCurrentUser().setExisting(true);
+					
 				} catch (Exception e) {
 					Window.alert(e.toString());
 					e.printStackTrace();
