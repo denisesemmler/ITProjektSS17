@@ -63,7 +63,7 @@ public class ProjektmarktplatzMapper {
 		 * @param id - Prim�rschl�ssel von Projektmarktplatz
 		 * @return Projektmarktplatz Objekt, das die gesuchte ID enth�lt
 		 */
-		public Projektmarktplatz findById(int id) {
+		public Projektmarktplatz findByTeilnehmerId(int teilnehmerId) {
 			// Datenbankverbindung �ffnen
 			Connection con = DBConnection.connection();
 			
@@ -72,7 +72,7 @@ public class ProjektmarktplatzMapper {
 				Statement stmt = con.createStatement();
 				// SQL Query ausf�hren
 				ResultSet rs = stmt.executeQuery("SELECT * FROM Projektmarktplatz " +
-						"WHERE idProjektmarktplatz = " + id);
+						"WHERE Teilnehmer_idTeilnehmer = " + teilnehmerId);
 				// Bei Treffer 
 				if(rs.next()) {
 					// Neues Projektmarktplatz Objekt erzeugen
@@ -95,6 +95,37 @@ public class ProjektmarktplatzMapper {
 			return null;
 		}
 		
+		public Projektmarktplatz findById(int id) {
+		// Datenbankverbindung �ffnen
+		Connection con = DBConnection.connection();
+		
+		try {
+			// Neues SQL Statement anlegen
+			Statement stmt = con.createStatement();
+			// SQL Query ausf�hren
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Projektmarktplatz " +
+					"WHERE idProjektmarktplatz = " + id);
+			// Bei Treffer 
+			if(rs.next()) {
+				// Neues Projektmarktplatz Objekt erzeugen
+				Projektmarktplatz pm = new Projektmarktplatz();
+				// Id und Bezeichnung mit den Daten aus der DB f�llen
+				pm.setId(rs.getInt("idProjektmarktplatz"));
+				pm.setBezeichnung(rs.getString("bezeichnung"));
+				pm.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
+			
+				// Objekt zur�ckgeben
+				return pm;
+			}
+		} 
+		// Error Handling
+		catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		// Falls nichts gefunden wurde null zur�ckgeben
+		return null;
+	}
 		/**
 		 * Suche eines Projektmarktplatz anhand seiner Bezeichnung.
 		 * Da die Bezeichnung eindeutig ist, k�nnen mehrere 
