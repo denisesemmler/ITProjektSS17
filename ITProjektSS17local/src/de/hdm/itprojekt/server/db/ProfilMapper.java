@@ -7,6 +7,7 @@ import java.sql.Statement;
 //import de.hdm.itprojekt.profil.server.db.DBConnection;
 import de.hdm.itprojekt.server.db.ProfilMapper;
 import de.hdm.itprojekt.shared.bo.Profil;
+import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 /**
  * <p>
@@ -53,7 +54,41 @@ public class ProfilMapper {
 	 * @param id
 	 *            - PrimÃ¤rschlÃ¼ssel von Profil
 	 * @return Profil Objekt, das die gesuchte ID enthält
-	 */
+	 * 
+	 * */
+	public Profil insert(Profil p) {
+
+		// Datenbankverbindung öffnen
+		Connection con = DBConnection.connection();
+		System.out.println("dbconnection: " + con);
+
+		try {
+			// neues SQL Statement anlegen
+			Statement stmt = con.createStatement();
+			// SQL Query ausführen um die höchste id zu erhalten
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idProfil) AS maxId FROM Profil");
+			if (rs.next()) {
+				// id um 1 erhöhen, damit ein neuer Eintrag erzeugt wird
+				p.setId(rs.getInt("maxId") + 1);
+				// neues SQL Statement
+				stmt = con.createStatement();
+				// SQL Query ausführen um Datensatz in DB zu schreiben
+				stmt.executeUpdate(
+						"INSERT INTO Teilnehmer (erstelldatum, Teilnehmer_idTeilnehmer) "
+								+ "VALUES " + "('" + p.getErstellDatum() + "', '" + p.getTeilnehmer_idTeilnehmer() + "')");
+
+				System.out.println(
+						"erstelldatum, Teilnehmer_idTeilnehmer) "
+								+ "VALUES " + "('" + p.getErstellDatum() + "', '" + p.getTeilnehmer_idTeilnehmer() + "')");
+
+			}
+		}
+		// Error Handling
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
 	public Profil findById(int id) {
 		// Datenbankverbindung öffnen
 		Connection con = DBConnection.connection();

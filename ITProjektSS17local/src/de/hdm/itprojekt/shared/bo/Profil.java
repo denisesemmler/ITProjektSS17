@@ -4,6 +4,7 @@
 package de.hdm.itprojekt.shared.bo;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * @author Denise
@@ -15,9 +16,10 @@ public class Profil extends BusinessObjekt {
 
 	private static final long serialVersionUID = 1L;
 	private int idProfil =0;
-	private Timestamp erstellDatum;
-	private Timestamp aenderungsDatum;
+	private Date erstellDatum;
+	private Date aenderungsDatum;
 	private Eigenschaft e		= new Eigenschaft("","");
+	private int Teilnehmer_idTeilnehmer;
 	
 
 /**
@@ -37,7 +39,7 @@ public void setIdProfil(int idProfil) {
 /**
  * @return the erstellDatum
  */
-public Timestamp getErstellDatum() {
+public Date getErstellDatum() {
 	return erstellDatum;
 }
 
@@ -45,7 +47,7 @@ public Timestamp getErstellDatum() {
 /**
  * @param erstellDatum the erstellDatum to set
  */
-public void setErstellDatum(Timestamp erstellDatum) {
+public void setErstellDatum(Date erstellDatum) {
 	this.erstellDatum = erstellDatum;
 }
 
@@ -53,7 +55,7 @@ public void setErstellDatum(Timestamp erstellDatum) {
 /**
  * @return the aenderungsDatum
  */
-public Timestamp getAenderungsDatum() {
+public Date getAenderungsDatum() {
 	return aenderungsDatum;
 }
 
@@ -61,7 +63,7 @@ public Timestamp getAenderungsDatum() {
 /**
  * @param aenderungsDatum the aenderungsDatum to set
  */
-public void setAenderungsDatum(Timestamp aenderungsDatum) {
+public void setAenderungsDatum(Date aenderungsDatum) {
 	this.aenderungsDatum = aenderungsDatum;
 }
 
@@ -79,6 +81,14 @@ public Eigenschaft getE() {
  */
 public void setE(Eigenschaft e) {
 	this.e = e;
+}
+
+public int getTeilnehmer_idTeilnehmer() {
+	return Teilnehmer_idTeilnehmer;
+}
+
+public void setTeilnehmer_idTeilnehmer(int teilnehmer_idTeilnehmer) {
+	Teilnehmer_idTeilnehmer = teilnehmer_idTeilnehmer;
 }
 	
 	

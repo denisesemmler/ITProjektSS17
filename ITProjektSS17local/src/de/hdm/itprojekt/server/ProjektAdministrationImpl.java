@@ -235,7 +235,21 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return projekteZuTeilnehmer;
 	}
 	
+
+	/*
+	 * Methode zum erstellen des Profils
+	 */
 	
+	private Profil createProfil(Date erstelldatum1, int teilnehmerId){
+		Profil p = new Profil();
+		
+		Date erstelldatum = new Date();
+		int now = erstelldatum.getDate();
+		p.setErstellDatum(new java.sql.Date(erstelldatum.getTime()));
+		p.setTeilnehmer_idTeilnehmer(teilnehmerId);
+		
+		return pfMapper.insert(p);
+	}
 	
 	/*
 	 * Methode zum löschen des Profils, da die Ausschreibung sonst nicht
