@@ -184,6 +184,13 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 				e.printStackTrace();
 			}
 			
+			Ausschreibung a = new Ausschreibung();
+			a.setId(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getId());
+			a.setBeschreibung(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBeschreibung());
+			a.setTitel(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getTitel());
+			a.setBewerbungsfrist(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
+			RootPanel.get("Content").clear();
+			RootPanel.get("Content").add(new EinzelAusschreibung(a));
 			
 		}
 	};
