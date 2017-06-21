@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
@@ -109,8 +110,10 @@ public interface ProjektAdministration extends RemoteService {
 
 	public Profil createProfil(int teilnehmerId) throws IllegalArgumentException;
 
+	/*
+	 * Methoden für Eigenschaften
+	 */
 	
-	
-	
+	public Eigenschaft createEigenschaft(String name, String wert) throws IllegalArgumentException;
 
 }

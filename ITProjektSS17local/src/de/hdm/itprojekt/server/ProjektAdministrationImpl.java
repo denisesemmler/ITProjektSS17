@@ -556,8 +556,24 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		return logInf;
 	}
+  /* Eigenschaft hinzufügen*/
+	@Override
+	public Eigenschaft createEigenschaft(String name, String wert) throws IllegalArgumentException { 
+		
+		Eigenschaft e = new Eigenschaft();
+		
+		e.setName(name);
+		e.setWert(wert);
+		e.setProfil_idProfil(getProfilIdCurrentUser().getId());
+		
+		return eMapper.insert(e);
+		
+	}
 
-
+	public Profil getProfilIdCurrentUser() throws IllegalArgumentException {
+		return this.pfMapper.findByTeilnehmerId(ClientSideSettings.getCurrentUser().getId());
+	
+	}
 
 
 
