@@ -9,7 +9,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 import de.hdm.itprojekt.shared.report.AlleAusschreibungen;
 import de.hdm.itprojekt.shared.report.AlleAusschreibungenNutzer;
-
 public class ReportNavigation extends VerticalPanel implements ClickHandler{
 	private Button allAds  = new Button("Alle Ausschreibungen", this);
 	private Button adsForProfile  = new Button("Alle Ausschreibungen für Profil", this);
