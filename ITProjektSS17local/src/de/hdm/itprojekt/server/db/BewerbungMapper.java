@@ -204,7 +204,7 @@ public class BewerbungMapper {
 				// neues SQL Statement
 				stmt = con.createStatement();
 				// SQL Query ausf�hren um Datensatz in DB zu schreiben
-				stmt.executeUpdate("INSERT INTO Bewerbung (idBewerbung, bewerbungstext, erstelldatum, idTeilnehmer, AusschreibungsID) " +
+				stmt.executeUpdate("INSERT INTO Bewerbung (idBewerbung, bewerbungstext, erstelldatum, bewertung, Profil_idProfil, Ausschreibung_idAusschreibung, status) " +
 						"VALUES "
 						+ "('" 
 						+ b.getId()
@@ -213,9 +213,11 @@ public class BewerbungMapper {
 						+ "', '" 
 						+ b.getErstellDatum()
 						+ "', '" 
-						+ b.getIdBewerbung()
-						+ "', '" 
 						+ b.getBewertung()
+						+ "', '" 
+						+ b.getIdProfil()
+						+ "', '" 
+						+ b.getAusschreibungID()
 						+ "', '" 
 						+ b.getStatus()
 						+ "')");	

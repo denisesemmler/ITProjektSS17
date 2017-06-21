@@ -26,7 +26,7 @@ public class BewerbungBearbeiten extends VerticalPanel{
 	private VerticalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
 
-	private Label bewerbungLabel = new Label("Projektmarktplatz auswählen");
+	private Label bewerbungLabel = new Label("Bewerbung auswählen");
 	private TextArea bewerbungTextArea = new TextArea();
 	private ListBox bewerbungsListbox = new ListBox();
 
