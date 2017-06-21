@@ -1,6 +1,8 @@
 package de.hdm.itprojekt.client.gui;
 
-	import com.google.gwt.event.dom.client.ClickEvent;
+	import java.util.Vector;
+
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -11,6 +13,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 
@@ -18,6 +21,9 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 	
 
 	public class ProfilAnlegen extends VerticalPanel {
+		
+		private Vector<String> eigenschaftName = new Vector<String>(); 
+		private Vector<String> eigenschaftWert = new Vector<String>(); 
 		
 		private VerticalPanel mainPanel= this;
 		
@@ -151,6 +157,30 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 					
 					try {
 						ClientSideSettings.getProjektAdministration().createProfil(ClientSideSettings.getCurrentUser().getId(), new CreateProfilCallback());
+						eigenschaftName.add(msofficeLabel.getText());
+						eigenschaftName.add(msprojectLabel.getText());
+						eigenschaftName.add(sapLabel.getText());
+						eigenschaftName.add(arisLabel.getText());
+						eigenschaftName.add(javaLabel.getText());
+						eigenschaftName.add(cLabel.getText());
+						eigenschaftName.add(catiaLabel.getText());
+						eigenschaftName.add(sqlLabel.getText());
+						
+						eigenschaftWert.add(msofficeListBox.getItemText(msofficeListBox.getSelectedIndex()));
+						eigenschaftWert.add(msprojectListBox.getItemText(msprojectListBox.getSelectedIndex()));
+						eigenschaftWert.add(sapListBox.getItemText(sapListBox.getSelectedIndex()));
+						eigenschaftWert.add(arisListBox.getItemText(arisListBox.getSelectedIndex()));
+						eigenschaftWert.add(javaListBox.getItemText(javaListBox.getSelectedIndex()));
+						eigenschaftWert.add(cListBox.getItemText(cListBox.getSelectedIndex()));
+						eigenschaftWert.add(catiaListBox.getItemText(catiaListBox.getSelectedIndex()));
+						eigenschaftWert.add(sqlListBox.getItemText(sqlListBox.getSelectedIndex()));
+						
+						for (int i = 0; i < eigenschaftName.size(); i++){
+							Eigenschaft e = new Eigenschaft();
+							eigenschaftName.elementAt(i).toString();
+							
+							
+						}
 					} catch (Exception e) {
 						Window.alert(e.toString());
 						e.printStackTrace();

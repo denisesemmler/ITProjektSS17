@@ -24,10 +24,7 @@ public class Eigenschaft extends BusinessObjekt{
 	 */
 	private String wert	= "";
 		
-		public Eigenschaft (String n, String w){
-			this.name =n;
-			}
-
+		
 		/**
 		 * @return  name
 		 */
