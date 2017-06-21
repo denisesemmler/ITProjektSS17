@@ -253,8 +253,8 @@ public class TeilnehmerMapper {
 				stmt = con.createStatement();
 				// SQL Query ausführen um Datensatz in DB zu schreiben
 				stmt.executeUpdate(
-						"INSERT INTO Teilnehmer (vorname, nachname, zusatz, email, rolle, ort, plz, strasse, projektleiter) "
-								+ "VALUES " + "('" + t.getVorname() + "', '" + t.getNachname() + "', '" + t.getZusatz()
+						"INSERT INTO Teilnehmer (idTeilnehmer, vorname, nachname, zusatz, email, rolle, ort, plz, strasse, projektleiter) "
+								+ "VALUES " + "('" + t.getId() + "', '"+ t.getVorname() + "', '" + t.getNachname() + "', '" + t.getZusatz()
 								+ "', '" + t.getEmail() + "', '" + t.getRolle() + "', '" + t.getOrt() + "', '"
 								+ t.getPlz() + "', '" + t.getStrasse() + "', '" + 
 								+ t.getProjektLeiter() + "')");

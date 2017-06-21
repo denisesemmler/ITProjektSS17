@@ -494,6 +494,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		user = t;
 	}
 
+	
 	@Override
 	public Teilnehmer createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, 
 									   int plz, String ort, String emailAdresse, int rolle, int projektleiter)
