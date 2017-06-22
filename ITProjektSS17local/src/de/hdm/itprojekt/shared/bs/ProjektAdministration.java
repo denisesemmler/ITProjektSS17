@@ -114,6 +114,6 @@ public interface ProjektAdministration extends RemoteService {
 	 * Methoden für Eigenschaften
 	 */
 	
-	public Eigenschaft createEigenschaft(String name, String wert, int profilId) throws IllegalArgumentException;
+	public Eigenschaft createEigenschaft(String name, String wert) throws IllegalArgumentException;
 
 }
