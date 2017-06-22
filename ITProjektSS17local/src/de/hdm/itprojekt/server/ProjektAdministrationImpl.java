@@ -558,22 +558,30 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
   /* Eigenschaft hinzufügen*/
 	@Override
-	public Eigenschaft createEigenschaft(String name, String wert, int profilId) throws IllegalArgumentException { 
+	public Vector<Eigenschaft> createEigenschaft(Vector<String> name, Vector <String> wert, int teilnehmerId) throws IllegalArgumentException { 
+		Vector<Eigenschaft> eigenschaften = new Vector<Eigenschaft>();
 		
+		for (int i =0; i< name.size(); i++){
+			String eigenname = name.elementAt(i);
+			String eigenwert = wert.elementAt(i);
+			
 		Eigenschaft e = new Eigenschaft();
+		e.setName(eigenname);
+		e.setWert(eigenwert);
+		e.setProfil_idProfil(teilnehmerId);
+		eigenschaften.add(e);
+		eMapper.insert(e);
 		
-		e.setName(name);
-		e.setWert(wert);
-		e.setProfil_idProfil(profilId);
-		
-		return eMapper.insert(e);
-		
+		}
+		return eigenschaften;
 	}
-
-	public Profil getProfilIdCurrentUser() throws IllegalArgumentException {
-		return pfMapper.findByTeilnehmerId(ClientSideSettings.getCurrentUser().getId());
+	@Override
+	public Profil getProfilIdCurrentUser(int teilnehmerId) throws IllegalArgumentException {
+		return pfMapper.findByTeilnehmerId(teilnehmerId);
 	
 	}
+
+	
 
 
 

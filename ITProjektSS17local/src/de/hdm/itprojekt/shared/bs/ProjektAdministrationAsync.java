@@ -96,9 +96,10 @@ public interface ProjektAdministrationAsync {
 
 	void createProfil(int teilnehmerId, AsyncCallback<Profil> callback);
 
-	void createEigenschaft(String name, String wert, int ProfilId, AsyncCallback<Eigenschaft> callback);
+	void createEigenschaft(Vector<String> name, Vector<String> wert, int teilnehmerId,
+			AsyncCallback<Vector<Eigenschaft>> callback);
 
-	void getProfilIdCurrentUser(int id, AsyncCallback<Vector<Profil>> callback);
+	void getProfilIdCurrentUser(int teilnehmerId, AsyncCallback<Profil> callback);
 
 	
 

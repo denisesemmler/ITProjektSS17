@@ -73,7 +73,7 @@ public class EigenschaftMapper {
 			Statement stmt = con.createStatement();
 
 			// Bisher größte EigenschaftsID bestimmen
-			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM Eigenschaft");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idEigenschaft) AS maxid " + "FROM Eigenschaft");
 
 			if (rs.next()) {
 				// Abgefragte EigenschaftsID++
@@ -82,8 +82,8 @@ public class EigenschaftMapper {
 				stmt = con.createStatement();
 
 				// In DB einfuegen
-				stmt.executeUpdate("INSERT INTO Eigenschaft (id, name, wert)" + "VALUES (" + e.getId() + "','"
-						+ e.getName() + "')");
+				stmt.executeUpdate("INSERT INTO Eigenschaft (idEigenschaft, name, wert, Profil_idProfil)" + "VALUES ('" + e.getId() + "','"
+						+ e.getName() + "','" + e.getWert() + "','" + e.getProfil_idProfil() + "')");
 
 			}
 		}
@@ -131,7 +131,7 @@ public class EigenschaftMapper {
 			// Bei Treffer
 			while (rs.next()) {
 				// Neues Eigenschaft Objekt erzeugen
-				Eigenschaft e = new Eigenschaft(rs.getString("name"), rs.getString("wert"));
+				Eigenschaft e = new Eigenschaft();
 				result.add(e);
 			}
 		}
