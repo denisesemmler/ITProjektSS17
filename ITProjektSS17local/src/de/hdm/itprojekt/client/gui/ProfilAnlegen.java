@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.client.gui;
 
-	import java.util.Vector;
+	import java.util.ArrayList;
+import java.util.Vector;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -13,7 +14,9 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
+import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 
@@ -22,10 +25,15 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 	public class ProfilAnlegen extends VerticalPanel {
 		
-		private Vector<String> eigenschaftName = new Vector<String>(); 
-		private Vector<String> eigenschaftWert = new Vector<String>(); 
+		private ArrayList<String> eigenschaftName = new ArrayList<String>(); 
+		private ArrayList<String> eigenschaftWert = new ArrayList<String>(); 
 		
 		private VerticalPanel mainPanel= this;
+		private HorizontalPanel eigenschaft = new HorizontalPanel();
+		
+		//private VerticalPanel speichern = new VerticalPanel();
+		private VerticalPanel eigenschaft2 = new VerticalPanel();
+		private VerticalPanel addEigenschaft = new VerticalPanel();
 		
 		private HorizontalPanel naviPanel = new HorizontalPanel();
 		private HorizontalPanel msoffice = new HorizontalPanel();
@@ -49,6 +57,8 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 	 	private Label catiaLabel = new Label ("CATIA: ");
 	 	private Label sqlLabel = new Label ("SQL/DB : ");
 	 	
+	 	private ListBox eigenschaftadd = new ListBox();
+		private ListBox eigenschaftaddwert = new ListBox();
 	 	private ListBox schulabschlussListBox = new ListBox();
 	 	private ListBox berufserfahrungListBox = new ListBox();
 	 	private ListBox msofficeListBox = new ListBox();
@@ -60,10 +70,12 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 	 	private ListBox catiaListBox = new ListBox();
 	 	private ListBox sqlListBox = new ListBox();
 	 	
-	 	private Button speichern = new Button("Speichern", new CreateProfilClickHandler());
-	
-	
-		public ProfilAnlegen(){
+	 	private Button speichern = new Button("Speichern", new AddEigenschaftClickHandler());
+	 	
+	 	//private Button speichernProfil = new Button("Speichern", new SpeicherProfilClickHandler());
+	 	Profil p = new Profil();
+	 	
+	 	public ProfilAnlegen(){
 			
 	 		mainPanel.add(eigenschaftLabel);
 	 		mainPanel.add(schulabschlussLabel);
@@ -81,8 +93,14 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 	 		berufserfahrungListBox.addItem("weniger als 1 Jahr");
 	 		berufserfahrungListBox.addItem("1 - 5 Jahre");
 	 		berufserfahrungListBox.addItem("6 - 10 Jahre");
-	 		berufserfahrungListBox.addItem("mehr als 10 Jahre"); 		
+	 		berufserfahrungListBox.addItem("mehr als 10 Jahre"); 
 	 		
+	 		/*mainPanel.add(eigenschaft);
+	 		 		
+	 		eigenschaft.add(eigenschaftadd);
+	 		eigenschaft.add(eigenschaftaddwert);
+	 		eigenschaft.add(addE);
+	 		*/
 	 		mainPanel.add(msoffice);
 	 		mainPanel.add(msproject);
 	 		mainPanel.add(sap);
@@ -114,7 +132,20 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 	 		catia.add(catiaListBox);
 	 		
 	 		sql.add(sqlLabel);
-	 		sql.add(sqlListBox);		 		 		
+	 		sql.add(sqlListBox);		 		
+	 		
+	 		/*eigenschaftadd.addItem("MS Office");
+	 		eigenschaftadd.addItem("MS Project");
+	 		eigenschaftadd.addItem("SAP/ERP");
+	 		eigenschaftadd.addItem("ARIS");
+	 		eigenschaftadd.addItem("Java");
+	 		eigenschaftadd.addItem("C/C++");
+	 		eigenschaftadd.addItem("CATIA");
+	 		eigenschaftadd.addItem("SQL/Datenbank");
+	 		
+	 		eigenschaftaddwert.addItem("Wenig Kenntnisse");
+	 		eigenschaftaddwert.addItem("Gute Kenntnisse");
+	 		eigenschaftaddwert.addItem("Sehr gute Kenntnisse");*/
 	 		
 	 		msofficeListBox.addItem("Keine Kenntnisse");
 	 		msofficeListBox.addItem("Wenig Kenntnisse");
@@ -148,15 +179,20 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 	 		sqlListBox.addItem("Wenig Kenntnisse");
 	 		sqlListBox.addItem("Gute Kenntnisse");
 			
-	 		mainPanel.add(speichern);
+			mainPanel.add(speichern);
+	 	
+	 		ClientSideSettings.getProjektAdministration().createProfil(ClientSideSettings.getCurrentUser().getId(), new CreateProfilCallback());
 		}
 			
-			private class CreateProfilClickHandler implements ClickHandler {
+			private class AddEigenschaftClickHandler implements ClickHandler {
 
 				public void onClick(ClickEvent event) {
 					
 					try {
-						ClientSideSettings.getProjektAdministration().createProfil(ClientSideSettings.getCurrentUser().getId(), new CreateProfilCallback());
+						
+					
+						
+						
 						eigenschaftName.add(msofficeLabel.getText());
 						eigenschaftName.add(msprojectLabel.getText());
 						eigenschaftName.add(sapLabel.getText());
@@ -175,12 +211,20 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 						eigenschaftWert.add(catiaListBox.getItemText(catiaListBox.getSelectedIndex()));
 						eigenschaftWert.add(sqlListBox.getItemText(sqlListBox.getSelectedIndex()));
 						
-						for (int i = 0; i < eigenschaftName.size(); i++){
-							Eigenschaft e = new Eigenschaft();
-							eigenschaftName.elementAt(i).toString();
-							
-							
+						for (int i =0; i< eigenschaftWert.size(); i++){
+							String name = eigenschaftName.get(i);
+							String wert = eigenschaftWert.get(i);
+							ClientSideSettings.getProjektAdministration().createEigenschaft(name, wert , p.getId(), new CreateEigenschaftCallback());
 						}
+					
+						
+						
+						
+						
+										
+				 		
+						
+						
 					} catch (Exception e) {
 						Window.alert(e.toString());
 						e.printStackTrace();
@@ -189,23 +233,49 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 										
 				}
 			};
-			private class CreateProfilCallback implements AsyncCallback {
+			private class CreateProfilCallback implements AsyncCallback<Profil> {
 
 				public void onFailure(Throwable caught) {
 					Window.alert("Dat läuft noch nit so Profil!");
 
 				}
 
-				public void onSuccess(Object result) {
+				public void onSuccess(Profil result) {
 					Window.alert("Dein Profil wurde angelegt!");
+					p.setId(result.getId());
+					
+				
+				}
+
+			}
+			
+			private class CreateEigenschaftCallback implements AsyncCallback {
+				int idx = 0;
+				public void onFailure(Throwable caught) {
+					Window.alert("Dat läuft noch nit so Eigenschaft!");
+
+				}
+
+				public void onSuccess(Object result) {
+					
+					
+					Window.alert("Deine Eigenschaft wurden angelegt!");
+			
+					idx++;
+					
+					if(idx == eigenschaftName.size())
 					RootPanel.get("Content").clear();
 					RootPanel.get("Navi").clear();
 					naviPanel.add(new Navigation());
 					RootPanel.get("Navi").add(naviPanel);
 					RootPanel.get("Content").add(
 							new ProfilAnzeigen());
+			 		
+				
 				}
 
 			}
+		
 
+			
 	}
