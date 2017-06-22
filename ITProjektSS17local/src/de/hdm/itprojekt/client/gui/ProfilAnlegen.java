@@ -25,8 +25,8 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 	public class ProfilAnlegen extends VerticalPanel {
 		
-		private ArrayList<String> eigenschaftName = new ArrayList<String>(); 
-		private ArrayList<String> eigenschaftWert = new ArrayList<String>(); 
+		private Vector<String> eigenschaftName = new Vector<String>(); 
+		private Vector<String> eigenschaftWert = new Vector<String>(); 
 		
 		private VerticalPanel mainPanel= this;
 		private HorizontalPanel eigenschaft = new HorizontalPanel();
@@ -189,10 +189,6 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 				public void onClick(ClickEvent event) {
 					
 					try {
-						
-					
-						
-						
 						eigenschaftName.add(msofficeLabel.getText());
 						eigenschaftName.add(msprojectLabel.getText());
 						eigenschaftName.add(sapLabel.getText());
@@ -212,8 +208,8 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 						eigenschaftWert.add(sqlListBox.getItemText(sqlListBox.getSelectedIndex()));
 						
 						for (int i =0; i< eigenschaftWert.size(); i++){
-							String name = eigenschaftName.get(i);
-							String wert = eigenschaftWert.get(i);
+							String name = eigenschaftName.elementAt(i);
+							String wert = eigenschaftWert.elementAt(i);
 							ClientSideSettings.getProjektAdministration().createEigenschaft(name, wert , p.getId(), new CreateEigenschaftCallback());
 						}
 					
