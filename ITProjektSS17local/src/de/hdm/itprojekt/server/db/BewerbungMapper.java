@@ -222,7 +222,7 @@ public class BewerbungMapper {
 						+ b.getStatus()
 						+ "')");	
 				
-				System.out.println("INSERT INTO Bewerbung (idBewerbung, bewerbungstext, erstelldatum, idTeilnehmer, AusschreibungsID) " +
+				System.out.println("INSERT INTO Bewerbung (idBewerbung, bewerbungstext, erstelldatum, bewertung, Profil_idProfil, Ausschreibung_idAusschreibung, status) " +
 						"VALUES "
 						+ "('" 
 						+ b.getId()
@@ -231,9 +231,11 @@ public class BewerbungMapper {
 						+ "', '" 
 						+ b.getErstellDatum()
 						+ "', '" 
-						+ b.getIdBewerbung()
-						+ "', '" 
 						+ b.getBewertung()
+						+ "', '" 
+						+ b.getIdProfil()
+						+ "', '" 
+						+ b.getAusschreibungID()
 						+ "', '" 
 						+ b.getStatus()
 						+ "')");	
