@@ -558,20 +558,20 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
   /* Eigenschaft hinzufügen*/
 	@Override
-	public Eigenschaft createEigenschaft(String name, String wert) throws IllegalArgumentException { 
+	public Eigenschaft createEigenschaft(String name, String wert, int profilId) throws IllegalArgumentException { 
 		
 		Eigenschaft e = new Eigenschaft();
 		
 		e.setName(name);
 		e.setWert(wert);
-		e.setProfil_idProfil(getProfilIdCurrentUser().getId());
+		e.setProfil_idProfil(profilId);
 		
 		return eMapper.insert(e);
 		
 	}
 
 	public Profil getProfilIdCurrentUser() throws IllegalArgumentException {
-		return this.pfMapper.findByTeilnehmerId(ClientSideSettings.getCurrentUser().getId());
+		return pfMapper.findByTeilnehmerId(ClientSideSettings.getCurrentUser().getId());
 	
 	}
 
