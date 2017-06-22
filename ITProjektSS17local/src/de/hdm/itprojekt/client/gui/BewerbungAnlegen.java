@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Profil;
 
 public class BewerbungAnlegen extends VerticalPanel {
 
@@ -28,6 +29,8 @@ public class BewerbungAnlegen extends VerticalPanel {
 
 	Date date = new Date();
 	private int ausschreibungID;
+	
+	Profil p = new Profil();
 
 	public BewerbungAnlegen(int aID) {
 
@@ -35,6 +38,8 @@ public class BewerbungAnlegen extends VerticalPanel {
 		mainPanel.add(textA);
 		mainPanel.add(sendenButton);
 		ausschreibungID = aID;
+		
+		int currentUserId = ClientSideSettings.getCurrentUser().getId(); 
 
 	}
 
@@ -45,9 +50,15 @@ public class BewerbungAnlegen extends VerticalPanel {
 			// TODO Callback
 
 			try {
-				ClientSideSettings.getProjektAdministration().createBewerbung(textA.getText(),
+				
+				int pofilId = ClientSideSettings.getProjektAdministration().getProfilIdCurrentUserINT(ClientSideSettings.getCurrentUser().getId(), new ProfilIdSuchenCallback());
+				Profil p = new Profil();
+				p.setId(parseInt(ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(ClientSideSettings.getCurrentUser().getId(), new ProfilIdSuchenCallback())));
+						
+						ClientSideSettings.getProjektAdministration().createBewerbung(textA.getText(),
 						date,
-						0.0f, "Laufend", ClientSideSettings.getCurrentUser().getId(), ausschreibungID,
+						0.0f, "Laufend", ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(ClientSideSettings.getCurrentUser().getId(), new ProfilIdSuchenCallback()),
+						ausschreibungID,
 						new BewerbungSendenCallback());
 			} catch (Exception e) {
 				Window.alert(e.toString());
@@ -55,7 +66,7 @@ public class BewerbungAnlegen extends VerticalPanel {
 			}
 
 		}
-	};
+	}; 
 
 	private class BewerbungSendenCallback implements AsyncCallback {
 
@@ -69,4 +80,20 @@ public class BewerbungAnlegen extends VerticalPanel {
 		}
 
 	}
-}
+	
+	 private class GetPartnerProfileCallback implements AsyncCallback<Profil> {
+			
+			public void onFailure(Throwable caught) {
+				Window.alert("Dat läuft noch nit so Profil finden!");
+
+			}
+
+			public void onSuccess(Profil result) {
+				
+				p.setId(result.getId());
+				Window.alert("Dein Profil wurde gefunden!");
+
+			
+			}
+
+		}}

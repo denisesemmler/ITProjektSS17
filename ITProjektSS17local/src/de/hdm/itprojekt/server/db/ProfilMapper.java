@@ -156,6 +156,37 @@ public class ProfilMapper {
 		// Falls nichts gefunden wurde null zurückgeben
 		return null;
 	}
+	
+	public int findByTeilnehmerIdINT(int id) {
+		// Datenbankverbindung öffnen
+		Connection con = DBConnection.connection();
+
+		try {
+			// Neues SQL Statement anlegen
+			Statement stmt = con.createStatement();
+			// SQL Query ausfÃ¼hren
+			ResultSet rs = stmt.executeQuery("SELECT idProfil, erstelldatum, erstelldatum, aenderungsdatum FROM Profil "
+					+ "WHERE idTeilnehmer_Teilnehmer = " + id);
+			// Bei Treffer
+			if (rs.next()) {
+				// Neues Source Objekt erzeugen
+				int p;
+				// Id und Source mit den Daten aus der DB fÃ¼llen
+				p = rs.getInt("idProfil");				
+
+				// Objekt zurÃ¼ckgeben
+				return p;
+			}
+		}
+		// Error Handling
+		catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+		// Falls nichts gefunden wurde null zurückgeben
+		return 0;
+	}
+
 
 	public void delete(Profil p) {
 		// Datenbankverbindung öffnen
