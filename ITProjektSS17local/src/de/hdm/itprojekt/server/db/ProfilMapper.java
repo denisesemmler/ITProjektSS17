@@ -131,16 +131,15 @@ public class ProfilMapper {
 			// Neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
 			// SQL Query ausführen
-			ResultSet rs = stmt.executeQuery("SELECT idProfil, erstelldatum, erstelldatum, aenderungsdatum FROM Profil "
-					+ "WHERE idTeilnehmer_Teilnehmer = " + id);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Profil WHERE Teilnehmer_idTeilnehmer = " + id);
 			// Bei Treffer
 			if (rs.next()) {
 				// Neues Source Objekt erzeugen
 				Profil p = new Profil();
 				// Id und Source mit den Daten aus der DB füllen
 				p.setId(rs.getInt("idProfil"));
-				p.setErstellDatum(rs.getTimestamp("erstelldatum"));
-				p.setAenderungsDatum(rs.getTimestamp("aenderungsdatum"));
+				p.setErstellDatum(rs.getDate("erstelldatum"));
+				p.setAenderungsDatum(rs.getDate("aenderungsdatum"));
 
 				
 
@@ -153,7 +152,6 @@ public class ProfilMapper {
 			e.printStackTrace();
 			return null;
 		}
-		// Falls nichts gefunden wurde null zur�ckgeben
 		return null;
 	}
 

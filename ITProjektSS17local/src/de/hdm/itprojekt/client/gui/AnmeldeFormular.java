@@ -8,7 +8,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -22,8 +21,6 @@ public class AnmeldeFormular extends VerticalPanel{
 	
 		private VerticalPanel mainPanel = this;
 		private VerticalPanel labelsPanel = new VerticalPanel();
-		private HorizontalPanel naviPanel = new HorizontalPanel();
-		
 		
 		private Label firstNameLabel = new Label("Vorname: "); 
 	 	private TextBox firstNameBox = new TextBox(); 
@@ -119,14 +116,9 @@ public class AnmeldeFormular extends VerticalPanel{
 				ClientSideSettings.getCurrentUser().setStrasse(result.getStrasse());
 				ClientSideSettings.getCurrentUser().setPlz(result.getPlz());
 				ClientSideSettings.getCurrentUser().setOrt(result.getOrt());
+				ClientSideSettings.getProjektAdministration().createProfil(ClientSideSettings.getCurrentUser().getId(), new CreateProfilCallback());
 				Window.alert("Deine Daten wurden gespeichert!");
-				RootPanel.get("Content").clear();
-				RootPanel.get("Content").add(
-						new ProfilAnlegen());
-				
-				/*RootPanel.get("Content").clear();
-				RootPanel.get("Content").add(
-						new ProfilAnlegen());*/
+			
 			}
 
 		}
