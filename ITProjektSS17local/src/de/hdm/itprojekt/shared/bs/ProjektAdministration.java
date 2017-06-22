@@ -110,7 +110,7 @@ public interface ProjektAdministration extends RemoteService {
 
 	public Profil createProfil(int teilnehmerId) throws IllegalArgumentException;
 	
-	public Vector<Profil> getProfilIdCurrentUser(int teilnehmerId) throws IllegalArgumentException;
+	public Profil getProfilIdCurrentUser(int teilnehmerId) throws IllegalArgumentException;
 
 	/*
 	 * Methoden für Eigenschaften

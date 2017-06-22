@@ -569,11 +569,13 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return eMapper.insert(e);
 		
 	}
-
-	public Profil getProfilIdCurrentUser() throws IllegalArgumentException {
+	@Override
+	public Profil getProfilIdCurrentUser(int teilnehmerId) throws IllegalArgumentException {
 		return pfMapper.findByTeilnehmerId(ClientSideSettings.getCurrentUser().getId());
 	
 	}
+
+	
 
 
 
