@@ -14,12 +14,14 @@ public class BewerbungVerwalten extends VerticalPanel {
 	// Erstellen von Buttons
 	private Button bewerbungAnlegenButton = new Button("Anlegen", new NavigationsButtonHandler());
 	private Button bewerbungAndernButton = new Button("Bearbeiten", new NavigationsButtonHandler());
+	private Button bewerbungBewertenButton = new Button ("Bewerten", new NavigationsButtonHandler());
 	private Button bewerbungLoschenButton = new Button("Loschen", new NavigationsButtonHandler());
 
 	public BewerbungVerwalten() {
 		RootPanel.get("Content").add(new HTML("<h2>Was willst Du tun?</h2>"));
 		mainPanel.add(bewerbungAnlegenButton);
 		mainPanel.add(bewerbungAndernButton);
+		mainPanel.add(bewerbungBewertenButton);
 		mainPanel.add(bewerbungLoschenButton);
 	}
 
@@ -37,11 +39,15 @@ public class BewerbungVerwalten extends VerticalPanel {
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(new BewerbungBearbeiten());
 				break;
+			case "Bewerten":
+				RootPanel.get("Content").clear();
+				RootPanel.get("Content").add(new BewerbungBewerten());
+				break;
 			case "Loschen":
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(new BewerbungLoeschen());
 				break;
 			}
 		}
-	};
+	}
 }

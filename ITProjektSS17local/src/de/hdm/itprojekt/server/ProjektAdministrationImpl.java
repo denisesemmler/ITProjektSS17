@@ -556,6 +556,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		return logInf;
 	}
+	
+	
+	
   /* Eigenschaft hinzufügen*/
 	@Override
 	public Vector<Eigenschaft> createEigenschaft(Vector<String> name, Vector <String> wert, int teilnehmerId) throws IllegalArgumentException { 
