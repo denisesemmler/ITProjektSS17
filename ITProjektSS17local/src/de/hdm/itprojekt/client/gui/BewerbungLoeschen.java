@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Profil;
 
 
 public class BewerbungLoeschen extends VerticalPanel{
@@ -24,14 +25,20 @@ public class BewerbungLoeschen extends VerticalPanel{
 	private Button loeschenButton = new Button("Bewerbung zurückziehen", new DeleteClickHandler());
 
 	private Vector<Bewerbung> bVector = new Vector<Bewerbung>();
+	
+	Profil p = new Profil();
 
 	public BewerbungLoeschen() {
 		mainPanel.add(bewerbungNameLabel);
 		mainPanel.add(bewerbungListbox);
+		
 		mainPanel.add(loeschenButton);
 		
+		int currentUserId = ClientSideSettings.getCurrentUser().getId();
+		
 		try {
-			ClientSideSettings.getProjektAdministration().findBewerbungByTeilnehmerid(ClientSideSettings.getCurrentUser().getId(), new GetAllBewerbungenByIdCallback());
+			ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(currentUserId,
+					new GetPartnerProfileCallback());
 		} catch (Exception e) {
 			Window.alert(e.toString());
 			e.printStackTrace();
@@ -52,7 +59,7 @@ public class BewerbungLoeschen extends VerticalPanel{
 
 	}
 
-	private class GetAllBewerbungenByIdCallback implements AsyncCallback<Vector<Bewerbung>> {
+	private class GetBewerbungByIdCallback implements AsyncCallback<Vector<Bewerbung>> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Läuft garnit");
@@ -86,6 +93,29 @@ public class BewerbungLoeschen extends VerticalPanel{
 		}
 
 	};
+	
+	private class GetPartnerProfileCallback implements AsyncCallback<Profil> {
+
+		public void onFailure(Throwable caught) {
+			Window.alert("Dat läuft noch nit so Profil finden!");
+
+		}
+
+		public void onSuccess(Profil result) {
+
+			p.setId(result.getId());
+			Window.alert("Dein Profil wurde gefunden!");
+			
+			try {
+				ClientSideSettings.getProjektAdministration().findBewerbungByTeilnehmerid(p.getId(), new GetBewerbungByIdCallback());
+			} catch (Exception e) {
+				Window.alert(e.toString());
+				e.printStackTrace();
+			}
+
+		}
+
+	}
 
 }
 

@@ -29,7 +29,7 @@ public class BewerbungAnlegen extends VerticalPanel {
 
 	Date date = new Date();
 	private int ausschreibungID;
-	
+
 	Profil p = new Profil();
 
 	public BewerbungAnlegen(int aID) {
@@ -38,8 +38,16 @@ public class BewerbungAnlegen extends VerticalPanel {
 		mainPanel.add(textA);
 		mainPanel.add(sendenButton);
 		ausschreibungID = aID;
-		
-		int currentUserId = ClientSideSettings.getCurrentUser().getId(); 
+
+		int currentUserId = ClientSideSettings.getCurrentUser().getId();
+
+		try {
+			ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(currentUserId,
+					new GetPartnerProfileCallback());
+		} catch (Exception e) {
+			Window.alert(e.toString());
+			e.printStackTrace();
+		}
 
 	}
 
@@ -50,23 +58,16 @@ public class BewerbungAnlegen extends VerticalPanel {
 			// TODO Callback
 
 			try {
-				
-				int pofilId = ClientSideSettings.getProjektAdministration().getProfilIdCurrentUserINT(ClientSideSettings.getCurrentUser().getId(), new ProfilIdSuchenCallback());
-				Profil p = new Profil();
-				p.setId(parseInt(ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(ClientSideSettings.getCurrentUser().getId(), new ProfilIdSuchenCallback())));
-						
-						ClientSideSettings.getProjektAdministration().createBewerbung(textA.getText(),
-						date,
-						0.0f, "Laufend", ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(ClientSideSettings.getCurrentUser().getId(), new ProfilIdSuchenCallback()),
-						ausschreibungID,
-						new BewerbungSendenCallback());
+
+				ClientSideSettings.getProjektAdministration().createBewerbung(textA.getText(), date, 0.0f, "Laufend",
+						p.getId(), ausschreibungID, new BewerbungSendenCallback());
 			} catch (Exception e) {
 				Window.alert(e.toString());
 				e.printStackTrace();
 			}
 
 		}
-	}; 
+	};
 
 	private class BewerbungSendenCallback implements AsyncCallback {
 
@@ -80,20 +81,20 @@ public class BewerbungAnlegen extends VerticalPanel {
 		}
 
 	}
-	
-	 private class GetPartnerProfileCallback implements AsyncCallback<Profil> {
-			
-			public void onFailure(Throwable caught) {
-				Window.alert("Dat läuft noch nit so Profil finden!");
 
-			}
+	private class GetPartnerProfileCallback implements AsyncCallback<Profil> {
 
-			public void onSuccess(Profil result) {
-				
-				p.setId(result.getId());
-				Window.alert("Dein Profil wurde gefunden!");
+		public void onFailure(Throwable caught) {
+			Window.alert("Dat läuft noch nit so Profil finden!");
 
-			
-			}
+		}
 
-		}}
+		public void onSuccess(Profil result) {
+
+			p.setId(result.getId());
+			Window.alert("Dein Profil wurde gefunden!");
+
+		}
+
+	}
+}

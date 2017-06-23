@@ -146,7 +146,7 @@ public class BewerbungMapper {
 	 * 
 	 * @return Vektor mit allen registrierten Teilnehmer
 	 */
-	public Vector<Bewerbung> findBewerbungByTeilnehmerId(int teilnehmerId) {
+	public Vector<Bewerbung> findBewerbungByTeilnehmerId(int profilId) {
 		// Datenbankverbindung 
 		Connection con = DBConnection.connection();
 		//Ergebnis-Vector anlegen
@@ -158,7 +158,7 @@ public class BewerbungMapper {
 			
 			// SQL Query ausf�hren
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Bewerbung " +
-					"WHERE teilnehmerId = '" + teilnehmerId+ "'");
+					"WHERE Profil_idProfil = '" + profilId+ "'");
 			
 			// F�r jeden gefundenen Treffer...
 			while (rs.next()) {
