@@ -3,7 +3,6 @@
  */
 package de.hdm.itprojekt.shared.bo;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -20,12 +19,12 @@ public class Bewerbung extends BusinessObjekt{
 	private String status;
 	
 	/**
-	 * Fremdschlüsselbeziehung zu Profil
+	 * Fremdschlï¿½sselbeziehung zu Profil
 	 */
 	private int idProfil;
 	
 	/**
-	 * Fremdschlüsselbeziehung zu Ausschreibung
+	 * Fremdschlï¿½sselbeziehung zu Ausschreibung
 	 */
 	private int ausschreibungID;
 		

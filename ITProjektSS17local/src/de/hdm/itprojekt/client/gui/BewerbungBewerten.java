@@ -2,9 +2,12 @@ package de.hdm.itprojekt.client.gui;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
@@ -17,12 +20,26 @@ public class BewerbungBewerten extends VerticalPanel {
 
 	private VerticalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
+	
+	//Dropdown Menü
 	private ListBox marktplatzListBox = new ListBox();
 	private ListBox projektListBox = new ListBox();
 	private ListBox ausschreibungListBox = new ListBox();
 	private ListBox bewerbungListBox = new ListBox();
 
-	private Label bewerbungBewertenLabel = new Label("<h2>Wählen Sie hier die zu bewertende Bewerbung aus</h2>");
+	//Überschrifts Label
+	private Label bewerbungBewertenLabel = new Label("Wählen Sie hier die zu bewertende Bewerbung aus");
+	
+	//Label für die aufgerufene Bewerbung
+	private Label erstellDatum = new Label("Erstell Datum");
+	private Label bewerbungsText = new Label ("Bewerbungs Text");
+	private Label idBewerbung = new Label ("ID Bewerbung");
+	private Label bewertung = new Label ("Bewertung");
+	private Label status = new Label ("Status");
+	private Label stellungnahme = new Label ("Stellungnahme");
+	
+	//Button zum speichern
+	private Button bewertungAbgebenButton = new Button("Bewertung abgeben", new SaveChangesClickHandler());
 
 	public BewerbungBewerten() {
 
@@ -45,6 +62,37 @@ public class BewerbungBewerten extends VerticalPanel {
 
 		editorPanel.add(bewerbungListBox);
 		projektListBox.addChangeHandler(new BewerbungOnChangeHandler());
+		
+		/*
+		 * ausgewählte Bewerbung soll angezeigt werden, 
+		 * dazu werden horizontale Panels auf vertikale Panels gelegt
+		 */
+		HorizontalPanel idPanel = new HorizontalPanel();
+		idPanel.add(idBewerbung);
+		editorPanel.add(idPanel);
+		
+		HorizontalPanel datumPanel = new HorizontalPanel();
+		datumPanel.add(erstellDatum);
+		editorPanel.add(datumPanel);
+		
+		HorizontalPanel bewerbungPanel = new HorizontalPanel();
+		bewerbungPanel.add(bewerbungsText);
+		editorPanel.add(bewerbungPanel);
+		
+		HorizontalPanel statusPanel = new HorizontalPanel();
+		statusPanel.add(status);
+		editorPanel.add(statusPanel);
+		
+		HorizontalPanel bewertungPanel = new HorizontalPanel();
+		bewertungPanel.add(bewertung);
+		editorPanel.add(bewertungPanel);
+		
+		HorizontalPanel stellungnahmePanel = new HorizontalPanel();
+		stellungnahmePanel.add(stellungnahme);
+		editorPanel.add(stellungnahmePanel);
+		
+		//Button zum mainPanel hinzugefügt
+		mainPanel.add(bewertungAbgebenButton);
 
 	}
 	
@@ -100,4 +148,15 @@ public class BewerbungBewerten extends VerticalPanel {
 		
 	}
 
+	//Innerclass Bewertung abgeben Speicher Button Handler
+	private class SaveChangesClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			
+		}
+		
+	}
+	
+	
 }
