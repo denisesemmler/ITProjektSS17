@@ -117,7 +117,7 @@ public class EigenschaftMapper {
 
 	
 	//Eigenschaften werden anhand ihrer einzigartigen ID gesucht
-	public Vector<Eigenschaft> findByProfil(Profil suchProfil) {
+	public Vector<Eigenschaft> findByProfil(Profil profilId) {
 
 		// Datenbankverbindung öffnen
 		Connection con = DBConnection.connection();
@@ -127,12 +127,16 @@ public class EigenschaftMapper {
 			Statement stmt = con.createStatement();
 			// SQL Query ausführen
 			ResultSet rs = stmt
-					.executeQuery("SELECT * FROM Eigenschaft " + "WHERE Profil_idProfil = " + suchProfil.getIdProfil());
+					.executeQuery("SELECT * FROM Eigenschaft " + "WHERE Profil_idProfil = " + profilId.getIdProfil());
 			// Bei Treffer
 			while (rs.next()) {
 				// Neues Eigenschaft Objekt erzeugen
 				Eigenschaft e = new Eigenschaft();
+				e.setId(rs.getInt("idEigenschaft"));
+				e.setName(rs.getString("name"));
+				e.setWert(rs.getString("wert"));
 				result.add(e);
+				
 			}
 		}
 		// Error Handling
@@ -140,8 +144,8 @@ public class EigenschaftMapper {
 			e.printStackTrace();
 			return null;
 		}
-		// Falls nichts gefunden wurde null zurückgeben
-		return null;
+		
+		return result;
 
 	}
 
