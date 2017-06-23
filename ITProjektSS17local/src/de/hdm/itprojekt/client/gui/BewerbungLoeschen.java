@@ -15,8 +15,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Profil;
 
-
-public class BewerbungLoeschen extends VerticalPanel{
+public class BewerbungLoeschen extends VerticalPanel {
 
 	private VerticalPanel mainPanel = this;
 	private Label bewerbungNameLabel = new Label("Bewerbung: ");
@@ -25,17 +24,17 @@ public class BewerbungLoeschen extends VerticalPanel{
 	private Button loeschenButton = new Button("Bewerbung zurückziehen", new DeleteClickHandler());
 
 	private Vector<Bewerbung> bVector = new Vector<Bewerbung>();
-	
+
 	Profil p = new Profil();
 
 	public BewerbungLoeschen() {
 		mainPanel.add(bewerbungNameLabel);
 		mainPanel.add(bewerbungListbox);
-		
+
 		mainPanel.add(loeschenButton);
-		
+
 		int currentUserId = ClientSideSettings.getCurrentUser().getId();
-		
+
 		try {
 			ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(currentUserId,
 					new GetPartnerProfileCallback());
@@ -93,7 +92,7 @@ public class BewerbungLoeschen extends VerticalPanel{
 		}
 
 	};
-	
+
 	private class GetPartnerProfileCallback implements AsyncCallback<Profil> {
 
 		public void onFailure(Throwable caught) {
@@ -105,9 +104,10 @@ public class BewerbungLoeschen extends VerticalPanel{
 
 			p.setId(result.getId());
 			Window.alert("Dein Profil wurde gefunden!");
-			
+
 			try {
-				ClientSideSettings.getProjektAdministration().findBewerbungByTeilnehmerid(p.getId(), new GetBewerbungByIdCallback());
+				ClientSideSettings.getProjektAdministration().findBewerbungByTeilnehmerid(p.getId(),
+						new GetBewerbungByIdCallback());
 			} catch (Exception e) {
 				Window.alert(e.toString());
 				e.printStackTrace();
@@ -118,4 +118,3 @@ public class BewerbungLoeschen extends VerticalPanel{
 	}
 
 }
-
