@@ -28,7 +28,7 @@ public class BewerbungBearbeiten extends VerticalPanel{
 	private VerticalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
 
-	private Label bewerbungLabel = new Label("Bewerbung auswählen");
+	private Label bewerbungLabel = new Label("Bewerbung auswï¿½hlen");
 	private TextArea bewerbungTextArea = new TextArea();
 	private ListBox bewerbungsListbox = new ListBox();
 
@@ -65,7 +65,7 @@ public class BewerbungBearbeiten extends VerticalPanel{
 	private class SaveChangesCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat läuft noch nit so!");
+			Window.alert("Dat lï¿½uft noch nit so!");
 
 		}
 
@@ -79,7 +79,7 @@ public class BewerbungBearbeiten extends VerticalPanel{
 	private class GetBewerbungByIdCallback implements AsyncCallback<Vector<Bewerbung>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Läuft garnit");
+			Window.alert("Lï¿½uft garnit");
 		}
 
 		public void onSuccess(Vector<Bewerbung> result) {
@@ -109,7 +109,7 @@ public class BewerbungBearbeiten extends VerticalPanel{
 				e.printStackTrace();
 			}
 		}
-	};
+	}
 	
 	
 	private class OnChangeHandler implements ChangeHandler {
@@ -131,7 +131,7 @@ public class BewerbungBearbeiten extends VerticalPanel{
 	private class GetPartnerProfileCallback implements AsyncCallback<Profil> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat läuft noch nit so Profil finden!");
+			Window.alert("Dat lï¿½uft noch nit so Profil finden!");
 
 		}
 
