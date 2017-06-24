@@ -97,7 +97,10 @@ public class ProfilMapper {
 			// Neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
 			// SQL Query ausführen
-			ResultSet rs = stmt.executeQuery("SELECT idProfil, erstelldatum, erstelldatum, aenderungsdatum FROM Profil "
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Profil "
+					+ "WHERE idProfil = " + id);
+			
+			System.out.println("SELECT * FROM Profil "
 					+ "WHERE idProfil = " + id);
 			// Bei Treffer
 			if (rs.next()) {
@@ -108,7 +111,9 @@ public class ProfilMapper {
 				p.setErstellDatum(rs.getTimestamp("erstelldatum"));
 				p.setAenderungsDatum(rs.getTimestamp("aenderungsdatum"));
 
-				// p.setidTeilnehmer(rs.getInt("idTeilnehmer"));
+				p.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
+				
+				System.out.println("ID is "+rs.getInt("Teilnehmer_idTeilnehmer"));
 
 				// Objekt zurückgeben
 				return p;

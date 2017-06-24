@@ -117,7 +117,7 @@ public class BewerbungMapper {
 			Statement stmt = con.createStatement();
 			// SQL Query ausf�hren
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Bewerbung " +
-					"WHERE AusschreibungID = '" + ausschreibungsID +"'");
+					"WHERE Ausschreibung_idAusschreibung = '" + ausschreibungsID +"'");
 			// F�r jeden gefundenen Treffer...
 			while (rs.next()) {
 				// ... neues Bewerbung Objekt anlegen
@@ -126,7 +126,10 @@ public class BewerbungMapper {
 				b.setId(rs.getInt("idBewerbung"));
 				b.setBewerbungsText(rs.getString("bewerbungstext"));
 				b.setErstellDatum(rs.getTimestamp("erstellDatum"));
-				// ... Objekt dem Ergebnisvektor hinzuf�gen
+				b.setAusschreibungID(rs.getInt("Ausschreibung_idAusschreibung"));
+				b.setStatus(rs.getString("status"));
+				b.setBewertung(rs.getFloat("bewertung"));
+				b.setIdProfil(rs.getInt("Profil_idProfil"));
 				result.add(b);
 			}
 		}

@@ -65,14 +65,14 @@ public class AlleAusschreibungenNutzer extends SimpleReport{
 		TextColumn<AusschreibungReport> ansprechpartnerColumn = new TextColumn<AusschreibungReport>() {
 			@Override
 			public String getValue(AusschreibungReport ausschreibung) {
-				return ""+ ausschreibung.getProfil_idSuchprofil();
+				return ausschreibung.getAnsprechpartnerName();
 			}
 		};
 		
 		TextColumn<AusschreibungReport> projektColumn = new TextColumn<AusschreibungReport>() {
 			@Override
 			public String getValue(AusschreibungReport ausschreibung) {
-				return ""+ ausschreibung.getProjektName();
+				return ausschreibung.getProjektName();
 			}
 		};
 		
