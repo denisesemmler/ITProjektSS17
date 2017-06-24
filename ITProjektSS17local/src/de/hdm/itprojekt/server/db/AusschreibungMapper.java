@@ -365,7 +365,8 @@ public class AusschreibungMapper {
 						// SQL Query ausf�hren
 						ResultSet rs = stmt.executeQuery("SELECT * FROM Ausschreibung " +
 								"WHERE Teilnehmer_idTeilnehmer = " + teilnehmerId);
-						
+						System.out.println("SELECT * FROM Ausschreibung " +
+								"WHERE Teilnehmer_idTeilnehmer = " + teilnehmerId);
 						// Bei Treffer 
 						while(rs.next()) {
 							

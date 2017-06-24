@@ -14,8 +14,8 @@ import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 
 public class AlleAusschreibungenNutzer extends SimpleReport{
 	public AlleAusschreibungenNutzer() {
-		super("Alle Ausschreibungen für Nutzer ...");
-ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
+		super("Alle Ausschreibungen für angemeldeten Nutzer");
+		ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
     	
     	final AsyncCallback<List<AusschreibungReport>> initReportGeneratorCallback = new AsyncCallback<List<AusschreibungReport>>() {
             @Override
@@ -28,7 +28,7 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
             	renderTable(result);
             }
           };
-    	reportGenerator.getAllAusschreibungen(initReportGeneratorCallback);        
+    	reportGenerator.getAllAusschreibungenUser(ClientSideSettings.getCurrentUser().getId(), initReportGeneratorCallback);
 	}
 	
 	private void setSize(int i) {
@@ -42,7 +42,7 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
 		TextColumn<AusschreibungReport> idColumn = new TextColumn<AusschreibungReport>() {
 			@Override
 			public String getValue(AusschreibungReport ausschreibung) {
-				return "" + ausschreibung.getIdAusschreibung();
+				return "" + ausschreibung.getId();
 			}
 		};
 		

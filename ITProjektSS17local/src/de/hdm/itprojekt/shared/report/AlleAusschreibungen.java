@@ -44,7 +44,7 @@ public class AlleAusschreibungen extends SimpleReport {
 		TextColumn<AusschreibungReport> idColumn = new TextColumn<AusschreibungReport>() {
 			@Override
 			public String getValue(AusschreibungReport ausschreibung) {
-				return "" + ausschreibung.getIdAusschreibung();
+				return "" + ausschreibung.getId();
 			}
 		};
 		

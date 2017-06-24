@@ -20,6 +20,7 @@ public class Ausschreibung extends BusinessObjekt {
 	}
 	
 	public Ausschreibung(Ausschreibung ausschreibung) {
+		this.setId(ausschreibung.getId());
 		this.setTitel(ausschreibung.getTitel());
 		this.setBeschreibung(ausschreibung.getBeschreibung());
 		this.setBewerbungsfrist(ausschreibung.getBewerbungsfrist());
