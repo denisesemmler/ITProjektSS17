@@ -58,7 +58,6 @@ public class ProfilMapper {
 
 		// Datenbankverbindung �ffnen
 		Connection con = DBConnection.connection();
-		System.out.println("dbconnection: " + con);
 
 		try {
 			// neues SQL Statement anlegen
@@ -73,10 +72,6 @@ public class ProfilMapper {
 				// SQL Query ausf�hren um Datensatz in DB zu schreiben
 				stmt.executeUpdate(
 						"INSERT INTO Profil (idProfil, erstelldatum, Teilnehmer_idTeilnehmer) "
-								+ "VALUES " + "('" + p.getId() + "', '"  + p.getErstellDatum() + "', '" + p.getTeilnehmer_idTeilnehmer() + "')");
-
-				System.out.println(
-						"idProfil, erstelldatum, Teilnehmer_idTeilnehmer) "
 								+ "VALUES " + "('" + p.getId() + "', '"  + p.getErstellDatum() + "', '" + p.getTeilnehmer_idTeilnehmer() + "')");
 
 			}

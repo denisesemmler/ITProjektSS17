@@ -9,6 +9,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 import de.hdm.itprojekt.shared.report.AlleAusschreibungen;
 import de.hdm.itprojekt.shared.report.AlleAusschreibungenNutzer;
+import de.hdm.itprojekt.shared.report.AlleBewerbungenNutzer;
+import de.hdm.itprojekt.shared.report.BewerbungZuAusschreibung;
 public class ReportNavigation extends VerticalPanel implements ClickHandler{
 	private Button allAds  = new Button("Alle Ausschreibungen", this);
 	private Button adsForProfile  = new Button("Alle Ausschreibungen für Profil", this);
@@ -33,9 +35,9 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 		} else if (sender == adsForProfile){
 			this.parent.setReport(new AlleAusschreibungenNutzer());
 		} else if (sender == adsForApplication){
-			Window.alert("Not yet implemented");
+			this.parent.setReport(new BewerbungZuAusschreibung());
 		} else if (sender == openApplication){
-			Window.alert("Not yet implemented");
+			this.parent.setReport(new AlleBewerbungenNutzer());
 		}
 	}
 }

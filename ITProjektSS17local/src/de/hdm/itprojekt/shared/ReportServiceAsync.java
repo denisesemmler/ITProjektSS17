@@ -5,8 +5,11 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
+import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
 
 public interface ReportServiceAsync {
 	void getAllAusschreibungen(AsyncCallback<List<AusschreibungReport>> callback);
-	void getAllAusschreibungenUser(String user, AsyncCallback<List<AusschreibungReport>> callback);
+	void getAllAusschreibungenUser(int teilnehmerId, AsyncCallback<List<AusschreibungReport>> callback);
+	void getAllBewerbungenUser(int teilnehmerId, AsyncCallback<List<BewerbungReport>> callback);
+	void getAllBewerbungenForUser(int teilnehmerId, AsyncCallback<List<BewerbungReport>> callback);
 }

@@ -99,3 +99,13 @@ h1 {
 	margin-right: 50px;
 	
 }
+
+table.reportTable {
+	border-collapse: collapse;
+	margin-bottom:3em;
+}
+
+table.reportTable th, table.reportTable td{
+	border: 1px solid black;
+	width:200px;
+}

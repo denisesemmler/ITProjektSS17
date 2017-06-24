@@ -126,7 +126,10 @@ public class BewerbungMapper {
 				b.setId(rs.getInt("idBewerbung"));
 				b.setBewerbungsText(rs.getString("bewerbungstext"));
 				b.setErstellDatum(rs.getTimestamp("erstellDatum"));
-				// ... Objekt dem Ergebnisvektor hinzuf�gen
+				b.setAusschreibungID(rs.getInt("Ausschreibung_idAusschreibung"));
+				b.setStatus(rs.getString("status"));
+				b.setBewertung(rs.getFloat("bewertung"));
+				b.setIdProfil(rs.getInt("Profil_idProfil"));
 				result.add(b);
 			}
 		}
@@ -170,6 +173,10 @@ public class BewerbungMapper {
 				b.setId(rs.getInt("idBewerbung"));
 				b.setBewerbungsText(rs.getString("bewerbungstext"));
 				b.setErstellDatum(rs.getTimestamp("erstellDatum"));
+				b.setAusschreibungID(rs.getInt("Ausschreibung_idAusschreibung"));
+				b.setStatus(rs.getString("status"));
+				b.setBewertung(rs.getFloat("bewertung"));
+				b.setIdProfil(rs.getInt("Profil_idProfil"));
 				// ... Objekt dem Ergebnisvektor hinzuf�gen
 				result.add(b);
 			}
