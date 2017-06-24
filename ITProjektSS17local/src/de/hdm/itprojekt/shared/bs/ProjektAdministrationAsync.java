@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.shared.bs;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -62,6 +63,9 @@ public interface ProjektAdministrationAsync {
 	void deleteAusschreibung(Ausschreibung a, AsyncCallback<Void> callback);
 	
 	void findBewerbungenByAusschreibungId(int AusschreibungId, AsyncCallback<Vector<Bewerbung>> callback);
+
+	void findBewerbungenTeilnehmerByAusschreibungId(int AuscchreibungId,
+			AsyncCallback<Map<Bewerbung, Teilnehmer>> callback);
 	
 	void findAllAusschreibungByTeilnehmerId(int teilnehmerId, AsyncCallback<Vector<Ausschreibung>> callback);
 	
@@ -78,6 +82,8 @@ public interface ProjektAdministrationAsync {
 	void deleteBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 	
 	void findBewerbungByTeilnehmerid(int teilnehmerId, AsyncCallback<Vector<Bewerbung>> callback);
+	
+	void findBewerbungByProfilIdAndAusschreibungId(int id, int ausschreibungID, AsyncCallback<Bewerbung> callback);
 	
 	void bewertungZurBewerbung(int bewerbungId, float bewertung, int beteiligungId, String stellungnahme, int projektId,
 			int manntage, Date startdatum, Date enddatum, AsyncCallback<Void> callback);
@@ -100,6 +106,11 @@ public interface ProjektAdministrationAsync {
 			AsyncCallback<Vector<Eigenschaft>> callback);
 
 	void getProfilIdCurrentUser(int teilnehmerId, AsyncCallback<Profil> callback);
+
+	void findTeilnehmerByBewerbungId(int bewerbungId, AsyncCallback<Teilnehmer> callback);
+
+	
+
 
 	
 

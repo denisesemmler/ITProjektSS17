@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.shared.bs;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -74,9 +75,13 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public Vector<Bewerbung> findBewerbungenByAusschreibungId(int AuscchreibungId) throws IllegalArgumentException;
 	
+	public Map<Bewerbung,Teilnehmer> findBewerbungenTeilnehmerByAusschreibungId(int AuscchreibungId) throws IllegalArgumentException;
+	
 	public Vector<Ausschreibung> findAllAusschreibungByTeilnehmerId(int teilnehmerId) throws IllegalArgumentException;
 	
 	public Vector<Ausschreibung> findAllAusschreibungen() throws IllegalArgumentException;
+	
+		
 	/*
 	 * Methoden zum anlegen von Bewerbungen
 	 */
@@ -87,6 +92,8 @@ public interface ProjektAdministration extends RemoteService {
 	public void deleteBewerbung(Bewerbung b) throws IllegalArgumentException;
 	
 	public Vector<Bewerbung> findBewerbungByTeilnehmerid(int tilnehmerId) throws IllegalArgumentException;
+	
+	public Bewerbung findBewerbungByProfilIdAndAusschreibungId(int id, int ausschreibungID) throws IllegalArgumentException;
 	
 	public void bewertungZurBewerbung(int bewerbungId, float bewertung, int beteiligungId, String stellungnahme, int projektId, int manntage, Date startdatum, Date enddatum) throws IllegalArgumentException;
 	
@@ -111,9 +118,11 @@ public interface ProjektAdministration extends RemoteService {
 	public Profil createProfil(int teilnehmerId) throws IllegalArgumentException;
 	
 	public Profil getProfilIdCurrentUser(int teilnehmerId) throws IllegalArgumentException;
+	
+	public Teilnehmer findTeilnehmerByBewerbungId(int bewerbungId) throws IllegalArgumentException;
 
 	/*
-	 * Methoden für Eigenschaften
+	 * Methoden fï¿½r Eigenschaften
 	 */
 	
 	public Vector <Eigenschaft> createEigenschaft(Vector<String> name, Vector<String> wert, int teilnehmerId) throws IllegalArgumentException;
