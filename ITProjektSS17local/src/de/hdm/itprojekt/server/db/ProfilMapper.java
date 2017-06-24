@@ -4,20 +4,18 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-//import de.hdm.itprojekt.profil.server.db.DBConnection;
-import de.hdm.itprojekt.server.db.ProfilMapper;
+
 import de.hdm.itprojekt.shared.bo.Profil;
-import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 /**
  * <p>
  * Mapper-Klasse zur Abbildung von <code>Profil</code> Objekten auf die
- * Datenbank. Über das Mapping können sowohl Objekte als auch deren Attribute in
+ * Datenbank. ï¿½ber das Mapping kï¿½nnen sowohl Objekte als auch deren Attribute in
  * die Datenbank geschrieben werden, als auch von der Datenbank ausgelesen
  * werden.
  * </p>
  * <p>
- * Es werden Methoden zum Erstellen, Ãndern, Löschen und Ausgeben von Profilen
+ * Es werden Methoden zum Erstellen, ï¿½ndern, Lï¿½schen und Ausgeben von Profilen
  * bereitgestellt.
  * </p>
  * 
@@ -53,25 +51,25 @@ public class ProfilMapper {
 	 * 
 	 * @param id
 	 *            - PrimÃ¤rschlÃ¼ssel von Profil
-	 * @return Profil Objekt, das die gesuchte ID enthält
+	 * @return Profil Objekt, das die gesuchte ID enthï¿½lt
 	 * 
 	 * */
 	public Profil insert(Profil p) {
 
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen um die höchste id zu erhalten
+			// SQL Query ausfï¿½hren um die hï¿½chste id zu erhalten
 			ResultSet rs = stmt.executeQuery("SELECT MAX(idProfil) AS maxId FROM Profil");
 			if (rs.next()) {
-				// id um 1 erhöhen, damit ein neuer Eintrag erzeugt wird
+				// id um 1 erhï¿½hen, damit ein neuer Eintrag erzeugt wird
 				p.setId(rs.getInt("maxId") + 1);
 				// neues SQL Statement
 				stmt = con.createStatement();
-				// SQL Query ausführen um Datensatz in DB zu schreiben
+				// SQL Query ausfï¿½hren um Datensatz in DB zu schreiben
 				stmt.executeUpdate(
 						"INSERT INTO Profil (idProfil, erstelldatum, Teilnehmer_idTeilnehmer) "
 								+ "VALUES " + "('" + p.getId() + "', '"  + p.getErstellDatum() + "', '" + p.getTeilnehmer_idTeilnehmer() + "')");
@@ -85,7 +83,7 @@ public class ProfilMapper {
 		return p;
 	}
 	public Profil findById(int id) {
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 
 		try {
@@ -93,9 +91,6 @@ public class ProfilMapper {
 			Statement stmt = con.createStatement();
 			// SQL Query ausfÃ¼hren
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Profil "
-					+ "WHERE idProfil = " + id);
-			
-			System.out.println("SELECT * FROM Profil "
 					+ "WHERE idProfil = " + id);
 			// Bei Treffer
 			if (rs.next()) {
@@ -105,10 +100,7 @@ public class ProfilMapper {
 				p.setId(rs.getInt("idProfil"));
 				p.setErstellDatum(rs.getTimestamp("erstelldatum"));
 				p.setAenderungsDatum(rs.getTimestamp("aenderungsdatum"));
-
 				p.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
-				
-				System.out.println("ID is "+rs.getInt("Teilnehmer_idTeilnehmer"));
 
 				// Objekt zurÃ¼ckgeben
 				return p;
@@ -119,12 +111,12 @@ public class ProfilMapper {
 			e.printStackTrace();
 			return null;
 		}
-		// Falls nichts gefunden wurde null zurückgeben
+		// Falls nichts gefunden wurde null zurï¿½ckgeben
 		return null;
 	}
 	
 	public Profil findByTeilnehmerId(int id) {
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 
 		try {
@@ -156,7 +148,7 @@ public class ProfilMapper {
 	}
 	
 	public int findByTeilnehmerIdINT(int id) {
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 
 		try {
@@ -181,19 +173,19 @@ public class ProfilMapper {
 			e.printStackTrace();
 			return 0;
 		}
-		// Falls nichts gefunden wurde null zurückgeben
+		// Falls nichts gefunden wurde null zurï¿½ckgeben
 		return 0;
 	}
 
 
 	public void delete(Profil p) {
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen
+			// SQL Query ausfï¿½hren
 			stmt.executeUpdate("DELETE FROM Profil WHERE idProfil = " + p.getId());
 		}
 		// Error Handling

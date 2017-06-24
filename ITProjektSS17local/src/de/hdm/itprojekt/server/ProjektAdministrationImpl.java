@@ -2,6 +2,8 @@ package de.hdm.itprojekt.server;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import com.google.appengine.api.users.User;
@@ -256,11 +258,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 */
 	private void deleteProfil(Ausschreibung a) {
 
-		// Hier wird das Suchprofil zur Ausschreibung von der DB gelesen
-		Profil suchProfil = pfMapper.findById(a.getProfil_idSuchprofil());
-
 		// Hier werden die Eigenschaften zum Profil gelesen
-		Vector<Eigenschaft> profilEigenschaften = eMapper.findByProfil(suchProfil);
+		Vector<Eigenschaft> profilEigenschaften = eMapper.findByProfil(a.getProfil_idSuchprofil());
 
 		// Hier werden die Eigenschaften aus der DB entfernt
 		for (Eigenschaft e : profilEigenschaften) {
@@ -386,6 +385,24 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 				return bewerbungen;
 	}
 
+	@Override
+	public Map<Bewerbung, Teilnehmer> findBewerbungenTeilnehmerByAusschreibungId(int ausscchreibungId)
+			throws IllegalArgumentException {
+	
+		Vector<Bewerbung> bewerbungen = this.findBewerbungenByAusschreibungId(ausscchreibungId);
+		
+		Map<Bewerbung, Teilnehmer> bewerbungTeilnehmerMap = new HashMap<Bewerbung, Teilnehmer>();
+		
+		for(Bewerbung b : bewerbungen){
+			bewerbungTeilnehmerMap.put(b,this.findTeilnehmerByBewerbungId(b.getId()));
+		}
+		
+		return bewerbungTeilnehmerMap;
+		
+	}
+	
+	
+	
 	// Methoden für Bewerbung
 	/**
 	 * Diese Methode implementiert denn UC Auf Ausschreibung bewerben
@@ -448,6 +465,17 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		
 		return bewerbungenZuTeilnehmer;
 	}
+	
+	
+	@Override
+	public Bewerbung findBewerbungByProfilIdAndAusschreibungId(int profilId, int ausschreibungID)
+			throws IllegalArgumentException {
+		
+		return bMapper.findByProfilIdAndAusschreibungsId(profilId, ausschreibungID);
+		
+		
+	}
+	
 	
 	
 	/**
@@ -556,9 +584,35 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		return logInf;
 	}
+	
+	
+	
+	/**
+	 * Methode für die BewerbungsBewertung in der GUI
+	 */
+	@Override
+	public Teilnehmer findTeilnehmerByBewerbungId(int bewerbungId) throws IllegalArgumentException {
+		
+		//BewerbungsId wird über den Mapper aufruf in die Variable bewerbung geschrieben
+		Bewerbung bewerbung = bMapper.findById(bewerbungId);
+		
+		int profilId = bewerbung.getIdProfil();
+		//ProfilId wird über den Mapper aufruf in die Variable profil geschrieben
+		Profil profil = pfMapper.findById(profilId);
+		
+		int teilnehmerId = profil.getTeilnehmer_idTeilnehmer();
+		//Alle Teilnehmer zur Bewerbungid werden hier "gemerkt"
+		Teilnehmer teilnehmer = tMapper.findById(teilnehmerId);
+
+		//Rückgabe
+		return teilnehmer;
+	}
+	
+	
+	
   /* Eigenschaft hinzufügen*/
 	@Override
-	public Vector<Eigenschaft> createEigenschaft(Vector<String> name, Vector <String> wert, int teilnehmerId) throws IllegalArgumentException { 
+	public Vector<Eigenschaft> createEigenschaft(Vector<String> name, Vector<String> wert, int teilnehmerId) throws IllegalArgumentException { 
 		Vector<Eigenschaft> eigenschaften = new Vector<Eigenschaft>();
 		
 		for (int i =0; i< name.size(); i++){
@@ -580,12 +634,14 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return pfMapper.findByTeilnehmerId(teilnehmerId);
 	
 	}
-
 	
-
-
-
-
-
+	
+//Methode um Name und Wert von Eigenschaften zu lesen
+	public Vector<Eigenschaft> findNameAndWertFromEigenschaften(int profilId) throws IllegalArgumentException {
+		
+		Vector<Eigenschaft>  eigenschaftenNameWert = eMapper.findByProfil(profilId);
+		
+		return eigenschaftenNameWert;
+	}
 
 }

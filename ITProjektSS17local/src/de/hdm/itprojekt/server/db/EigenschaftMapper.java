@@ -117,17 +117,17 @@ public class EigenschaftMapper {
 
 	
 	//Eigenschaften werden anhand ihrer einzigartigen ID gesucht
-	public Vector<Eigenschaft> findByProfil(Profil profilId) {
+	public Vector<Eigenschaft> findByProfil(int profilId) {
 
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 		Vector<Eigenschaft> result = new Vector<Eigenschaft>();
 		try {
 			// Neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen
+			// SQL Query ausfï¿½hren
 			ResultSet rs = stmt
-					.executeQuery("SELECT * FROM Eigenschaft " + "WHERE Profil_idProfil = " + profilId.getIdProfil());
+					.executeQuery("SELECT * FROM Eigenschaft " + "WHERE Profil_idProfil = " + profilId);
 			// Bei Treffer
 			while (rs.next()) {
 				// Neues Eigenschaft Objekt erzeugen
@@ -150,13 +150,13 @@ public class EigenschaftMapper {
 	}
 
 	public void delete(Eigenschaft e) {
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen
+			// SQL Query ausfï¿½hren
 			stmt.executeUpdate("DELETE FROM Eigenschaft WHERE idEigenschaft = " + e.getId());
 		}
 		// Error Handling
