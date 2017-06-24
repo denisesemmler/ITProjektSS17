@@ -258,11 +258,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 */
 	private void deleteProfil(Ausschreibung a) {
 
-		// Hier wird das Suchprofil zur Ausschreibung von der DB gelesen
-		Profil suchProfil = pfMapper.findById(a.getProfil_idSuchprofil());
-
 		// Hier werden die Eigenschaften zum Profil gelesen
-		Vector<Eigenschaft> profilEigenschaften = eMapper.findByProfil(suchProfil);
+		Vector<Eigenschaft> profilEigenschaften = eMapper.findByProfil(a.getProfil_idSuchprofil());
 
 		// Hier werden die Eigenschaften aus der DB entfernt
 		for (Eigenschaft e : profilEigenschaften) {
@@ -615,7 +612,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	
   /* Eigenschaft hinzufügen*/
 	@Override
-	public Vector<Eigenschaft> createEigenschaft(Vector<String> name, Vector <String> wert, int teilnehmerId) throws IllegalArgumentException { 
+	public Vector<Eigenschaft> createEigenschaft(Vector<String> name, Vector<String> wert, int teilnehmerId) throws IllegalArgumentException { 
 		Vector<Eigenschaft> eigenschaften = new Vector<Eigenschaft>();
 		
 		for (int i =0; i< name.size(); i++){
@@ -637,8 +634,14 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return pfMapper.findByTeilnehmerId(teilnehmerId);
 	
 	}
-
-
-
+	
+	
+//Methode um Name und Wert von Eigenschaften zu lesen
+	public Vector<Eigenschaft> findNameAndWertFromEigenschaften(int profilId) throws IllegalArgumentException {
+		
+		Vector<Eigenschaft>  eigenschaftenNameWert = eMapper.findByProfil(profilId);
+		
+		return eigenschaftenNameWert;
+	}
 
 }

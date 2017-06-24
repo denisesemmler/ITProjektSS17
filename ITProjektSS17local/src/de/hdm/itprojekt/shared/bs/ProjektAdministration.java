@@ -125,6 +125,7 @@ public interface ProjektAdministration extends RemoteService {
 	 * Methoden f�r Eigenschaften
 	 */
 	
-	public Vector <Eigenschaft> createEigenschaft(Vector<String> name, Vector<String> wert, int teilnehmerId) throws IllegalArgumentException;
+	public Vector<Eigenschaft> createEigenschaft(Vector<String> name, Vector<String> wert, int teilnehmerId) throws IllegalArgumentException;
 
+	public Vector<Eigenschaft> findNameAndWertFromEigenschaften(int profilId) throws IllegalArgumentException;
 }
