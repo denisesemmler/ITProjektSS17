@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Profil;
 
 public class BewerbungAnlegen extends VerticalPanel {
@@ -55,27 +56,19 @@ public class BewerbungAnlegen extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 
-			// TODO Callback
-
-			try {
-
-				ClientSideSettings.getProjektAdministration().createBewerbung(textA.getText(), date, 0.0f, "Laufend",
-						p.getId(), ausschreibungID, new BewerbungSendenCallback());
-			} catch (Exception e) {
-				Window.alert(e.toString());
-				e.printStackTrace();
-			}
+			ClientSideSettings.getProjektAdministration().findBewerbungByProfilIdAndAusschreibungId(p.getId(),
+					ausschreibungID, new BewerbungByProfilIdAndAusschreibungsIdCallback());
 
 		}
 	};
 
-	private class BewerbungSendenCallback implements AsyncCallback {
+	private class BewerbungSendenCallback implements AsyncCallback<Bewerbung> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Nein das falsch");
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(Bewerbung result) {
 
 			RootPanel.get("Content").clear();
 		}
@@ -85,7 +78,7 @@ public class BewerbungAnlegen extends VerticalPanel {
 	private class GetPartnerProfileCallback implements AsyncCallback<Profil> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat läuft noch nit so Profil finden!");
+			Window.alert("Dat lï¿½uft noch nit so Profil finden!");
 
 		}
 
@@ -93,6 +86,34 @@ public class BewerbungAnlegen extends VerticalPanel {
 
 			p.setId(result.getId());
 			Window.alert("Dein Profil wurde gefunden!");
+
+		}
+
+	}
+
+	private class BewerbungByProfilIdAndAusschreibungsIdCallback implements AsyncCallback<Bewerbung> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+
+		}
+
+		@Override
+		public void onSuccess(Bewerbung result) {
+			
+			if (result == null) {
+
+				try {
+
+					ClientSideSettings.getProjektAdministration().createBewerbung(textA.getText(), date, 0.0f,
+							"Laufend", p.getId(), ausschreibungID, new BewerbungSendenCallback());
+				} catch (Exception e) {
+					Window.alert(e.toString());
+					e.printStackTrace();
+				}
+			} else {
+				Window.alert("Bewerbung nicht mÃ¶glich. Es existiert bereits eine Bewerbung.");
+			}
 
 		}
 

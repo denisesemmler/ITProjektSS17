@@ -117,7 +117,7 @@ public class BewerbungMapper {
 			Statement stmt = con.createStatement();
 			// SQL Query ausf�hren
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Bewerbung " +
-					"WHERE AusschreibungID = '" + ausschreibungsID +"'");
+					"WHERE Ausschreibung_idAusschreibung = '" + ausschreibungsID +"'");
 			// F�r jeden gefundenen Treffer...
 			while (rs.next()) {
 				// ... neues Bewerbung Objekt anlegen
@@ -304,6 +304,41 @@ public class BewerbungMapper {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public Bewerbung findByProfilIdAndAusschreibungsId(int profilId, int ausschreibungID) {
+		// Datenbankverbindung 
+		Connection con = DBConnection.connection();
+		//Ergebnis-Vector anlegen
+		Bewerbung result = new Bewerbung();
+		
+		try {
+			// neues SQL Statement anlegen
+			Statement stmt = con.createStatement();
+			
+			// SQL Query ausf�hren
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Bewerbung " +
+					"WHERE Profil_idProfil = '" + profilId+ "'" + "AND Ausschreibung_idAusschreibung = '"+ ausschreibungID +"'");
+			
+			// F�r jeden gefundenen Treffer...
+			if(rs.next()) {
+				
+				// Id, bewerbungstext, und Erstelldatum mit den Daten aus der DB f�llen
+				result.setId(rs.getInt("idBewerbung"));
+				result.setBewerbungsText(rs.getString("bewerbungstext"));
+				result.setErstellDatum(rs.getTimestamp("erstellDatum"));
+				// ... Objekt dem Ergebnisvektor hinzuf�gen
+
+			} else{
+				result = null;
+			}
+		}
+		// Error Handling
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		// Ergebnis zur�ckgeben
+		return result;
 	}
 	
 	
