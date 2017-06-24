@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.server;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -89,6 +90,34 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 				
 				report.add(reportEntry);
 			}
+		}
+		
+		return report;
+	}
+
+	@Override
+	public List<BewerbungReport> getAllBewerbungenForUser(int teilnehmerId) {
+		List<BewerbungReport> report = new ArrayList<BewerbungReport>();
+		
+		Profil profil = ProfilMapper.profilMapper().findByTeilnehmerId(teilnehmerId);
+		
+		Vector<Bewerbung> bewerbungen = BewerbungMapper.bewerbungMapper().findBewerbungByTeilnehmerId(profil.getId());
+		
+		for(Bewerbung bewerbung: bewerbungen) {
+			BewerbungReport reportEntry = new BewerbungReport(bewerbung);
+			
+			Ausschreibung ausschreibung = AusschreibungMapper.ausschreibungMapper().findById(bewerbung.getAusschreibungID());
+			reportEntry.setBewerbungName(ausschreibung.getTitel());
+			
+			Projekt projekt = ProjektMapper.projektMapper().findById(ausschreibung.getProjekt_idProjekt());
+			reportEntry.setProjektName(projekt.getName());
+			
+			Teilnehmer teilnehmer = TeilnehmerMapper.teilnehmerMapper().findById(ausschreibung.getTeilnehmer_idTeilnehmer());
+			reportEntry.setAnsprechpartnerName(teilnehmer.getVorname() + " " + teilnehmer.getNachname());
+			
+			reportEntry.setFrist(ausschreibung.getBewerbungsfrist());
+			
+			report.add(reportEntry);
 		}
 		
 		return report;

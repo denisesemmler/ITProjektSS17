@@ -37,7 +37,7 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 		} else if (sender == adsForApplication){
 			this.parent.setReport(new BewerbungZuAusschreibung());
 		} else if (sender == openApplication){
-			Window.alert("Not yet implemented");
+			this.parent.setReport(new AlleBewerbungenNutzer());
 		}
 	}
 }

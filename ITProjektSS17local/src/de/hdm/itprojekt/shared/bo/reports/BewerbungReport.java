@@ -1,5 +1,7 @@
 package de.hdm.itprojekt.shared.bo.reports;
 
+import java.util.Date;
+
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 
 public class BewerbungReport extends Bewerbung{
@@ -12,6 +14,8 @@ public class BewerbungReport extends Bewerbung{
 	private String projektName;
 	private String bewerbungName;
 	private String bewerberName;
+	private String ansprechpartnerName;
+	private Date frist;
 	
 	public BewerbungReport() {
 		
@@ -44,5 +48,17 @@ public class BewerbungReport extends Bewerbung{
 	}
 	public void setBewerberName(String bewerberName) {
 		this.bewerberName = bewerberName;
+	}
+	public Date getFrist() {
+		return frist;
+	}
+	public void setFrist(Date frist) {
+		this.frist = frist;
+	}
+	public String getAnsprechpartnerName() {
+		return ansprechpartnerName;
+	}
+	public void setAnsprechpartnerName(String ansprechpartnerName) {
+		this.ansprechpartnerName = ansprechpartnerName;
 	}
 }

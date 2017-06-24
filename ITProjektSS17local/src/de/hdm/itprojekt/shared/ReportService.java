@@ -14,4 +14,5 @@ public interface ReportService  extends RemoteService{
 	List<AusschreibungReport> getAllAusschreibungen();
 	List<AusschreibungReport> getAllAusschreibungenUser(int teilnehmerId);
 	List<BewerbungReport> getAllBewerbungenUser(int teilnehmerId);
+	List<BewerbungReport> getAllBewerbungenForUser(int teilnehmerId);
 }
