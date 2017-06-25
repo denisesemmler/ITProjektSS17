@@ -163,6 +163,9 @@ public class BewerbungMapper {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Bewerbung " +
 					"WHERE Profil_idProfil = '" + profilId+ "'");
 			
+			System.out.println("SELECT * FROM Bewerbung " +
+					"WHERE Profil_idProfil = '" + profilId+ "'");
+			
 			// F�r jeden gefundenen Treffer...
 			while (rs.next()) {
 				

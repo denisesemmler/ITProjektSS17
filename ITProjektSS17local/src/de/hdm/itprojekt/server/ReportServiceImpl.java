@@ -22,9 +22,19 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
 
+/**
+ * Backend Service für die unterschiedlichen Berichte
+ * @author Jiayi
+ *
+ */
 public class ReportServiceImpl extends RemoteServiceServlet implements ReportService  {	
 	
+	private static final long serialVersionUID = -7548005663369824973L;
+
 	@Override
+	/**
+	 * 
+	 */
 	public List<AusschreibungReport> getAllAusschreibungen() {
 		List<AusschreibungReport> report = new ArrayList<AusschreibungReport>();
 		
@@ -77,11 +87,8 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 				Projekt projekt = ProjektMapper.projektMapper().findById(ausschreibung.getProjekt_idProjekt());
 				reportEntry.setProjektName(projekt.getName());
 				
-				System.out.println("Jiayi:: ProfilId is "+ bewerbung.getIdProfil());
-				
 				Profil profil = ProfilMapper.profilMapper().findById(bewerbung.getIdProfil());
 				
-				System.out.println("Jiayi:: id is "+ profil.getTeilnehmer_idTeilnehmer());
 				
 				Teilnehmer teilnehmer = TeilnehmerMapper.teilnehmerMapper().findById(profil.getTeilnehmer_idTeilnehmer());
 				reportEntry.setBewerberName(teilnehmer.getVorname() + " " + teilnehmer.getNachname());
@@ -122,4 +129,51 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 		
 		return report;
 	}	
+	
+	@Override
+	public List<BewerbungReport> getProjektverpflechtungen(int teilnehmerId) {
+		List<BewerbungReport> report = new ArrayList<BewerbungReport>();
+		
+		List<Ausschreibung> ausschreibungen = AusschreibungMapper.ausschreibungMapper().findAllAusschreibungByTeilnehmerId(teilnehmerId);
+		for(Ausschreibung ausschreibung: ausschreibungen) {
+			Vector<Bewerbung> bewerbungen = BewerbungMapper.bewerbungMapper().findByAusschreibungsId(ausschreibung.getId());
+			
+			for(Bewerbung bewerbung: bewerbungen) {
+				BewerbungReport reportEntry = new BewerbungReport(bewerbung);
+				
+				Projekt projekt = ProjektMapper.projektMapper().findById(ausschreibung.getProjekt_idProjekt());
+				reportEntry.setProjektName(projekt.getName());
+				
+				Profil profil = ProfilMapper.profilMapper().findById(bewerbung.getIdProfil());
+				
+				
+				Teilnehmer teilnehmer = TeilnehmerMapper.teilnehmerMapper().findById(profil.getTeilnehmer_idTeilnehmer());
+				reportEntry.setBewerberName(teilnehmer.getVorname() + " " + teilnehmer.getNachname());
+				
+				reportEntry.setBewerbungName(ausschreibung.getTitel());
+				
+				
+				Vector<Bewerbung> referencen = BewerbungMapper.bewerbungMapper().findBewerbungByTeilnehmerId(profil.getId());
+				
+				List<BewerbungReport> refs = new ArrayList<BewerbungReport>();
+				for(Bewerbung ref: referencen) {
+					BewerbungReport refEntry = new BewerbungReport(ref);
+					
+					Ausschreibung refAusschreibung = AusschreibungMapper.ausschreibungMapper().findById(ref.getAusschreibungID());
+					
+					Projekt refProjekt = ProjektMapper.projektMapper().findById(refAusschreibung.getProjekt_idProjekt());
+					refEntry.setProjektName(refProjekt.getName());
+					
+					refEntry.setBewerbungName(refAusschreibung.getTitel());
+								
+					
+					refs.add(refEntry);
+				}
+				reportEntry.setReferenz(refs);
+				report.add(reportEntry);
+			}
+		}
+		
+		return report;
+	}
 }
