@@ -21,6 +21,7 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
+import de.hdm.itprojekt.shared.bo.reports.FanInFanOut;
 
 /**
  * Backend Service für die unterschiedlichen Berichte
@@ -174,6 +175,12 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 			}
 		}
 		
+		return report;
+	}
+
+	@Override
+	public List<FanInFanOut> getFanInFanOut() {
+		List<FanInFanOut> report = new ArrayList<>();
 		return report;
 	}
 }
