@@ -31,17 +31,17 @@ public class ProfilAnlegen extends VerticalPanel {
 	private HorizontalPanel catia = new HorizontalPanel();
 	private HorizontalPanel sql = new HorizontalPanel();
 
-	private Label eigenschaftLabel = new Label("Deine Fähigkeiten: ");
-	private Label schulabschlussLabel = new Label("Höchster Schulabschluss ");
-	private Label berufserfahrungLabel = new Label("Berufserfahrung ");
-	private Label msofficeLabel = new Label("Microsoft Office ");
-	private Label msprojectLabel = new Label("Microsoft Project ");
-	private Label sapLabel = new Label("SAP/ERP ");
-	private Label arisLabel = new Label("ARIS ");
-	private Label javaLabel = new Label("Java ");
-	private Label cLabel = new Label("C/C++ ");
-	private Label catiaLabel = new Label("CATIA ");
-	private Label sqlLabel = new Label("SQL/DB ");
+	private Label eigenschaftLabel = new Label("Deine Fähigkeiten:");
+	private Label schulabschlussLabel = new Label("Hoechster Schulabschluss");
+	private Label berufserfahrungLabel = new Label("Berufserfahrung");
+	private Label msofficeLabel = new Label("Microsoft Office");
+	private Label msprojectLabel = new Label("Microsoft Project");
+	private Label sapLabel = new Label("SAP/ERP");
+	private Label arisLabel = new Label("ARIS");
+	private Label javaLabel = new Label("Java");
+	private Label cLabel = new Label("C/C++");
+	private Label catiaLabel = new Label("CATIA");
+	private Label sqlLabel = new Label("SQL/DB");
 
 	private ListBox schulabschlussListBox = new ListBox();
 	private ListBox berufserfahrungListBox = new ListBox();

@@ -128,4 +128,6 @@ public interface ProjektAdministration extends RemoteService {
 	public Vector<Eigenschaft> createEigenschaft(Vector<String> name, Vector<Integer> wert, int teilnehmerId) throws IllegalArgumentException;
 
 	public Vector<Eigenschaft> findNameAndWertFromEigenschaften(int profilId) throws IllegalArgumentException;
+
+	void updateEigenschaft(Vector<Eigenschaft> eigenschaften) throws IllegalArgumentException;
 }

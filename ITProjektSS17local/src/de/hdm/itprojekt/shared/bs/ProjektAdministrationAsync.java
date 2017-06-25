@@ -115,6 +115,8 @@ public interface ProjektAdministrationAsync {
 	void createEigenschaft(Vector<String> name, Vector<Integer> wert, int teilnehmerId,
 			AsyncCallback<Vector<Eigenschaft>> callback);
 
+	void updateEigenschaft(Vector<Eigenschaft> eigenschaften, AsyncCallback<Void> callback);
+
 
 
 
