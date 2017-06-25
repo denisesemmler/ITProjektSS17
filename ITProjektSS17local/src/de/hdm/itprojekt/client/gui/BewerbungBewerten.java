@@ -4,16 +4,21 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import com.google.gwt.dom.client.Text;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
@@ -34,33 +39,67 @@ public class BewerbungBewerten extends VerticalPanel {
 	private VerticalPanel editorPanel = new VerticalPanel();
 
 	/*
-	 *  Insatnzvariablen zu Speicherung der ErgebnisVektoren und späteren
-	 *  Zuweisung für die ListBoxen
+	 * Insatnzvariablen zu Speicherung der ErgebnisVektoren und späteren
+	 * Zuweisung für die ListBoxen
 	 */
-	private Vector<Projektmarktplatz> projektmarktplätze;
-	private Vector<Projekt> projekte;
-	private Vector<Ausschreibung> ausschreibungen;
-	private Vector<Bewerbung> bewerbungen;
+	private Vector<Projektmarktplatz> projektmarktplätze = new Vector<Projektmarktplatz>();
+	private Vector<Projekt> projekte = new Vector<Projekt>();
+	private Vector<Ausschreibung> ausschreibungen = new Vector<Ausschreibung>();
+	private Vector<Bewerbung> bewerbungen = new Vector<Bewerbung>();
 
-	// Dropdown Menü
+	// Dropdown Menü Instanzvariablen
 	private ListBox marktplatzListBox = new ListBox();
 	private ListBox projektListBox = new ListBox();
 	private ListBox ausschreibungListBox = new ListBox();
 	private ListBox bewerbungListBox = new ListBox();
 
-	// Überschrifts Label
-	private Label bewerbungBewertenLabel = new Label("Wählen Sie hier die zu bewertende Bewerbung aus");
+	// Textboxen Instanzvariablen zum befüllen mit Textinhalten
+	private TextBox bewertungInBox = new TextBox();
+	private TextBox stellungnahmeInBox = new TextBox();
+
+	// Überschrifts Panel
+	private HTMLPanel bewerbungBewertenPanel = new HTMLPanel(
+			"<h2>Wählen Sie hier die zu bewertende Bewerbung aus</h2>");
+
+	// Panel für die Dropdownfelder
+	private HTMLPanel projektmarktplatzDropdown = new HTMLPanel("<strong>Projektmarktplatz auswählen</strong>");
+	private HTMLPanel projektDropdown = new HTMLPanel("<strong>Projekt auswählen</strong>");
+	private HTMLPanel ausschreibungDropdown = new HTMLPanel("<strong>Ausschreibung auswählen</strong>");
+	private HTMLPanel bewerbungDropdown = new HTMLPanel("<strong>Bewerbung auswählen</strong>");
 
 	// Label für die aufgerufene Bewerbung
-	private Label erstellDatum = new Label("Erstell Datum");
-	private Label bewerbungsText = new Label("Bewerbungs Text");
-	private Label idBewerbung = new Label("ID Bewerbung");
-	private Label bewertung = new Label("Bewertung");
-	private Label status = new Label("Status");
-	private Label stellungnahme = new Label("Stellungnahme");
+	private HTMLPanel erstellDatum = new HTMLPanel("<strong>Erstell Datum:</strong>");
+	private HTMLPanel bewerbungsText = new HTMLPanel("<strong>Bewerbungs Text:</strong>");
+	private HTMLPanel idBewerbung = new HTMLPanel("<strong>ID Bewerbung:</strong>");
+	private HTMLPanel bewertung = new HTMLPanel("<strong>Bewertung:</strong>");
+	private HTMLPanel status = new HTMLPanel("<strong>Status:</strong>");
+	private HTMLPanel stellungnahme = new HTMLPanel("<strong>Stellungnahme:</strong>");
 
-	// Button zum speichern
-	private Button bewertungAbgebenButton = new Button("Bewertung abgeben", new SaveChangesClickHandler());
+	// Leerzeichen zwischen den Labelen
+	private HTMLPanel erstellDatumSpacePanel = new HTMLPanel("&nbsp;");
+	private HTMLPanel bewerbungsTextSpacePanel = new HTMLPanel("&nbsp;");
+	private HTMLPanel idBewerbungSpacePanel = new HTMLPanel("&nbsp;");
+	private HTMLPanel bewertungSpacePanel = new HTMLPanel("&nbsp;");
+	private HTMLPanel statusSpacePanel = new HTMLPanel("&nbsp;");
+	private HTMLPanel stellungnahmeSpacePanel = new HTMLPanel("&nbsp;");
+
+	// Label für die Inhalte der ausgewählten Bewerbung
+	private Label erstellDatumWert = new Label("wird befüllt");
+	private Label bewerbungsTextWert = new Label("wird befüllt");
+	private Label idBewerbungWert = new Label("wird befüllt");
+	private Label bewertungWert = new Label("wird befüllt");// TODO
+	private Label statusWert = new Label("wird befüllt");// TODO
+	private Label stellungnahmeWert = new Label("wird befüllt");
+
+	// Label für Textboxen
+	private Label bewertungsZahlAbgeben = new Label("Hier bitte Bewertung eintragen (0.0-1.0)");
+	private Label stellungnahmeTextAbgeben = new Label("Hier bitte zur Bewertung Stellung beziehen");
+
+	// Button zum aufrufen der Textboxen
+	private Button bewerbungBewerten = new Button("Bewerbung bewerten", new VisibleClickHandler());
+
+	// Button um Bewertung hinzuzufügen der Bewerbung
+	private Button bewertungAbgeben = new Button("Bewertung abgeben", new SaveChangesClickHandler());
 
 	/*
 	 * gedanklich den Klick aus der Verwaltung von
@@ -69,25 +108,37 @@ public class BewerbungBewerten extends VerticalPanel {
 	 */
 	public BewerbungBewerten() {
 		/*
-		 * Mittels dem Projektasync Objekt aus Clientsidsettings, wird die Operation aufgerufen 
-		 * und ein AsyncCallBack Objekt für die Verarbeitung der Antwort erzeugt
+		 * Mittels dem Projektasync Objekt aus Clientsidsettings, wird die
+		 * Operation aufgerufen und ein AsyncCallBack Objekt für die
+		 * Verarbeitung der Antwort erzeugt
 		 */
 		ClientSideSettings.getProjektAdministration().findAllProjektmarktplatz(new AllProjektmarktplatzCallBack());
 
-		mainPanel.add(editorPanel);
-		editorPanel.add(bewerbungBewertenLabel);
+		// Großes HorizontalPanel Spalte 1 über die ganze Seite
+		// TODO
 
+		// Dropdown
+		mainPanel.add(editorPanel);
+		editorPanel.add(bewerbungBewertenPanel);
+
+		editorPanel.add(projektmarktplatzDropdown);
 		editorPanel.add(marktplatzListBox);
 		marktplatzListBox.addChangeHandler(new MarktplatzOnChangeHandler());
 
+		editorPanel.add(projektDropdown);
 		editorPanel.add(projektListBox);
 		projektListBox.addChangeHandler(new ProjektOnChangeHandler());
 
+		editorPanel.add(ausschreibungDropdown);
 		editorPanel.add(ausschreibungListBox);
 		projektListBox.addChangeHandler(new AusschreibungOnChangeHandler());
 
+		editorPanel.add(bewerbungDropdown);
 		editorPanel.add(bewerbungListBox);
 		projektListBox.addChangeHandler(new BewerbungOnChangeHandler());
+
+		// Großes HorizontalPanel Spalte 2 über die ganze Seite
+		// TODO
 
 		/*
 		 * ausgewählte Bewerbung soll angezeigt werden, dazu werden horizontale
@@ -95,30 +146,67 @@ public class BewerbungBewerten extends VerticalPanel {
 		 */
 		HorizontalPanel idPanel = new HorizontalPanel();
 		idPanel.add(idBewerbung);
+		idPanel.add(idBewerbungSpacePanel);
+		idPanel.add(idBewerbungWert);
 		editorPanel.add(idPanel);
 
 		HorizontalPanel datumPanel = new HorizontalPanel();
 		datumPanel.add(erstellDatum);
+		datumPanel.add(erstellDatumSpacePanel);
+		datumPanel.add(erstellDatumWert);
 		editorPanel.add(datumPanel);
 
 		HorizontalPanel bewerbungPanel = new HorizontalPanel();
 		bewerbungPanel.add(bewerbungsText);
+		bewerbungPanel.add(bewerbungsTextSpacePanel);
+		bewerbungPanel.add(bewerbungsTextWert);
 		editorPanel.add(bewerbungPanel);
 
 		HorizontalPanel statusPanel = new HorizontalPanel();
 		statusPanel.add(status);
+		statusPanel.add(statusSpacePanel);
+		statusPanel.add(statusWert);
 		editorPanel.add(statusPanel);
 
 		HorizontalPanel bewertungPanel = new HorizontalPanel();
 		bewertungPanel.add(bewertung);
+		bewertungPanel.add(bewertungSpacePanel);
+		bewertungPanel.add(bewertungWert);
 		editorPanel.add(bewertungPanel);
 
 		HorizontalPanel stellungnahmePanel = new HorizontalPanel();
 		stellungnahmePanel.add(stellungnahme);
+		stellungnahmePanel.add(stellungnahmeSpacePanel);
+		stellungnahmePanel.add(stellungnahmeWert);
 		editorPanel.add(stellungnahmePanel);
 
-		// Button zum mainPanel hinzugefügt
-		mainPanel.add(bewertungAbgebenButton);
+		// Button zum mainPanel hinzugefügt, um Textboxen zum befüllen zu
+		// erhalten
+		editorPanel.add(bewerbungBewerten);
+
+		// Großes HorizontalPanel Spalte 3 über die ganze Seite
+		// TODO
+
+		// Zum Verstecken der Bewertung und Stellungnahme bis es ausgewählt wird
+		bewertungsZahlAbgeben.setVisible(false);
+		bewertungInBox.setVisible(false);
+		bewertungInBox.addKeyUpHandler(new BewertungsKeyUpHandler());
+		bewertungInBox.setMaxLength(3);
+
+		stellungnahmeTextAbgeben.setVisible(false);
+		stellungnahmeInBox.setVisible(false);
+		// zum Verstecken des Buttons
+		bewertungAbgeben.setVisible(false);
+
+		// Textboxen zum befüllen mit Text
+		editorPanel.add(bewertungsZahlAbgeben);
+		editorPanel.add(bewertungInBox);
+
+		editorPanel.add(stellungnahmeTextAbgeben);
+		editorPanel.add(stellungnahmeInBox);
+
+		// Button zum Bewertung abgeben
+		editorPanel.add(bewertungAbgeben);
 
 	}
 
@@ -126,13 +214,15 @@ public class BewerbungBewerten extends VerticalPanel {
 	private class MarktplatzOnChangeHandler implements ChangeHandler {
 		/**
 		 * Diese Methode wird ausgeführt wenn im Projektkmarktplatz Handler in
-		 * der ListBox ein Element ausgewählt wird. Und sich dann die ProjektListbox
-		 * zum jeweilig ausgewählten Projekt anpassen/nachladen soll.
+		 * der ListBox ein Element ausgewählt wird. Und sich dann die
+		 * ProjektListbox zum jeweilig ausgewählten Projekt anpassen/nachladen
+		 * soll.
 		 */
 		@Override
 		public void onChange(ChangeEvent event) {
-			Window.alert(marktplatzListBox.getSelectedValue());
-			//ClientSideSettings.getProjektAdministration().findProjekteByProjektmarktplatzId(projektmarktplatzId, callback);
+			ClientSideSettings.getProjektAdministration().findProjekteByProjektmarktplatzId(
+					Integer.valueOf(marktplatzListBox.getSelectedValue()),
+					new FindProjektByProjektmarktplatzCallBack());
 		}
 	}
 
@@ -144,7 +234,7 @@ public class BewerbungBewerten extends VerticalPanel {
 		 */
 		@Override
 		public void onChange(ChangeEvent event) {
-			//TODO
+			// TODO
 		}
 
 	}
@@ -157,7 +247,7 @@ public class BewerbungBewerten extends VerticalPanel {
 		 */
 		@Override
 		public void onChange(ChangeEvent event) {
-			//TODO
+			// TODO
 		}
 
 	}
@@ -170,17 +260,45 @@ public class BewerbungBewerten extends VerticalPanel {
 		 */
 		@Override
 		public void onChange(ChangeEvent event) {
-			//TODO
+			// TODO
 		}
 
 	}
 
-	// Innerclass Bewertung abgeben Speicher Button Handler
+	// Innerclass für Bewertungen sichtbar machen button bewerbung bewerten
+	private class VisibleClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+
+			// Zum Anzeigen der Bewertung und Stellungnahme durch Klick
+			bewertungsZahlAbgeben.setVisible(true);
+			bewertungInBox.setVisible(true);
+
+			// zum Verstecken des Buttons
+			bewertungAbgeben.setVisible(true);
+		}
+	}
+
+	// Innerclass für Bewertung abgeben Speicher Button
 	private class SaveChangesClickHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			//TODO
+			// TODO
+			// Speichern
+			// ClientSideSettings.getProjektAdministration().
+
+			// werte in die Ausgabe
+
+			// Zum Verstecken der Bewertung und Stellungnahme nach Eintrag
+			bewertungsZahlAbgeben.setVisible(false);
+			bewertungInBox.setVisible(false);
+
+			stellungnahmeTextAbgeben.setVisible(false);
+			stellungnahmeInBox.setVisible(false);
+			// zum Verstecken des Buttons
+			bewertungAbgeben.setVisible(false);
 		}
 
 	}
@@ -188,130 +306,192 @@ public class BewerbungBewerten extends VerticalPanel {
 	// Innerclass für AllProjektmarktplatzCallBack RPC Callback
 	private class AllProjektmarktplatzCallBack implements AsyncCallback<Vector<Projektmarktplatz>> {
 
-		//Hier wird zuerst das result in der Instanzvariablen gespeichert
-		//In der onSucces findet IMMER die Anfragen Behaandlung statt, also was als nächstes geladen werden muss
+		// Hier wird zuerst das result in der Instanzvariablen gespeichert
+		// In der onSucces findet IMMER die Anfragen Behaandlung statt, also was
+		// als nächstes geladen werden muss
 		@Override
 		public void onSuccess(Vector<Projektmarktplatz> result) {
 			projektmarktplätze = result;
-			
+
 			/*
-			 * hier ist eine Schleife die durch die Instanzvariable durchiteriert
-			 * ziel ist es die Bezeichnungen der Projektmarktplätze in die Listbox zu schreiben.
+			 * hier ist eine Schleife die durch die Instanzvariable
+			 * durchiteriert ziel ist es die Bezeichnungen der
+			 * Projektmarktplätze in die Listbox zu schreiben.
 			 */
 			for (Projektmarktplatz projektmarktplatz : result) {
-				marktplatzListBox.addItem(projektmarktplatz.getBezeichnung(),String.valueOf(projektmarktplatz.getId()));
+				marktplatzListBox.addItem(projektmarktplatz.getBezeichnung(),
+						String.valueOf(projektmarktplatz.getId()));
 			}
-			
-			//Hier wird die ID zum ersten Marktplatz aus dem ErgebnissVektor rausgeholt.
+
+			// Hier wird die ID zum ersten Marktplatz aus dem ErgebnissVektor
+			// rausgeholt.
 			int ersterMarktplatz = result.elementAt(0).getId();
-			
-			//Hier wird die ID zur Weiterverarbeitung der Callbacks verwendet.
-			ClientSideSettings.getProjektAdministration().findProjekteByProjektmarktplatzId(ersterMarktplatz, new FindProjektByProjektmarktplatzCallBack());
-			
+
+			// Hier wird die ID zur Weiterverarbeitung der Callbacks verwendet.
+			ClientSideSettings.getProjektAdministration().findProjekteByProjektmarktplatzId(ersterMarktplatz,
+					new FindProjektByProjektmarktplatzCallBack());
+
 		}
 
 		@Override
 		public void onFailure(Throwable caught) {
-			//TODO
+			Window.alert("ERROR - Please try it later again :-)");
 		}
-
 	}
-	
-	
+
 	// Innerclass für FindProjektByProjektmarktplatzCallBack
 	private class FindProjektByProjektmarktplatzCallBack implements AsyncCallback<Vector<Projekt>> {
-		
-		//Hier wird zuerst das result in der Instanzvariablen gespeichert
-		//In der onSucces findet IMMER die Anfragen Behaandlung statt, also was als nächstes geladen werden muss
+
+		// Hier wird zuerst das result in der Instanzvariablen gespeichert
+		// In der onSucces findet IMMER die Anfragen Behaandlung statt, also was
+		// als nächstes geladen werden muss
 		@Override
 		public void onSuccess(Vector<Projekt> result) {
 			projekte = result;
-			
+
+			projektListBox.clear();
+
 			/*
-			 * hier ist eine Schleife die durch die Instanzvariable durchiteriert
-			 * ziel ist es die Bezeichnungen der Projektmarktplätze in die Listbox zu schreiben.
+			 * hier ist eine Schleife die durch die Instanzvariable
+			 * durchiteriert ziel ist es die Bezeichnungen der
+			 * Projektmarktplätze in die Listbox zu schreiben.
 			 */
 			for (Projekt projekt : result) {
 				projektListBox.addItem(projekt.getBeschreibung(), String.valueOf(projekt.getId()));
 			}
-			
-			//Hier wird die ID zum ersten Projekt aus dem ErgebnissVektor rausgeholt.
+
+			// Hier wird die ID zum ersten Projekt aus dem ErgebnissVektor
+			// rausgeholt.
 			int erstesProjekt = result.elementAt(0).getId();
-			
-			//Hier wird die ID zur Weiterverarbeitung der Callbacks verwendet.
-			ClientSideSettings.getProjektAdministration().findAusschreibungByProjektId(erstesProjekt, new FindAusschreibungByProjektIdCallback());
-			
+
+			// Hier wird die ID zur Weiterverarbeitung der Callbacks verwendet.
+			ClientSideSettings.getProjektAdministration().findAusschreibungByProjektId(erstesProjekt,
+					new FindAusschreibungByProjektIdCallback());
+
 		}
-		
+
 		@Override
 		public void onFailure(Throwable caught) {
-			// 
-			
+			Window.alert("ERROR - Please try it later again :-)");
+
 		}
-		
+
 	}
-	
-	//Innerclass für die FindAusschreibungByProjektIdCallback
+
+	// Innerclass für die FindAusschreibungByProjektIdCallback
 	private class FindAusschreibungByProjektIdCallback implements AsyncCallback<Vector<Ausschreibung>> {
-		
-		//Hier wird zuerst das result in der Instanzvariablen gespeichert
-		//In der onSucces findet IMMER die Anfragen Behaandlung statt, also was als nächstes geladen werden muss
+
+		// Hier wird zuerst das result in der Instanzvariablen gespeichert
+		// In der onSucces findet IMMER die Anfragen Behaandlung statt, also was
+		// als nächstes geladen werden muss
 		@Override
 		public void onSuccess(Vector<Ausschreibung> result) {
 			ausschreibungen = result;
-			
+
+			ausschreibungListBox.clear();
+
 			/*
-			 * hier ist eine Schleife die durch die Instanzvariable durchiteriert
-			 * ziel ist es die Bezeichnungen der Projektmarktplätze in die Listbox zu schreiben.
+			 * hier ist eine Schleife die durch die Instanzvariable
+			 * durchiteriert ziel ist es die Bezeichnungen der
+			 * Projektmarktplätze in die Listbox zu schreiben.
 			 */
 			for (Ausschreibung ausschreibung : result) {
 				ausschreibungListBox.addItem(ausschreibung.getBeschreibung(), String.valueOf(ausschreibung.getId()));
 			}
-			
-			//Hier wird die ID zum ersten Projekt aus dem ErgebnissVektor rausgeholt.
+
+			// Hier wird die ID zum ersten Projekt aus dem ErgebnissVektor
+			// rausgeholt.
 			int ersteAusschreibung = result.elementAt(0).getId();
-			
-			//Hier wird die ID zur Weiterverarbeitung der Callbacks verwendet.
-			ClientSideSettings.getProjektAdministration().findBewerbungenTeilnehmerByAusschreibungId(ersteAusschreibung, new FindBewerbungByAusschreibungIdCallback());
-			
+
+			// Hier wird die ID zur Weiterverarbeitung der Callbacks verwendet.
+			ClientSideSettings.getProjektAdministration().findBewerbungenTeilnehmerByAusschreibungId(ersteAusschreibung,
+					new FindBewerbungByAusschreibungIdCallback());
+
 		}
 
 		@Override
 		public void onFailure(Throwable caught) {
-			// TODO
-			
+			Window.alert("ERROR - Please try it later again :-)");
+
 		}
 	}
-	
-	
-	//Innerclass für die FindBewerbungByAusschreibungIdCallback
-	private class FindBewerbungByAusschreibungIdCallback implements AsyncCallback<Map<Bewerbung,Teilnehmer>> {
 
-		//Hier wird zuerst das result in der Instanzvariablen gespeichert
-		//In der onSucces findet IMMER die Anfragen Behaandlung statt, also was als nächstes geladen werden muss
+	// Innerclass für die FindBewerbungByAusschreibungIdCallback
+	private class FindBewerbungByAusschreibungIdCallback implements AsyncCallback<Map<Bewerbung, Teilnehmer>> {
+
+		// Hier wird zuerst das result in der Instanzvariablen gespeichert
+		// In der onSucces findet IMMER die Anfragen Behaandlung statt, also was
+		// als nächstes geladen werden muss
 		@Override
-		public void onSuccess(Map<Bewerbung,Teilnehmer> result) {
-			
-			Window.alert("ich bin in der succes Methode von Bewerbung Bewerten");
-			
-			for (Map.Entry<Bewerbung, Teilnehmer> entry : result.entrySet()){
+		public void onSuccess(Map<Bewerbung, Teilnehmer> result) {
+
+			bewerbungListBox.clear();
+			bewerbungen.clear();
+
+			// foreach schleife mit einer Map (Key,Value)
+			for (Map.Entry<Bewerbung, Teilnehmer> entry : result.entrySet()) {
 				Teilnehmer teilnehmerZuBewerbung = entry.getValue();
-				String anzeigeFuerListbox = teilnehmerZuBewerbung.getVorname() + " " + teilnehmerZuBewerbung.getNachname();
-				Window.alert(anzeigeFuerListbox);
+				String anzeigeFuerListbox = teilnehmerZuBewerbung.getVorname() + " "
+						+ teilnehmerZuBewerbung.getNachname();
 				bewerbungListBox.addItem(anzeigeFuerListbox, String.valueOf(entry.getKey().getId()));
 				bewerbungen.add(entry.getKey());
 			}
-			
+			Bewerbung ersteBewerbung = bewerbungen.elementAt(0);
+
+			/*
+			 * Hier wird das "wird befüllt" der Bewerbung dann tatsächlich mit
+			 * Werten befüllt die statische Methode String.valueof ist zum
+			 * ändern der Datentypen Int zu string verantwortlich
+			 */
+			erstellDatumWert.setText(String.valueOf(ersteBewerbung.getErstellDatum()));
+			idBewerbungWert.setText(String.valueOf(ersteBewerbung.getId()));
+			bewerbungsTextWert.setText(ersteBewerbung.getBewerbungsText());
+			statusWert.setText(ersteBewerbung.getStatus());
+			// bewertungWert.setText(ersteBewerbung.getBewertung());
+			// stellungnahmeWert.setText();
+
 		}
 
 		@Override
 		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
-			
+			Window.alert("ERROR - Please try it later again :-)");
 		}
 
+	}
 
-		
+	// Diese Klasse regelt die Zahlenwerte für die Bewertung von 0-1
+	private class BewertungsKeyUpHandler implements KeyUpHandler {
+
+		@Override
+		public void onKeyUp(KeyUpEvent event) {
+
+			if (bewertungInBox.getText() != "") {
+				try {
+					//Regelt das die Stellungnahme bei Zahlen größer 1 wegfällt
+					Float bewertungsZahl = Float.valueOf(bewertungInBox.getText());
+					if (bewertungsZahl > 1.0) {
+						stellungnahmeTextAbgeben.setVisible(false);
+						stellungnahmeInBox.setVisible(false);
+						Window.alert("Nur Zahlen von 0.0 bis 1.0 erlaubt");
+						//regelt das die stellungnahmebox bei bewertung 1 dazu kommt
+					} else if (bewertungsZahl == 1.0) {
+
+						stellungnahmeTextAbgeben.setVisible(true);
+						stellungnahmeInBox.setVisible(true);
+					}
+					//regelt das die stellungnahmebox unter wert 1 wegfällt
+					else { 
+						stellungnahmeTextAbgeben.setVisible(false);
+						stellungnahmeInBox.setVisible(false);
+					}
+				} catch (NumberFormatException e) {
+					Window.alert("Nur Zahlen im Format von 0.0 bis 1.0 erlaubt");
+
+				}
+			}
+
+		}
+
 	}
 
 }
