@@ -204,7 +204,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 				e.setName(eigenschaftLabelVector.elementAt(i).getText());
 				e.setWert(eigenschaftListVector.elementAt(i).getSelectedIndex());
 				eigenschaftDB.add(e);	
-				Window.alert(eigenschaftLabelVector.elementAt(i).getText() + Integer.toString(eigenschaften.elementAt(i).getId()));
+				
 			}
 			ClientSideSettings.getProjektAdministration().updateEigenschaft(eigenschaftDB, new UpdateEigenschaftenCallback());	
 			
