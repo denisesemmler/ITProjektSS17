@@ -181,6 +181,24 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 	@Override
 	public List<FanInFanOut> getFanInFanOut() {
 		List<FanInFanOut> report = new ArrayList<>();
+		
+		List<Teilnehmer> allTeilnehmer = TeilnehmerMapper.teilnehmerMapper().findAllTeilnehmer();
+		
+		for(Teilnehmer teilnehmer: allTeilnehmer) {
+			FanInFanOut reportEntry = new FanInFanOut();
+			
+			reportEntry.setTeilnehmerName(teilnehmer.getVorname() + " " + teilnehmer.getNachname());
+			
+			Profil profil = ProfilMapper.profilMapper().findByTeilnehmerId(teilnehmer.getId());
+			
+			int fanOut = BewerbungMapper.bewerbungMapper().findBewerbungByTeilnehmerId(profil.getId()).size();
+			reportEntry.setFanOut(fanOut);
+			
+			int fanIn = AusschreibungMapper.ausschreibungMapper().findAllAusschreibungByTeilnehmerId(teilnehmer.getId()).size();
+			reportEntry.setFanIn(fanIn);
+			
+			report.add(reportEntry);
+		}
 		return report;
 	}
 }

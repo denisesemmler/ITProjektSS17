@@ -33,8 +33,13 @@ public class FanInFanOut extends BusinessObjekt {
 		this.fanOut = fanOut;
 	}
 	
-	public double getAnalyse() {
-		return (double) this.fanOut / (double) this.fanIn;
+	public String getAnalyse() {
+		if(this.fanOut == 0)
+			return "Zero Fan Out";
+		if(this.fanIn == 0)
+			return "Zero Fan In";
+		return String.valueOf((double) this.fanOut / (double) this.fanIn);
 	}
+	
 
 }
