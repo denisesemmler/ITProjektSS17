@@ -203,6 +203,7 @@ public class ProfilAnlegen extends VerticalPanel {
 		public void onSuccess(Object result) {
 
 			Window.alert("Deine Eigenschaften wurden angelegt!");
+			ClientSideSettings.getCurrentUser().setProfilExisting(true);
 
 			RootPanel.get("Content").clear();
 			RootPanel.get("Navi").clear();

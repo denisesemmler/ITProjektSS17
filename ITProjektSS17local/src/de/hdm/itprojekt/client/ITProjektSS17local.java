@@ -1,6 +1,8 @@
 package de.hdm.itprojekt.client;
 
 
+import java.util.Vector;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -23,9 +25,13 @@ import de.hdm.itprojekt.client.gui.LogOutPopUp;
 import de.hdm.itprojekt.client.gui.AnmeldeFormular;
 import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.client.gui.Navigation;
+import de.hdm.itprojekt.client.gui.ProfilAnlegen;
 import de.hdm.itprojekt.client.gui.ProfilAnzeigen;
 import de.hdm.itprojekt.client.gui.ProjektLoeschen;
+
 import de.hdm.itprojekt.shared.LoginServiceAsync;
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
+import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 import de.hdm.itprojekt.shared.bs.ProjektAdministrationAsync;
 
@@ -39,7 +45,7 @@ public class ITProjektSS17local implements EntryPoint {
 		private HorizontalPanel emailPanel = new HorizontalPanel();
 		private HorizontalPanel passwordPanel = new HorizontalPanel();
 		private HorizontalPanel naviPanel = new HorizontalPanel();
-		
+		Vector<Eigenschaft> existing = new Vector<Eigenschaft>();
 		
 		//Begruessungstext im Label
 		private Label loginLabel = new Label(
@@ -66,7 +72,8 @@ public class ITProjektSS17local implements EntryPoint {
 		//Zur Kommunikation mit der Datenbank
 		private final ProjektAdministrationAsync pr0jectAdmin = ClientSideSettings.getProjektAdministration();
 		private final LoginServiceAsync loginService = ClientSideSettings.getLoginService();
-
+		Profil p = new Profil();
+		Teilnehmer currentUser = new Teilnehmer();
 	  /**
 	   * Entry point method.
 	   */
@@ -115,9 +122,13 @@ public class ITProjektSS17local implements EntryPoint {
 										e1.printStackTrace();
 									}
 								} else {
-							
-									RootPanel.get("Content").add(
-											new ProfilAnzeigen());
+									int id = result.getId();
+									currentUser.setExisting(result.isExisting());
+									ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(id, new GetProfileCallback());
+									
+										
+									//RootPanel.get("Content").add(
+									//		new ProfilAnzeigen());
 								}
 
 								/*
@@ -181,32 +192,7 @@ public class ITProjektSS17local implements EntryPoint {
 	
 			
 		
-	/**	  RootPanel.get("Content").add(loginPanel);
-		  //RootPanel.get("Navi_Container").add(naviPanel);
-		  
-		  loginPanel.add(loginLabel);
-		  
-		  loginPanel.add(emailPanel);
-		  emailPanel.add(emailLabel);		  
-		  emailPanel.add(emailTextBox);
-		  
-		  loginPanel.add(passwordPanel);
-		  passwordPanel.add(passwordLabel);		
-		  passwordPanel.add(passwordTextBox);
-		  
-		  loginPanel.add(loginButton);
-		  
-		  loginButton.addClickHandler(new ClickHandler() {
-		      @Override
-			public void onClick(ClickEvent event) {
-		        
-		    	  RootPanel.get("Content").clear();
-		    	  RootPanel.get("Navi").add(new Navigation());
-		    	 		    	 		    	 		    	
-		     }
-		   });	**/	  		  
-	    
-}
+	  }
 
 
 /*
@@ -225,4 +211,46 @@ private class SetUserCallback implements AsyncCallback {
 		}
 	}
 }
+
+private class GetProfileCallback implements AsyncCallback<Profil> {
+
+	public void onFailure(Throwable caught) {
+		Window.alert("Dat läuft noch nit so Profil finden!");
+
+	}
+
+	public void onSuccess(Profil result) {
+
+		p.setId(result.getId());
+		ClientSideSettings.getProjektAdministration().findNameAndWertFromEigenschaften(p.getId(),
+				new GetEigenschaftCallback());
+		Window.alert("Dein Profil wurde gefunden!");
+
+	}
+
+}
+
+private class GetEigenschaftCallback implements AsyncCallback<Vector<Eigenschaft>> {
+
+	public void onFailure(Throwable caught) {
+		Window.alert("Dat läuft noch nit so Eigenschaft finden!");
+
+	}
+
+	public void onSuccess(Vector<Eigenschaft> result) {
+		existing = result;
+		if(currentUser.isExisting() == true && existing.isEmpty()== true){
+			
+			RootPanel.get("Content").add(
+					new ProfilAnlegen());
+		} else{
+			ClientSideSettings.getCurrentUser().setProfilExisting(true);
+			RootPanel.get("Navi").clear();
+			naviPanel.add(new Navigation());
+			RootPanel.get("Navi").add(naviPanel);
+			RootPanel.get("Content").add(
+					new ProfilAnzeigen());
+		}
+	}
+	}
 }

@@ -38,7 +38,7 @@ public class Navigation extends HorizontalPanel {
 		navBerichteButton.setStylePrimaryName("navi-button");
 		logOutButton.setStylePrimaryName("navi-button");
 
-		if (ClientSideSettings.getCurrentUser().isExisting()) {
+		if (ClientSideSettings.getCurrentUser().isExisting() && ClientSideSettings.getCurrentUser().isProfilExisting()) {
 			this.add(navStarseiteButton);
 			this.add(navProjektmarktplatzVerwaltenButton);
 			this.add(navProjektVerwaltenButton);

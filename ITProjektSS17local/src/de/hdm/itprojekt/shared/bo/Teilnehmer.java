@@ -34,6 +34,7 @@ public class Teilnehmer extends BusinessObjekt {
 	private boolean loggedIn;
 	private String loginUrl, logoutUrl;
 	private boolean existing;
+	private boolean profilExisting;
 	
 	/**
 	 * Auslesen des LogIn
@@ -244,6 +245,14 @@ public class Teilnehmer extends BusinessObjekt {
 	
 	public void setExisting(boolean existing) {
 		this.existing = existing;
+	}
+
+	public boolean isProfilExisting() {
+		return profilExisting;
+	}
+
+	public void setProfilExisting(boolean profilExisting) {
+		this.profilExisting = profilExisting;
 	}
 	
 
