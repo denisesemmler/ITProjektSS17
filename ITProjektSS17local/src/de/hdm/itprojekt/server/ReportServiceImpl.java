@@ -158,6 +158,15 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 				List<BewerbungReport> refs = new ArrayList<BewerbungReport>();
 				for(Bewerbung ref: referencen) {
 					BewerbungReport refEntry = new BewerbungReport(ref);
+					
+					Ausschreibung refAusschreibung = AusschreibungMapper.ausschreibungMapper().findById(ref.getAusschreibungID());
+					
+					Projekt refProjekt = ProjektMapper.projektMapper().findById(refAusschreibung.getProjekt_idProjekt());
+					refEntry.setProjektName(refProjekt.getName());
+					
+					refEntry.setBewerbungName(refAusschreibung.getTitel());
+								
+					
 					refs.add(refEntry);
 				}
 				reportEntry.setReferenz(refs);
