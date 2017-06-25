@@ -44,9 +44,17 @@ public class Projektverpflechtungen extends SimpleReport{
 							+ "<td>" + bewerbung.getProjektName() + "</td>"
 							+ "</tr>";
 			
-			String eigenschaftenRow = "<tr><td colspan='3'><ul>"
-					+ "<li>yo</li>"
-					+ "</ul></td></tr>";
+			String eigenschaftenRow = "<tr><td colspan='3'><ul>";
+			
+			for(BewerbungReport ref: bewerbung.getReferenz()) {
+				eigenschaftenRow = eigenschaftenRow	+ "<li>Projekt: "+ref.getProjektName()+"<ul>"
+						+ "<li>Beworben als: "+ref.getBewerbungName()+"</li>"
+						+ "<li>Bewertung: "+ref.getBewertung()+"</li>"
+						+ "<li>Status: "+ref.getStatus()+"</li>"
+						+ "</ul></li>";
+			}
+			
+			eigenschaftenRow = eigenschaftenRow + "</ul></td></tr>";
 			HTML entry = new HTML("<table class='reportTable'><tr><th>Name des Bewerbers</th><th>Auf Stelle</th><th>Projekt</th></tr>" +dataRow+eigenschaftenRow + "</table>");
 			
 			this.add(entry);
