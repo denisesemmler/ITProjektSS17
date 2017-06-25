@@ -643,5 +643,14 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		
 		return eigenschaftenNameWert;
 	}
+	@Override
+	public void updateEigenschaft(Vector<Eigenschaft> eigenschaften) throws IllegalArgumentException {
+
+		for (int i =0; i< eigenschaften.size(); i++){
+		
+		eMapper.update(eigenschaften.elementAt(i));
+		
+	}
+	}
 
 }
