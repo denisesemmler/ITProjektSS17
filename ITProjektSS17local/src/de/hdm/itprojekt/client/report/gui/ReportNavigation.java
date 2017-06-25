@@ -2,7 +2,6 @@ package de.hdm.itprojekt.client.report.gui;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -11,6 +10,12 @@ import de.hdm.itprojekt.shared.report.AlleAusschreibungen;
 import de.hdm.itprojekt.shared.report.AlleAusschreibungenNutzer;
 import de.hdm.itprojekt.shared.report.AlleBewerbungenNutzer;
 import de.hdm.itprojekt.shared.report.BewerbungZuAusschreibung;
+
+/**
+ * Navigation, die auf die unterschiedlichen Berichte verlinkt.
+ * @author Jiayi
+ *
+ */
 public class ReportNavigation extends VerticalPanel implements ClickHandler{
 	private Button allAds  = new Button("Alle Ausschreibungen", this);
 	private Button adsForProfile  = new Button("Alle Ausschreibungen für Profil", this);
@@ -18,6 +23,10 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 	private Button openApplication  = new Button("Alle offenen Bewerbungen", this);
 	ReportWrapper parent;
 	
+	/**
+	 * Constuctor 
+	 * @param parent Verweis auf den Wrapper der Reports. Wrapper beinhaltet die Naviagtion selbst (linke Seite) und den Bericht (rechte Seite)
+	 */
 	public ReportNavigation(ReportWrapper parent){		
 		this.add(allAds);
 		this.add(adsForProfile);
@@ -26,7 +35,9 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 		
 		this.parent = parent;
 	}
-	
+	/**
+	 * Zeigt Bericht an, abhänig davon welcher Button gedrückt wurde
+	 */
 	public void onClick(ClickEvent event) {
 		Widget sender = (Widget) event.getSource();
 

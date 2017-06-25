@@ -4,6 +4,11 @@ import java.util.Date;
 
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 
+/**
+ * BusinessObject für Reports
+ * @author Jiayi
+ *
+ */
 public class BewerbungReport extends Bewerbung{
 
 	/**

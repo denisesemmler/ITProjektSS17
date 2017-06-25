@@ -22,9 +22,19 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
 
+/**
+ * Backend Service für die unterschiedlichen Berichte
+ * @author Jiayi
+ *
+ */
 public class ReportServiceImpl extends RemoteServiceServlet implements ReportService  {	
 	
+	private static final long serialVersionUID = -7548005663369824973L;
+
 	@Override
+	/**
+	 * 
+	 */
 	public List<AusschreibungReport> getAllAusschreibungen() {
 		List<AusschreibungReport> report = new ArrayList<AusschreibungReport>();
 		
