@@ -151,9 +151,9 @@ public class ITProjektSS17local implements EntryPoint {
 								 * erstellt und dem RootPanel angefuegt
 								 */
 								
-								naviPanel.add(new Navigation());
-								naviPanel.addStyleName("navi-panel");
-								RootPanel.get("Navi").add(naviPanel);
+								//naviPanel.add(new Navigation());
+								//naviPanel.addStyleName("navi-panel");
+								//RootPanel.get("Navi").add(naviPanel);
 								
 								
 								/*
@@ -240,7 +240,9 @@ private class GetEigenschaftCallback implements AsyncCallback<Vector<Eigenschaft
 	public void onSuccess(Vector<Eigenschaft> result) {
 		existing = result;
 		if(currentUser.isExisting() == true && existing.isEmpty()== true){
-			
+			RootPanel.get("Navi").clear();
+			naviPanel.add(new Navigation());
+			RootPanel.get("Navi").add(naviPanel);
 			RootPanel.get("Content").add(
 					new ProfilAnlegen());
 		} else{
