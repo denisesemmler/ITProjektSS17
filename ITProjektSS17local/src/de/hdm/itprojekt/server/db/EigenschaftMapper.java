@@ -126,15 +126,14 @@ public class EigenschaftMapper {
 			// Neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
 			// SQL Query ausf�hren
-			ResultSet rs = stmt
-					.executeQuery("SELECT * FROM Eigenschaft " + "WHERE Profil_idProfil = " + profilId);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Eigenschaft " + "WHERE Profil_idProfil = " + profilId);
 			// Bei Treffer
 			while (rs.next()) {
 				// Neues Eigenschaft Objekt erzeugen
 				Eigenschaft e = new Eigenschaft();
 				e.setId(rs.getInt("idEigenschaft"));
 				e.setName(rs.getString("name"));
-				e.setWert(rs.getString("wert"));
+				e.setWert(rs.getInt("wert"));
 				result.add(e);
 				
 			}

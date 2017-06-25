@@ -22,7 +22,7 @@ public class Eigenschaft extends BusinessObjekt{
 	/**
 	 * Wert der Eigenschaft
 	 */
-	private String wert	= "";
+	private int wert	= 0;
 		
 		
 		/**
@@ -42,14 +42,14 @@ public class Eigenschaft extends BusinessObjekt{
 		/**
 		 * @return  wert
 		 */
-		public String getWert() {
+		public int getWert() {
 			return wert;
 		}
 
 		/**
 		 * @param wert the wert to set
 		 */
-		public void setWert(String wert) {
+		public void setWert(int wert) {
 			this.wert = wert;
 		}
 

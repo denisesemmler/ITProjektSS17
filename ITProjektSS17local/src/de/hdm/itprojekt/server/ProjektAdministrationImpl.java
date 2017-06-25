@@ -612,12 +612,12 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	
   /* Eigenschaft hinzufügen*/
 	@Override
-	public Vector<Eigenschaft> createEigenschaft(Vector<String> name, Vector<String> wert, int teilnehmerId) throws IllegalArgumentException { 
+	public Vector<Eigenschaft> createEigenschaft(Vector<String> name, Vector<Integer> wert, int teilnehmerId) throws IllegalArgumentException { 
 		Vector<Eigenschaft> eigenschaften = new Vector<Eigenschaft>();
 		
 		for (int i =0; i< name.size(); i++){
 			String eigenname = name.elementAt(i);
-			String eigenwert = wert.elementAt(i);
+			int eigenwert = wert.elementAt(i);
 			
 		Eigenschaft e = new Eigenschaft();
 		e.setName(eigenname);
@@ -639,7 +639,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 //Methode um Name und Wert von Eigenschaften zu lesen
 	public Vector<Eigenschaft> findNameAndWertFromEigenschaften(int profilId) throws IllegalArgumentException {
 		
-		Vector<Eigenschaft>  eigenschaftenNameWert = eMapper.findByProfil(profilId);
+		Vector<Eigenschaft> eigenschaftenNameWert = eMapper.findByProfil(profilId);
 		
 		return eigenschaftenNameWert;
 	}

@@ -18,7 +18,7 @@ import de.hdm.itprojekt.shared.bo.Profil;
 public class ProfilAnlegen extends VerticalPanel {
 
 	private Vector<String> eigenschaftName = new Vector<String>();
-	private Vector<String> eigenschaftWert = new Vector<String>();
+	private Vector<Integer> eigenschaftWert = new Vector<Integer>();
 
 	private VerticalPanel mainPanel = this;
 	private HorizontalPanel naviPanel = new HorizontalPanel();
@@ -168,16 +168,16 @@ public class ProfilAnlegen extends VerticalPanel {
 				eigenschaftName.add(catiaLabel.getText());
 				eigenschaftName.add(sqlLabel.getText());
 
-				eigenschaftWert.add(schulabschlussListBox.getItemText(schulabschlussListBox.getSelectedIndex()));
-				eigenschaftWert.add(berufserfahrungListBox.getItemText(schulabschlussListBox.getSelectedIndex()));
-				eigenschaftWert.add(msofficeListBox.getItemText(msofficeListBox.getSelectedIndex()));
-				eigenschaftWert.add(msprojectListBox.getItemText(msprojectListBox.getSelectedIndex()));
-				eigenschaftWert.add(sapListBox.getItemText(sapListBox.getSelectedIndex()));
-				eigenschaftWert.add(arisListBox.getItemText(arisListBox.getSelectedIndex()));
-				eigenschaftWert.add(javaListBox.getItemText(javaListBox.getSelectedIndex()));
-				eigenschaftWert.add(cListBox.getItemText(cListBox.getSelectedIndex()));
-				eigenschaftWert.add(catiaListBox.getItemText(catiaListBox.getSelectedIndex()));
-				eigenschaftWert.add(sqlListBox.getItemText(sqlListBox.getSelectedIndex()));
+				eigenschaftWert.add(schulabschlussListBox.getSelectedIndex());
+				eigenschaftWert.add(berufserfahrungListBox.getSelectedIndex());
+				eigenschaftWert.add(msofficeListBox.getSelectedIndex());
+				eigenschaftWert.add(msprojectListBox.getSelectedIndex());
+				eigenschaftWert.add(sapListBox.getSelectedIndex());
+				eigenschaftWert.add(arisListBox.getSelectedIndex());
+				eigenschaftWert.add(javaListBox.getSelectedIndex());
+				eigenschaftWert.add(cListBox.getSelectedIndex());
+				eigenschaftWert.add(catiaListBox.getSelectedIndex());
+				eigenschaftWert.add(sqlListBox.getSelectedIndex());
 
 				ClientSideSettings.getProjektAdministration().createEigenschaft(eigenschaftName, eigenschaftWert,
 						p.getId(), new CreateEigenschaftCallback());
