@@ -103,8 +103,8 @@ public class EigenschaftMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE Eigenschaft SET name='" + e.getName() + "'wert='" + e.getWert() + "'WHERE id='"
-					+ e.getId() + "'");
+			stmt.executeUpdate("UPDATE Eigenschaft SET name= '" + e.getName() + "', wert= '" + e.getWert() + "' WHERE idEigenschaft= "
+					+ e.getId());
 
 		}
 
