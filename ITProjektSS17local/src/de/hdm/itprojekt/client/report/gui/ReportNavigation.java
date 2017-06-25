@@ -10,6 +10,7 @@ import de.hdm.itprojekt.shared.report.AlleAusschreibungen;
 import de.hdm.itprojekt.shared.report.AlleAusschreibungenNutzer;
 import de.hdm.itprojekt.shared.report.AlleBewerbungenNutzer;
 import de.hdm.itprojekt.shared.report.BewerbungZuAusschreibung;
+import de.hdm.itprojekt.shared.report.Projektverpflechtungen;
 
 /**
  * Navigation, die auf die unterschiedlichen Berichte verlinkt.
@@ -21,6 +22,7 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 	private Button adsForProfile  = new Button("Alle Ausschreibungen für Profil", this);
 	private Button adsForApplication  = new Button("Bewerbungen für Ausschreiben", this);
 	private Button openApplication  = new Button("Alle offenen Bewerbungen", this);
+	private Button projektverpflechtungen = new Button("Projektverpflechtungen", this);
 	ReportWrapper parent;
 	
 	/**
@@ -32,6 +34,7 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 		this.add(adsForProfile);
 		this.add(adsForApplication);
 		this.add(openApplication);
+		this.add(projektverpflechtungen);
 		
 		this.parent = parent;
 	}
@@ -49,6 +52,8 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 			this.parent.setReport(new BewerbungZuAusschreibung());
 		} else if (sender == openApplication){
 			this.parent.setReport(new AlleBewerbungenNutzer());
+		} else if (sender == projektverpflechtungen){
+			this.parent.setReport(new Projektverpflechtungen());
 		}
 	}
 }

@@ -37,4 +37,13 @@ public interface ReportService  extends RemoteService{
 	 * @returnListe aller Bewerbungen, die ein Teilnehmer erstellt hat.
 	 */
 	List<BewerbungReport> getAllBewerbungenForUser(int teilnehmerId);
+	
+	/**
+	 * Erzeugt Liste von Projektverpflechtungen.
+	 * @param teilnehmerId Id eines Teilnehmers.
+	 * @return Liste von Projektverpflechtungen.
+	 */
+	List<BewerbungReport> getProjektverpflechtungen(int teilnehmerId);
+	
+	
 }

@@ -12,4 +12,6 @@ public interface ReportServiceAsync {
 	void getAllAusschreibungenUser(int teilnehmerId, AsyncCallback<List<AusschreibungReport>> callback);
 	void getAllBewerbungenUser(int teilnehmerId, AsyncCallback<List<BewerbungReport>> callback);
 	void getAllBewerbungenForUser(int teilnehmerId, AsyncCallback<List<BewerbungReport>> callback);
+	void getProjektverpflechtungen(int teilnehmerId, AsyncCallback<List<BewerbungReport>> callback);
+	
 }
