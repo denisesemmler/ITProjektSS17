@@ -21,6 +21,7 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
+import de.hdm.itprojekt.shared.bo.reports.FanInFanOut;
 
 /**
  * Backend Service für die unterschiedlichen Berichte
@@ -174,6 +175,30 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 			}
 		}
 		
+		return report;
+	}
+
+	@Override
+	public List<FanInFanOut> getFanInFanOut() {
+		List<FanInFanOut> report = new ArrayList<>();
+		
+		List<Teilnehmer> allTeilnehmer = TeilnehmerMapper.teilnehmerMapper().findAllTeilnehmer();
+		
+		for(Teilnehmer teilnehmer: allTeilnehmer) {
+			FanInFanOut reportEntry = new FanInFanOut();
+			
+			reportEntry.setTeilnehmerName(teilnehmer.getVorname() + " " + teilnehmer.getNachname());
+			
+			Profil profil = ProfilMapper.profilMapper().findByTeilnehmerId(teilnehmer.getId());
+			
+			int fanOut = BewerbungMapper.bewerbungMapper().findBewerbungByTeilnehmerId(profil.getId()).size();
+			reportEntry.setFanOut(fanOut);
+			
+			int fanIn = AusschreibungMapper.ausschreibungMapper().findAllAusschreibungByTeilnehmerId(teilnehmer.getId()).size();
+			reportEntry.setFanIn(fanIn);
+			
+			report.add(reportEntry);
+		}
 		return report;
 	}
 }
