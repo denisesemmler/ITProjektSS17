@@ -7,6 +7,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
+import de.hdm.itprojekt.shared.bo.reports.FanInFanOut;
 
 @RemoteServiceRelativePath("reportgenerator")
 
@@ -45,5 +46,9 @@ public interface ReportService  extends RemoteService{
 	 */
 	List<BewerbungReport> getProjektverpflechtungen(int teilnehmerId);
 	
-	
+	/**
+	 * Erzeugt Liste mit Fan in Fan out.
+	 * @return Liste mit Fan in Fan out.
+	 */
+	List<FanInFanOut> getFanInFanOut();
 }
