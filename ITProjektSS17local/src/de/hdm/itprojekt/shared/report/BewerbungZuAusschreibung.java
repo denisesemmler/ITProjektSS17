@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Label;
 
 import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.shared.ReportServiceAsync;
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
 
 public class BewerbungZuAusschreibung extends SimpleReport {
@@ -43,9 +44,11 @@ public class BewerbungZuAusschreibung extends SimpleReport {
 							+ "<td>" + bewerbung.getProjektName() + "</td>"
 							+ "</tr>";
 			
-			String eigenschaftenRow = "<tr><td colspan='3'><ul>"
-					+ "<li>yo</li>"
-					+ "</ul></td></tr>";
+			String eigenschaftenRow = "<tr><td colspan='3'><ul>";
+			for(Eigenschaft eigenschaft: bewerbung.getEigenschaften()) {
+				eigenschaftenRow = eigenschaftenRow + "<li>" + eigenschaft.getName() + ": " + eigenschaft.getWert() + "</li>";
+			}
+			eigenschaftenRow = eigenschaftenRow + "</ul></td></tr>";
 			HTML entry = new HTML("<table class='reportTable'><tr><th>Name des Bewerbers</th><th>Auf Stelle</th><th>Projekt</th></tr>" +dataRow+eigenschaftenRow + "</table>");
 			
 			this.add(entry);

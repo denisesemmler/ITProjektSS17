@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
 
 /**
  * BusinessObject für Reports
@@ -22,6 +23,7 @@ public class BewerbungReport extends Bewerbung{
 	private String bewerberName;
 	private String ansprechpartnerName;
 	private Date frist;
+	private List<Eigenschaft> eigenschaften;
 	private List<BewerbungReport> referenz;
 	
 	public BewerbungReport() {
@@ -73,5 +75,11 @@ public class BewerbungReport extends Bewerbung{
 	}
 	public void setReferenz(List<BewerbungReport> referenz) {
 		this.referenz = referenz;
+	}
+	public List<Eigenschaft> getEigenschaften() {
+		return eigenschaften;
+	}
+	public void setEigenschaften(List<Eigenschaft> eigenschaften) {
+		this.eigenschaften = eigenschaften;
 	}
 }

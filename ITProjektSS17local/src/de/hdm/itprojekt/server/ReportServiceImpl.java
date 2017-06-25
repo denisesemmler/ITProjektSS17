@@ -10,12 +10,14 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.server.db.AusschreibungMapper;
 import de.hdm.itprojekt.server.db.BewerbungMapper;
+import de.hdm.itprojekt.server.db.EigenschaftMapper;
 import de.hdm.itprojekt.server.db.ProfilMapper;
 import de.hdm.itprojekt.server.db.ProjektMapper;
 import de.hdm.itprojekt.server.db.TeilnehmerMapper;
 import de.hdm.itprojekt.shared.ReportService;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
@@ -95,6 +97,9 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 				reportEntry.setBewerberName(teilnehmer.getVorname() + " " + teilnehmer.getNachname());
 				
 				reportEntry.setBewerbungName(ausschreibung.getTitel());
+				
+				List<Eigenschaft> eigenschaften = EigenschaftMapper.eigenschaftMapper().findByProfil(bewerbung.getIdProfil());
+				reportEntry.setEigenschaften(eigenschaften);
 				
 				report.add(reportEntry);
 			}
