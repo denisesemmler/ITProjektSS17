@@ -224,7 +224,7 @@ private class GetProfileCallback implements AsyncCallback<Profil> {
 		p.setId(result.getId());
 		ClientSideSettings.getProjektAdministration().findNameAndWertFromEigenschaften(p.getId(),
 				new GetEigenschaftCallback());
-		Window.alert("Dein Profil wurde gefunden!");
+	
 
 	}
 
