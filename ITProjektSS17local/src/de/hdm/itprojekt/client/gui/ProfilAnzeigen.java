@@ -46,6 +46,7 @@ public class ProfilAnzeigen extends HorizontalPanel {
  		strasseDataLabel.addStyleName("label1");
  		plzDataLabel.addStyleName("label1");
  		ortDataLabel.addStyleName("label1");
+ 		mainPanel.addStyleName("verticalrand");
  		
  		mainPanel.add(labelsPanel);
  		mainPanel.add(dataPanel);
