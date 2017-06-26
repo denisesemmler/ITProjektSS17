@@ -1,10 +1,8 @@
 package de.hdm.itprojekt.client.gui;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
-import com.google.gwt.dom.client.Text;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -107,6 +105,7 @@ public class BewerbungBewerten extends VerticalPanel {
 	 * Konstruktoraufruf verbinden!
 	 */
 	public BewerbungBewerten() {
+
 		/*
 		 * Mittels dem Projektasync Objekt aus Clientsidsettings, wird die
 		 * Operation aufgerufen und ein AsyncCallBack Objekt für die
@@ -131,11 +130,11 @@ public class BewerbungBewerten extends VerticalPanel {
 
 		editorPanel.add(ausschreibungDropdown);
 		editorPanel.add(ausschreibungListBox);
-		projektListBox.addChangeHandler(new AusschreibungOnChangeHandler());
+		ausschreibungListBox.addChangeHandler(new AusschreibungOnChangeHandler());
 
 		editorPanel.add(bewerbungDropdown);
 		editorPanel.add(bewerbungListBox);
-		projektListBox.addChangeHandler(new BewerbungOnChangeHandler());
+		bewerbungListBox.addChangeHandler(new BewerbungOnChangeHandler());
 
 		// Großes HorizontalPanel Spalte 2 über die ganze Seite
 		// TODO
@@ -234,7 +233,8 @@ public class BewerbungBewerten extends VerticalPanel {
 		 */
 		@Override
 		public void onChange(ChangeEvent event) {
-			// TODO
+			ClientSideSettings.getProjektAdministration().findAusschreibungByProjektId(
+					Integer.valueOf(projektListBox.getSelectedValue()), new FindAusschreibungByProjektIdCallback());
 		}
 
 	}
@@ -247,9 +247,11 @@ public class BewerbungBewerten extends VerticalPanel {
 		 */
 		@Override
 		public void onChange(ChangeEvent event) {
-			// TODO
-		}
 
+			ClientSideSettings.getProjektAdministration().findBewerbungenTeilnehmerByAusschreibungId(
+					Integer.valueOf(ausschreibungListBox.getSelectedValue()).intValue(),
+					new FindBewerbungByAusschreibungIdCallback());
+		}
 	}
 
 	// Innerclass Bewerbung Handler
@@ -260,7 +262,31 @@ public class BewerbungBewerten extends VerticalPanel {
 		 */
 		@Override
 		public void onChange(ChangeEvent event) {
-			// TODO
+			int selectedBewerbungsId = Integer.valueOf(bewerbungListBox.getSelectedValue());
+			Bewerbung selectedBewerbung = null;
+
+			for (Bewerbung b : bewerbungen) {
+				if (b.getId() == selectedBewerbungsId) {
+					selectedBewerbung = b;
+				}
+			}
+
+			if (selectedBewerbung == null) {
+				Window.alert("Irgendwas ist mit den bereits geladenen Bewerbungen schief gegangen...");
+			} else {
+
+				/*
+				 * Hier wird das "wird befüllt" der Bewerbung dann tatsächlich
+				 * mit Werten befüllt die statische Methode String.valueof ist
+				 * zum ändern der Datentypen Int zu string verantwortlich
+				 */
+				erstellDatumWert.setText(String.valueOf(selectedBewerbung.getErstellDatum()));
+				idBewerbungWert.setText(String.valueOf(selectedBewerbung.getId()));
+				bewerbungsTextWert.setText(selectedBewerbung.getBewerbungsText());
+				statusWert.setText(selectedBewerbung.getStatus());
+				// bewertungWert.setText(ersteBewerbung.getBewertung());
+				// stellungnahmeWert.setText();
+			}
 		}
 
 	}
@@ -416,7 +442,7 @@ public class BewerbungBewerten extends VerticalPanel {
 		}
 	}
 
-	// Innerclass für die FindBewerbungByAusschreibungIdCallback
+	// Innerclass für die FindBewerbungByProfilAndAusschreibungIdCallback
 	private class FindBewerbungByAusschreibungIdCallback implements AsyncCallback<Map<Bewerbung, Teilnehmer>> {
 
 		// Hier wird zuerst das result in der Instanzvariablen gespeichert
@@ -467,20 +493,21 @@ public class BewerbungBewerten extends VerticalPanel {
 
 			if (bewertungInBox.getText() != "") {
 				try {
-					//Regelt das die Stellungnahme bei Zahlen größer 1 wegfällt
+					// Regelt das die Stellungnahme bei Zahlen größer 1 wegfällt
 					Float bewertungsZahl = Float.valueOf(bewertungInBox.getText());
 					if (bewertungsZahl > 1.0) {
 						stellungnahmeTextAbgeben.setVisible(false);
 						stellungnahmeInBox.setVisible(false);
 						Window.alert("Nur Zahlen von 0.0 bis 1.0 erlaubt");
-						//regelt das die stellungnahmebox bei bewertung 1 dazu kommt
+						// regelt das die stellungnahmebox bei bewertung 1 dazu
+						// kommt
 					} else if (bewertungsZahl == 1.0) {
 
 						stellungnahmeTextAbgeben.setVisible(true);
 						stellungnahmeInBox.setVisible(true);
 					}
-					//regelt das die stellungnahmebox unter wert 1 wegfällt
-					else { 
+					// regelt das die stellungnahmebox unter wert 1 wegfällt
+					else {
 						stellungnahmeTextAbgeben.setVisible(false);
 						stellungnahmeInBox.setVisible(false);
 					}
