@@ -81,4 +81,39 @@ public class Eigenschaft extends BusinessObjekt{
 			this.profil_idProfil = profil_idProfil;
 		}
 		
+		public String getWertAsString() {
+			if(this.name.equals("Hoechster Schulabschluss")) {
+				String[] options =  {"Hauptschulabschluss", "Mittlere Reife", "Fachhochschulreife", "Abitur", "Bachelor", "Master"};
+				return options[this.wert];
+			} else if (this.name.equals("Berufserfahrung")) {
+				String[] options = {"weniger als 1 Jahr", "1 - 5 Jahre","6 - 10 Jahre", "mehr als 10 Jahre"};
+				return options[this.wert];
+			} else if (this.name.equals("Microsoft Office")) {
+				String[] options = {"Keine Kenntnisse", "Wenig Kenntnisse", "Gute Kenntnisse" };
+				return options[this.wert];
+			} else if (this.name.equals("Microsoft Project")) {
+				String[] options = {"Keine Kenntnisse", "Wenig Kenntnisse", "Gute Kenntnisse" };
+				return options[this.wert];
+			} else if (this.name.equals("SAP/ERP")) {
+				String[] options = {"Keine Kenntnisse", "Wenig Kenntnisse", "Gute Kenntnisse" };
+				return options[this.wert];
+			} else if (this.name.equals("ARIS")) {
+				String[] options = {"Keine Kenntnisse", "Wenig Kenntnisse", "Gute Kenntnisse" };
+				return options[this.wert];
+			} else if (this.name.equals("Java")) {
+				String[] options = {"Keine Kenntnisse", "Wenig Kenntnisse", "Gute Kenntnisse" };
+				return options[this.wert];
+			} else if (this.name.equals("C/C++")) {
+				String[] options = {"Keine Kenntnisse", "Wenig Kenntnisse", "Gute Kenntnisse" };
+				return options[this.wert];
+			} else if (this.name.equals("CATIA")) {
+				String[] options = {"Keine Kenntnisse", "Wenig Kenntnisse", "Gute Kenntnisse" };
+				return options[this.wert];
+			} else if (this.name.equals("SQL/DB")) {
+				String[] options = {"Keine Kenntnisse", "Wenig Kenntnisse", "Gute Kenntnisse" };
+				return options[this.wert];
+			}
+			return String.valueOf(this.wert);
+		}
+		
 	}
