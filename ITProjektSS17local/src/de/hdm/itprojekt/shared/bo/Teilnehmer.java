@@ -1,34 +1,33 @@
 package de.hdm.itprojekt.shared.bo;
 
 /**
- * Umsetzung der Teilnehmerklasse. Als Attribute dienen Name, Zusatz, Email, und Rolle
+ * Umsetzung der Teilnehmerklasse. Als Attribute dienen Name, Zusatz, Email, und
+ * Rolle
  * 
  *
  */
 public class Teilnehmer extends BusinessObjekt {
 
 	private static final long serialVersionUID = 1L;
-	private int idTeilnehmer	= 0;
-	private String vorname 		= "";
-	private String nachname		= "";
-	private String zusatz 		= "";
-	private String 	ort			= "";
-	private int plz 			= 0;
-	private String strasse		= "";
-	private String email		= "";
-	private String firma		= "";
-	//private int profil_idProfil	= 0;
+	private int idTeilnehmer = 0;
+	private String vorname = "";
+	private String nachname = "";
+	private String zusatz = "";
+	private String ort = "";
+	private int plz = 0;
+	private String strasse = "";
+	private String email = "";
+	private String firma = "";
+	// private int profil_idProfil = 0;
 	/**
-	 * bei Rolle  wird angegeben ob Teilnehmers UN/ Team oder Person ist
-	 */	
-
-	
-	/**
-	 * erstellt ein Teilnehmer ein Projekt wird der boolean 
-	 * projektleiter auf true gesetzt
+	 * bei Rolle wird angegeben ob Teilnehmers UN/ Team oder Person ist
 	 */
 
-	
+	/**
+	 * erstellt ein Teilnehmer ein Projekt wird der boolean projektleiter auf
+	 * true gesetzt
+	 */
+
 	/**
 	 * Deklaration der Login-Informationen
 	 */
@@ -36,7 +35,7 @@ public class Teilnehmer extends BusinessObjekt {
 	private String loginUrl, logoutUrl;
 	private boolean existing;
 	private boolean profilExisting;
-	
+
 	/**
 	 * Auslesen des LogIn
 	 * 
@@ -45,11 +44,11 @@ public class Teilnehmer extends BusinessObjekt {
 	public boolean isLoggedIn() {
 		return loggedIn;
 	}
-	
+
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
 	}
-	
+
 	/**
 	 * Auslesen der LogInUrl
 	 * 
@@ -85,7 +84,7 @@ public class Teilnehmer extends BusinessObjekt {
 	public void setLogoutUrl(String logoutUrl) {
 		this.logoutUrl = logoutUrl;
 	}
-		
+
 	/**
 	 * @return the vorname
 	 */
@@ -94,12 +93,13 @@ public class Teilnehmer extends BusinessObjekt {
 	}
 
 	/**
-	 * @param name the vorname to set
+	 * @param name
+	 *            the vorname to set
 	 */
 	public void setVorname(String vorname) {
 		this.vorname = vorname;
 	}
-	
+
 	/**
 	 * @return the nachname
 	 */
@@ -108,7 +108,8 @@ public class Teilnehmer extends BusinessObjekt {
 	}
 
 	/**
-	 * @param name the nachname to set
+	 * @param name
+	 *            the nachname to set
 	 */
 	public void setNachname(String nachname) {
 		this.nachname = nachname;
@@ -122,7 +123,8 @@ public class Teilnehmer extends BusinessObjekt {
 	}
 
 	/**
-	 * @param zusatz the zusatz to set
+	 * @param zusatz
+	 *            the zusatz to set
 	 */
 	public void setZusatz(String zusatz) {
 		this.zusatz = zusatz;
@@ -136,14 +138,12 @@ public class Teilnehmer extends BusinessObjekt {
 	}
 
 	/**
-	 * @param emailAdresse the emailAdresse to set
+	 * @param emailAdresse
+	 *            the emailAdresse to set
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
-	
 
 	/**
 	 * @return the idTeilnehmer
@@ -153,7 +153,8 @@ public class Teilnehmer extends BusinessObjekt {
 	}
 
 	/**
-	 * @param idTeilnehmer the idTeilnehmer to set
+	 * @param idTeilnehmer
+	 *            the idTeilnehmer to set
 	 */
 	public void setIdTeilnehmer(int idTeilnehmer) {
 		this.idTeilnehmer = idTeilnehmer;
@@ -167,7 +168,8 @@ public class Teilnehmer extends BusinessObjekt {
 	}
 
 	/**
-	 * @param ort the ort to set
+	 * @param ort
+	 *            the ort to set
 	 */
 	public void setOrt(String ort) {
 		this.ort = ort;
@@ -181,7 +183,8 @@ public class Teilnehmer extends BusinessObjekt {
 	}
 
 	/**
-	 * @param plz the plz to set
+	 * @param plz
+	 *            the plz to set
 	 */
 	public void setPlz(int plz) {
 		this.plz = plz;
@@ -195,18 +198,17 @@ public class Teilnehmer extends BusinessObjekt {
 	}
 
 	/**
-	 * @param strasse the strasse to set
+	 * @param strasse
+	 *            the strasse to set
 	 */
 	public void setStrasse(String strasse) {
 		this.strasse = strasse;
 	}
 
-
-
 	public boolean isExisting() {
 		return existing;
 	}
-	
+
 	public void setExisting(boolean existing) {
 		this.existing = existing;
 	}
@@ -226,7 +228,5 @@ public class Teilnehmer extends BusinessObjekt {
 	public void setFirma(String firma) {
 		this.firma = firma;
 	}
-	
-
 
 }

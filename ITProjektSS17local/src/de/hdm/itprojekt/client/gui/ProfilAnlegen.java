@@ -2,6 +2,7 @@ package de.hdm.itprojekt.client.gui;
 
 import java.util.Vector;
 
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -14,7 +15,11 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.bo.Profil;
-
+/**
+ * Klasse für die Startseite nach der Anmeldung, die die das Profil anzeigt
+ * @author Philipp Mueller
+ *
+ */
 public class ProfilAnlegen extends VerticalPanel {
 
 	private Vector<String> eigenschaftName = new Vector<String>();
