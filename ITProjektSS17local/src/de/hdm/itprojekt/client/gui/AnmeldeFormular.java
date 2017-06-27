@@ -116,7 +116,7 @@ public class AnmeldeFormular extends VerticalPanel{
 				ClientSideSettings.getCurrentUser().setStrasse(result.getStrasse());
 				ClientSideSettings.getCurrentUser().setPlz(result.getPlz());
 				ClientSideSettings.getCurrentUser().setOrt(result.getOrt());
-				ClientSideSettings.getProjektAdministration().createProfil(ClientSideSettings.getCurrentUser().getId(), new CreateProfilCallback());
+				ClientSideSettings.getProjektAdministration().createProfil(ClientSideSettings.getCurrentUser().getId(), 0, new CreateProfilCallback());
 				Window.alert("Deine Daten wurden gespeichert!");
 			
 			}

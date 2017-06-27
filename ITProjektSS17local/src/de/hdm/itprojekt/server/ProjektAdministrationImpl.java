@@ -242,12 +242,13 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 * Methode zum erstellen des Profils
 	 */
 	@Override
-	public Profil createProfil(int teilnehmerId) throws IllegalArgumentException {
+	public Profil createProfil(int teilnehmerId, int suchprofil) throws IllegalArgumentException {
 		Profil p = new Profil();
 		
 		Date erstelldatum = new Date();
 		p.setErstellDatum(new java.sql.Date(erstelldatum.getTime()));
 		p.setTeilnehmer_idTeilnehmer(teilnehmerId);
+		p.setSuchprofil(suchprofil);
 		
 		return pfMapper.insert(p);
 	}
