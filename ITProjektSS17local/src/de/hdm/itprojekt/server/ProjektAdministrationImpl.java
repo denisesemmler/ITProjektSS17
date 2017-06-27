@@ -644,6 +644,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		
 		return eigenschaftenNameWert;
 	}
+	
 	@Override
 	public void updateEigenschaft(Vector<Eigenschaft> eigenschaften) throws IllegalArgumentException {
 
@@ -652,6 +653,46 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		eMapper.update(eigenschaften.elementAt(i));
 		
 	}
+		
+		
 	}
-
+	@Override	
+	public Vector<Ausschreibung> matchingAusschreibung (int profilUserId) throws IllegalArgumentException {
+			
+			//Vector für passende Ausschreibungen
+			Vector<Ausschreibung> matching = new Vector<Ausschreibung>();
+			
+			///Vector für eigenschaften des Users
+			Vector<Eigenschaft> eigenschaftenUser = findNameAndWertFromEigenschaften(profilUserId);
+			//Alle ausschreibungen abrufen
+			Vector<Ausschreibung> allAusschreibungen = findAllAusschreibungen();
+			
+		
+			for(int i=0; i<allAusschreibungen.size();i++){
+				//Vector für eigenschaften des Suchprofils
+				Vector<Eigenschaft> eigenschaftenSuch = new Vector<Eigenschaft>();
+				eigenschaftenSuch = findNameAndWertFromEigenschaften(allAusschreibungen.elementAt(i).getProfil_idSuchprofil());
+				//Variable für Anzahl der übereinstimmenden Eigenschaften 
+				int k = 0;
+				
+				for(int j=0; j<eigenschaftenSuch.size();j++){
+					//Übereinstimmung der einzelnen Werte überprüfen
+					if(eigenschaftenUser.elementAt(j).getWert() == eigenschaftenSuch.elementAt(j).getWert()){
+						k++;
+						//Wenn 4 Eigenschaften übereinstimmen, dann passt Ausschreibung und in den matching-Vektor laden
+						if(k==4){
+						matching.add(allAusschreibungen.elementAt(i));
+						break;
+						}
+						
+					}
+					
+				
+				}
+				
+			}
+			//Gebe Vektor mit passenden Ausschreibung an GUI zurück	
+		 return matching;
+	}
+	
 }

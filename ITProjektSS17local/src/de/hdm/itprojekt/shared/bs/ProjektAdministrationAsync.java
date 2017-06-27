@@ -117,6 +117,8 @@ public interface ProjektAdministrationAsync {
 
 	void updateEigenschaft(Vector<Eigenschaft> eigenschaften, AsyncCallback<Void> callback);
 
+	void matchingAusschreibung(int profilUserId, AsyncCallback<Vector<Ausschreibung>> callback);
+
 
 
 
