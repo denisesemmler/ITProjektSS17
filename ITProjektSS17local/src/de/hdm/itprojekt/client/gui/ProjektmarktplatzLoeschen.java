@@ -14,21 +14,34 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 
+/**
+ * GUI Klasse die das VerticalPanel vererbt bekommt
+ * 
+ * @author Moritz Bittner
+ */
+
+
 public class ProjektmarktplatzLoeschen extends VerticalPanel {
 
+	// MainPanel um Widgets anzufügen
 	private VerticalPanel mainPanel = this;
+	// Für Marktplatz Auswahl
 	private Label marktplatzNameLabel = new Label("Marktplatzname: ");
 	private ListBox marktplatzListbox = new ListBox();
-
+	// Button zum Löschen
 	private Button loeschenButton = new Button("Löschen", new DeleteClickHandler());
-
+	// Vector der Marktplätze speichert
 	private Vector<Projektmarktplatz> pmVector = new Vector<Projektmarktplatz>();
 
+	// Konstruktor der bei Laden des Widgets aufgerufen wird
 	public ProjektmarktplatzLoeschen() {
+
+		// Hinzufügen der Widgets
 		mainPanel.add(marktplatzNameLabel);
 		mainPanel.add(marktplatzListbox);
 		mainPanel.add(loeschenButton);
-		
+
+		// Try für alle Marktplätze auslesen
 		try {
 			ClientSideSettings.getProjektAdministration().findAllProjektmarktplatz(new GetAllMarktplatzCallback());
 		} catch (Exception e) {
@@ -37,6 +50,11 @@ public class ProjektmarktplatzLoeschen extends VerticalPanel {
 		}
 	}
 
+	/**
+	 * Callback dür Löschen der PM
+	 * @author Moritz Bittner
+	 *
+	 */
 	private class DeleteCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
@@ -51,6 +69,11 @@ public class ProjektmarktplatzLoeschen extends VerticalPanel {
 
 	}
 
+	/**
+	 * Callback um alle PM auszulesen und an Listbox anhängen
+	 * @author Moritz Bittner
+	 *
+	 */
 	private class GetAllMarktplatzCallback implements AsyncCallback<Vector<Projektmarktplatz>> {
 
 		public void onFailure(Throwable caught) {
@@ -58,9 +81,11 @@ public class ProjektmarktplatzLoeschen extends VerticalPanel {
 		}
 
 		public void onSuccess(Vector<Projektmarktplatz> result) {
+			// Anhängen aller Elemente an Listbox
 			for (Projektmarktplatz p : result) {
 				marktplatzListbox.addItem(p.getBezeichnung());
 			}
+			// Anfügen der PM an Vector
 			for (int i = 0; i < result.size(); i++) {
 				Projektmarktplatz pm1 = result.elementAt(i);
 				pmVector.add(pm1);
@@ -68,14 +93,22 @@ public class ProjektmarktplatzLoeschen extends VerticalPanel {
 		}
 	}
 
+	/**
+	 * Clickhandler für Löschen der Marktplätze
+	 * 
+	 * @author Moritz Bittner
+	 *
+	 */
 	private class DeleteClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
 
 			try {
 				int id = pmVector.elementAt(marktplatzListbox.getSelectedIndex()).getId();
+				// Zu löschendes Objekt
 				Projektmarktplatz pm = new Projektmarktplatz();
 				pm.setId(id);
+				// Löschen des PM
 				ClientSideSettings.getProjektAdministration().deleteProjektmarktplatz(pm, new DeleteCallback());
 
 			} catch (Exception e) {

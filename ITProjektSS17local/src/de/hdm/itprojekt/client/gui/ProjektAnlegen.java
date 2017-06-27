@@ -22,12 +22,14 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 
-
-
+/**
+ * GUI Klasse die das VerticalPanel vererbt bekommt für Anlegen von Projekten
+ * 
+ * @author Moritz Bittner
+ */
 public class ProjektAnlegen extends VerticalPanel {
 
-	
-	private Vector <Projektmarktplatz> pmVector = new Vector <Projektmarktplatz>();
+	private Vector<Projektmarktplatz> pmVector = new Vector<Projektmarktplatz>();
 	/**
 	 * Erstellen der Panels
 	 */
@@ -89,9 +91,7 @@ public class ProjektAnlegen extends VerticalPanel {
 
 		attributePanel.add(marktplatzLabel);
 		attributePanel.add(marktplatzListbox);
-		//marktplatzListbox.addItem("IT");
-		//marktplatzListbox.addItem("Bau");
-		//marktplatzListbox.addItem("Landwirtschaft");
+
 		attributePanel.add(projektNameLabel);
 		attributePanel.add(projektNameBox);
 		attributePanel.add(projektBeschreibungLabel);
@@ -120,7 +120,11 @@ public class ProjektAnlegen extends VerticalPanel {
 		}
 
 	}
-
+	/**
+	 * Alle Marktplätze auslesen Callback
+	 * @author Moritz Bittner
+	 *
+	 */
 	private class GetAllMarktplatzCallback implements AsyncCallback<Vector<Projektmarktplatz>> {
 
 		public void onFailure(Throwable caught) {
@@ -128,15 +132,19 @@ public class ProjektAnlegen extends VerticalPanel {
 		}
 
 		public void onSuccess(Vector<Projektmarktplatz> result) {
-			
-			for (int i = 0; i < result.size(); i++){
+
+			for (int i = 0; i < result.size(); i++) {
 				Projektmarktplatz pm1 = result.elementAt(i);
 				pmVector.add(pm1);
 				marktplatzListbox.addItem(pm1.getBezeichnung());
 			}
 		}
 	}
-
+	/**
+	 * Callback für Erstellen von Projekt
+	 * @author Moritz Bittner
+	 *
+	 */
 	private class CreateProjectCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
@@ -150,12 +158,16 @@ public class ProjektAnlegen extends VerticalPanel {
 		}
 
 	}
-
+	/**
+	 * ClickHandler für Erstellen von Projekt
+	 * @author Moritz Bittner
+	 *
+	 */
 	private class CreateProjectClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
-			//Projektmarktplatz ID
-			int id = pmVector.elementAt(marktplatzListbox.getSelectedIndex()).getId();	
+			// Projektmarktplatz ID
+			int id = pmVector.elementAt(marktplatzListbox.getSelectedIndex()).getId();
 			try {
 
 				ClientSideSettings.getProjektAdministration().createProjekt(projektNameBox.getText(),

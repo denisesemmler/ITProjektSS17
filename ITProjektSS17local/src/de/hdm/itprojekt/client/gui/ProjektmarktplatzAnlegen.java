@@ -12,7 +12,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 
 
-
+/**
+ * GUI Klasse die das VerticalPanel vererbt bekommt für Anlegen von Projektmarktplätzen
+ * 
+ * @author Moritz Bittner
+ */
 public class ProjektmarktplatzAnlegen extends VerticalPanel{
 
 	private VerticalPanel mainPanel = this;
@@ -34,6 +38,11 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel{
 		editorPanel.add(projektmarktplatzAnlegenButton);
 	}
 	
+	/**
+	 * Callback für Erstellen von PM
+	 * @author Moritz Bittner
+	 *
+	 */
 	private class CreateProjektmarktplatzCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
@@ -49,7 +58,12 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel{
 		}
 
 	}
-	
+	/**
+	 * Projektmarktplatz erstellen Clickhandler
+	 * 
+	 * @author Moritz Bittner
+	 *
+	 */
 	private class CreateProjektmarktplatzClickHandler implements ClickHandler {
 		
 		public void onClick(ClickEvent event) {
