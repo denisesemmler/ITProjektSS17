@@ -261,7 +261,7 @@ public class AusschreibungAnlegen extends VerticalPanel {
 						p.getId(), new CreateEigenschaftCallback());
 
 				ClientSideSettings.getProjektAdministration().createProfil(ClientSideSettings.getCurrentUser().getId(),
-						0, new CreateProfilCallback());
+						1, new CreateProfilCallback());
 				Window.alert("Deine Daten wurden gespeichert!");
 
 			} catch (Exception e) {
