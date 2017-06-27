@@ -76,11 +76,10 @@ public class TeilnehmerMapper {
 				t.setNachname(rs.getString("nachname"));
 				t.setZusatz(rs.getString("zusatz"));
 				t.setEmail(rs.getString("email"));
-				t.setRolle(rs.getInt("rolle"));
 				t.setOrt(rs.getString("ort"));
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
-				t.setProjektLeiter(rs.getInt("projektleiter"));
+				
 
 				// Objekt zurückgeben
 				return t;
@@ -128,11 +127,10 @@ public class TeilnehmerMapper {
 				t.setNachname(rs.getString("nachname"));
 				t.setZusatz(rs.getString("zusatz"));
 				t.setEmail(rs.getString("email"));
-				t.setRolle(rs.getInt("rolle"));
 				t.setOrt(rs.getString("ort"));
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
-				t.setProjektLeiter(rs.getInt("projektleiter"));
+				
 				// ... Objekt dem Ergebnisvektor hinzufÃ¼gen
 				result.add(t);
 			}
@@ -172,12 +170,11 @@ public class TeilnehmerMapper {
 				t.setNachname(rs.getString("nachname"));
 				t.setZusatz(rs.getString("zusatz"));
 				t.setEmail(rs.getString("email"));
-				t.setRolle(rs.getInt("rolle"));
 				t.setOrt(rs.getString("ort"));
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
-				t.setProjektLeiter(rs.getInt("projektleiter"));
-
+			
+				
 				return t;
 			}
 		} catch (SQLException e) {
@@ -212,11 +209,9 @@ public class TeilnehmerMapper {
 				t.setNachname(rs.getString("nachname"));
 				t.setZusatz(rs.getString("zusatz"));
 				t.setEmail(rs.getString("email"));
-				t.setRolle(rs.getInt("rolle"));
 				t.setOrt(rs.getString("ort"));
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
-				t.setProjektLeiter(rs.getInt("projektleiter"));
 				// Teilnehmer dem Ergebnisvektor hinzufÃ¼gen
 				result.add(t);
 			}
@@ -253,19 +248,16 @@ public class TeilnehmerMapper {
 				stmt = con.createStatement();
 				// SQL Query ausführen um Datensatz in DB zu schreiben
 				stmt.executeUpdate(
-						"INSERT INTO Teilnehmer (idTeilnehmer, vorname, nachname, zusatz, email, rolle, ort, plz, strasse, projektleiter) "
+						"INSERT INTO Teilnehmer (idTeilnehmer, vorname, nachname, zusatz, email, ort, plz, strasse) "
 								+ "VALUES " + "('" + t.getId() + "', '"+ t.getVorname() + "', '" + t.getNachname() + "', '" + t.getZusatz()
-								+ "', '" + t.getEmail() + "', '" + t.getRolle() + "', '" + t.getOrt() + "', '"
-								+ t.getPlz() + "', '" + t.getStrasse() + "', '" + 
-								+ t.getProjektLeiter() + "')");
+								+ "', '" + t.getEmail() + "', '" + t.getOrt() + "', '"
+								+ t.getPlz() + "', '" + t.getStrasse() + "')");
 
 				System.out.println(
-						"vorname, nachname, zusatz, email, rolle, ort, plz, strasse, projektleiter) "
-								+ "VALUES " + "('" + t.getVorname() + "', '" + t.getNachname() + "', '" + t.getZusatz()
-								+ "', '" + t.getEmail() + "', '" + t.getRolle() + "', '" + t.getOrt() + "', '"
-								+ t.getPlz() + "', '" + t.getStrasse() + "', '" +
-								+ t.getProjektLeiter() + "')");
-
+						"(idTeilnehmer, vorname, nachname, zusatz, email, ort, plz, strasse) "
+								+ "VALUES " + "('" + t.getId() + "', '"+ t.getVorname() + "', '" + t.getNachname() + "', '" + t.getZusatz()
+								+ "', '" + t.getEmail() + "', '" + t.getOrt() + "', '"
+								+ t.getPlz() + "', '" + t.getStrasse() + "')");
 			}
 		}
 		// Error Handling
@@ -290,15 +282,14 @@ public class TeilnehmerMapper {
 			Statement stmt = con.createStatement();
 			// SQL Query ausführen
 			stmt.executeUpdate("UPDATE Teilnehmer " + "SET vorname = '" + t.getVorname() + "', nachname = '" + t.getNachname() + "', zusatz = '" + t.getZusatz()
-					+ "', rolle = '" + t.getRolle() + "',email = '" + t.getEmail() + "',ort = '" + t.getOrt()
-					+ "', plz = '" + t.getPlz() + "',strasse = '" + t.getStrasse() +  "', projektleiter = '" + t.getProjektLeiter() + "' WHERE idTeilnehmer = "
+					+ "',email = '" + t.getEmail() + "',ort = '" + t.getOrt()
+					+ "', plz = '" + t.getPlz() + "',strasse = '" + t.getStrasse() +  "' WHERE idTeilnehmer = "
 					+ t.getId());
 
 			System.out.println("UPDATE Teilnehmer " + "SET vorname = '" + t.getVorname() + "', nachname = '" + t.getNachname() + "', zusatz = '" + t.getZusatz()
-					+ "', rolle = '" + t.getRolle() + "',email = '" + t.getEmail() + "',ort = '" + t.getOrt()
-					+ "', plz = '" + t.getPlz() + "',strasse = '" + t.getStrasse() + "', projektleiter = '" + t.getProjektLeiter() + "' WHERE idTeilnehmer = "
-					+ t.getId());
-
+			+ "',email = '" + t.getEmail() + "',ort = '" + t.getOrt()
+			+ "', plz = '" + t.getPlz() + "',strasse = '" + t.getStrasse() +  "' WHERE idTeilnehmer = "
+			+ t.getId());
 		}
 		// Error Handling
 		catch (SQLException e) {

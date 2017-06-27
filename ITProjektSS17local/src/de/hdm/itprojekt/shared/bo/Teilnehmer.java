@@ -20,13 +20,13 @@ public class Teilnehmer extends BusinessObjekt {
 	/**
 	 * bei Rolle  wird angegeben ob Teilnehmers UN/ Team oder Person ist
 	 */	
-	private int		rolle		= 0;
+
 	
 	/**
 	 * erstellt ein Teilnehmer ein Projekt wird der boolean 
 	 * projektleiter auf true gesetzt
 	 */
-	private int	projektLeiter	= 2;
+
 	
 	/**
 	 * Deklaration der Login-Informationen
@@ -141,19 +141,8 @@ public class Teilnehmer extends BusinessObjekt {
 		this.email = email;
 	}
 
-	/**
-	 * @return the rolle
-	 */
-	public int getRolle() {
-		return rolle;
-	}
 
-	/**
-	 * @param rolle the rolle to set
-	 */
-	public void setRolle(int rolle) {
-		this.rolle = rolle;
-	}
+	
 
 	/**
 	 * @return the idTeilnehmer
@@ -211,34 +200,8 @@ public class Teilnehmer extends BusinessObjekt {
 		this.strasse = strasse;
 	}
 
-	/**
-	 * @return the projektLeiter
-	 */
-	public int getProjektLeiter() {
-		return projektLeiter;
-	}
 
-	/**
-	 * @param projektLeiter the projektLeiter to set
-	 */
-	public void setProjektLeiter(int projektLeiter) {
-		this.projektLeiter = projektLeiter;
-	}
 
-	/**
-	 * @return the profil_idProfil
-	 */
-	/*public int getProfil_idProfil() {
-		return profil_idProfil;
-	}
-
-	/**
-	 * @param profil_idProfil the profil_idProfil to set
-	 
-	public void setProfil_idProfil(int profil_idProfil) {
-		this.profil_idProfil = profil_idProfil;
-	}*/
-	
 	public boolean isExisting() {
 		return existing;
 	}
