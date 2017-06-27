@@ -28,6 +28,8 @@ public class AnmeldeFormular extends VerticalPanel{
 	 	private TextBox lastNameBox = new TextBox(); 
 	 	private Label zusatzLabel = new Label("Zusatz: ");
 	 	private TextBox zusatzBox = new TextBox(); 
+	 	private Label firmaLabel = new Label("Firma: ");
+	 	private TextBox firmaBox = new TextBox();
 	 	private Label strasseLabel = new Label("Straﬂe: ");
 	 	private TextBox strasseBox = new TextBox(); 
 	 	private Label plzLabel = new Label("PLZ: ");
@@ -68,6 +70,9 @@ public class AnmeldeFormular extends VerticalPanel{
 	 		labelsPanel.add(zusatzLabel);
 	 		labelsPanel.add(zusatzBox);
 	 		
+	 		labelsPanel.add(firmaLabel);
+	 		labelsPanel.add(firmaBox);	 		
+	 		
 	 		labelsPanel.add(strasseLabel);
 	 		labelsPanel.add(strasseBox);
 	 		
@@ -89,7 +94,7 @@ public class AnmeldeFormular extends VerticalPanel{
 				try {
 					ClientSideSettings.getProjektAdministration().createTeilnehmer(firstNameBox.getText(),
 							lastNameBox.getText(), zusatzBox.getText(), strasseBox.getText(), Integer.parseInt(plzBox.getText()),
-							ortBox.getText(), ClientSideSettings.getCurrentUser().getEmail(), 1, 2,  new CreateTeilnehmerCallback());
+							ortBox.getText(), ClientSideSettings.getCurrentUser().getEmail(), firmaBox.getText(),  new CreateTeilnehmerCallback());
 					ClientSideSettings.getCurrentUser().setExisting(true);
 					
 				} catch (Exception e) {

@@ -16,6 +16,7 @@ public class Teilnehmer extends BusinessObjekt {
 	private int plz 			= 0;
 	private String strasse		= "";
 	private String email		= "";
+	private String firma		= "";
 	//private int profil_idProfil	= 0;
 	/**
 	 * bei Rolle  wird angegeben ob Teilnehmers UN/ Team oder Person ist
@@ -216,6 +217,14 @@ public class Teilnehmer extends BusinessObjekt {
 
 	public void setProfilExisting(boolean profilExisting) {
 		this.profilExisting = profilExisting;
+	}
+
+	public String getFirma() {
+		return firma;
+	}
+
+	public void setFirma(String firma) {
+		this.firma = firma;
 	}
 	
 
