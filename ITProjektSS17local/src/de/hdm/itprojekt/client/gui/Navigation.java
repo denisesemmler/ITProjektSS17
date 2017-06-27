@@ -12,6 +12,11 @@ import de.hdm.itprojekt.client.ITProjektSS17local;
 import de.hdm.itprojekt.client.report.gui.ReportWrapper;
 import de.hdm.itprojekt.client.gui.LogOutPopUp;
 
+/**
+ * Klasse für Navigationsleiste
+ * @author Moritz Bittner
+ *
+ */
 public class Navigation extends HorizontalPanel {
 
 	private Button navStarseiteButton = new Button ("Start", new NavigationsButtonHandler());
@@ -22,10 +27,13 @@ public class Navigation extends HorizontalPanel {
 			new NavigationsButtonHandler());
 	private Button navBewerbungVerwaltenButton = new Button("Bewerbungen verwalten", new NavigationsButtonHandler());
 	private Button navProfilVerwaltenButton = new Button("Profil verwalten", new NavigationsButtonHandler());
-	private Button navBerichteButton = new Button("Berichte", new NavigationsButtonHandler());
+	private Button navMatchingButton = new Button("Matching", new NavigationsButtonHandler());
 	private Button logOutButton = new Button("Abmelden", new NavigationsButtonHandler());
 	public static LogOutPopUp logOutPop = new LogOutPopUp();
 
+	/** 
+	 * Konstruktor der Klasse Navigation
+	 */
 	public Navigation() {
 		// CSS Style Zuweisung
 		this.setStylePrimaryName("Navi");
@@ -35,7 +43,7 @@ public class Navigation extends HorizontalPanel {
 		navAusschreibungVerwaltenButton.setStylePrimaryName("navi-button");
 		navBewerbungVerwaltenButton.setStylePrimaryName("navi-button");
 		navProfilVerwaltenButton.setStylePrimaryName("navi-button");
-		navBerichteButton.setStylePrimaryName("navi-button");
+		navMatchingButton.setStylePrimaryName("navi-button");
 		logOutButton.setStylePrimaryName("navi-button");
 
 		if (ClientSideSettings.getCurrentUser().isExisting() && ClientSideSettings.getCurrentUser().isProfilExisting()) {
@@ -46,17 +54,22 @@ public class Navigation extends HorizontalPanel {
 			this.add(navBewerbungVerwaltenButton);
 			this.add(navProfilVerwaltenButton);
 			this.add(navProfilVerwaltenButton);
-			this.add(navBerichteButton);
+			this.add(navMatchingButton);
 		}
 		this.add(logOutButton);
 
 	}
-
+	/**
+	 * Clickhandler für Navigationsleiste
+	 * @author Moritz Bittner
+	 *
+	 */
 	private class NavigationsButtonHandler implements ClickHandler {
 		public void onClick(ClickEvent e) {
 
 			Button active = (Button) e.getSource();
 
+			//Swich Case, die den Text des aktiven Button abfängt
 			switch (active.getText()) {
 			case "Start":
 				RootPanel.get("Content").clear();
@@ -82,7 +95,7 @@ public class Navigation extends HorizontalPanel {
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(new ProfilVerwalten());
 				break;
-			case "Berichte":
+			case "Matching":
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(new ReportWrapper());
 				break;
