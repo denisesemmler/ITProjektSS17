@@ -100,7 +100,7 @@ public interface ProjektAdministrationAsync {
 
 	void updateTeilnehmer(Teilnehmer t, AsyncCallback<Void> callback);
 
-	void createProfil(int teilnehmerId, AsyncCallback<Profil> callback);
+	void createProfil(int teilnehmerId, int suchprofil, AsyncCallback<Profil> callback);
 
 
 	void getProfilIdCurrentUser(int teilnehmerId, AsyncCallback<Profil> callback);

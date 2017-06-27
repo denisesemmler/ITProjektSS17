@@ -18,6 +18,7 @@ public class Profil extends BusinessObjekt {
 	private int idProfil = 0;
 	private Date erstellDatum = null;
 	private Date aenderungsDatum = null;
+	private int suchprofil = 0;
 	
 	private int Teilnehmer_idTeilnehmer = 0;
 	
@@ -76,6 +77,12 @@ public int getTeilnehmer_idTeilnehmer() {
 
 public void setTeilnehmer_idTeilnehmer(int teilnehmer_idTeilnehmer) {
 	Teilnehmer_idTeilnehmer = teilnehmer_idTeilnehmer;
+}
+public int getSuchprofil() {
+	return suchprofil;
+}
+public void setSuchprofil(int suchprofil) {
+	this.suchprofil = suchprofil;
 }
 	
 	
