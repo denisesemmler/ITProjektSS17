@@ -85,7 +85,7 @@ public interface ProjektAdministrationAsync {
 	
 	void findBewerbungByProfilIdAndAusschreibungId(int id, int ausschreibungID, AsyncCallback<Bewerbung> callback);
 	
-	void bewertungZurBewerbung(int bewerbungId, float bewertung, int beteiligungId, String stellungnahme, int projektId,
+	void bewertungZurBewerbung(int bewerbungId, float bewertung, String stellungnahme, int projektId,
 			int manntage, Date startdatum, Date enddatum, AsyncCallback<Void> callback);
 	
 	/*
