@@ -2,7 +2,6 @@ package de.hdm.itprojekt.client.gui;
 
 import java.util.Vector;
 
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -15,19 +14,20 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.bo.Profil;
+
 /**
  * Klasse für die Startseite nach der Anmeldung, die die das Profil anzeigt
+ * 
  * @author Philipp Mueller
  *
  */
 public class ProfilAnlegen extends VerticalPanel {
-	
-	
-	//Vektoren für die Eigenschaften erstellen
+
+	// Vektoren für die Eigenschaften erstellen
 	private Vector<String> eigenschaftName = new Vector<String>();
 	private Vector<Integer> eigenschaftWert = new Vector<Integer>();
-	
-	//Die verschiedenen Panels erstellen
+
+	// Die verschiedenen Panels erstellen
 	private VerticalPanel mainPanel = this;
 	private HorizontalPanel naviPanel = new HorizontalPanel();
 	private HorizontalPanel msoffice = new HorizontalPanel();
@@ -38,8 +38,8 @@ public class ProfilAnlegen extends VerticalPanel {
 	private HorizontalPanel c = new HorizontalPanel();
 	private HorizontalPanel catia = new HorizontalPanel();
 	private HorizontalPanel sql = new HorizontalPanel();
-	
-	//Labels erstellen
+
+	// Labels erstellen
 	private Label eigenschaftLabel = new Label("Deine Fähigkeiten:");
 	private Label schulabschlussLabel = new Label("Hoechster Schulabschluss");
 	private Label berufserfahrungLabel = new Label("Berufserfahrung");
@@ -51,8 +51,8 @@ public class ProfilAnlegen extends VerticalPanel {
 	private Label cLabel = new Label("C/C++");
 	private Label catiaLabel = new Label("CATIA");
 	private Label sqlLabel = new Label("SQL/DB");
-	
-	//ListBoxen erstellen
+
+	// ListBoxen erstellen
 	private ListBox schulabschlussListBox = new ListBox();
 	private ListBox berufserfahrungListBox = new ListBox();
 	private ListBox msofficeListBox = new ListBox();
@@ -63,20 +63,21 @@ public class ProfilAnlegen extends VerticalPanel {
 	private ListBox cListBox = new ListBox();
 	private ListBox catiaListBox = new ListBox();
 	private ListBox sqlListBox = new ListBox();
-	
-	//Speicher-Button erstellen
+
+	// Speicher-Button erstellen
 	private Button speichern = new Button("Speichern", new AddEigenschaftClickHandler());
 
-	int currentUserId= 0;
+	int currentUserId = 0;
 	Profil p = new Profil();
 
 	public ProfilAnlegen() {
-		//aktuellen UserId und dazugehörigen ProfilId suchen
+		// aktuellen UserId und dazugehörigen ProfilId suchen
 		this.currentUserId = ClientSideSettings.getCurrentUser().getId();
- 		ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(currentUserId, new GetPartnerProfileCallback());
+		ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(currentUserId,
+				new GetPartnerProfileCallback());
 
-		//GUI erstellen
- 		mainPanel.add(eigenschaftLabel);
+		// GUI erstellen
+		mainPanel.add(eigenschaftLabel);
 		mainPanel.add(schulabschlussLabel);
 
 		mainPanel.add(schulabschlussListBox);
@@ -159,9 +160,9 @@ public class ProfilAnlegen extends VerticalPanel {
 		sqlListBox.addItem("Wenig Kenntnisse");
 		sqlListBox.addItem("Gute Kenntnisse");
 
+		// Button zum Panel hinzufügen
 		mainPanel.add(speichern);
 
-		
 	}
 
 	private class AddEigenschaftClickHandler implements ClickHandler {
@@ -169,7 +170,7 @@ public class ProfilAnlegen extends VerticalPanel {
 		public void onClick(ClickEvent event) {
 
 			try {
-				//Eigenschaftname und Wert in Vektoren laden
+				// Eigenschaftname und Wert in Vektoren laden
 				eigenschaftName.add(schulabschlussLabel.getText());
 				eigenschaftName.add(berufserfahrungLabel.getText());
 				eigenschaftName.add(msofficeLabel.getText());
@@ -191,7 +192,7 @@ public class ProfilAnlegen extends VerticalPanel {
 				eigenschaftWert.add(cListBox.getSelectedIndex());
 				eigenschaftWert.add(catiaListBox.getSelectedIndex());
 				eigenschaftWert.add(sqlListBox.getSelectedIndex());
-				//Diese dann in der DB speichern
+				// Diese dann in der DB speichern
 				ClientSideSettings.getProjektAdministration().createEigenschaft(eigenschaftName, eigenschaftWert,
 						p.getId(), new CreateEigenschaftCallback());
 
@@ -203,10 +204,7 @@ public class ProfilAnlegen extends VerticalPanel {
 		}
 	};
 
-	
-
 	private class CreateEigenschaftCallback implements AsyncCallback {
-	
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen");
@@ -214,9 +212,11 @@ public class ProfilAnlegen extends VerticalPanel {
 		}
 
 		public void onSuccess(Object result) {
-			
-			Window.alert("Deine Eigenschaften wurden angelegt!");
-			//Wenn Eigenschaften angelegt wurden, dann User existing setzen, damit dieser beim nächsten Aufruf der Seite dirket auf die Startseite kommt
+
+			Window.alert("Dein Profil wurde angelegt!");
+			// Wenn Eigenschaften angelegt wurden, dann User existing setzen,
+			// damit dieser beim nächsten Aufruf der Seite dirket auf die
+			// Startseite kommt
 			ClientSideSettings.getCurrentUser().setProfilExisting(true);
 
 			RootPanel.get("Content").clear();
@@ -230,18 +230,16 @@ public class ProfilAnlegen extends VerticalPanel {
 	}
 
 	private class GetPartnerProfileCallback implements AsyncCallback<Profil> {
-		
+
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
 		public void onSuccess(Profil result) {
-			//Profil Id in profil-objekt speichern
+			// Profil Id in profil-objekt speichern
 			p.setId(result.getId());
-			Window.alert("Dein Profil wurde gefunden!");
 
-		
 		}
 
 	}
