@@ -97,6 +97,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 		public void onClick(ClickEvent event) {
 			try {
 				Teilnehmer t = ClientSideSettings.getCurrentUser();
+				t.setId(ClientSideSettings.getCurrentUser().getId());
 				t.setVorname(firstNameBox.getText());
 				t.setNachname(lastNameBox.getText());
 				t.setZusatz(zusatzBox.getText());

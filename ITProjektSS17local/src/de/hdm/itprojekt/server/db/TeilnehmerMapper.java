@@ -11,12 +11,12 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 /**
  * <p>
  * Mapper-Klasse zur Abbildung von <code>Teilnehmer</code> Objekten auf die
- * Datenbank. Über das Mapping können sowohl Objekte als auch deren Attribute in
+ * Datenbank. ï¿½ber das Mapping kï¿½nnen sowohl Objekte als auch deren Attribute in
  * die Datenbank geschrieben werden, als auch von der Datenbank ausgelesen
  * werden.
  * </p>
  * <p>
- * Es werden Methoden zum Erstellen, Ãndern, Löschen und Ausgeben von Nutzern
+ * Es werden Methoden zum Erstellen, ï¿½ndern, Lï¿½schen und Ausgeben von Nutzern
  * bereitgestellt.
  * </p>
  * 
@@ -53,24 +53,24 @@ public class TeilnehmerMapper {
 	 * Suche eines Nutzers anhand seiner eindeutigen ID.
 	 * 
 	 * @param id
-	 *            - Primärschlüssel von Teilnehmer
-	 * @return Teilnehmer Objekt, das die gesuchte ID enthält
+	 *            - Primï¿½rschlï¿½ssel von Teilnehmer
+	 * @return Teilnehmer Objekt, das die gesuchte ID enthï¿½lt
 	 */
 	public Teilnehmer findById(int id) {
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 
 		try {
 			// Neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen
+			// SQL Query ausfï¿½hren
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Teilnehmer " + "WHERE idTeilnehmer = " + id);
 			// Bei Treffer
 			if (rs.next()) {
 				// Neues Teilnehmer Objekt erzeugen
 				Teilnehmer t = new Teilnehmer();
 				// Id, name, zusatz Email und Rolle mit den Daten aus der DB
-				// füllen
+				// fï¿½llen
 				t.setId(rs.getInt("idTeilnehmer"));
 				t.setVorname(rs.getString("vorname"));
 				t.setNachname(rs.getString("nachname"));
@@ -82,7 +82,7 @@ public class TeilnehmerMapper {
 				t.setFirma(rs.getString("firma"));
 				
 
-				// Objekt zurückgeben
+				// Objekt zurï¿½ckgeben
 				return t;
 			}
 		}
@@ -91,13 +91,13 @@ public class TeilnehmerMapper {
 			e.printStackTrace();
 			return null;
 		}
-		// Falls nichts gefunden wurde null zurückgeben
+		// Falls nichts gefunden wurde null zurï¿½ckgeben
 		return null;
 	}
 
 	/**
 	 * Suche eines Teilnehmers anhand seines Vor- und Nachnamens. Da Vor- und
-	 * Nachname nicht eindeutig sind, können mehrere Ergebnisse ausgegeben
+	 * Nachname nicht eindeutig sind, kï¿½nnen mehrere Ergebnisse ausgegeben
 	 * werden. Alle gefundenen Nutzer werden in einem Vektor gespeichert.
 	 * 
 	 * @param firstName
@@ -166,7 +166,7 @@ public class TeilnehmerMapper {
 			if (rs.next()) {
 				// Neues User Objekt anlegen
 				Teilnehmer t = new Teilnehmer();
-				// Das Objekt mit Daten aus der DB füllen
+				// Das Objekt mit Daten aus der DB fï¿½llen
 				t.setId(rs.getInt("idTeilnehmer"));
 				t.setVorname(rs.getString("vorname"));
 				t.setNachname(rs.getString("nachname"));
@@ -232,25 +232,25 @@ public class TeilnehmerMapper {
 	 * Neuer Teilnehmer in der Datenbank anlegen.
 	 * 
 	 * @param t
-	 *            Teilnehmer Objekt, das in die Datenbank eingefügt werden soll
+	 *            Teilnehmer Objekt, das in die Datenbank eingefï¿½gt werden soll
 	 */
 	public Teilnehmer insert(Teilnehmer t) {
 
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 		System.out.println("dbconnection: " + con);
 
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen um die höchste id zu erhalten
+			// SQL Query ausfï¿½hren um die hï¿½chste id zu erhalten
 			ResultSet rs = stmt.executeQuery("SELECT MAX(idTeilnehmer) AS maxId FROM Teilnehmer");
 			if (rs.next()) {
-				// id um 1 erhöhen, damit ein neuer Eintrag erzeugt wird
+				// id um 1 erhï¿½hen, damit ein neuer Eintrag erzeugt wird
 				t.setId(rs.getInt("maxId") + 1);
 				// neues SQL Statement
 				stmt = con.createStatement();
-				// SQL Query ausführen um Datensatz in DB zu schreiben
+				// SQL Query ausfï¿½hren um Datensatz in DB zu schreiben
 				stmt.executeUpdate(
 						"INSERT INTO Teilnehmer (idTeilnehmer, vorname, nachname, zusatz, email, ort, plz, strasse, firma) "
 								+ "VALUES " + "('" + t.getId() + "', '"+ t.getVorname() + "', '" + t.getNachname() + "', '" + t.getZusatz()
@@ -272,22 +272,22 @@ public class TeilnehmerMapper {
 	}
 
 	/**
-	 * Teilnehmerdaten eines bestehenden Teilnehmers in der Datenbank ändern
+	 * Teilnehmerdaten eines bestehenden Teilnehmers in der Datenbank ï¿½ndern
 	 * 
 	 * @param u
-	 *            das bereits geänderte Teilnehmerobjekt
+	 *            das bereits geï¿½nderte Teilnehmerobjekt
 	 */
 	public Teilnehmer update(Teilnehmer t) {
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen
+			// SQL Query ausfï¿½hren
 			stmt.executeUpdate("UPDATE Teilnehmer " + "SET vorname = '" + t.getVorname() + "', nachname = '" + t.getNachname() + "', zusatz = '" + t.getZusatz()
 					+ "',email = '" + t.getEmail() + "',ort = '" + t.getOrt()
-					+ "', plz = '" + t.getPlz() + "',strasse = '"  + t.getStrasse() + "', '" + t.getFirma() +  "' WHERE idTeilnehmer = "
+					+ "', plz = '" + t.getPlz() + "',strasse = '"  + t.getStrasse() + "',firma = '" + t.getFirma() +  "' WHERE idTeilnehmer = "
 					+ t.getId());
 
 			System.out.println("UPDATE Teilnehmer " + "SET vorname = '" + t.getVorname() + "', nachname = '" + t.getNachname() + "', zusatz = '" + t.getZusatz()
@@ -304,20 +304,20 @@ public class TeilnehmerMapper {
 	}
 
 	/**
-	 * Diese Methode löscht einen Teilnehmer in der Datenbank die dazugehörigen
+	 * Diese Methode lï¿½scht einen Teilnehmer in der Datenbank die dazugehï¿½rigen
 	 * Nutzer-Referenzen in allen Tabellen
 	 * 
 	 * @param u
-	 *            der zu löschende Teilnehmer
+	 *            der zu lï¿½schende Teilnehmer
 	 */
 	public void delete(Teilnehmer t) {
-		// Datenbankverbindung öffnen
+		// Datenbankverbindung ï¿½ffnen
 		Connection con = DBConnection.connection();
 
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
-			// SQL Query ausführen
+			// SQL Query ausfï¿½hren
 			stmt.executeUpdate("DELETE FROM Teilnehmer WHERE idTeilnehmer = " + t.getId());
 		}
 		// Error Handling
@@ -341,7 +341,7 @@ public class TeilnehmerMapper {
 			if (rs.next()) {
 				// Neues User Objekt anlegen
 				Teilnehmer t = new Teilnehmer();
-				// Das Objekt mit Daten aus der DB füllen
+				// Das Objekt mit Daten aus der DB fï¿½llen
 				t.setId(rs.getInt("idTeilnehmer"));
 				t.setVorname(rs.getString("vorname"));
 				t.setNachname(rs.getString("nachname"));
