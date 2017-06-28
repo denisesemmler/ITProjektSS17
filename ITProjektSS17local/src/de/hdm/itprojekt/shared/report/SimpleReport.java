@@ -21,7 +21,7 @@ public abstract class SimpleReport extends Report {
   SimpleReport(String title) {
 	  Date date = new Date();
 	  DateTimeFormat dtf = DateTimeFormat.getFormat("dd.MM.yyyy HH:mm");
-	  String time = dtf.format(date, TimeZone.createTimeZone(1));
+	  String time = dtf.format(date);
 	  
 	  HTML html = new HTML("<h2>"+title+"</h2><h3>Erstellt am "+time+"</h3>");
 	  this.add(html);

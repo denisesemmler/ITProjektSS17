@@ -32,6 +32,7 @@ public class BewerbungReport extends Bewerbung{
 	public BewerbungReport(Bewerbung bewerbung) {
 		this.setAusschreibungID(bewerbung.getAusschreibungID());
 		this.setBewerbungsText(bewerbung.getBewerbungsText());
+		this.setTitel(bewerbung.getTitel());
 		this.setBewertung(bewerbung.getBewertung());
 		this.setCreationDate(bewerbung.getCreationDate());
 		this.setErstellDatum(bewerbung.getErstellDatum());

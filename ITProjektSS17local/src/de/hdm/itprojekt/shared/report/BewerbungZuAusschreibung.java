@@ -42,14 +42,16 @@ public class BewerbungZuAusschreibung extends SimpleReport {
 							+ "<td>" + bewerbung.getBewerberName() + "</td>"
 							+ "<td>" + bewerbung.getBewerbungName() + "</td>"
 							+ "<td>" + bewerbung.getProjektName() + "</td>"
+							+ "<td>" + bewerbung.getTitel() + "</td>"
+							+ "<td>" + bewerbung.getBewerbungsText() + "</td>"
 							+ "</tr>";
 			
-			String eigenschaftenRow = "<tr><td colspan='3'><ul>";
+			String eigenschaftenRow = "<tr><td colspan='5'>Eigenschaften: <ul>";
 			for(Eigenschaft eigenschaft: bewerbung.getEigenschaften()) {
 				eigenschaftenRow = eigenschaftenRow + "<li>" + eigenschaft.getName() + ": " + eigenschaft.getWertAsString() + "</li>";
 			}
 			eigenschaftenRow = eigenschaftenRow + "</ul></td></tr>";
-			HTML entry = new HTML("<table class='reportTable'><tr><th>Name des Bewerbers</th><th>Auf Stelle</th><th>Projekt</th></tr>" +dataRow+eigenschaftenRow + "</table>");
+			HTML entry = new HTML("<table class='reportTable'><tr><th>Name des Bewerbers</th><th>Auf Stelle</th><th>Projekt</th><th>Bewerbungstitel</th><th>Bewerbungstext</th></tr>" +dataRow+eigenschaftenRow + "</table>");
 			
 			this.add(entry);
 		}

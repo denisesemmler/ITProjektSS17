@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 
@@ -15,7 +16,7 @@ import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
 
 public class AlleBewerbungenNutzer extends SimpleReport{
 	public AlleBewerbungenNutzer() {
-		super("Alle Bewerbungen für Nutzer");
+		super("Ihre Bewerbung - " + ClientSideSettings.getCurrentUser().getVorname() + " " + ClientSideSettings.getCurrentUser().getNachname());
 		
 ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
     	
@@ -70,14 +71,41 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
 			}
 		};
 		
+		TextColumn<BewerbungReport> bewerbungsTitelColumn = new TextColumn<BewerbungReport>() {
+			@Override
+			public String getValue(BewerbungReport bewerbung) {
+				return bewerbung.getTitel();
+			}
+		};
+		
+		TextColumn<BewerbungReport> bewerbungsTextColumn = new TextColumn<BewerbungReport>() {
+			@Override
+			public String getValue(BewerbungReport bewerbung) {
+				return bewerbung.getBewerbungsText();
+			}
+		};
+		
+		TextColumn<BewerbungReport> bewertungColumn = new TextColumn<BewerbungReport>() {
+			@Override
+			public String getValue(BewerbungReport bewerbung) {
+				return String.valueOf(bewerbung.getBewertung());
+			}
+		};
+				
 		
 		
 		//idColumn.setSortable(true);
 		
-		table.addColumn(stelleColumn, "Stelle");
 		table.addColumn(projektColumn, "Projekt");
+		table.addColumn(stelleColumn, "Stelle");
+	
+		table.addColumn(bewerbungsTitelColumn, "Bewerbungstitel");
+		table.addColumn(bewerbungsTextColumn, "Bewerbungstext");
+		table.addColumn(bewertungColumn, "Bewertung");
+		
 		table.addColumn(ansprechpartnerColumn, "Ansprechpartner");
 		table.addColumn(bewerbungsfristColumn, "Bewerbungsfrist");
+
 
 		
 		table.setRowCount(ausschreibungen.size(), true);
