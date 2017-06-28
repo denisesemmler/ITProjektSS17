@@ -37,6 +37,7 @@ import de.hdm.itprojekt.shared.bs.ProjektAdministrationAsync;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
+ * @author Philipp
  */
 public class ITProjektSS17local implements EntryPoint {
 
@@ -45,7 +46,7 @@ public class ITProjektSS17local implements EntryPoint {
 		private HorizontalPanel emailPanel = new HorizontalPanel();
 		private HorizontalPanel passwordPanel = new HorizontalPanel();
 		private HorizontalPanel naviPanel = new HorizontalPanel();
-		Vector<Eigenschaft> existing = new Vector<Eigenschaft>();
+
 		
 		//Begruessungstext im Label
 		private Label loginLabel = new Label(
@@ -66,9 +67,7 @@ public class ITProjektSS17local implements EntryPoint {
 		TextBox emailTextBox = new TextBox();
 		PasswordTextBox passwordTextBox = new PasswordTextBox();
 		
-		//ProjektAnlegen Panel
-		//HorizontalPanel showcase = new ProjektAnlegen();
-		
+
 		//Zur Kommunikation mit der Datenbank
 		private final ProjektAdministrationAsync pr0jectAdmin = ClientSideSettings.getProjektAdministration();
 		private final LoginServiceAsync loginService = ClientSideSettings.getLoginService();
@@ -78,10 +77,7 @@ public class ITProjektSS17local implements EntryPoint {
 	   * Entry point method.
 	   */
 	  public void onModuleLoad() {
-		  
-		  //VlientSideSettings m¸ssen noch erstellt werden in de.hdm.itproject.client
-		  //pr0jectAdmin = ClientSideSettings.getProjektAdministration();
-		  //loginService = ClientSideSettings.getLoginService();
+
 		  
 			/*
 			 * Wir rufen die Methode login mit den Uebergabeparametern request Uri &
@@ -94,11 +90,11 @@ public class ITProjektSS17local implements EntryPoint {
 			 * anmeldet, dies wird ueber result.getFname() == null gepr√ºft
 			 * 
 			 * Beim ersten anmelden wird eine Instanz der Klasse
-			 * ProfilERstellenEditor erstellt und dem RootPanel hinzugefuegt Der
+			 * AnmeldeFormular erstellt und dem RootPanel hinzugefuegt Der
 			 * User kann nun sein noch leeres Profil anlegen
 			 * 
 			 * Ist bereits ein Profil angelegt, so wird dieses Profil mit dem
-			 * erstellen eines Objektes der Klasse ProfilAnzeigenEditor angezeigt
+			 * erstellen eines Objektes der Klasse ProfilAnzeigen angezeigt
 			 */
 		  
 			
@@ -124,11 +120,9 @@ public class ITProjektSS17local implements EntryPoint {
 								} else {
 									int id = result.getId();
 									currentUser.setExisting(result.isExisting());
+									//Profil Id suchen des Nutzers um dann zu pr√ºfen ob Eigenschaften schon vorhanden
 									ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(id, new GetProfileCallback());
-									
-										
-									//RootPanel.get("Content").add(
-									//		new ProfilAnzeigen());
+								
 								}
 
 								/*
@@ -146,16 +140,6 @@ public class ITProjektSS17local implements EntryPoint {
 								logOutUrl = logOutLink.getHref();
 								logOutButton.setStylePrimaryName("navi-button");
 																					
-								/*
-								 * Eine neue Instanz der Klasse Navigation wird
-								 * erstellt und dem RootPanel angefuegt
-								 */
-								
-								//naviPanel.add(new Navigation());
-								//naviPanel.addStyleName("navi-panel");
-								//RootPanel.get("Navi").add(naviPanel);
-								
-								
 								/*
 								 * Ist das Ergebnis der Abfrage, ob der User 
 								 * eingelogt ist negativ, so wird eine 
@@ -181,16 +165,7 @@ public class ITProjektSS17local implements EntryPoint {
 			});
 	  
 	  
-	  /*
-		 * Der getter und setter des LogOutPopUp, die in der Klasse LogOutPopUp
-		 * im Package "de.client.gui" zur Uebergabe des 
-		 * Objektes aus der Klasse LGrotte benutz wird
-		 */
-		
-	
-
-	
-			
+				
 		
 	  }
 
@@ -215,13 +190,14 @@ private class SetUserCallback implements AsyncCallback {
 private class GetProfileCallback implements AsyncCallback<Profil> {
 
 	public void onFailure(Throwable caught) {
-		Window.alert("Dat l‰uft noch nit so Profil finden!");
+		Window.alert("Da ist wohl etwas schief gelaufen");
 
 	}
 
 	public void onSuccess(Profil result) {
-
+		//Wenn Profil gefunden, Id in Profil Objekt speichern
 		p.setId(result.getId());
+		//Dann Eigenschaften laden bzw. schauen ob welche schon vorhanden
 		ClientSideSettings.getProjektAdministration().findNameAndWertFromEigenschaften(p.getId(),
 				new GetEigenschaftCallback());
 	
@@ -233,18 +209,21 @@ private class GetProfileCallback implements AsyncCallback<Profil> {
 private class GetEigenschaftCallback implements AsyncCallback<Vector<Eigenschaft>> {
 
 	public void onFailure(Throwable caught) {
-		Window.alert("Dat l‰uft noch nit so Eigenschaft finden!");
+		Window.alert("Da ist wohl etwas schief gelaufen");
 
 	}
 
 	public void onSuccess(Vector<Eigenschaft> result) {
-		existing = result;
-		if(currentUser.isExisting() == true && existing.isEmpty()== true){
+	
+		
+		//wenn user existing aber zur√ºckgegebener Vektor von Eigenschaften leer ist, dann auf die ProfilAnlegen seite leiten
+		if(currentUser.isExisting() == true && result.isEmpty()== true){
 			RootPanel.get("Navi").clear();
 			naviPanel.add(new Navigation());
 			RootPanel.get("Navi").add(naviPanel);
 			RootPanel.get("Content").add(
 					new ProfilAnlegen());
+			//Sonst direkt auf die ProfilAnzeigen (Startseite) weiterleiten
 		} else{
 			ClientSideSettings.getCurrentUser().setProfilExisting(true);
 			RootPanel.get("Navi").clear();

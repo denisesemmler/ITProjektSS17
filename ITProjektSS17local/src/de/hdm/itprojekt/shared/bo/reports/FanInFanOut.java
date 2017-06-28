@@ -3,7 +3,7 @@ package de.hdm.itprojekt.shared.bo.reports;
 import de.hdm.itprojekt.shared.bo.BusinessObjekt;
 
 /**
- * Repot Objekt für Fan in Fan Out
+ * Repot Objekt fÃ¼r Fan in Fan Out
  * @author Jiayi
  *
  */

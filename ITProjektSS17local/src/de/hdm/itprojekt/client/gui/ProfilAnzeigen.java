@@ -12,6 +12,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.itprojekt.shared.report.AlleAusschreibungenNutzer;
 import de.hdm.itprojekt.shared.report.AlleBewerbungenNutzer;
 
+/**
+ * Klasse für die Startseite nach der Anmeldung, die die das Profil anzeigt
+ * @author Philipp Mueller
+ *
+ */
 public class ProfilAnzeigen extends HorizontalPanel {
 	//Panels erstellen
 	private HorizontalPanel mainPanel = this;
@@ -32,7 +37,7 @@ public class ProfilAnzeigen extends HorizontalPanel {
 	private Label zusatzLabel = new Label("Zusatz: ");
 	private Label zusatzDataLabel = new Label(ClientSideSettings.getCurrentUser().getZusatz());
 
-	private Label strasseLabel = new Label("Stra�e: ");
+	private Label strasseLabel = new Label("Straße: ");
 	private Label strasseDataLabel = new Label(ClientSideSettings.getCurrentUser().getStrasse());
 
 	private Label plzLabel = new Label("PLZ: ");
@@ -47,7 +52,7 @@ public class ProfilAnzeigen extends HorizontalPanel {
 	private Button bewerbungen = new Button("Meine Bewerbungen", new ButtonClickHandler());
 
 	public ProfilAnzeigen() {
-
+		//CSS-Styling
 		firstNameLabel.addStyleName("label1");
 		lastNameLabel.addStyleName("label1");
 		zusatzLabel.addStyleName("label1");
@@ -61,7 +66,8 @@ public class ProfilAnzeigen extends HorizontalPanel {
 		plzDataLabel.addStyleName("label1");
 		ortDataLabel.addStyleName("label1");
 		mainPanel.addStyleName("verticalrand");
-
+		
+		//Panels hinzufügen
 		mainPanel.add(labelsPanel);
 		mainPanel.add(dataPanel);
 		mainPanel.add(buttonsPanel);
@@ -75,6 +81,7 @@ public class ProfilAnzeigen extends HorizontalPanel {
 		labelsPanel.add(lastNameLabel);
 		dataPanel.add(lastNameDataLabel);
 
+		//Feld Firma oder Zusatz nur anzeigen wenn nicht leer
 		if (ClientSideSettings.getCurrentUser().getFirma() != "") {
 			labelsPanel.add(firmaLabel);
 			dataPanel.add(firmaDataLabel);
@@ -103,7 +110,7 @@ public class ProfilAnzeigen extends HorizontalPanel {
 
 			Button active = (Button) e.getSource();
 
-			//Swich Case, die den Text des aktiven Button abf�ngt
+			//Swich Case, die den Text des aktiven Button abfängt
 			switch (active.getText()) {
 			case "Passende Ausschreibungen":
 				RootPanel.get("Content").clear();

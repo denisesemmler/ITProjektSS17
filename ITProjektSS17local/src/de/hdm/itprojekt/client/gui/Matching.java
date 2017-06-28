@@ -1,7 +1,6 @@
 package de.hdm.itprojekt.client.gui;
 
 import java.util.Vector;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -13,12 +12,16 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
-import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Profil;
 
+/**
+ * Klasse die die Ausschreibungen anzeigt, die mit dem Profil des Benutzer Ã¼bereinstimmen
+ * @author Philipp Mueller
+ *
+ */
 public class Matching extends  VerticalPanel {
 	
-	//benötigte Vektoren erstellen
+	//benÃ¶tigte Vektoren erstellen
 	Vector<Ausschreibung> aVector = new Vector<Ausschreibung>();
 		
 	//Panels erstellen
@@ -26,7 +29,7 @@ public class Matching extends  VerticalPanel {
 	VerticalPanel matchingPanel = new VerticalPanel();
 	
 	//Label-Attribute erstellen
-	private Label ueberschriftLabel = new Label("Für dich passende Ausschreibungen");
+	private Label ueberschriftLabel = new Label("FÃ¼r dich passende Ausschreibungen");
 	private Label passendeAusschreibungLabel = new Label ("Passende Ausschreibungen:");
 	
 	//Button erstellen
@@ -39,7 +42,7 @@ public class Matching extends  VerticalPanel {
 	
 	
 	public Matching(){
-		//matchingPanel dem mainPanel hinzufügen, sowie Labels,ListBox und Button hinzufügen
+		//matchingPanel dem mainPanel hinzufÃ¼gen, sowie Labels,ListBox und Button hinzufÃ¼gen
 		mainPanel.add(matchingPanel);
 		matchingPanel.add(ueberschriftLabel);
 		matchingPanel.add(passendeAusschreibungLabel);
@@ -53,15 +56,15 @@ public class Matching extends  VerticalPanel {
 		
 	}
 	
-	// Wenn ProfilUserId erhalten, dann matching durchführen
+	// Wenn ProfilUserId erhalten, dann matching durchfÃ¼hren
 	private class FindProfilCallback implements AsyncCallback<Profil> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Läuft garnit");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 		}
 
 		public void onSuccess(Profil result) {
-			Window.alert("T Profil gefunden");
+			//Wenn ProfilId gefunden, dann macthing Methode aufrufen
 			ClientSideSettings.getProjektAdministration().matchingAusschreibung(result.getId(), new GetMatchingAusschreibungenCallback());
 			
 		}
@@ -70,7 +73,7 @@ public class Matching extends  VerticalPanel {
 	private class GetMatchingAusschreibungenCallback implements AsyncCallback<Vector<Ausschreibung>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Läuft garnit");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 		}
 
 		public void onSuccess(Vector<Ausschreibung> result) {
@@ -91,12 +94,14 @@ public class Matching extends  VerticalPanel {
 			// TODO Callback
 			
 			try {
-				//Ausschreibungs Objekt, dass mit dem in der ListBox gewählten Objekt gefüllt wird.
+				//Ausschreibungs Objekt, dass mit dem in der ListBox gewÃ¤hlten Objekt gefÃ¼llt wird.
 				Ausschreibung a = new Ausschreibung();
 				a.setId(aVector.elementAt(passendeAusschreibungListBox.getSelectedIndex()).getId());
 				a.setBeschreibung(aVector.elementAt(passendeAusschreibungListBox.getSelectedIndex()).getBeschreibung());
 				a.setTitel(aVector.elementAt(passendeAusschreibungListBox.getSelectedIndex()).getTitel());
 				a.setBewerbungsfrist(aVector.elementAt(passendeAusschreibungListBox.getSelectedIndex()).getBewerbungsfrist());
+				
+				//RootPanel clearen und GUI EinzelAusschreibung laden
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(new EinzelAusschreibung(a));
 				

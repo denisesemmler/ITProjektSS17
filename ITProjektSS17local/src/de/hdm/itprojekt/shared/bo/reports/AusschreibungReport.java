@@ -3,7 +3,7 @@ package de.hdm.itprojekt.shared.bo.reports;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 
 /**
- * BusinessObject für Reports
+ * BusinessObject fÃ¼r Reports
  * @author Jiayi
  *
  */
