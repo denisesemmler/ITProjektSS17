@@ -15,27 +15,35 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 
+/**
+ * Klasse für Bearbeiten von Projektmarktplätzen
+ * 
+ * @author Moritz Bittner, Philipp Müller
+ *
+ */
 public class ProjektmarktplatzBearbeiten extends VerticalPanel {
-	
-	private Vector <Projektmarktplatz> pmVector = new Vector<Projektmarktplatz>();
+
+	private Vector<Projektmarktplatz> pmVector = new Vector<Projektmarktplatz>();
 
 	private VerticalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
 
-	private Label marktplatzLabel = new Label("Projektmarktplatz ausw�hlen");
+	private Label marktplatzLabel = new Label("Projektmarktplatz ausw�hlen");
 	private Label marktplatzNameLabel = new Label("Marktplatzname: ");
 	private ListBox marktplatzListbox = new ListBox();
 	private TextBox marktplatzNameBox = new TextBox();
 
 	private Button speichernButton = new Button("Speichern", new SaveChangesClickHandler());
 
+	/**
+	 * Konstruktor für PM Bearbeiten
+	 */
 	public ProjektmarktplatzBearbeiten() {
 
 		// CSS Styles
-		
+
 		mainPanel.add(editorPanel);
 		editorPanel.add(marktplatzLabel);
 		editorPanel.add(marktplatzListbox);
@@ -46,7 +54,8 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 		editorPanel.add(speichernButton);
 
 		try {
-			ClientSideSettings.getProjektAdministration().findProjektmarktplatzByTeilnehmerId(ClientSideSettings.getCurrentUser().getId(), new GetAllMarktplatzCallback());
+			ClientSideSettings.getProjektAdministration().findProjektmarktplatzByTeilnehmerId(
+					ClientSideSettings.getCurrentUser().getId(), new GetAllMarktplatzCallback());
 		} catch (Exception e) {
 			Window.alert(e.toString());
 			e.printStackTrace();
@@ -54,10 +63,13 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 
 	}
 
+	/**
+	 * Callback für Speichern der Änderungen
+	 */
 	private class SaveChangesCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l�uft noch nit so!");
+			Window.alert("Da ist wohl etwas schief gleaufen");
 
 		}
 
@@ -68,24 +80,31 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 
 	}
 
+	/**
+	 * Callback für auslesen aller PM
+	 */
 	private class GetAllMarktplatzCallback implements AsyncCallback<Vector<Projektmarktplatz>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("L�uft garnit");
+			Window.alert("Da ist wohl etwas schief gleaufen");
 		}
 
 		public void onSuccess(Vector<Projektmarktplatz> result) {
-			
-			for (int i = 0; i < result.size(); i++){
+
+			for (int i = 0; i < result.size(); i++) {
 				Projektmarktplatz pm1 = result.elementAt(i);
 				pmVector.add(pm1);
-				marktplatzListbox.addItem(pm1.getBezeichnung());	
+				marktplatzListbox.addItem(pm1.getBezeichnung());
 			}
 			marktplatzNameBox.setText(pmVector.elementAt(marktplatzListbox.getSelectedIndex()).getBezeichnung());
-			
+
 		}
 	}
 
+	/**
+	 * Clickhandler zum Speichern der Änderungen
+	 *
+	 */
 	private class SaveChangesClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
@@ -103,21 +122,25 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 			}
 		}
 	};
-	
+
+	/**
+	 * Changehandler, der auf Änderungen reagiert und NameBox befüllt
+	 *
+	 */
 	private class OnChangeHandler implements ChangeHandler {
 
 		@Override
 		public void onChange(ChangeEvent event) {
 			try {
 				marktplatzNameBox.setText(pmVector.elementAt(marktplatzListbox.getSelectedIndex()).getBezeichnung());
-				
-			} catch (Exception e){
+
+			} catch (Exception e) {
 				Window.alert(e.toString());
 				e.printStackTrace();
 			}
-			
+
 		}
-		
+
 	}
 
 }

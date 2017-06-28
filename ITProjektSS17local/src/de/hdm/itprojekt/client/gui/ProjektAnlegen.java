@@ -23,7 +23,7 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 
 /**
- * GUI Klasse die das VerticalPanel vererbt bekommt für Anlegen von Projekten
+ * GUI Klasse die das VerticalPanel vererbt bekommt fï¿½r Anlegen von Projekten
  * 
  * @author Moritz Bittner
  */
@@ -71,7 +71,7 @@ public class ProjektAnlegen extends VerticalPanel {
 	private DatePicker endPicker = new DatePicker();
 
 	/**
-	 * Konstruktor für Anlegen der GUI
+	 * Konstruktor fï¿½r Anlegen der GUI
 	 */
 	public ProjektAnlegen() {
 
@@ -120,15 +120,17 @@ public class ProjektAnlegen extends VerticalPanel {
 		}
 
 	}
+
 	/**
-	 * Alle Marktplätze auslesen Callback
+	 * Alle Marktplï¿½tze auslesen Callback
+	 * 
 	 * @author Moritz Bittner
 	 *
 	 */
 	private class GetAllMarktplatzCallback implements AsyncCallback<Vector<Projektmarktplatz>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Läuft garnit");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 		}
 
 		public void onSuccess(Vector<Projektmarktplatz> result) {
@@ -140,15 +142,17 @@ public class ProjektAnlegen extends VerticalPanel {
 			}
 		}
 	}
+
 	/**
-	 * Callback für Erstellen von Projekt
+	 * Callback fÃ¼r Erstellen von Projekt
+	 * 
 	 * @author Moritz Bittner
 	 *
 	 */
 	private class CreateProjectCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat läuft noch nit so!");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
@@ -158,8 +162,10 @@ public class ProjektAnlegen extends VerticalPanel {
 		}
 
 	}
+
 	/**
-	 * ClickHandler für Erstellen von Projekt
+	 * ClickHandler fÃ¼r Erstellen von Projekt
+	 * 
 	 * @author Moritz Bittner
 	 *
 	 */

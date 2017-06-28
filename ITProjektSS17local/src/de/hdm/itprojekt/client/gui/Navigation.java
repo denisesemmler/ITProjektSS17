@@ -13,14 +13,15 @@ import de.hdm.itprojekt.client.report.gui.ReportWrapper;
 import de.hdm.itprojekt.client.gui.LogOutPopUp;
 
 /**
- * Klasse für Navigationsleiste
+ * Klasse fÃ¼r Navigationsleiste
+ * 
  * @author Moritz Bittner
  *
  */
 public class Navigation extends HorizontalPanel {
 
-	private Button navStarseiteButton = new Button ("Start", new NavigationsButtonHandler());
-	private Button navProjektmarktplatzVerwaltenButton = new Button("Projektmarktplätze verwalten",
+	private Button navStarseiteButton = new Button("Start", new NavigationsButtonHandler());
+	private Button navProjektmarktplatzVerwaltenButton = new Button("ProjektmarktplÃ¤tze verwalten",
 			new NavigationsButtonHandler());
 	private Button navProjektVerwaltenButton = new Button("Projekte verwalten", new NavigationsButtonHandler());
 	private Button navAusschreibungVerwaltenButton = new Button("Ausschreibungen verwalten",
@@ -31,7 +32,7 @@ public class Navigation extends HorizontalPanel {
 	private Button logOutButton = new Button("Abmelden", new NavigationsButtonHandler());
 	public static LogOutPopUp logOutPop = new LogOutPopUp();
 
-	/** 
+	/**
 	 * Konstruktor der Klasse Navigation
 	 */
 	public Navigation() {
@@ -46,7 +47,8 @@ public class Navigation extends HorizontalPanel {
 		navMatchingButton.setStylePrimaryName("navi-button");
 		logOutButton.setStylePrimaryName("navi-button");
 
-		if (ClientSideSettings.getCurrentUser().isExisting() && ClientSideSettings.getCurrentUser().isProfilExisting()) {
+		if (ClientSideSettings.getCurrentUser().isExisting()
+				&& ClientSideSettings.getCurrentUser().isProfilExisting()) {
 			this.add(navStarseiteButton);
 			this.add(navProjektmarktplatzVerwaltenButton);
 			this.add(navProjektVerwaltenButton);
@@ -59,8 +61,10 @@ public class Navigation extends HorizontalPanel {
 		this.add(logOutButton);
 
 	}
+
 	/**
-	 * Clickhandler für Navigationsleiste
+	 * Clickhandler fï¿½r Navigationsleiste
+	 * 
 	 * @author Moritz Bittner
 	 *
 	 */
@@ -69,13 +73,13 @@ public class Navigation extends HorizontalPanel {
 
 			Button active = (Button) e.getSource();
 
-			//Swich Case, die den Text des aktiven Button abfängt
+			// Swich Case, die den Text des aktiven Button abfï¿½ngt
 			switch (active.getText()) {
 			case "Start":
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(new ProfilAnzeigen());
 				break;
-			case "Projektmarktplätze verwalten":
+			case "ProjektmarktplÃ¤tze verwalten":
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(new ProjektmarktplatzVerwalten());
 				break;

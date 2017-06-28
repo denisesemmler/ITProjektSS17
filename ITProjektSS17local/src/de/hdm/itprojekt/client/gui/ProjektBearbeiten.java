@@ -22,37 +22,42 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
+/**
+ * Klasse für Anlegen von Projekte
+ * 
+ * @author Moritz Bittner
+ *
+ */
 
-public class ProjektBearbeiten extends VerticalPanel{
-	
+public class ProjektBearbeiten extends VerticalPanel {
+
 	private Vector<Projekt> pVector = new Vector<Projekt>();
-	
+
 	private VerticalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
 	private VerticalPanel attributePanel = new VerticalPanel();
 	private HorizontalPanel datePanel = new HorizontalPanel();
 	private VerticalPanel startPanel = new VerticalPanel();
 	private VerticalPanel endPanel = new VerticalPanel();
-	
+
 	/**
-	 * Erstellen der Labels 
+	 * Erstellen der Labels
 	 */
-	private Label marktplatzLabel = new Label ("Projekt auswaehlen: ");
+	private Label marktplatzLabel = new Label("Projekt auswählen: ");
 	private Label projektNameLabel = new Label("Projektname: ");
 	private Label projektBeschreibungLabel = new Label("Projektbeschreibung: ");
 	private Label startDateLabel = new Label("Start Datum: ");
 	private Label endDateLabel = new Label("End Datum: ");
-	
+
 	/**
 	 * Erstellen der ListBox
 	 */
 	private ListBox projektListbox = new ListBox();
-	
+
 	/**
 	 * Erstellen der Buttons
 	 */
-	private Button projektSpeichernButton = new Button("Speichern",
-			new SpeichernButtonHandler());
+	private Button projektSpeichernButton = new Button("Speichern", new SpeichernButtonHandler());
 
 	/**
 	 * Erstellen der TextBoxen
@@ -64,17 +69,20 @@ public class ProjektBearbeiten extends VerticalPanel{
 	 */
 	private DatePicker startPicker = new DatePicker();
 	private DatePicker endPicker = new DatePicker();
-	
-	public ProjektBearbeiten(){
-		
-		//CSS Styles
+
+	/**
+	 * Konstruktor fpr Bearbeiten von Projekte
+	 */
+	public ProjektBearbeiten() {
+
+		// CSS Styles
 		projektSpeichernButton.setStylePrimaryName("grotte-button");
-		
+
 		mainPanel.add(editorPanel);
-		
+
 		editorPanel.add(attributePanel);
 		editorPanel.add(datePanel);
-		
+
 		attributePanel.add(marktplatzLabel);
 		attributePanel.add(projektListbox);
 		projektListbox.addChangeHandler(new OnChangeHandler());
@@ -82,44 +90,44 @@ public class ProjektBearbeiten extends VerticalPanel{
 		attributePanel.add(projektNameBox);
 		attributePanel.add(projektBeschreibungLabel);
 		attributePanel.add(projektBeschreibungArea);
-		
+
 		datePanel.add(startPanel);
 		datePanel.add(endPanel);
-		
+
 		startPanel.add(startDateLabel);
 		startPanel.add(startPicker);
-		
+
 		endPanel.add(endDateLabel);
 		endPanel.add(endPicker);
-		
-		//Set default Value 
+
+		// Set default Value
 		startPicker.setValue(new Date(), true);
 		endPicker.setValue(new Date(), true);
-		
+
 		mainPanel.add(projektSpeichernButton);
-		
+
 		try {
-			ClientSideSettings.getProjektAdministration().findAllProjektByTeilnehmerId(ClientSideSettings.getCurrentUser().getId(),
-					new GetAllProjekteByIDCallback());
+			ClientSideSettings.getProjektAdministration().findAllProjektByTeilnehmerId(
+					ClientSideSettings.getCurrentUser().getId(), new GetAllProjekteByIDCallback());
 		} catch (Exception e) {
 			Window.alert(e.toString());
 			e.printStackTrace();
 		}
-	
+
 	}
-	
+
 	private class GetAllProjekteByIDCallback implements AsyncCallback<Vector<Projekt>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("L�uft garnit");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 		}
 
 		public void onSuccess(Vector<Projekt> result) {
-		
-			for (int i = 0; i < result.size(); i++){
+
+			for (int i = 0; i < result.size(); i++) {
 				Projekt p1 = result.elementAt(i);
 				pVector.add(p1);
-				projektListbox.addItem(p1.getName());	
+				projektListbox.addItem(p1.getName());
 			}
 			projektNameBox.setText(pVector.elementAt(projektListbox.getSelectedIndex()).getName());
 			projektBeschreibungArea.setText(pVector.elementAt(projektListbox.getSelectedIndex()).getBeschreibung());
@@ -130,6 +138,9 @@ public class ProjektBearbeiten extends VerticalPanel{
 		}
 	}
 
+	/**
+	 * Handler, der auf Änderungen eingeht -> Projekt Attribute aktuallisieren
+	 */
 	private class OnChangeHandler implements ChangeHandler {
 
 		@Override
@@ -141,14 +152,18 @@ public class ProjektBearbeiten extends VerticalPanel{
 				startPicker.setCurrentMonth(pVector.elementAt(projektListbox.getSelectedIndex()).getStartDatum());
 				endPicker.setValue(pVector.elementAt(projektListbox.getSelectedIndex()).getEndDatum());
 				endPicker.setCurrentMonth(pVector.elementAt(projektListbox.getSelectedIndex()).getEndDatum());
-			} catch (Exception e){
+			} catch (Exception e) {
 				Window.alert(e.toString());
 				e.printStackTrace();
 			}
-			
+
 		}
-		
+
 	}
+
+	/**
+	 * ClickHandler zum Speichern von Änderungen
+	 */
 	private class SpeichernButtonHandler implements ClickHandler {
 		public void onClick(ClickEvent event) {
 			try {
@@ -167,11 +182,14 @@ public class ProjektBearbeiten extends VerticalPanel{
 			}
 		}
 	};
-	
+
+	/**
+	 * Callback für Speichern
+	 */
 	private class SpeichernCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l�uft noch nit so!");
+			Window.alert("Dat l�uft noch nit so!");
 
 		}
 
@@ -182,4 +200,3 @@ public class ProjektBearbeiten extends VerticalPanel{
 
 	}
 }
-

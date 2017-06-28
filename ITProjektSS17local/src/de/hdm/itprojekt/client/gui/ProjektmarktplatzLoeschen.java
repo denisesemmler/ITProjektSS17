@@ -20,28 +20,27 @@ import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
  * @author Moritz Bittner
  */
 
-
 public class ProjektmarktplatzLoeschen extends VerticalPanel {
 
-	// MainPanel um Widgets anzufügen
+	// MainPanel um Widgets anzufï¿½gen
 	private VerticalPanel mainPanel = this;
-	// Für Marktplatz Auswahl
+	// FÃ¼r Marktplatz Auswahl
 	private Label marktplatzNameLabel = new Label("Marktplatzname: ");
 	private ListBox marktplatzListbox = new ListBox();
-	// Button zum Löschen
-	private Button loeschenButton = new Button("Löschen", new DeleteClickHandler());
-	// Vector der Marktplätze speichert
+	// Button zum LÃ¶schen
+	private Button loeschenButton = new Button("LÃ¶schen", new DeleteClickHandler());
+	// Vector der Marktplï¿½tze speichert
 	private Vector<Projektmarktplatz> pmVector = new Vector<Projektmarktplatz>();
 
 	// Konstruktor der bei Laden des Widgets aufgerufen wird
 	public ProjektmarktplatzLoeschen() {
 
-		// Hinzufügen der Widgets
+		// Hinzufï¿½gen der Widgets
 		mainPanel.add(marktplatzNameLabel);
 		mainPanel.add(marktplatzListbox);
 		mainPanel.add(loeschenButton);
 
-		// Try für alle Marktplätze auslesen
+		// Try fï¿½r alle Marktplï¿½tze auslesen
 		try {
 			ClientSideSettings.getProjektAdministration().findAllProjektmarktplatz(new GetAllMarktplatzCallback());
 		} catch (Exception e) {
@@ -51,14 +50,15 @@ public class ProjektmarktplatzLoeschen extends VerticalPanel {
 	}
 
 	/**
-	 * Callback dür Löschen der PM
+	 * Callback fÃ¼r LÃ¶schen der PM
+	 * 
 	 * @author Moritz Bittner
 	 *
 	 */
 	private class DeleteCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat läuft noch nit so!");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
@@ -70,22 +70,23 @@ public class ProjektmarktplatzLoeschen extends VerticalPanel {
 	}
 
 	/**
-	 * Callback um alle PM auszulesen und an Listbox anhängen
+	 * Callback um alle PM auszulesen und an Listbox anhÃ¤ngen
+	 * 
 	 * @author Moritz Bittner
 	 *
 	 */
 	private class GetAllMarktplatzCallback implements AsyncCallback<Vector<Projektmarktplatz>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Läuft garnit");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 		}
 
 		public void onSuccess(Vector<Projektmarktplatz> result) {
-			// Anhängen aller Elemente an Listbox
+			// Anhï¿½ngen aller Elemente an Listbox
 			for (Projektmarktplatz p : result) {
 				marktplatzListbox.addItem(p.getBezeichnung());
 			}
-			// Anfügen der PM an Vector
+			// Anfï¿½gen der PM an Vector
 			for (int i = 0; i < result.size(); i++) {
 				Projektmarktplatz pm1 = result.elementAt(i);
 				pmVector.add(pm1);
@@ -94,7 +95,7 @@ public class ProjektmarktplatzLoeschen extends VerticalPanel {
 	}
 
 	/**
-	 * Clickhandler für Löschen der Marktplätze
+	 * Clickhandler fï¿½r Lï¿½schen der Marktplï¿½tze
 	 * 
 	 * @author Moritz Bittner
 	 *
@@ -105,10 +106,10 @@ public class ProjektmarktplatzLoeschen extends VerticalPanel {
 
 			try {
 				int id = pmVector.elementAt(marktplatzListbox.getSelectedIndex()).getId();
-				// Zu löschendes Objekt
+				// Zu lÃ¶schendes Objekt
 				Projektmarktplatz pm = new Projektmarktplatz();
 				pm.setId(id);
-				// Löschen des PM
+				// LÃ¶schen des PM
 				ClientSideSettings.getProjektAdministration().deleteProjektmarktplatz(pm, new DeleteCallback());
 
 			} catch (Exception e) {

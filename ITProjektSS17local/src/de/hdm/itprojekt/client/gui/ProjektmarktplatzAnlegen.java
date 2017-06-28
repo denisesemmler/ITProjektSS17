@@ -10,54 +10,54 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-
-
 /**
- * GUI Klasse die das VerticalPanel vererbt bekommt für Anlegen von Projektmarktplätzen
+ * GUI Klasse die das VerticalPanel vererbt bekommt fÃ¼r Anlegen von
+ * ProjektmarktplÃ¤tzen
  * 
  * @author Moritz Bittner
  */
-public class ProjektmarktplatzAnlegen extends VerticalPanel{
+public class ProjektmarktplatzAnlegen extends VerticalPanel {
 
 	private VerticalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
-	
+
 	private Label marktplatzLabel = new Label("Bezeichnung:");
-	
+
 	private TextBox projektmarktplatzNameBox = new TextBox();
-	
+
 	private Button projektmarktplatzAnlegenButton = new Button("Anlegen", new CreateProjektmarktplatzClickHandler());
-	
-	public ProjektmarktplatzAnlegen(){
-		//CSS Styling
+
+	public ProjektmarktplatzAnlegen() {
+		// CSS Styling
 		marktplatzLabel.addStyleName("Content-Label");
-		
+
 		mainPanel.add(editorPanel);
 		editorPanel.add(marktplatzLabel);
 		editorPanel.add(projektmarktplatzNameBox);
 		editorPanel.add(projektmarktplatzAnlegenButton);
 	}
-	
+
 	/**
-	 * Callback für Erstellen von PM
+	 * Callback fï¿½r Erstellen von PM
+	 * 
 	 * @author Moritz Bittner
 	 *
 	 */
 	private class CreateProjektmarktplatzCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat läuft noch nit so!");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
 		public void onSuccess(Object result) {
-			Window.alert("Dat läuft!");
+			Window.alert("Projektmarktplatz gespeichert");
 			RootPanel.get("Content").clear();
-			
 
 		}
 
 	}
+
 	/**
 	 * Projektmarktplatz erstellen Clickhandler
 	 * 
@@ -65,13 +65,13 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel{
 	 *
 	 */
 	private class CreateProjektmarktplatzClickHandler implements ClickHandler {
-		
+
 		public void onClick(ClickEvent event) {
-			// Projekt project = new Projekt();
+
 			try {
 
-				ClientSideSettings.getProjektAdministration().
-				createProjektmarktplatz(projektmarktplatzNameBox.getText(), ClientSideSettings.getCurrentUser().getId(),
+				ClientSideSettings.getProjektAdministration().createProjektmarktplatz(
+						projektmarktplatzNameBox.getText(), ClientSideSettings.getCurrentUser().getId(),
 						new CreateProjektmarktplatzCallback());
 			} catch (Exception e) {
 				Window.alert(e.toString());
@@ -81,6 +81,3 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel{
 		}
 	}
 }
-
-
-
