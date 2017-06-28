@@ -14,7 +14,7 @@ import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 
 public class AlleAusschreibungenNutzer extends SimpleReport{
 	public AlleAusschreibungenNutzer() {
-		super("Alle Ausschreibungen für angemeldeten Nutzer");
+		super("Alle Ausschreibungen fÃ¼r angemeldeten Nutzer");
 		ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
     	
     	final AsyncCallback<List<AusschreibungReport>> initReportGeneratorCallback = new AsyncCallback<List<AusschreibungReport>>() {
