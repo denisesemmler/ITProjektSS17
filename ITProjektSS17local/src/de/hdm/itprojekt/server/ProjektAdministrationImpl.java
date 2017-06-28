@@ -450,7 +450,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 */
 	public void deleteBewerbung(Bewerbung b) {
 		Beteiligung beteiligung = btMapper.findByBewerbung(b);
-		btMapper.delete(beteiligung);
+		//btMapper.delete(beteiligung);
 		bMapper.delete(b);
 	}
 
