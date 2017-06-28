@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Profil;
 
 /**
@@ -177,6 +178,28 @@ public class ProfilMapper {
 		return 0;
 	}
 
+	public Profil update(Profil p) {
+		// Datenbankverbindung �ffnen
+		Connection con = DBConnection.connection();
+		
+		try {
+			// neues SQL Statement anlegen
+			Statement stmt = con.createStatement();
+			// SQL Query ausf�hren
+			stmt.executeUpdate("UPDATE Profil "
+					+ "SET aenderungsdatum = '" 
+					+ p.getAenderungsDatum()
+					+ "' WHERE idProfil = " 
+					+ p.getId());	
+			
+		}
+		// Error Handling
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return p;
+	}
 
 	public void delete(Profil p) {
 		// Datenbankverbindung �ffnen

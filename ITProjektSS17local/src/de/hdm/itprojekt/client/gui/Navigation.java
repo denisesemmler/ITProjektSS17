@@ -25,7 +25,6 @@ public class Navigation extends HorizontalPanel {
 			new NavigationsButtonHandler());
 	private Button navBewerbungVerwaltenButton = new Button("Bewerbungen verwalten", new NavigationsButtonHandler());
 	private Button navProfilVerwaltenButton = new Button("Profil verwalten", new NavigationsButtonHandler());
-	private Button navMatchingButton = new Button("Matching", new NavigationsButtonHandler());
 	private Button logOutButton = new Button("Abmelden", new NavigationsButtonHandler());
 	public static LogOutPopUp logOutPop = new LogOutPopUp();
 
@@ -41,7 +40,6 @@ public class Navigation extends HorizontalPanel {
 		navAusschreibungVerwaltenButton.setStylePrimaryName("navi-button");
 		navBewerbungVerwaltenButton.setStylePrimaryName("navi-button");
 		navProfilVerwaltenButton.setStylePrimaryName("navi-button");
-		navMatchingButton.setStylePrimaryName("navi-button");
 		logOutButton.setStylePrimaryName("navi-button");
 
 		if (ClientSideSettings.getCurrentUser().isExisting()
@@ -53,7 +51,7 @@ public class Navigation extends HorizontalPanel {
 			this.add(navBewerbungVerwaltenButton);
 			this.add(navProfilVerwaltenButton);
 			this.add(navProfilVerwaltenButton);
-			this.add(navMatchingButton);
+		
 		}
 		this.add(logOutButton);
 
@@ -95,10 +93,6 @@ public class Navigation extends HorizontalPanel {
 			case "Profil verwalten":
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(new ProfilVerwalten());
-				break;
-			case "Matching":
-				RootPanel.get("Content").clear();
-				RootPanel.get("Content").add(new ReportWrapper());
 				break;
 			case "Abmelden":
 				getLogOutPop().setPopupPositionAndShow(new PopupPanel.PositionCallback() {

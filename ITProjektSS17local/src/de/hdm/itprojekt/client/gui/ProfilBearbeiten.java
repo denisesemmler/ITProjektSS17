@@ -1,5 +1,7 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -34,14 +36,14 @@ public class ProfilBearbeiten extends VerticalPanel {
 	private TextBox lastNameBox = new TextBox();
 	private Label zusatzLabel = new Label("Zusatz: ");
 	private TextBox zusatzBox = new TextBox();
-	private Label strasseLabel = new Label("Straße: ");
+	private Label strasseLabel = new Label("Straï¿½e: ");
 	private TextBox strasseBox = new TextBox();
 	private Label plzLabel = new Label("PLZ: ");
 	private TextBox plzBox = new TextBox();
 	private Label ortLabel = new Label("Ort: ");
 	private TextBox ortBox = new TextBox();
 
-	private Label kenntnisseLabel = new Label("Deine Fähigkeiten: ");
+	private Label kenntnisseLabel = new Label("Deine Fï¿½higkeiten: ");
 	private Button speichern = new Button("Speichern", new CreateTeilnehmerClickHandler());
 
 	Profil p = new Profil();
@@ -58,7 +60,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 
 		mainPanel.add(labelsPanel);
 
-		// Elemente hinzufügen
+		// Elemente hinzufï¿½gen
 		labelsPanel.add(firstNameLabel);
 		labelsPanel.add(firstNameBox);
 		firstNameBox.setText(ClientSideSettings.getCurrentUser().getVorname());
@@ -103,7 +105,9 @@ public class ProfilBearbeiten extends VerticalPanel {
 				t.setOrt(ortBox.getText());
 				ClientSideSettings.getProjektAdministration().updateTeilnehmer(t, new UpdateTeilnehmerCallback());
 				
-				
+				Date aenderungsDatum = new Date();
+				p.setAenderungsDatum(new java.sql.Date(aenderungsDatum.getTime()));
+				ClientSideSettings.getProjektAdministration().updateProfil(p, new UpdateProfileCallback());
 				
 			} catch (Exception e) {
 				Window.alert(e.toString());
@@ -115,7 +119,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 	private class GetEigenschaftCallback implements AsyncCallback<Vector<Eigenschaft>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat läuft noch nit so Eigenschaft finden!");
+			Window.alert("Dat lï¿½uft noch nit so Eigenschaft finden!");
 
 		}
 
@@ -190,7 +194,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 	private class UpdateTeilnehmerCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat läuft noch nit so!");
+			Window.alert("Dat lï¿½uft noch nit so!");
 
 		}
 
@@ -216,7 +220,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 	private class GetProfileCallback implements AsyncCallback<Profil> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat läuft noch nit so Profil finden!");
+			Window.alert("Dat lï¿½uft noch nit so Profil finden!");
 
 		}
 
@@ -231,10 +235,24 @@ public class ProfilBearbeiten extends VerticalPanel {
 
 	}
 	
+	private class UpdateProfileCallback implements AsyncCallback {
+
+		public void onFailure(Throwable caught) {
+			Window.alert("Da ist wohl etwas schief gelaufen!");
+
+		}
+
+		public void onSuccess(Object result) {
+
+			
+		}
+
+	}
+	
 	private class UpdateEigenschaftenCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat läuft noch nit so Profil finden!");
+			Window.alert("Dat lï¿½uft noch nit so Profil finden!");
 
 		}
 

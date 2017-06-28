@@ -91,6 +91,16 @@ img{
 	width: 250px;
 }
 
+.button1{
+	margin: 0px 7px 7px 7px;
+}
+
+.button1:hover{
+	border-style: groove;
+	border-color: #000000;
+}
+
+
 .Content-Label{
 	width: 130px;
 	padding-right: 20px;
@@ -118,6 +128,10 @@ img{
 
 .verticalrand{
 	margin-left: 50px;
+}
+.reportPanel{
+	margin-left: 40px;
+	margin-right: 50px;
 }
 table.reportTable {
 	border-collapse: collapse;

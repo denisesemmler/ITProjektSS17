@@ -6,7 +6,6 @@ public class Ausschreibung extends BusinessObjekt {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private int idAusschreibung 		= 0;
 	private String titel				= "";
 	private String beschreibung 		= "";
 	private Date bewerbungsfrist 		= null;
@@ -110,22 +109,18 @@ public class Ausschreibung extends BusinessObjekt {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
 	/**
-	 * @return the idAusschreibung
+	 * @param the Teilnehmer_idTeilnehmer 
 	 */
-	public int getIdAusschreibung() {
-		return idAusschreibung;
-	}
-	/**
-	 * @param idAusschreibung the idAusschreibung to set
-	 */
-	public void setIdAusschreibung(int idAusschreibung) {
-		this.idAusschreibung = idAusschreibung;
-	}
 
 	public int getTeilnehmer_idTeilnehmer() {
 		return Teilnehmer_idTeilnehmer;
 	}
+	
+	/**
+	 * @param Teilnehmer_idTeilnehmer the Teilnehmer_idTeilnehmer to set
+	 */
 
 	public void setTeilnehmer_idTeilnehmer(int teilnehmer_idTeilnehmer) {
 		Teilnehmer_idTeilnehmer = teilnehmer_idTeilnehmer;
