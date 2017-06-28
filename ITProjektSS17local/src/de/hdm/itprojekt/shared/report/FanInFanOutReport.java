@@ -74,9 +74,9 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
 		//idColumn.setSortable(true);
 		
 		table.addColumn(nameColumn, "Name");
-		table.addColumn(fanOutColumn, "Fan Out");
-		table.addColumn(fanInColumn, "Fan In");
-		table.addColumn(analyseColumn, "Analyse");
+		table.addColumn(fanOutColumn, "Fan-Out/Bewerbung");
+		table.addColumn(fanInColumn, "Fan-In/Ausschreibung");
+		table.addColumn(analyseColumn, "Fan-out/Fan-IN Analyse");
 		
 		table.setRowCount(report.size(), true);
 	    table.setRowData(0, report);
