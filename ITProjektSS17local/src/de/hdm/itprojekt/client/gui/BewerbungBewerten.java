@@ -1,7 +1,10 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.Vector;
+
+import org.apache.http.impl.cookie.DateParseException;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -18,6 +21,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.datepicker.client.DatePicker;
 
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
@@ -54,6 +58,9 @@ public class BewerbungBewerten extends VerticalPanel {
 	// Textboxen Instanzvariablen zum befüllen mit Textinhalten
 	private TextBox bewertungInBox = new TextBox();
 	private TextBox stellungnahmeInBox = new TextBox();
+	private DatePicker startdatumInBox = new DatePicker();
+	private DatePicker enddatumInBox = new DatePicker();
+	private TextBox manntageInBox = new TextBox();
 
 	// Überschrifts Panel
 	private HTMLPanel bewerbungBewertenPanel = new HTMLPanel(
@@ -69,29 +76,34 @@ public class BewerbungBewerten extends VerticalPanel {
 	private HTMLPanel erstellDatum = new HTMLPanel("<strong>Erstell Datum:</strong>");
 	private HTMLPanel bewerbungsText = new HTMLPanel("<strong>Bewerbungs Text:</strong>");
 	private HTMLPanel idBewerbung = new HTMLPanel("<strong>ID Bewerbung:</strong>");
-	private HTMLPanel bewertung = new HTMLPanel("<strong>Bewertung:</strong>");
+	// private HTMLPanel bewertung = new
+	// HTMLPanel("<strong>Bewertung:</strong>");
 	private HTMLPanel status = new HTMLPanel("<strong>Status:</strong>");
-	private HTMLPanel stellungnahme = new HTMLPanel("<strong>Stellungnahme:</strong>");
+	// private HTMLPanel stellungnahme = new
+	// HTMLPanel("<strong>Stellungnahme:</strong>");
 
 	// Leerzeichen zwischen den Labelen
 	private HTMLPanel erstellDatumSpacePanel = new HTMLPanel("&nbsp;");
 	private HTMLPanel bewerbungsTextSpacePanel = new HTMLPanel("&nbsp;");
 	private HTMLPanel idBewerbungSpacePanel = new HTMLPanel("&nbsp;");
-	private HTMLPanel bewertungSpacePanel = new HTMLPanel("&nbsp;");
+	// private HTMLPanel bewertungSpacePanel = new HTMLPanel("&nbsp;");
 	private HTMLPanel statusSpacePanel = new HTMLPanel("&nbsp;");
-	private HTMLPanel stellungnahmeSpacePanel = new HTMLPanel("&nbsp;");
+	// private HTMLPanel stellungnahmeSpacePanel = new HTMLPanel("&nbsp;");
 
 	// Label für die Inhalte der ausgewählten Bewerbung
 	private Label erstellDatumWert = new Label("wird befüllt");
 	private Label bewerbungsTextWert = new Label("wird befüllt");
 	private Label idBewerbungWert = new Label("wird befüllt");
-	private Label bewertungWert = new Label("wird befüllt");// TODO
+	// private Label bewertungWert = new Label("wird befüllt");// TODO
 	private Label statusWert = new Label("wird befüllt");// TODO
-	private Label stellungnahmeWert = new Label("wird befüllt");
+	// private Label stellungnahmeWert = new Label("wird befüllt");
 
 	// Label für Textboxen
 	private Label bewertungsZahlAbgeben = new Label("Hier bitte Bewertung eintragen (0.0-1.0)");
 	private Label stellungnahmeTextAbgeben = new Label("Hier bitte zur Bewertung Stellung beziehen");
+	private Label startdatum = new Label("Startdatum");
+	private Label enddatum = new Label("Enddatum");
+	private Label manntage = new Label("Manntage");
 
 	// Button zum aufrufen der Textboxen
 	private Button bewerbungBewerten = new Button("Bewerbung bewerten", new VisibleClickHandler());
@@ -167,17 +179,17 @@ public class BewerbungBewerten extends VerticalPanel {
 		statusPanel.add(statusWert);
 		editorPanel.add(statusPanel);
 
-		HorizontalPanel bewertungPanel = new HorizontalPanel();
-		bewertungPanel.add(bewertung);
-		bewertungPanel.add(bewertungSpacePanel);
-		bewertungPanel.add(bewertungWert);
-		editorPanel.add(bewertungPanel);
-
-		HorizontalPanel stellungnahmePanel = new HorizontalPanel();
-		stellungnahmePanel.add(stellungnahme);
-		stellungnahmePanel.add(stellungnahmeSpacePanel);
-		stellungnahmePanel.add(stellungnahmeWert);
-		editorPanel.add(stellungnahmePanel);
+		// HorizontalPanel bewertungPanel = new HorizontalPanel();
+		// bewertungPanel.add(bewertung);
+		// bewertungPanel.add(bewertungSpacePanel);
+		// bewertungPanel.add(bewertungWert);
+		// editorPanel.add(bewertungPanel);
+		//
+		// HorizontalPanel stellungnahmePanel = new HorizontalPanel();
+		// stellungnahmePanel.add(stellungnahme);
+		// stellungnahmePanel.add(stellungnahmeSpacePanel);
+		// stellungnahmePanel.add(stellungnahmeWert);
+		// editorPanel.add(stellungnahmePanel);
 
 		// Button zum mainPanel hinzugefügt, um Textboxen zum befüllen zu
 		// erhalten
@@ -186,20 +198,39 @@ public class BewerbungBewerten extends VerticalPanel {
 		// Großes HorizontalPanel Spalte 3 über die ganze Seite
 		// TODO
 
-		// Zum Verstecken der Bewertung und Stellungnahme bis es ausgewählt wird
+		// Zum Verstecken der Textboxen bis es ausgewählt wird
 		bewertungsZahlAbgeben.setVisible(false);
 		bewertungInBox.setVisible(false);
 		bewertungInBox.addKeyUpHandler(new BewertungsKeyUpHandler());
 		bewertungInBox.setMaxLength(3);
 
+		startdatum.setVisible(false);
+		startdatumInBox.setVisible(false);
+
+		enddatum.setVisible(false);
+		enddatumInBox.setVisible(false);
+
+		manntage.setVisible(false);
+		manntageInBox.setVisible(false);
+
 		stellungnahmeTextAbgeben.setVisible(false);
 		stellungnahmeInBox.setVisible(false);
+
 		// zum Verstecken des Buttons
 		bewertungAbgeben.setVisible(false);
 
 		// Textboxen zum befüllen mit Text
 		editorPanel.add(bewertungsZahlAbgeben);
 		editorPanel.add(bewertungInBox);
+
+		editorPanel.add(startdatum);
+		editorPanel.add(startdatumInBox);
+
+		editorPanel.add(enddatum);
+		editorPanel.add(enddatumInBox);
+
+		editorPanel.add(manntage);
+		editorPanel.add(manntageInBox);
 
 		editorPanel.add(stellungnahmeTextAbgeben);
 		editorPanel.add(stellungnahmeInBox);
@@ -311,18 +342,29 @@ public class BewerbungBewerten extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			// TODO
-			// Speichern
-			// ClientSideSettings.getProjektAdministration().
-
-			// werte in die Ausgabe
+			
+			// Speicherbutton
+			ClientSideSettings.getProjektAdministration().bewertungZurBewerbung(
+					Integer.valueOf(bewerbungListBox.getSelectedValue()), Float.valueOf(bewertungInBox.getText()),
+					stellungnahmeInBox.getText(), Integer.valueOf(projektListBox.getSelectedValue()),
+					Integer.valueOf(manntageInBox.getText()), startdatumInBox.getValue(), enddatumInBox.getValue(), new BewerbungBewertenCallback());
 
 			// Zum Verstecken der Bewertung und Stellungnahme nach Eintrag
 			bewertungsZahlAbgeben.setVisible(false);
 			bewertungInBox.setVisible(false);
 
+			startdatum.setVisible(false);
+			startdatumInBox.setVisible(false);
+
+			enddatum.setVisible(false);
+			enddatumInBox.setVisible(false);
+
+			manntage.setVisible(false);
+			manntageInBox.setVisible(false);
+
 			stellungnahmeTextAbgeben.setVisible(false);
 			stellungnahmeInBox.setVisible(false);
+
 			// zum Verstecken des Buttons
 			bewertungAbgeben.setVisible(false);
 		}
@@ -485,6 +527,22 @@ public class BewerbungBewerten extends VerticalPanel {
 
 	}
 
+	// Diese Klasse ist für Bewerbung Bewerten
+	private class BewerbungBewertenCallback implements AsyncCallback<Void> {
+
+		@Override
+		public void onSuccess(Void result) {
+			Window.alert("Speicherung war erfolgreich");
+
+		}
+
+		@Override
+		public void onFailure(Throwable caught) {
+			Window.alert("ERROR - Please try it later again :-)");
+		}
+
+	}
+
 	// Diese Klasse regelt die Zahlenwerte für die Bewertung von 0-1
 	private class BewertungsKeyUpHandler implements KeyUpHandler {
 
@@ -502,7 +560,17 @@ public class BewerbungBewerten extends VerticalPanel {
 						// regelt das die stellungnahmebox bei bewertung 1 dazu
 						// kommt
 					} else if (bewertungsZahl == 1.0) {
-
+						
+						
+						startdatum.setVisible(true);
+						startdatumInBox.setVisible(true);
+						
+						enddatum.setVisible(true);
+						enddatumInBox.setVisible(true);
+						
+						manntage.setVisible(true);
+						manntageInBox.setVisible(true);
+						
 						stellungnahmeTextAbgeben.setVisible(true);
 						stellungnahmeInBox.setVisible(true);
 					}

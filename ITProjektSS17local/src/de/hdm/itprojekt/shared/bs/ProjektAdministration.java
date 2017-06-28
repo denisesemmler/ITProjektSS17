@@ -95,7 +95,7 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public Bewerbung findBewerbungByProfilIdAndAusschreibungId(int id, int ausschreibungID) throws IllegalArgumentException;
 	
-	public void bewertungZurBewerbung(int bewerbungId, float bewertung, int beteiligungId, String stellungnahme, int projektId, int manntage, Date startdatum, Date enddatum) throws IllegalArgumentException;
+	public void bewertungZurBewerbung(int bewerbungId, float bewertung, String stellungnahme, int projektId, int manntage, Date startdatum, Date enddatum) throws IllegalArgumentException;
 	
 	
 	
