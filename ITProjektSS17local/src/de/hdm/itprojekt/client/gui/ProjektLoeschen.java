@@ -10,50 +10,57 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.bo.Projekt;
 
+/**
+ * Klasse für Löschen von Projekte
+ * 
+ * @author Moritz Bittner
+ *
+ */
 public class ProjektLoeschen extends VerticalPanel {
 
 	private Vector<Projekt> pVector = new Vector<Projekt>();
-	
-	private VerticalPanel mainPanel = this;
-	
-	private Label projektNameLabel = new Label("Projektname: ");
-	
-	private ListBox projektListbox = new ListBox();
-	
-	
 
-	
+	private VerticalPanel mainPanel = this;
+
+	private Label projektNameLabel = new Label("Projektname: ");
+
+	private ListBox projektListbox = new ListBox();
 
 	private Button projektLoeschenButton = new Button("Loeschen", new DeleteClickHandler());
 
+	/**
+	 * Konstruktor für Löschen von Projekte
+	 */
 	public ProjektLoeschen() {
 		projektNameLabel.addStyleName("Content-label");
-		
-		
+
 		mainPanel.add(projektNameLabel);
 		mainPanel.add(projektListbox);
-		
 
 		mainPanel.add(projektLoeschenButton);
 
 		try {
-			ClientSideSettings.getProjektAdministration().findAllProjektByTeilnehmerId(ClientSideSettings.getCurrentUser().getId(),
-					new GetAllProjekteByIDCallback());
+			ClientSideSettings.getProjektAdministration().findAllProjektByTeilnehmerId(
+					ClientSideSettings.getCurrentUser().getId(), new GetAllProjekteByIDCallback());
 		} catch (Exception e) {
 			Window.alert(e.toString());
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * 
+	 * Löschen Callback
+	 *
+	 */
 	private class DeleteCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l�uft noch nit so!");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
@@ -63,33 +70,36 @@ public class ProjektLoeschen extends VerticalPanel {
 		}
 
 	}
-
+	/**
+	 * Callback, der alle Projekte des Users in Vecotr speichert
+	 */
 	private class GetAllProjekteByIDCallback implements AsyncCallback<Vector<Projekt>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Nein das falsch");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 		}
 
 		public void onSuccess(Vector<Projekt> result) {
-			//Window.alert("Joo Sucess");
-			//Window.alert(ClientSideSettings.getCurrentUser().getVorname());
+			
 			for (int i = 0; i < result.size(); i++) {
 				Projekt p1 = result.elementAt(i);
 				pVector.add(p1);
 				projektListbox.addItem(p1.getName());
 			}
-			
+
 		}
 	}
 
+	/**
+	 * Clickhandler, der Löschen des Projekts veranlasst
+	 */
 	private class DeleteClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
 
 			try {
-				//int id = pVector.elementAt(projektListbox.getSelectedIndex()).getId();
+
 				Projekt p = pVector.elementAt(projektListbox.getSelectedIndex());
-				//p.setId(id);
 				ClientSideSettings.getProjektAdministration().deleteProjekt(p, new DeleteCallback());
 
 			} catch (Exception e) {
