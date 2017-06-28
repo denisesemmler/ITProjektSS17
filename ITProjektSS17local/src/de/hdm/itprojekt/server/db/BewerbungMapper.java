@@ -79,6 +79,7 @@ public class BewerbungMapper {
 				b.setStatus(rs.getString("status"));
 				b.setBewertung(rs.getFloat("bewertung"));
 				b.setIdProfil(rs.getInt("Profil_idProfil"));
+				b.setTitel(rs.getString("titel"));
 				// Objekt zur�ckgeben
 				return b;
 			}
@@ -130,6 +131,7 @@ public class BewerbungMapper {
 				b.setStatus(rs.getString("status"));
 				b.setBewertung(rs.getFloat("bewertung"));
 				b.setIdProfil(rs.getInt("Profil_idProfil"));
+				b.setTitel(rs.getString("titel"));
 				result.add(b);
 			}
 		}
@@ -180,6 +182,7 @@ public class BewerbungMapper {
 				b.setStatus(rs.getString("status"));
 				b.setBewertung(rs.getFloat("bewertung"));
 				b.setIdProfil(rs.getInt("Profil_idProfil"));
+				b.setTitel(rs.getString("titel"));
 				// ... Objekt dem Ergebnisvektor hinzuf�gen
 				result.add(b);
 			}
@@ -214,7 +217,7 @@ public class BewerbungMapper {
 				// neues SQL Statement
 				stmt = con.createStatement();
 				// SQL Query ausf�hren um Datensatz in DB zu schreiben
-				stmt.executeUpdate("INSERT INTO Bewerbung (idBewerbung, bewerbungstext, erstelldatum, bewertung, Profil_idProfil, Ausschreibung_idAusschreibung, status) " +
+				stmt.executeUpdate("INSERT INTO Bewerbung (idBewerbung, bewerbungstext, erstelldatum, bewertung, Profil_idProfil, Ausschreibung_idAusschreibung, status, titel) " +
 						"VALUES "
 						+ "('" 
 						+ b.getId()
@@ -230,9 +233,11 @@ public class BewerbungMapper {
 						+ b.getAusschreibungID()
 						+ "', '" 
 						+ b.getStatus()
+						+ "', '" 
+						+ b.getTitel()
 						+ "')");	
 				
-				System.out.println("INSERT INTO Bewerbung (idBewerbung, bewerbungstext, erstelldatum, bewertung, Profil_idProfil, Ausschreibung_idAusschreibung, status) " +
+				System.out.println("INSERT INTO Bewerbung (idBewerbung, bewerbungstext, erstelldatum, bewertung, Profil_idProfil, Ausschreibung_idAusschreibung, status, titel) " +
 						"VALUES "
 						+ "('" 
 						+ b.getId()
@@ -248,6 +253,8 @@ public class BewerbungMapper {
 						+ b.getAusschreibungID()
 						+ "', '" 
 						+ b.getStatus()
+						+ "', '" 
+						+ b.getTitel()
 						+ "')");	
 					
 			}

@@ -21,7 +21,7 @@ public class BewerbungLoeschen extends VerticalPanel {
 	private Label bewerbungNameLabel = new Label("Bewerbung: ");
 	private ListBox bewerbungListbox = new ListBox();
 
-	private Button loeschenButton = new Button("Bewerbung zurückziehen", new DeleteClickHandler());
+	private Button loeschenButton = new Button("Bewerbung zurï¿½ckziehen", new DeleteClickHandler());
 
 	private Vector<Bewerbung> bVector = new Vector<Bewerbung>();
 
@@ -47,7 +47,7 @@ public class BewerbungLoeschen extends VerticalPanel {
 	private class DeleteCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat läuft noch nit so!");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
@@ -61,12 +61,12 @@ public class BewerbungLoeschen extends VerticalPanel {
 	private class GetBewerbungByIdCallback implements AsyncCallback<Vector<Bewerbung>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Läuft garnit");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 		}
 
 		public void onSuccess(Vector<Bewerbung> result) {
 			for (Bewerbung b : result) {
-				bewerbungListbox.addItem(b.getBewerbungsText());
+				bewerbungListbox.addItem(b.getTitel());
 			}
 			for (int i = 0; i < result.size(); i++) {
 				Bewerbung b1 = result.elementAt(i);
@@ -96,7 +96,7 @@ public class BewerbungLoeschen extends VerticalPanel {
 	private class GetPartnerProfileCallback implements AsyncCallback<Profil> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat läuft noch nit so Profil finden!");
+			Window.alert("Dat lï¿½uft noch nit so Profil finden!");
 
 		}
 

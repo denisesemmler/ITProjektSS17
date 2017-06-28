@@ -85,7 +85,7 @@ public interface ProjektAdministration extends RemoteService {
 	/*
 	 * Methoden zum anlegen von Bewerbungen
 	 */
-	public Bewerbung createBewerbung(String bewerbungstext, Date erstelldatum, float bewertung, String status, int profil_idProfil, int ausschreibung_idAusschreibung) throws IllegalArgumentException;
+	public Bewerbung createBewerbung(String bewerbungstext, Date erstelldatum, float bewertung, String status, String titel, int profil_idProfil, int ausschreibung_idAusschreibung) throws IllegalArgumentException;
 	
 	public void updateBewerbung(Bewerbung b) throws IllegalArgumentException;
 	

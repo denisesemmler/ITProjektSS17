@@ -28,7 +28,7 @@ public class BewerbungBearbeiten extends VerticalPanel{
 	private VerticalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
 
-	private Label bewerbungLabel = new Label("Bewerbung ausw�hlen");
+	private Label bewerbungLabel = new Label("Bewerbung auswählen");
 	private TextArea bewerbungTextArea = new TextArea();
 	private ListBox bewerbungsListbox = new ListBox();
 
@@ -79,14 +79,14 @@ public class BewerbungBearbeiten extends VerticalPanel{
 	private class GetBewerbungByIdCallback implements AsyncCallback<Vector<Bewerbung>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("L�uft garnit");
+			Window.alert("Da ist wohl was schief gelaufen");
 		}
 
 		public void onSuccess(Vector<Bewerbung> result) {
 			for (int i = 0; i < result.size(); i++){
 				Bewerbung b1 = result.elementAt(i);
 				bVector.add(b1);
-				bewerbungsListbox.addItem(b1.getBewerbungsText());	
+				bewerbungsListbox.addItem(b1.getTitel());	
 			}
 			bewerbungTextArea.setText(bVector.elementAt(bewerbungsListbox.getSelectedIndex()).getBewerbungsText());
 			

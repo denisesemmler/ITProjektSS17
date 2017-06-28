@@ -74,7 +74,7 @@ public interface ProjektAdministrationAsync {
 	/*
 	 * F�r Bewerbungen
 	 */
-	void createBewerbung(String bewerbungstext, Date erstelldatum, float bewertung, String status, int profil_idProfil,
+	void createBewerbung(String bewerbungstext, Date erstelldatum, float bewertung, String status, String titel, int profil_idProfil,
 			int ausschreibung_idAusschreibung, AsyncCallback<Bewerbung> callback);
 	
 	void updateBewerbung(Bewerbung b, AsyncCallback<Void> callback);
