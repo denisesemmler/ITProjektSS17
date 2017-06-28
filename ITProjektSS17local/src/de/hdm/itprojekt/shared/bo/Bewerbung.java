@@ -14,7 +14,7 @@ public class Bewerbung extends BusinessObjekt{
 	private static final long serialVersionUID = 1L;
 	private Date erstellDatum = null;
 	private String bewerbungsText= "";
-	private int idBewerbung=0;
+	private String titel="";
 	private float bewertung;
 	private String status;
 	
@@ -66,18 +66,6 @@ public class Bewerbung extends BusinessObjekt{
 	}
 	
 	/**
-	 * @return the idBewerbung
-	 */
-	public int getIdBewerbung() {
-		return idBewerbung;
-	}
-	/**
-	 * @param idBewerbung the idBewerbung to set
-	 */
-	public void setIdBewerbung(int idBewerbung) {
-		this.idBewerbung = idBewerbung;
-	}
-	/**
 	 * @return the idProfil
 	 */
 	public int getIdProfil() {
@@ -112,6 +100,12 @@ public class Bewerbung extends BusinessObjekt{
 	 */
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getTitel() {
+		return titel;
+	}
+	public void setTitel(String titel) {
+		this.titel = titel;
 	}
 	
 	

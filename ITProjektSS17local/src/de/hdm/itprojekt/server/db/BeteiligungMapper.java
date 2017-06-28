@@ -278,7 +278,7 @@ public class BeteiligungMapper {
 			Statement stmt = con.createStatement();
 			
 			// SQL Query ausführen
-			ResultSet rs = stmt.executeQuery("SELECT * FROM Beteiligung " + "WHERE Bewerbung_idBewerbung = " + b.getIdBewerbung());
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Beteiligung " + "WHERE Bewerbung_idBewerbung = " + b.getId());
 			
 			// Für jeden gefundenen Treffer...
 			if (rs.next()) {

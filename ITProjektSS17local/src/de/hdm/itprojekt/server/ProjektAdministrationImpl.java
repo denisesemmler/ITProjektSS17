@@ -409,7 +409,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 * Diese Methode implementiert denn UC Auf Ausschreibung bewerben
 	 */
 	@Override
-	public Bewerbung createBewerbung(String bewerbungsText, Date erstellDatum, float bewertung, String status,
+	public Bewerbung createBewerbung(String bewerbungsText, Date erstellDatum, float bewertung, String status, String titel,
 			int idProfil, int ausschreibungID) throws IllegalArgumentException {
 
 		// Neues Objekt erstellen
@@ -423,6 +423,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		bewerbung.setErstellDatum(dbErstellDatum);// Timestamp?
 		bewerbung.setBewertung(bewertung);
 		bewerbung.setStatus(status);
+		bewerbung.setTitel(titel);
 		bewerbung.setIdProfil(idProfil);
 		bewerbung.setAusschreibungID(ausschreibungID);
 
@@ -449,7 +450,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 */
 	public void deleteBewerbung(Bewerbung b) {
 		Beteiligung beteiligung = btMapper.findByBewerbung(b);
-		btMapper.delete(beteiligung);
+		//btMapper.delete(beteiligung);
 		bMapper.delete(b);
 	}
 

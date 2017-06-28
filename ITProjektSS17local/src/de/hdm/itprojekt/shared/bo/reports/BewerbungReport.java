@@ -7,7 +7,7 @@ import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 
 /**
- * BusinessObject für Reports
+ * BusinessObject fï¿½r Reports
  * @author Jiayi
  *
  */
@@ -36,7 +36,6 @@ public class BewerbungReport extends Bewerbung{
 		this.setCreationDate(bewerbung.getCreationDate());
 		this.setErstellDatum(bewerbung.getErstellDatum());
 		this.setId(bewerbung.getId());
-		this.setIdBewerbung(bewerbung.getIdBewerbung());
 		this.setIdProfil(bewerbung.getIdProfil());
 		this.setStatus(bewerbung.getStatus());
 	}
