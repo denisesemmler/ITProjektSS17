@@ -14,14 +14,20 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
-
+/**
+ * Klasse f√ºr das Anmelde Formular bei erster Anmeldung
+ * @author Philipp Mueller
+ *
+ */
 
 
 public class AnmeldeFormular extends VerticalPanel{
-	
+		
+		//Panels erstellen
 		private VerticalPanel mainPanel = this;
 		private VerticalPanel labelsPanel = new VerticalPanel();
 		
+		//Label und TextBoxen erstellen
 		private Label firstNameLabel = new Label("Vorname: "); 
 	 	private TextBox firstNameBox = new TextBox(); 
 	 	private Label lastNameLabel = new Label("Nachname: ");
@@ -30,13 +36,14 @@ public class AnmeldeFormular extends VerticalPanel{
 	 	private TextBox zusatzBox = new TextBox(); 
 	 	private Label firmaLabel = new Label("Firma: ");
 	 	private TextBox firmaBox = new TextBox();
-	 	private Label strasseLabel = new Label("Straﬂe: ");
+	 	private Label strasseLabel = new Label("Stra√üe: ");
 	 	private TextBox strasseBox = new TextBox(); 
 	 	private Label plzLabel = new Label("PLZ: ");
 	 	private TextBox plzBox = new TextBox(); 
 	 	private Label ortLabel = new Label("Ort: ");
 	 	private TextBox ortBox = new TextBox(); 
-	 
+	 	
+	 	//Weiter-Button erstellen
 	 	private Button weiter = new Button("Weiter", new CreateTeilnehmerClickHandler());
 	 	
 	 	
@@ -56,11 +63,12 @@ public class AnmeldeFormular extends VerticalPanel{
 	 		
 	 		mainPanel.add(labelsPanel);
 	 		
+	 		//Willkommenstext
 	 		labelsPanel.add(new HTML(
 					"<p>Willkommen bei Pr0ject, es scheint als ob du noch nicht bei uns angemeldet bist, "
 					+ "bitte gebe deine Daten hier ein!</p><br />"));
 	 		
-	 		//Elemente hinzuf¸gen
+	 		//Elemente hinzuf√ºgen
 	 		labelsPanel.add(firstNameLabel);
 	 		labelsPanel.add(firstNameBox);
 	 		
@@ -92,9 +100,11 @@ public class AnmeldeFormular extends VerticalPanel{
 			public void onClick(ClickEvent event) {
 				
 				try {
+					//Teilnehmer anlegen
 					ClientSideSettings.getProjektAdministration().createTeilnehmer(firstNameBox.getText(),
 							lastNameBox.getText(), zusatzBox.getText(), strasseBox.getText(), Integer.parseInt(plzBox.getText()),
 							ortBox.getText(), ClientSideSettings.getCurrentUser().getEmail(), firmaBox.getText(),  new CreateTeilnehmerCallback());
+					//Teilnehmer existing setzen
 					ClientSideSettings.getCurrentUser().setExisting(true);
 					
 				} catch (Exception e) {
@@ -109,11 +119,12 @@ public class AnmeldeFormular extends VerticalPanel{
 		private class CreateTeilnehmerCallback implements AsyncCallback<Teilnehmer> {
 
 			public void onFailure(Throwable caught) {
-				Window.alert("Dat l‰uft noch nit so!");
+				Window.alert("Da ist wohl etwas schief gelaufen");
 
 			}
 
 			public void onSuccess(Teilnehmer result) {
+				//currentUser objekt bef√ºllen
 				ClientSideSettings.getCurrentUser().setId(result.getId());
 				ClientSideSettings.getCurrentUser().setVorname(result.getVorname());
 				ClientSideSettings.getCurrentUser().setNachname(result.getNachname());
@@ -131,12 +142,12 @@ public class AnmeldeFormular extends VerticalPanel{
 		private class CreateProfilCallback implements AsyncCallback {
 
 			public void onFailure(Throwable caught) {
-				Window.alert("Dat l‰uft noch nit so!");
+				Window.alert("Da ist wohl etwas schief gelaufen");
 
 			}
 
 			public void onSuccess(Object result) {
-			
+				//Weiterleitung auf ProfilAnlegen um dann Eigenschaften anzulegen
 				Window.alert("Dein Profil wurde gespeichert!");
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(

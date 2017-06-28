@@ -16,15 +16,18 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.bo.Profil;
 /**
- * Klasse f¸r die Startseite nach der Anmeldung, die die das Profil anzeigt
+ * Klasse f√ºr die Startseite nach der Anmeldung, die die das Profil anzeigt
  * @author Philipp Mueller
  *
  */
 public class ProfilAnlegen extends VerticalPanel {
-
+	
+	
+	//Vektoren f√ºr die Eigenschaften erstellen
 	private Vector<String> eigenschaftName = new Vector<String>();
 	private Vector<Integer> eigenschaftWert = new Vector<Integer>();
-
+	
+	//Die verschiedenen Panels erstellen
 	private VerticalPanel mainPanel = this;
 	private HorizontalPanel naviPanel = new HorizontalPanel();
 	private HorizontalPanel msoffice = new HorizontalPanel();
@@ -35,8 +38,9 @@ public class ProfilAnlegen extends VerticalPanel {
 	private HorizontalPanel c = new HorizontalPanel();
 	private HorizontalPanel catia = new HorizontalPanel();
 	private HorizontalPanel sql = new HorizontalPanel();
-
-	private Label eigenschaftLabel = new Label("Deine F‰higkeiten:");
+	
+	//Labels erstellen
+	private Label eigenschaftLabel = new Label("Deine F√§higkeiten:");
 	private Label schulabschlussLabel = new Label("Hoechster Schulabschluss");
 	private Label berufserfahrungLabel = new Label("Berufserfahrung");
 	private Label msofficeLabel = new Label("Microsoft Office");
@@ -47,7 +51,8 @@ public class ProfilAnlegen extends VerticalPanel {
 	private Label cLabel = new Label("C/C++");
 	private Label catiaLabel = new Label("CATIA");
 	private Label sqlLabel = new Label("SQL/DB");
-
+	
+	//ListBoxen erstellen
 	private ListBox schulabschlussListBox = new ListBox();
 	private ListBox berufserfahrungListBox = new ListBox();
 	private ListBox msofficeListBox = new ListBox();
@@ -58,18 +63,20 @@ public class ProfilAnlegen extends VerticalPanel {
 	private ListBox cListBox = new ListBox();
 	private ListBox catiaListBox = new ListBox();
 	private ListBox sqlListBox = new ListBox();
-
+	
+	//Speicher-Button erstellen
 	private Button speichern = new Button("Speichern", new AddEigenschaftClickHandler());
 
 	int currentUserId= 0;
 	Profil p = new Profil();
 
 	public ProfilAnlegen() {
-		
+		//aktuellen UserId und dazugeh√∂rigen ProfilId suchen
 		this.currentUserId = ClientSideSettings.getCurrentUser().getId();
  		ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(currentUserId, new GetPartnerProfileCallback());
 
-		mainPanel.add(eigenschaftLabel);
+		//GUI erstellen
+ 		mainPanel.add(eigenschaftLabel);
 		mainPanel.add(schulabschlussLabel);
 
 		mainPanel.add(schulabschlussListBox);
@@ -162,6 +169,7 @@ public class ProfilAnlegen extends VerticalPanel {
 		public void onClick(ClickEvent event) {
 
 			try {
+				//Eigenschaftname und Wert in Vektoren laden
 				eigenschaftName.add(schulabschlussLabel.getText());
 				eigenschaftName.add(berufserfahrungLabel.getText());
 				eigenschaftName.add(msofficeLabel.getText());
@@ -183,7 +191,7 @@ public class ProfilAnlegen extends VerticalPanel {
 				eigenschaftWert.add(cListBox.getSelectedIndex());
 				eigenschaftWert.add(catiaListBox.getSelectedIndex());
 				eigenschaftWert.add(sqlListBox.getSelectedIndex());
-
+				//Diese dann in der DB speichern
 				ClientSideSettings.getProjektAdministration().createEigenschaft(eigenschaftName, eigenschaftWert,
 						p.getId(), new CreateEigenschaftCallback());
 
@@ -201,13 +209,14 @@ public class ProfilAnlegen extends VerticalPanel {
 	
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l‰uft noch nit so Eigenschaft!");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
 		public void onSuccess(Object result) {
-
+			
 			Window.alert("Deine Eigenschaften wurden angelegt!");
+			//Wenn Eigenschaften angelegt wurden, dann User existing setzen, damit dieser beim n√§chsten Aufruf der Seite dirket auf die Startseite kommt
 			ClientSideSettings.getCurrentUser().setProfilExisting(true);
 
 			RootPanel.get("Content").clear();
@@ -223,12 +232,12 @@ public class ProfilAnlegen extends VerticalPanel {
 	private class GetPartnerProfileCallback implements AsyncCallback<Profil> {
 		
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l‰uft noch nit so Profil finden!");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
 		public void onSuccess(Profil result) {
-			
+			//Profil Id in profil-objekt speichern
 			p.setId(result.getId());
 			Window.alert("Dein Profil wurde gefunden!");
 
