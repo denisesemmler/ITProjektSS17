@@ -70,6 +70,7 @@ public class ProjektLoeschen extends VerticalPanel {
 		}
 
 	}
+
 	/**
 	 * Callback, der alle Projekte des Users in Vecotr speichert
 	 */
@@ -80,7 +81,7 @@ public class ProjektLoeschen extends VerticalPanel {
 		}
 
 		public void onSuccess(Vector<Projekt> result) {
-			
+
 			for (int i = 0; i < result.size(); i++) {
 				Projekt p1 = result.elementAt(i);
 				pVector.add(p1);

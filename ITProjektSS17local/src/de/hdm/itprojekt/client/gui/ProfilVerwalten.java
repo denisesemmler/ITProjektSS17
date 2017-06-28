@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * Klasse für Verwalten von Profil
+ * 
  * @author Moritz Bittner
  *
  */
@@ -28,6 +29,7 @@ public class ProfilVerwalten extends VerticalPanel {
 		mainPanel.add(profilAndernButton);
 		mainPanel.add(profilLoschenButton);
 	}
+
 	/**
 	 * ClickHandler, der Button Click abfängt und entsprächende Klasse lädt
 	 */

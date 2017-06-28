@@ -7,15 +7,14 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-
 public class ProfilLoeschen extends VerticalPanel {
 
-	private Label deleteLabel = new Label("Willst du dein Profil wirklich Löschen?");
+	private Label deleteLabel = new Label("Willst du dein Profil wirklich Lï¿½schen?");
 	private Button deleteButton = new Button("Loeschen", new DeleteTeilnehmerClickHandler());
 
 	ProfilLoeschen() {
 		deleteLabel.addStyleName("Content-label");
-		
+
 		this.add(deleteLabel);
 		this.add(deleteButton);
 	}
@@ -25,10 +24,15 @@ public class ProfilLoeschen extends VerticalPanel {
 		public void onClick(ClickEvent event) {
 			// Projekt project = new Projekt();
 			try {
-				/*ClientSideSettings.getProjektAdministration().createTeilnehmer(firstNameBox.getText(),
-						lastNameBox.getText(), zusatzBox.getText(), strasseBox.getText(),
-						Integer.parseInt(plzBox.getText()), ortBox.getText(),
-						ClientSideSettings.getCurrentUser().getEmail(), 1, new CreateTeilnehmerCallback());*/
+				/*
+				 * ClientSideSettings.getProjektAdministration().
+				 * createTeilnehmer(firstNameBox.getText(),
+				 * lastNameBox.getText(), zusatzBox.getText(),
+				 * strasseBox.getText(), Integer.parseInt(plzBox.getText()),
+				 * ortBox.getText(),
+				 * ClientSideSettings.getCurrentUser().getEmail(), 1, new
+				 * CreateTeilnehmerCallback());
+				 */
 			} catch (Exception e) {
 				Window.alert(e.toString());
 				e.printStackTrace();

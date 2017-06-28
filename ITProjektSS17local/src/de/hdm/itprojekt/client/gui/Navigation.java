@@ -2,15 +2,12 @@ package de.hdm.itprojekt.client.gui;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import de.hdm.itprojekt.client.ITProjektSS17local;
 import de.hdm.itprojekt.client.report.gui.ReportWrapper;
-import de.hdm.itprojekt.client.gui.LogOutPopUp;
 
 /**
  * Klasse für Navigationsleiste
