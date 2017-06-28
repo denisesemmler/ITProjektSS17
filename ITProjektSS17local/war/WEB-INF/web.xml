@@ -36,6 +36,11 @@
     <url-pattern>/reportgenerator/reportgenerator</url-pattern>
   </servlet-mapping>
   
+    <servlet-mapping>
+    <servlet-name>reportServiceServlet</servlet-name>
+    <url-pattern>/itprojektss17local/reportgenerator</url-pattern>
+  </servlet-mapping>
+  
      <!-- pr0ject Login Servlet -->
   <servlet>
     <servlet-name>loginServiceImpl</servlet-name>
