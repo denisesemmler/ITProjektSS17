@@ -132,4 +132,6 @@ public interface ProjektAdministration extends RemoteService {
 	void updateEigenschaft(Vector<Eigenschaft> eigenschaften) throws IllegalArgumentException;
 
 	Vector<Ausschreibung> matchingAusschreibung(int profilUserId) throws IllegalArgumentException;
+
+	void updateProfil(Profil p) throws IllegalArgumentException;
 }

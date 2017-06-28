@@ -254,6 +254,17 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 	
 	/*
+	 * Methode zum updaten des Profils
+	 */	
+	
+	@Override
+	public void updateProfil(Profil p) throws IllegalArgumentException {
+
+		// Update ohne Prüfung in DB
+		pfMapper.update(p);
+	}
+
+	/*
 	 * Methode zum löschen des Profils, da die Ausschreibung sonst nicht
 	 * gelöscht werden kann
 	 */
@@ -270,7 +281,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		/*
 		 *  Hier wird eine Liste aller Bewerbungen zur Ausschreibungen von der DB gelesen
 		 */  
-		Vector<Bewerbung> bewerbungenZuProfil = bMapper.findByAusschreibungsId(a.getIdAusschreibung());
+		Vector<Bewerbung> bewerbungenZuProfil = bMapper.findByAusschreibungsId(a.getId());
 
 		/*
 		 *  Hier werden die Bewerbungen aus der DB entfernt, aber erst wenn die dazugehörige Beteiligung entfernt ist
