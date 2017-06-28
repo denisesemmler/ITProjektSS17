@@ -2,6 +2,7 @@ package de.hdm.itprojekt.client.gui;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -50,7 +51,9 @@ public class ProfilAnzeigen extends HorizontalPanel {
 	private Button matching = new Button("Passende Ausschreibungen", new ButtonClickHandler());
 	private Button ausschreibungen = new Button("Meine Ausschreibungen", new ButtonClickHandler());
 	private Button bewerbungen = new Button("Meine Bewerbungen", new ButtonClickHandler());
-
+	private Button report = new Button("Zum ReportGenerator", new ButtonClickHandler());
+	
+	
 	public ProfilAnzeigen() {
 		//CSS-Styling
 		firstNameLabel.addStyleName("label1");
@@ -67,6 +70,10 @@ public class ProfilAnzeigen extends HorizontalPanel {
 		ortDataLabel.addStyleName("label1");
 		labelsPanel.addStyleName("verticalrand");
 		dataPanel.addStyleName("verticalrand");
+		matching.setStylePrimaryName("button1");
+		ausschreibungen.setStylePrimaryName("button1");
+		bewerbungen.setStylePrimaryName("button1");
+		report.setStylePrimaryName("button1");
 		
 		//Panels hinzufügen
 		mainPanel.add(labelsPanel);
@@ -105,6 +112,7 @@ public class ProfilAnzeigen extends HorizontalPanel {
 		buttonsPanel.add(matching);
 		buttonsPanel.add(ausschreibungen);
 		buttonsPanel.add(bewerbungen);
+		buttonsPanel.add(report);
 	}
 	private class ButtonClickHandler implements ClickHandler {
 		public void onClick(ClickEvent e) {
@@ -124,6 +132,10 @@ public class ProfilAnzeigen extends HorizontalPanel {
 			case "Meine Bewerbungen":
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(new AlleBewerbungenNutzer());
+				break;
+			case "Zum ReportGenerator":
+				RootPanel.get("Content").clear();
+				Window.open("http://1-dot-global-bridge-162410.appspot.com/Report.html", "_self", ""); 
 				break;
 			}
 		}

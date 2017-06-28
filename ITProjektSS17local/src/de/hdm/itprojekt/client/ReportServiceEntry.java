@@ -57,8 +57,7 @@ public class ReportServiceEntry implements EntryPoint{
 			//Zur An- und Abmeldung
 			private Anchor signInLink = new Anchor("Anmelden");
 			private final Button loginButton = new Button("Anmelden");
-			private final Anchor logOutLink = new Anchor("Abmelden");
-			private Button logOutButton = new Button("Abmelden");
+			private final Button zurueck = new Button("Zum Projektmarktplatz");
 			public static LogOutPopUp logOutPop = new LogOutPopUp();
 			public static String logOutUrl;
 			
@@ -68,9 +67,9 @@ public class ReportServiceEntry implements EntryPoint{
 			
 
 			//Zur Kommunikation mit der Datenbank
-			private final ProjektAdministrationAsync pr0jectAdmin = ClientSideSettings.getProjektAdministration();
-			//private final LoginServiceAsync loginService = ClientSideSettings.getLoginService();
-			//private final ReportServiceAsync reportService = ClientSideSettings.getReportGenerator();
+			//private final ProjektAdministrationAsync pr0jectAdmin = ClientSideSettings.getProjektAdministration();
+			private final LoginServiceAsync loginService = ClientSideSettings.getLoginService();
+			private final ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
 			Profil p = new Profil();
 			Teilnehmer currentUser = new Teilnehmer();
 		  /**
@@ -97,7 +96,7 @@ public class ReportServiceEntry implements EntryPoint{
 				 * erstellen eines Objektes der Klasse ProfilAnzeigen angezeigt
 				 */
 			  
-			  	reportService = ClientSideSettings.getReportGenerator();
+		
 				LoginServiceAsync loginService = ClientSideSettings.getLoginService();
 				loginService.login(GWT.getHostPageBaseURL() + "Report.html",
 						new AsyncCallback<Teilnehmer>() {
@@ -133,38 +132,22 @@ public class ReportServiceEntry implements EntryPoint{
 									 * Position und die Sichtbarkeit des 
 									 * Popups LogOutPop festlegt
 									 * */
-							logOutLink.setHref(result.getLogoutUrl());
-							logOutUrl = logOutLink.getHref();
-							logOutButton.setStylePrimaryName("navi-button");
 							
-							logOutButton.addClickHandler(new ClickHandler() {
+							
+							zurueck.setStylePrimaryName("navi-button");
+							zurueck.addClickHandler(new ClickHandler() {
 								public void onClick(ClickEvent e) {
-									getLogOutPop().setPopupPositionAndShow(
-											new PopupPanel.PositionCallback() {
-												public void setPosition(
-														int offsetWidth,
-														int offsetHeight) {
-													int left = logOutButton
-														.getAbsoluteLeft()-80;
-													int top = logOutButton
-														.getAbsoluteTop()+45;
-													getLogOutPop()
-															.setPopupPosition(
-																	left, top);
-													getLogOutPop().show();
-												}
-
-											});
+									RootPanel.get("Content").clear();
+									RootPanel.get("Navi").clear();
+									Window.open("http://1-dot-global-bridge-162410.appspot.com/", "_self", ""); 
 								}
 							});
-							
 							/*
 							 * Eine neue Instanz der Klasse Navigation wird
 							 * erstellt und dem RootPanel angefuegt
 							 */
-							
-							naviPanel.add(new Navigation());
-							naviPanel.add(logOutButton);
+							RootPanel.get("Navi").clear();
+							naviPanel.add(zurueck);
 							naviPanel.addStyleName("navi-panel");
 							RootPanel.get("Navi").add(naviPanel);
 							
@@ -204,11 +187,11 @@ public class ReportServiceEntry implements EntryPoint{
 	 * zurueckgegeben wird festgelegt
 	 */
 
-	private class SetUserCallback implements AsyncCallback {
+	private class SetUserCallback implements AsyncCallback<Teilnehmer> {
 		public void onFailure(Throwable caught) {
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(Teilnehmer result) {
 			try {
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -216,12 +199,7 @@ public class ReportServiceEntry implements EntryPoint{
 		}
 	}
 
-	public static LogOutPopUp getLogOutPop() {
-		return logOutPop;
-	}
 
-	public static void setLogOutPop(LogOutPopUp hideIt) {
-		logOutPop = hideIt;
-	}
+	
 	}
 

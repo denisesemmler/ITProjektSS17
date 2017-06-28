@@ -33,6 +33,14 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 	 * @param parent Verweis auf den Wrapper der Reports. Wrapper beinhaltet die Naviagtion selbst (linke Seite) und den Bericht (rechte Seite)
 	 */
 	public ReportNavigation(ReportWrapper parent){		
+		parent.setStylePrimaryName("reportPanel");
+		allAds.setStylePrimaryName("button1");
+		adsForProfile.setStylePrimaryName("button1");
+		adsForApplication.setStylePrimaryName("button1");
+		openApplication.setStylePrimaryName("button1");
+		projektverpflechtungen.setStylePrimaryName("button1");
+		fanInFanOut.setStylePrimaryName("button1");
+		
 		this.add(allAds);
 		this.add(adsForProfile);
 		this.add(adsForApplication);

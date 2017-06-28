@@ -26,7 +26,7 @@ import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
 import de.hdm.itprojekt.shared.bo.reports.FanInFanOut;
 
 /**
- * Backend Service für die unterschiedlichen Berichte
+ * Backend Service fï¿½r die unterschiedlichen Berichte
  * @author Jiayi
  *
  */
