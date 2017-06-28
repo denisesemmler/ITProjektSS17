@@ -20,11 +20,11 @@ import de.hdm.itprojekt.shared.report.Projektverpflechtungen;
  */
 public class ReportNavigation extends VerticalPanel implements ClickHandler{
 	private Button allAds  = new Button("Alle Ausschreibungen", this);
-	private Button adsForProfile  = new Button("Alle Ausschreibungen für Profil", this);
-	private Button adsForApplication  = new Button("Bewerbungen für Ausschreiben", this);
+	private Button adsForProfile  = new Button("Alle Ausschreibungen fÃ¼r Profil", this);
+	private Button adsForApplication  = new Button("Bewerbungen fÃ¼r Ausschreiben", this);
 	private Button openApplication  = new Button("Alle offenen Bewerbungen", this);
 	private Button projektverpflechtungen = new Button("Projektverpflechtungen", this);
-	private Button fanInFanOut = new Button("Fan In Fan Out", this);
+	private Button fanInFanOut = new Button("Fan-In/Fan-Out Analyse", this);
 	
 	ReportWrapper parent;
 	
@@ -43,7 +43,7 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 		this.parent = parent;
 	}
 	/**
-	 * Zeigt Bericht an, abhänig davon welcher Button gedrückt wurde
+	 * Zeigt Bericht an, abhÃ¤nig davon welcher Button gedrÃ¼ckt wurde
 	 */
 	public void onClick(ClickEvent event) {
 		Widget sender = (Widget) event.getSource();
