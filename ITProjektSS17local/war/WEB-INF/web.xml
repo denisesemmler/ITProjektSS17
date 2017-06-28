@@ -8,6 +8,7 @@
       <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>ITProjektSS17local.html</welcome-file>
+    <welcome-file>Report.html</welcome-file>
   </welcome-file-list>
 
 
@@ -37,19 +38,19 @@
   
      <!-- pr0ject Login Servlet -->
   <servlet>
-    <servlet-name>loginServiveImpl</servlet-name>
+    <servlet-name>loginServiceImpl</servlet-name>
     <servlet-class>de.hdm.itprojekt.server.login.LoginServiceImpl</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>loginServiveImpl</servlet-name>
+    <servlet-name>loginServiceImpl</servlet-name>
     <url-pattern>/itprojektss17local/login</url-pattern>
   </servlet-mapping>
   
-<!--  <servlet-mapping>
-    <servlet-name>loginServlet</servlet-name>
-    <url-pattern>itprojektss17local/reportgenerator/login</url-pattern>
-  </servlet-mapping> -->
+ <servlet-mapping>
+    <servlet-name>loginServiceImpl</servlet-name>
+    <url-pattern>/reportgenerator/login</url-pattern>
+  </servlet-mapping> 
   
   </web-app>
     

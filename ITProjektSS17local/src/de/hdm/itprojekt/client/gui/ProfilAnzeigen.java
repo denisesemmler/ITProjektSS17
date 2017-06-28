@@ -65,15 +65,16 @@ public class ProfilAnzeigen extends HorizontalPanel {
 		strasseDataLabel.addStyleName("label1");
 		plzDataLabel.addStyleName("label1");
 		ortDataLabel.addStyleName("label1");
-		mainPanel.addStyleName("verticalrand");
+		labelsPanel.addStyleName("verticalrand");
+		dataPanel.addStyleName("verticalrand");
 		
 		//Panels hinzufügen
 		mainPanel.add(labelsPanel);
 		mainPanel.add(dataPanel);
 		mainPanel.add(buttonsPanel);
 
-		RootPanel.get("Content").add(new HTML("<h2>Willkommen bei Pr0ject, "
-				+ ClientSideSettings.getCurrentUser().getVorname() + "</h2> <br /> " + "<h3>Mein Profil: </h3>"));
+		RootPanel.get("Content").add(new HTML("<h3>Willkommen bei Pr0ject, "
+				+ ClientSideSettings.getCurrentUser().getVorname() + "</h3> <br /> " + "<h3>Mein Profil: </h3>"));
 
 		labelsPanel.add(firstNameLabel);
 		dataPanel.add(firstNameDataLabel);

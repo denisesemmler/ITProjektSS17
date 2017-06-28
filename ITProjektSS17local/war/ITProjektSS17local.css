@@ -7,6 +7,10 @@ h1{
   text-align: center;
 }
 
+h3{
+	margin-left: 50px;
+}
+
 img{
 	margin-left: 100px;
 	margin-right: 200px;
@@ -46,12 +50,13 @@ img{
 }
 
 .navi-button:hover {
-	background-color: #EB891A;
- 	color: #000000;
+	background-color: #c0c0c0;
+ 	color: #ffffff;
+ 	font-style: bold;
 }
 
 
-.grotte-Button {
+/**.grotte-Button {
 	background-color: #FFF;
 	color: #000000;
 	font-size: 15px;
@@ -68,7 +73,7 @@ img{
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
-}
+}**/
 .gwt-TextBox{
 	font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
 	width: 250px;
@@ -112,7 +117,7 @@ img{
 }
 
 .verticalrand{
-	margin-right: 20px;
+	margin-left: 50px;
 }
 table.reportTable {
 	border-collapse: collapse;
