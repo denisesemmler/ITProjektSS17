@@ -80,7 +80,7 @@ public class BewerbungAnlegen extends VerticalPanel {
 	private class GetPartnerProfileCallback implements AsyncCallback<Profil> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l�uft noch nit so Profil finden!");
+			Window.alert("Dat läuft noch nit so Profil finden!");
 
 		}
 
