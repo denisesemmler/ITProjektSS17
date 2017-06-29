@@ -1,11 +1,8 @@
 package de.hdm.itprojekt.client.gui;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Vector;
 
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -23,10 +20,13 @@ import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 public class ProfilBearbeiten extends VerticalPanel {
+
+	// Vektoren für Eigenschaften erstellen
 	private Vector<Eigenschaft> eigenschaften = new Vector<Eigenschaft>();
 	private Vector<ListBox> eigenschaftListVector = new Vector<ListBox>();
 	private Vector<Label> eigenschaftLabelVector = new Vector<Label>();
 
+	// Panels erstellen
 	private VerticalPanel mainPanel = this;
 	private VerticalPanel labelsPanel = new VerticalPanel();
 	private VerticalPanel eigenschaftenVert = new VerticalPanel();
@@ -34,9 +34,11 @@ public class ProfilBearbeiten extends VerticalPanel {
 	private TextBox firstNameBox = new TextBox();
 	private Label lastNameLabel = new Label("Nachname: ");
 	private TextBox lastNameBox = new TextBox();
+	private Label firmaLabel = new Label("Firma: ");
+	private TextBox firmaBox = new TextBox();
 	private Label zusatzLabel = new Label("Zusatz: ");
 	private TextBox zusatzBox = new TextBox();
-	private Label strasseLabel = new Label("Stra�e: ");
+	private Label strasseLabel = new Label("Straße: ");
 	private TextBox strasseBox = new TextBox();
 	private Label plzLabel = new Label("PLZ: ");
 	private TextBox plzBox = new TextBox();
@@ -44,8 +46,10 @@ public class ProfilBearbeiten extends VerticalPanel {
 	private TextBox ortBox = new TextBox();
 
 	private Label kenntnisseLabel = new Label("Deine Fähigkeiten: ");
+	// Speicher Button erstellen
 	private Button speichern = new Button("Speichern", new CreateTeilnehmerClickHandler());
 
+	// Profil Objekt erstellen
 	Profil p = new Profil();
 
 	public ProfilBearbeiten() {
@@ -60,7 +64,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 
 		mainPanel.add(labelsPanel);
 
-		// Elemente hinzuf�gen
+		// Elemente hinzufügen
 		labelsPanel.add(firstNameLabel);
 		labelsPanel.add(firstNameBox);
 		firstNameBox.setText(ClientSideSettings.getCurrentUser().getVorname());
@@ -68,6 +72,10 @@ public class ProfilBearbeiten extends VerticalPanel {
 		labelsPanel.add(lastNameLabel);
 		labelsPanel.add(lastNameBox);
 		lastNameBox.setText(ClientSideSettings.getCurrentUser().getNachname());
+
+		labelsPanel.add(firmaLabel);
+		labelsPanel.add(firmaBox);
+		firmaBox.setText(ClientSideSettings.getCurrentUser().getFirma());
 
 		labelsPanel.add(zusatzLabel);
 		labelsPanel.add(zusatzBox);
@@ -87,6 +95,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 
 		labelsPanel.add(kenntnisseLabel);
 
+		// Profil-ID des Users feststellen
 		ClientSideSettings.getProjektAdministration()
 				.getProfilIdCurrentUser(ClientSideSettings.getCurrentUser().getId(), new GetProfileCallback());
 
@@ -96,6 +105,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 			try {
+				// Teilnehmer Daten änderungen zuweisen
 				Teilnehmer t = ClientSideSettings.getCurrentUser();
 				t.setId(ClientSideSettings.getCurrentUser().getId());
 				t.setVorname(firstNameBox.getText());
@@ -106,6 +116,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 				t.setOrt(ortBox.getText());
 				ClientSideSettings.getProjektAdministration().updateTeilnehmer(t, new UpdateTeilnehmerCallback());
 
+				// Änderungsdatum des Profils aktualisieren
 				Date aenderungsDatum = new Date();
 				p.setAenderungsDatum(new java.sql.Date(aenderungsDatum.getTime()));
 				ClientSideSettings.getProjektAdministration().updateProfil(p, new UpdateProfileCallback());
@@ -127,7 +138,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 		public void onSuccess(Vector<Eigenschaft> result) {
 
 			labelsPanel.add(eigenschaftenVert);
-
+			// Labels und ListBoxen erstellen für Eigenschaften
 			for (int i = 0; i < result.size(); i++) {
 				HorizontalPanel eigenschaftenPanel = new HorizontalPanel();
 				Label abschlussLabel = new Label();
@@ -138,6 +149,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 				ListBox eigenschaftWertBox = new ListBox();
 				eigenschaften.add(result.elementAt(i));
 
+				// Eigenschaften laden und anzeigen
 				if (result.elementAt(i).getName().equals("Berufserfahrung")) {
 					eigenschaftenVert.add(eigenschaftenPanel);
 					eigenschaftenPanel.add(berufserfahrungLabel);
@@ -182,20 +194,23 @@ public class ProfilBearbeiten extends VerticalPanel {
 				}
 
 			}
+			// Speicher Button hinzufügen
 			labelsPanel.add(speichern);
 
 		}
 
 	}
 
-	private class UpdateTeilnehmerCallback implements AsyncCallback {
+	private class UpdateTeilnehmerCallback implements AsyncCallback<Void> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen!");
 
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(Void result) {
+			// Wenn Teilnehmer Daten geändert wurden, dann Eigenschaften des
+			// Teilnehmers updaten
 			Vector<Eigenschaft> eigenschaftDB = new Vector<Eigenschaft>();
 			for (int i = 0; i < eigenschaften.size(); i++) {
 				int id = eigenschaften.elementAt(i).getId();
@@ -222,7 +237,8 @@ public class ProfilBearbeiten extends VerticalPanel {
 		}
 
 		public void onSuccess(Profil result) {
-
+			// Profil ID des Nutzers im Profil Objekt speichern und dann
+			// Eigenschaften des Nutzer abrufen
 			p.setId(result.getId());
 			ClientSideSettings.getProjektAdministration().findNameAndWertFromEigenschaften(p.getId(),
 					new GetEigenschaftCallback());
@@ -231,28 +247,29 @@ public class ProfilBearbeiten extends VerticalPanel {
 
 	}
 
-	private class UpdateProfileCallback implements AsyncCallback {
+	private class UpdateProfileCallback implements AsyncCallback<Void> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen!");
 
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(Void result) {
 
 		}
 
 	}
 
-	private class UpdateEigenschaftenCallback implements AsyncCallback {
+	private class UpdateEigenschaftenCallback implements AsyncCallback<Void> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen!");
 
 		}
 
-		public void onSuccess(Object result) {
-
+		public void onSuccess(Void result) {
+			// Wurden Eigenschaften erfolgreich aktualisiert, zurück auf Profil
+			// anzeigen
 			Window.alert("Dein Profil wurde aktualisiert!");
 			RootPanel.get("Content").clear();
 			RootPanel.get("Content").add(new ProfilAnzeigen());
