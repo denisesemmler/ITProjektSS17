@@ -20,7 +20,7 @@ import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
-public class AusschreibungAnlegen extends VerticalPanel {
+public class AusschreibungAnlegen extends HorizontalPanel {
 
 	private Vector<Projekt> pVector = new Vector<Projekt>();
 	private Vector<String> eigenschaftName = new Vector<String>();
@@ -29,7 +29,7 @@ public class AusschreibungAnlegen extends VerticalPanel {
 	/**
 	 * Erstellen der Panels
 	 */
-	private VerticalPanel mainPanel = this;
+	private HorizontalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
 	private VerticalPanel attributePanel = new VerticalPanel();
 	private VerticalPanel suchPanel = new VerticalPanel();
@@ -59,6 +59,8 @@ public class AusschreibungAnlegen extends VerticalPanel {
 	/**
 	 * Widgets für Suchprofil
 	 */
+	private HorizontalPanel schulabschluss = new HorizontalPanel();
+	private HorizontalPanel berufserfahrung = new HorizontalPanel();
 	private HorizontalPanel naviPanel = new HorizontalPanel();
 	private HorizontalPanel msoffice = new HorizontalPanel();
 	private HorizontalPanel msproject = new HorizontalPanel();
@@ -69,8 +71,8 @@ public class AusschreibungAnlegen extends VerticalPanel {
 	private HorizontalPanel catia = new HorizontalPanel();
 	private HorizontalPanel sql = new HorizontalPanel();
 
-	private Label eigenschaftLabel = new Label("Deine Fähigkeiten:");
-	private Label schulabschlussLabel = new Label("Hoechster Schulabschluss");
+	private Label eigenschaftLabel = new Label("Voraussetzungen für diese Stelle:");
+	private Label schulabschlussLabel = new Label("Höchster Schulabschluss");
 	private Label berufserfahrungLabel = new Label("Berufserfahrung");
 	private Label msofficeLabel = new Label("Microsoft Office");
 	private Label msprojectLabel = new Label("Microsoft Project");
@@ -107,6 +109,23 @@ public class AusschreibungAnlegen extends VerticalPanel {
 		ausschreibungTitelLabel.addStyleName("Content-Label");
 		stellenbeschreibungLabel.addStyleName("Content-Label");
 		bewerbungsfristLabel.addStyleName("Content-label");
+		suchPanel.setStylePrimaryName("verticalrand");
+		eigenschaftLabel.setStylePrimaryName("label1");
+		schulabschluss.setStylePrimaryName("label1");
+		berufserfahrung.setStylePrimaryName("label1");
+		msoffice.setStylePrimaryName("label1");
+		msproject.setStylePrimaryName("label1");
+		sap.setStylePrimaryName("label1");
+		aris.setStylePrimaryName("label1");
+		java.setStylePrimaryName("label1");
+		c.setStylePrimaryName("label1");
+		catia.setStylePrimaryName("label1");
+		sql.setStylePrimaryName("label1");
+		attributePanel.setStylePrimaryName("label1");
+		projektLabel.setStylePrimaryName("label1");
+		ausschreibungTitelLabel.setStylePrimaryName("label1");
+		stellenbeschreibungLabel.setStylePrimaryName("label1");
+		bewerbungsfristLabel.setStylePrimaryName("label1");
 
 		mainPanel.add(editorPanel);
 
@@ -126,11 +145,15 @@ public class AusschreibungAnlegen extends VerticalPanel {
 		attributePanel.add(bewerbungsfristLabel);
 		attributePanel.add(bewerbungsfrist);
 
-		// Suchprofil
+		// Suchprofil GUI erstellen
 		suchPanel.add(eigenschaftLabel);
-		suchPanel.add(schulabschlussLabel);
+		suchPanel.add(schulabschluss);
+		suchPanel.add(berufserfahrung);
 
-		suchPanel.add(schulabschlussListBox);
+		schulabschluss.add(schulabschlussLabel);
+		schulabschlussLabel.setWidth("200px");
+		schulabschluss.add(schulabschlussListBox);
+
 		schulabschlussListBox.addItem("Hauptschulabschluss");
 		schulabschlussListBox.addItem("Mittlere Reife");
 		schulabschlussListBox.addItem("Fachhochschulreife");
@@ -138,8 +161,10 @@ public class AusschreibungAnlegen extends VerticalPanel {
 		schulabschlussListBox.addItem("Bachelor");
 		schulabschlussListBox.addItem("Master");
 
-		suchPanel.add(berufserfahrungLabel);
-		suchPanel.add(berufserfahrungListBox);
+		berufserfahrung.add(berufserfahrungLabel);
+		berufserfahrungLabel.setWidth("200px");
+		berufserfahrung.add(berufserfahrungListBox);
+
 		berufserfahrungListBox.addItem("weniger als 1 Jahr");
 		berufserfahrungListBox.addItem("1 - 5 Jahre");
 		berufserfahrungListBox.addItem("6 - 10 Jahre");
@@ -155,27 +180,35 @@ public class AusschreibungAnlegen extends VerticalPanel {
 		suchPanel.add(sql);
 
 		msoffice.add(msofficeLabel);
+		msofficeLabel.setWidth("200px");
 		msoffice.add(msofficeListBox);
 
 		msproject.add(msprojectLabel);
+		msprojectLabel.setWidth("200px");
 		msproject.add(msprojectListBox);
 
 		sap.add(sapLabel);
+		sapLabel.setWidth("200px");
 		sap.add(sapListBox);
 
 		aris.add(arisLabel);
+		arisLabel.setWidth("200px");
 		aris.add(arisListBox);
 
 		java.add(javaLabel);
+		javaLabel.setWidth("200px");
 		java.add(javaListBox);
 
 		c.add(cLabel);
+		cLabel.setWidth("200px");
 		c.add(cListBox);
 
 		catia.add(catiaLabel);
+		catiaLabel.setWidth("200px");
 		catia.add(catiaListBox);
 
 		sql.add(sqlLabel);
+		sqlLabel.setWidth("200px");
 		sql.add(sqlListBox);
 
 		msofficeListBox.addItem("Keine Kenntnisse");
@@ -210,8 +243,9 @@ public class AusschreibungAnlegen extends VerticalPanel {
 		sqlListBox.addItem("Wenig Kenntnisse");
 		sqlListBox.addItem("Gute Kenntnisse");
 
-		mainPanel.add(ausschreibungAnlegenButton);
+		suchPanel.add(ausschreibungAnlegenButton);
 
+		// Alle Projekt des Teilnehmers suchen
 		try {
 			ClientSideSettings.getProjektAdministration().findAllProjektByTeilnehmerId(
 					ClientSideSettings.getCurrentUser().getId(), new GetAllProjekteByIDCallback());
@@ -228,7 +262,6 @@ public class AusschreibungAnlegen extends VerticalPanel {
 				// Suchprofil erstellen
 				ClientSideSettings.getProjektAdministration().createProfil(ClientSideSettings.getCurrentUser().getId(),
 						1, new CreateProfilCallback());
-				Window.alert("Deine Daten wurden gespeichert!");
 
 			} catch (Exception e) {
 				Window.alert(e.toString());
@@ -306,13 +339,13 @@ public class AusschreibungAnlegen extends VerticalPanel {
 
 		public void onSuccess(Vector<Eigenschaft> result) {
 
-			Window.alert("Deine Eigenschaften wurden angelegt!");
-			// Wenn Eigenschaften gespeichert auf Startseite wechseln
+			Window.alert("Deine Ausschreibung wurde angelegt!");
+			// Wenn Eigenschaften gespeichert auf Verwalten wechseln
 			RootPanel.get("Content").clear();
 			RootPanel.get("Navi").clear();
 			naviPanel.add(new Navigation());
 			RootPanel.get("Navi").add(naviPanel);
-			RootPanel.get("Content").add(new ProfilAnzeigen());
+			RootPanel.get("Content").add(new AusschreibungVerwalten());
 
 		}
 
@@ -326,9 +359,10 @@ public class AusschreibungAnlegen extends VerticalPanel {
 		}
 
 		public void onSuccess(Profil result) {
-			// Profil finden und dann Ausschreibung anlegen
+			// Id des eben erstellen Suchprofils finden und dann Ausschreibung
+			// anlegen
 			p.setId(result.getId());
-			Window.alert("Dein Profil wurde gespeichert!");
+
 			int pid = pVector.elementAt(projektListbox.getSelectedIndex()).getId();
 			ClientSideSettings.getProjektAdministration().createAusschreibung(stellenbeschreibungBox.getText(),
 					bewerbungsfrist.getValue(), ausschreibungTitelBox.getText(), "laufend", pid, p.getId(),
