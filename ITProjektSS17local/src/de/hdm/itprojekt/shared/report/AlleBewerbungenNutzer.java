@@ -1,17 +1,18 @@
+
 package de.hdm.itprojekt.shared.report;
 
 import java.util.List;
 
-import com.google.gwt.i18n.client.DateTimeFormat;
+
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.user.client.Window;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 
 import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.shared.ReportServiceAsync;
-import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
+
 import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
 
 public class AlleBewerbungenNutzer extends SimpleReport{
@@ -91,6 +92,13 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
 				return String.valueOf(bewerbung.getBewertung());
 			}
 		};
+		
+		TextColumn<BewerbungReport> statusColumn = new TextColumn<BewerbungReport>() {
+			@Override
+			public String getValue(BewerbungReport bewerbung) {
+				return bewerbung.getStatus();
+			}
+		};
 				
 		
 		
@@ -105,6 +113,7 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
 		
 		table.addColumn(ansprechpartnerColumn, "Ansprechpartner");
 		table.addColumn(bewerbungsfristColumn, "Bewerbungsfrist");
+		table.addColumn(statusColumn, "Status");
 
 
 		
