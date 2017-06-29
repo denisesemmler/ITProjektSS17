@@ -99,8 +99,8 @@ public class ProfilMapper {
 				Profil p = new Profil();
 				// Id und Source mit den Daten aus der DB füllen
 				p.setId(rs.getInt("idProfil"));
-				p.setErstellDatum(rs.getTimestamp("erstelldatum"));
-				p.setAenderungsDatum(rs.getTimestamp("aenderungsdatum"));
+				p.setErstellDatum(rs.getDate("erstelldatum"));
+				p.setAenderungsDatum(rs.getDate("aenderungsdatum"));
 				p.setTeilnehmer_idTeilnehmer(rs.getInt("Teilnehmer_idTeilnehmer"));
 
 				// Objekt zurückgeben

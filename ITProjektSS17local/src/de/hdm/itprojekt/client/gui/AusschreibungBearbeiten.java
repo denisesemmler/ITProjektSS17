@@ -242,9 +242,8 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 				a.setBeschreibung(stellenbeschreibungArea.getText());
 				a.setBewerbungsfrist(new java.sql.Date((bewerbungsfrist.getValue()).getTime()));
 				ClientSideSettings.getProjektAdministration().updateAusschreibung(a, new SpeichernCallback());
-
-				ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(a.getProfil_idSuchprofil(),
-						new GetProfileCallback());
+				// Suchprofil Id in Profil Obejkt speichern
+				p.setId(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getProfil_idSuchprofil());
 
 			} catch (Exception e) {
 				Window.alert(e.toString());
@@ -289,41 +288,30 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 		}
 
 		public void onSuccess(Void result) {
-			// Wenn Eigenschaften auch aktualisiert, RootPanel clearen und auf
-			// Übersichtsseite zurück
-			Window.alert("Dein Ausschreibung wurde geändert!");
-			RootPanel.get("Content").clear();
-			RootPanel.get("Content").add(new AusschreibungVerwalten());
+			// Profil änderungsdatum noch aktualisieren
+
+			Date aenderungsDatum = new Date();
+			p.setAenderungsDatum(new java.sql.Date(aenderungsDatum.getTime()));
+			ClientSideSettings.getProjektAdministration().updateProfil(p, new UpdateProfileCallback());
+
 		}
 
 	}
 
-	private class GetProfileCallback implements AsyncCallback<Profil> {
+	private class UpdateProfileCallback implements AsyncCallback<Void> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen!");
 
 		}
 
-		public void onSuccess(Profil result) {
-			// Änderungsdatum des Profils akualisieren
-			Date aenderungsDatum = new Date();
-			result.setAenderungsDatum(new java.sql.Date(aenderungsDatum.getTime()));
-			ClientSideSettings.getProjektAdministration().updateProfil(result, new UpdateProfileCallback());
-
+		public void onSuccess(Void result) {
+			// Wenn Profil auch aktualisiert, RootPanel clearen und auf
+			// Übersichtsseite zurück
+			Window.alert("Deine Ausschreibung wurde geändert!");
+			RootPanel.get("Content").clear();
+			RootPanel.get("Content").add(new AusschreibungVerwalten());
 		}
 
-		private class UpdateProfileCallback implements AsyncCallback<Void> {
-
-			public void onFailure(Throwable caught) {
-				Window.alert("Da ist wohl etwas schief gelaufen!");
-
-			}
-
-			public void onSuccess(Void result) {
-
-			}
-
-		}
 	}
 }
