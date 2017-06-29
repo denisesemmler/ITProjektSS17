@@ -17,7 +17,7 @@ import de.hdm.itprojekt.shared.bo.reports.FanInFanOut;
 public class FanInFanOutReport extends SimpleReport {
 
 	public FanInFanOutReport() {
-		super("Fan In Fan Out");
+		super("Fan-In/Fan-Out Anaylse");
 ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
     	
     	final AsyncCallback<List<FanInFanOut>> initReportGeneratorCallback = new AsyncCallback<List<FanInFanOut>>() {
@@ -76,7 +76,7 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
 		table.addColumn(nameColumn, "Name");
 		table.addColumn(fanOutColumn, "Fan-Out/Bewerbung");
 		table.addColumn(fanInColumn, "Fan-In/Ausschreibung");
-		table.addColumn(analyseColumn, "Fan-out/Fan-IN Analyse");
+		table.addColumn(analyseColumn, "Fan-In/Fan-Out Analyse");
 		
 		table.setRowCount(report.size(), true);
 	    table.setRowData(0, report);
