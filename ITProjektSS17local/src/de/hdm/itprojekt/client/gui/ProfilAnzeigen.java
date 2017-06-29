@@ -15,11 +15,12 @@ import de.hdm.itprojekt.shared.report.AlleBewerbungenNutzer;
 
 /**
  * Klasse für die Startseite nach der Anmeldung, die die das Profil anzeigt
+ * 
  * @author Philipp Mueller
  *
  */
 public class ProfilAnzeigen extends HorizontalPanel {
-	//Panels erstellen
+	// Panels erstellen
 	private HorizontalPanel mainPanel = this;
 	VerticalPanel labelsPanel = new VerticalPanel();
 	VerticalPanel dataPanel = new VerticalPanel();
@@ -46,24 +47,25 @@ public class ProfilAnzeigen extends HorizontalPanel {
 
 	private Label ortLabel = new Label("Ort: ");
 	private Label ortDataLabel = new Label(ClientSideSettings.getCurrentUser().getOrt());
-	
-	//Buttons erstellen
+
+	// Buttons erstellen
 	private Button matching = new Button("Passende Ausschreibungen", new ButtonClickHandler());
 	private Button ausschreibungen = new Button("Meine Ausschreibungen", new ButtonClickHandler());
 	private Button bewerbungen = new Button("Meine Bewerbungen", new ButtonClickHandler());
 	private Button report = new Button("Zum ReportGenerator", new ButtonClickHandler());
-	
-	
+
 	public ProfilAnzeigen() {
-		//CSS-Styling
+		// CSS-Styling
 		firstNameLabel.addStyleName("label1");
 		lastNameLabel.addStyleName("label1");
+		firmaLabel.addStyleName("label1");
 		zusatzLabel.addStyleName("label1");
 		strasseLabel.addStyleName("label1");
 		plzLabel.addStyleName("label1");
 		ortLabel.addStyleName("label1");
 		firstNameDataLabel.addStyleName("label1");
 		lastNameDataLabel.addStyleName("label1");
+		firmaDataLabel.addStyleName("label1");
 		zusatzDataLabel.addStyleName("label1");
 		strasseDataLabel.addStyleName("label1");
 		plzDataLabel.addStyleName("label1");
@@ -74,8 +76,9 @@ public class ProfilAnzeigen extends HorizontalPanel {
 		ausschreibungen.setStylePrimaryName("button1");
 		bewerbungen.setStylePrimaryName("button1");
 		report.setStylePrimaryName("button1");
-		
-		//Panels hinzufügen
+		buttonsPanel.setStylePrimaryName("buttonsPanel");
+
+		// Panels hinzufügen
 		mainPanel.add(labelsPanel);
 		mainPanel.add(dataPanel);
 		mainPanel.add(buttonsPanel);
@@ -89,7 +92,7 @@ public class ProfilAnzeigen extends HorizontalPanel {
 		labelsPanel.add(lastNameLabel);
 		dataPanel.add(lastNameDataLabel);
 
-		//Feld Firma oder Zusatz nur anzeigen wenn nicht leer
+		// Feld Firma oder Zusatz nur anzeigen wenn nicht leer
 		if (ClientSideSettings.getCurrentUser().getFirma() != "") {
 			labelsPanel.add(firmaLabel);
 			dataPanel.add(firmaDataLabel);
@@ -108,18 +111,19 @@ public class ProfilAnzeigen extends HorizontalPanel {
 
 		labelsPanel.add(ortLabel);
 		dataPanel.add(ortDataLabel);
-		
+
 		buttonsPanel.add(matching);
 		buttonsPanel.add(ausschreibungen);
 		buttonsPanel.add(bewerbungen);
 		buttonsPanel.add(report);
 	}
+
 	private class ButtonClickHandler implements ClickHandler {
 		public void onClick(ClickEvent e) {
 
 			Button active = (Button) e.getSource();
 
-			//Swich Case, die den Text des aktiven Button abfängt
+			// Swich Case, die den Text des aktiven Button abfängt
 			switch (active.getText()) {
 			case "Passende Ausschreibungen":
 				RootPanel.get("Content").clear();
@@ -135,7 +139,7 @@ public class ProfilAnzeigen extends HorizontalPanel {
 				break;
 			case "Zum ReportGenerator":
 				RootPanel.get("Content").clear();
-				Window.open("http://1-dot-global-bridge-162410.appspot.com/Report.html", "_self", ""); 
+				Window.open("http://1-dot-global-bridge-162410.appspot.com/Report.html", "_self", "");
 				break;
 			}
 		}
