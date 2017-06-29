@@ -106,7 +106,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	public void deleteProjektmarktplatz(Projektmarktplatz pm) throws IllegalArgumentException {
 		
 		//Alle Projekte zum Projektmarktplatz werden hier "gemerkt"
-		Vector<Projekt> projekte = pMapper.findAllProjektmarktplatzById(pm.getIdProjektmarktplatz());
+		Vector<Projekt> projekte = pMapper.findAllProjektmarktplatzById(pm.getId());
 		
 		//Alle Projektzeilen löschen
 		for (Projekt projekt : projekte){
