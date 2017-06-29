@@ -30,7 +30,7 @@ public class ProjektLoeschen extends VerticalPanel {
 
 	private ListBox projektListbox = new ListBox();
 
-	private Button projektLoeschenButton = new Button("Loeschen", new DeleteClickHandler());
+	private Button projektLoeschenButton = new Button("Löschen", new DeleteClickHandler());
 
 	/**
 	 * Konstruktor für Löschen von Projekte

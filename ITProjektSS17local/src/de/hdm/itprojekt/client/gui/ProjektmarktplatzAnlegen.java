@@ -38,7 +38,7 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel {
 	}
 
 	/**
-	 * Callback f�r Erstellen von PM
+	 * Callback für Erstellen von PM
 	 * 
 	 * @author Moritz Bittner
 	 *

@@ -74,9 +74,6 @@ public class ProjektBearbeiten extends VerticalPanel {
 	 */
 	public ProjektBearbeiten() {
 
-		// CSS Styles
-		projektSpeichernButton.setStylePrimaryName("grotte-button");
-
 		mainPanel.add(editorPanel);
 
 		editorPanel.add(attributePanel);
@@ -188,7 +185,7 @@ public class ProjektBearbeiten extends VerticalPanel {
 	private class SpeichernCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l�uft noch nit so!");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 

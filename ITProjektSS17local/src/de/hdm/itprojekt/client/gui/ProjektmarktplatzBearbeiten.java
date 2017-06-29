@@ -30,7 +30,7 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 	private VerticalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
 
-	private Label marktplatzLabel = new Label("Projektmarktplatz ausw�hlen");
+	private Label marktplatzLabel = new Label("Projektmarktplatz auswählen");
 	private Label marktplatzNameLabel = new Label("Marktplatzname: ");
 	private ListBox marktplatzListbox = new ListBox();
 	private TextBox marktplatzNameBox = new TextBox();
@@ -69,7 +69,7 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 	private class SaveChangesCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Da ist wohl etwas schief gleaufen");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
