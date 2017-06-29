@@ -33,10 +33,10 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
  *
  */
 
-public class BewerbungBewerten extends VerticalPanel {
+public class BewerbungBewerten extends HorizontalPanel {
 
 	//Panels erstellen
-	private VerticalPanel mainPanel = this;
+	private HorizontalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
 
 	/*
@@ -321,6 +321,7 @@ public class BewerbungBewerten extends VerticalPanel {
 				 */
 				erstellDatumWert.setText(String.valueOf(selectedBewerbung.getErstellDatum()));
 				idBewerbungWert.setText(String.valueOf(selectedBewerbung.getId()));
+				bewerbungsTitelWert.setText(selectedBewerbung.getTitel());
 				bewerbungsTextWert.setText(selectedBewerbung.getBewerbungsText());
 				statusWert.setText(selectedBewerbung.getStatus());
 				// bewertungWert.setText(ersteBewerbung.getBewertung());
@@ -418,9 +419,10 @@ public class BewerbungBewerten extends VerticalPanel {
 	// Innerclass für FindProjektByProjektmarktplatzCallBack
 	private class FindProjektByProjektmarktplatzCallBack implements AsyncCallback<Vector<Projekt>> {
 
-		// Hier wird zuerst das result in der Instanzvariablen gespeichert
-		// In der onSucces findet IMMER die Anfragen Behaandlung statt, also was
-		// als nächstes geladen werden muss
+		/* Hier wird zuerst das result in der Instanzvariablen gespeichert
+		 *In der onSucces findet IMMER die Anfragen Behandlung statt, also was
+		 *  als nächstes geladen werden muss(non-Javadoc)
+		 */
 		@Override
 		public void onSuccess(Vector<Projekt> result) {
 			projekte = result;
@@ -457,9 +459,10 @@ public class BewerbungBewerten extends VerticalPanel {
 	// Innerclass für die FindAusschreibungByProjektIdCallback
 	private class FindAusschreibungByProjektIdCallback implements AsyncCallback<Vector<Ausschreibung>> {
 
-		// Hier wird zuerst das result in der Instanzvariablen gespeichert
-		// In der onSucces findet IMMER die Anfragen Behaandlung statt, also was
-		// als nächstes geladen werden muss
+		/* Hier wird zuerst das result in der Instanzvariablen gespeichert
+		 *In der onSucces findet IMMER die Anfragen Behandlung statt, also was
+		 *als nächstes geladen werden muss
+		 */
 		@Override
 		public void onSuccess(Vector<Ausschreibung> result) {
 			ausschreibungen = result;
@@ -472,7 +475,7 @@ public class BewerbungBewerten extends VerticalPanel {
 			 * Projektmarktplätze in die Listbox zu schreiben.
 			 */
 			for (Ausschreibung ausschreibung : result) {
-				ausschreibungListBox.addItem(ausschreibung.getBeschreibung(), String.valueOf(ausschreibung.getId()));
+				ausschreibungListBox.addItem(ausschreibung.getTitel(), String.valueOf(ausschreibung.getId()));
 			}
 
 			// Hier wird die ID zum ersten Projekt aus dem ErgebnissVektor
@@ -495,9 +498,10 @@ public class BewerbungBewerten extends VerticalPanel {
 	// Innerclass für die FindBewerbungByProfilAndAusschreibungIdCallback
 	private class FindBewerbungByAusschreibungIdCallback implements AsyncCallback<Map<Bewerbung, Teilnehmer>> {
 
-		// Hier wird zuerst das result in der Instanzvariablen gespeichert
-		// In der onSucces findet IMMER die Anfragen Behaandlung statt, also was
-		// als nächstes geladen werden muss
+		/* Hier wird zuerst das result in der Instanzvariablen gespeichert
+		 * In der onSucces findet IMMER die Anfragen Behaandlung statt, also was
+		 * als nächstes geladen werden muss
+		 */ 
 		@Override
 		public void onSuccess(Map<Bewerbung, Teilnehmer> result) {
 
@@ -506,10 +510,7 @@ public class BewerbungBewerten extends VerticalPanel {
 
 			// foreach schleife mit einer Map (Key,Value)
 			for (Map.Entry<Bewerbung, Teilnehmer> entry : result.entrySet()) {
-				Teilnehmer teilnehmerZuBewerbung = entry.getValue();
-				String anzeigeFuerListbox = teilnehmerZuBewerbung.getVorname() + " "
-						+ teilnehmerZuBewerbung.getNachname();
-				bewerbungListBox.addItem(anzeigeFuerListbox, String.valueOf(entry.getKey().getId()));
+				bewerbungListBox.addItem(entry.getKey().getTitel(), String.valueOf(entry.getKey().getId()));
 				bewerbungen.add(entry.getKey());
 			}
 			Bewerbung ersteBewerbung = bewerbungen.elementAt(0);
@@ -521,6 +522,7 @@ public class BewerbungBewerten extends VerticalPanel {
 			 */
 			erstellDatumWert.setText(String.valueOf(ersteBewerbung.getErstellDatum()));
 			idBewerbungWert.setText(String.valueOf(ersteBewerbung.getId()));
+			bewerbungsTitelWert.setText(ersteBewerbung.getTitel());
 			bewerbungsTextWert.setText(ersteBewerbung.getBewerbungsText());
 			statusWert.setText(ersteBewerbung.getStatus());
 			// bewertungWert.setText(ersteBewerbung.getBewertung());
