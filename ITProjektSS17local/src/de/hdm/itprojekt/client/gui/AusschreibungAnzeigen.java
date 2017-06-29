@@ -27,7 +27,7 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 	/**
 	 * Erstellen der Labels
 	 */
-	private Label marktplatzLabel = new Label("Projektmarktplatz w‰hlen:");
+	private Label marktplatzLabel = new Label("Projektmarktplatz wfhlen:");
 
 	/**
 	 * Erstellen der ListBox
@@ -43,25 +43,26 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 	private Button projektSuchenButton = new Button("Ausschreibungen suchen", new SuchenProjektClickHandler());
 	private Button ausschreibungAnzeigenButton = new Button("Ausschreibung anzeigen", new AusschreibungAnzeigenClickHandler());
 	
+	//Vektoren erstellen
 	private Vector<Projektmarktplatz> pmVector = new Vector<Projektmarktplatz>();
 	private Vector<Projekt> pVector = new Vector<Projekt>();
 	private Vector<Ausschreibung> aVector = new Vector<Ausschreibung>();
 	private int pmID;
 	private int pID;
-	private int aID;
+
 
 	/**
-	 * Konstruktor f¸r Anlegen der GUI
+	 * Konstruktor f√ºr Anlegen der GUI
 	 */
 	public AusschreibungAnzeigen() {
 
 		// CSS Styling
 		marktplatzLabel.addStyleName("Content-Label");
-
+		// GUI erstellen
 		mainPanel.add(marktplatzLabel);
 		mainPanel.add(marktplatzListbox);
 		mainPanel.add(marktplatzSuchenButton);
-
+		//Alle Marktpl√§tze suchen
 		try {
 			ClientSideSettings.getProjektAdministration().findAllProjektmarktplatz(new GetAllMarktplatzCallback());
 		} catch (Exception e) {
@@ -74,11 +75,11 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 	private class GetAllMarktplatzCallback implements AsyncCallback<Vector<Projektmarktplatz>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("L‰uft garnit");
+			Window.alert("Da ist wohl etwas schief gelaufen!");
 		}
 
 		public void onSuccess(Vector<Projektmarktplatz> result) {
-
+			// Alle Marktpl√§tez anzeigen
 			for (int i = 0; i < result.size(); i++) {
 				Projektmarktplatz pm1 = result.elementAt(i);
 				pmVector.add(pm1);
@@ -91,12 +92,11 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 	private class SuchenClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
-
-			// TODO Konstruktor f¸r n‰chste Klasse (Projekt Suchen)
+			// Bei Suchen klick, projekte in diesem Markplatz suchen
 			pmID = pmVector.elementAt(marktplatzListbox.getSelectedIndex()).getId();
 			mainPanel.clear();
 			mainPanel.add(marktplatzLabel);
-			marktplatzLabel.setText("Projekt w‰hlen");
+			marktplatzLabel.setText("Projekt w√§hlen");
 			mainPanel.add(projektListbox);
 			mainPanel.add(projektSuchenButton);
 			
@@ -115,9 +115,9 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 	private class GetAllProjekteByIDCallback implements AsyncCallback<Vector<Projekt>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Nein das falsch");
+			Window.alert("Da ist wohl etwas schief gelaufen!");
 		}
-
+		//Gefundene Projekt anzeigen
 		public void onSuccess(Vector<Projekt> result) {
 
 			for (int i = 0; i < result.size(); i++) {
@@ -132,7 +132,7 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 	private class SuchenProjektClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
-
+			//Ausschreibungen des Projekts anzeigen
 			pID = pVector.elementAt(projektListbox.getSelectedIndex()).getId();
 			mainPanel.clear();
 			mainPanel.add(marktplatzLabel);
@@ -158,7 +158,7 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 		}
 
 		public void onSuccess(Vector<Ausschreibung> result) {
-
+			//Gefundene Ausschreibungen in ListBox laden
 			for (int i = 0; i < result.size(); i++) {
 				Ausschreibung a1 = result.elementAt(i);
 				aVector.add(a1);
@@ -174,8 +174,6 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 
-			// TODO Callback
-			
 			try {
 				ClientSideSettings.getProjektAdministration().findAusschreibungByProjektId(pID,
 						new GetAllAusschreibungByIDCallback());
@@ -183,7 +181,7 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 				Window.alert(e.toString());
 				e.printStackTrace();
 			}
-			
+			// Anzuzeigende Ausschreibung in  Ausschreibungs Objekt laden
 			Ausschreibung a = new Ausschreibung();
 			a.setId(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getId());
 			a.setBeschreibung(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBeschreibung());
