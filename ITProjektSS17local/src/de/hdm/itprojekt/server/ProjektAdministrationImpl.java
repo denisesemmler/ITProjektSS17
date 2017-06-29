@@ -692,7 +692,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 					if(eigenschaftenUser.elementAt(j).getWert() == eigenschaftenSuch.elementAt(j).getWert()){
 						k++;
 						//Wenn 4 Eigenschaften übereinstimmen, dann passt Ausschreibung und in den matching-Vektor laden
-						if(k==4){
+						if(k==6){
 						matching.add(allAusschreibungen.elementAt(i));
 						break;
 						}
