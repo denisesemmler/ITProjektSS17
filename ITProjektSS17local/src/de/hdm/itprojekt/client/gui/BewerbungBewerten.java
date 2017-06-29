@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
@@ -72,28 +73,31 @@ public class BewerbungBewerten extends VerticalPanel {
 
 	// Label für die aufgerufene Bewerbung
 	private HTMLPanel erstellDatum = new HTMLPanel("<strong>Erstell Datum:</strong>");
+	private HTMLPanel bewerbungsTitel = new HTMLPanel ("<strong>Bewerbungstitel:</strong>");
 	private HTMLPanel bewerbungsText = new HTMLPanel("<strong>Bewerbungs Text:</strong>");
 	private HTMLPanel idBewerbung = new HTMLPanel("<strong>ID Bewerbung:</strong>");
+	private HTMLPanel status = new HTMLPanel("<strong>Status:</strong>");
 	// private HTMLPanel bewertung = new
 	// HTMLPanel("<strong>Bewertung:</strong>");
-	private HTMLPanel status = new HTMLPanel("<strong>Status:</strong>");
 	// private HTMLPanel stellungnahme = new
 	// HTMLPanel("<strong>Stellungnahme:</strong>");
 
 	// Leerzeichen zwischen den Labelen
 	private HTMLPanel erstellDatumSpacePanel = new HTMLPanel("&nbsp;");
+	private HTMLPanel bewerbungsTitelSpacePanel = new HTMLPanel("&nbsp;");
 	private HTMLPanel bewerbungsTextSpacePanel = new HTMLPanel("&nbsp;");
 	private HTMLPanel idBewerbungSpacePanel = new HTMLPanel("&nbsp;");
-	// private HTMLPanel bewertungSpacePanel = new HTMLPanel("&nbsp;");
 	private HTMLPanel statusSpacePanel = new HTMLPanel("&nbsp;");
+	// private HTMLPanel bewertungSpacePanel = new HTMLPanel("&nbsp;");
 	// private HTMLPanel stellungnahmeSpacePanel = new HTMLPanel("&nbsp;");
 
 	// Label für die Inhalte der ausgewählten Bewerbung
 	private Label erstellDatumWert = new Label("wird befüllt");
+	private Label bewerbungsTitelWert = new Label("wird befüllt");
 	private Label bewerbungsTextWert = new Label("wird befüllt");
 	private Label idBewerbungWert = new Label("wird befüllt");
+	private Label statusWert = new Label("wird befüllt");
 	// private Label bewertungWert = new Label("wird befüllt");// TODO
-	private Label statusWert = new Label("wird befüllt");// TODO
 	// private Label stellungnahmeWert = new Label("wird befüllt");
 
 	// Label für Textboxen
@@ -164,6 +168,12 @@ public class BewerbungBewerten extends VerticalPanel {
 		datumPanel.add(erstellDatumSpacePanel);
 		datumPanel.add(erstellDatumWert);
 		editorPanel.add(datumPanel);
+		
+		HorizontalPanel bewerbungsTitelPanel = new HorizontalPanel();
+		bewerbungsTitelPanel.add(bewerbungsTitel);
+		bewerbungsTitelPanel.add(bewerbungsTitelSpacePanel);
+		bewerbungsTitelPanel.add(bewerbungsTitelWert);
+		editorPanel.add(bewerbungsTitelPanel);
 
 		HorizontalPanel bewerbungPanel = new HorizontalPanel();
 		bewerbungPanel.add(bewerbungsText);
@@ -531,6 +541,10 @@ public class BewerbungBewerten extends VerticalPanel {
 		@Override
 		public void onSuccess(Void result) {
 			Window.alert("Speicherung war erfolgreich");
+			
+			//Seite wird hier wieder auf Anfang zurückgesetzt um weitere Bewerbungen zu bewerten
+			//TODO 
+			RootPanel.get("Content").clear();
 
 		}
 
