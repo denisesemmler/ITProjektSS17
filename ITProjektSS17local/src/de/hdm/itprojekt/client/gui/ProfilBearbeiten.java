@@ -23,13 +23,13 @@ import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 public class ProfilBearbeiten extends VerticalPanel {
-	Vector <Eigenschaft> eigenschaften = new Vector<Eigenschaft>();
-	Vector <ListBox> eigenschaftListVector = new Vector<ListBox>();
-	Vector <Label> eigenschaftLabelVector = new Vector<Label>();
-	
+	private Vector<Eigenschaft> eigenschaften = new Vector<Eigenschaft>();
+	private Vector<ListBox> eigenschaftListVector = new Vector<ListBox>();
+	private Vector<Label> eigenschaftLabelVector = new Vector<Label>();
+
 	private VerticalPanel mainPanel = this;
-	VerticalPanel labelsPanel = new VerticalPanel();
-	VerticalPanel eigenschaftenVert = new VerticalPanel();
+	private VerticalPanel labelsPanel = new VerticalPanel();
+	private VerticalPanel eigenschaftenVert = new VerticalPanel();
 	private Label firstNameLabel = new Label("Vorname: ");
 	private TextBox firstNameBox = new TextBox();
 	private Label lastNameLabel = new Label("Nachname: ");
@@ -43,7 +43,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 	private Label ortLabel = new Label("Ort: ");
 	private TextBox ortBox = new TextBox();
 
-	private Label kenntnisseLabel = new Label("Deine F�higkeiten: ");
+	private Label kenntnisseLabel = new Label("Deine Fähigkeiten: ");
 	private Button speichern = new Button("Speichern", new CreateTeilnehmerClickHandler());
 
 	Profil p = new Profil();
@@ -105,11 +105,11 @@ public class ProfilBearbeiten extends VerticalPanel {
 				t.setPlz(Integer.parseInt(plzBox.getText()));
 				t.setOrt(ortBox.getText());
 				ClientSideSettings.getProjektAdministration().updateTeilnehmer(t, new UpdateTeilnehmerCallback());
-				
+
 				Date aenderungsDatum = new Date();
 				p.setAenderungsDatum(new java.sql.Date(aenderungsDatum.getTime()));
 				ClientSideSettings.getProjektAdministration().updateProfil(p, new UpdateProfileCallback());
-				
+
 			} catch (Exception e) {
 				Window.alert(e.toString());
 				e.printStackTrace();
@@ -120,7 +120,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 	private class GetEigenschaftCallback implements AsyncCallback<Vector<Eigenschaft>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l�uft noch nit so Eigenschaft finden!");
+			Window.alert("Da ist wohl etwas schief gelaufen!");
 
 		}
 
@@ -148,7 +148,6 @@ public class ProfilBearbeiten extends VerticalPanel {
 					berufserfahrungListBox.addItem("1 - 5 Jahre");
 					berufserfahrungListBox.addItem("6 - 10 Jahre");
 					berufserfahrungListBox.addItem("mehr als 10 Jahre");
-					//berufserfahrungListBox.addChangeHandler(new OnChangeHandler());
 					berufserfahrungListBox.setSelectedIndex(result.elementAt(i).getWert());
 					eigenschaftListVector.add(berufserfahrungListBox);
 
@@ -164,7 +163,6 @@ public class ProfilBearbeiten extends VerticalPanel {
 					abschlussListBox.addItem("Abitur");
 					abschlussListBox.addItem("Bachelor");
 					abschlussListBox.addItem("Master");
-					//abschlussListBox.addChangeHandler(new OnChangeHandler());
 					abschlussListBox.setSelectedIndex(result.elementAt(i).getWert());
 					eigenschaftListVector.add(abschlussListBox);
 
@@ -178,7 +176,6 @@ public class ProfilBearbeiten extends VerticalPanel {
 					eigenschaftWertBox.addItem("Keine Kenntnisse");
 					eigenschaftWertBox.addItem("Wenig Kenntnisse");
 					eigenschaftWertBox.addItem("Gute Kenntnisse");
-				//eigenschaftWertBox.addChangeHandler(new OnChangeHandler());
 					eigenschaftWertBox.setSelectedIndex(result.elementAt(i).getWert());
 					eigenschaftListVector.add(eigenschaftWertBox);
 
@@ -186,7 +183,6 @@ public class ProfilBearbeiten extends VerticalPanel {
 
 			}
 			labelsPanel.add(speichern);
-			Window.alert("Deine Eigenschaften wurden gefunden!");
 
 		}
 
@@ -195,25 +191,25 @@ public class ProfilBearbeiten extends VerticalPanel {
 	private class UpdateTeilnehmerCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l�uft noch nit so!");
+			Window.alert("Da ist wohl etwas schief gelaufen!");
 
 		}
 
 		public void onSuccess(Object result) {
 			Vector<Eigenschaft> eigenschaftDB = new Vector<Eigenschaft>();
-			for(int i=0; i< eigenschaften.size(); i++){
-				int id= eigenschaften.elementAt(i).getId();
-				
-				Eigenschaft e = new Eigenschaft ();
+			for (int i = 0; i < eigenschaften.size(); i++) {
+				int id = eigenschaften.elementAt(i).getId();
+
+				Eigenschaft e = new Eigenschaft();
 				e.setId(id);
 				e.setName(eigenschaftLabelVector.elementAt(i).getText());
 				e.setWert(eigenschaftListVector.elementAt(i).getSelectedIndex());
-				eigenschaftDB.add(e);	
-				
+				eigenschaftDB.add(e);
+
 			}
-			ClientSideSettings.getProjektAdministration().updateEigenschaft(eigenschaftDB, new UpdateEigenschaftenCallback());	
-			
-			Window.alert("Dein Profil wurde aktualisiert!");
+			ClientSideSettings.getProjektAdministration().updateEigenschaft(eigenschaftDB,
+					new UpdateEigenschaftenCallback());
+
 		}
 
 	}
@@ -221,7 +217,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 	private class GetProfileCallback implements AsyncCallback<Profil> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l�uft noch nit so Profil finden!");
+			Window.alert("Da ist wohl etwas schief gelaufen!");
 
 		}
 
@@ -230,12 +226,11 @@ public class ProfilBearbeiten extends VerticalPanel {
 			p.setId(result.getId());
 			ClientSideSettings.getProjektAdministration().findNameAndWertFromEigenschaften(p.getId(),
 					new GetEigenschaftCallback());
-			Window.alert("Dein Profil wurde gefunden!");
 
 		}
 
 	}
-	
+
 	private class UpdateProfileCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
@@ -245,25 +240,24 @@ public class ProfilBearbeiten extends VerticalPanel {
 
 		public void onSuccess(Object result) {
 
-			
 		}
 
 	}
-	
+
 	private class UpdateEigenschaftenCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l�uft noch nit so Profil finden!");
+			Window.alert("Da ist wohl etwas schief gelaufen!");
 
 		}
 
 		public void onSuccess(Object result) {
 
-			Window.alert("Dein Eigenschaften wurden geaendert!");
+			Window.alert("Dein Profil wurde aktualisiert!");
 			RootPanel.get("Content").clear();
+			RootPanel.get("Content").add(new ProfilAnzeigen());
 		}
 
 	}
-	
 
 }
