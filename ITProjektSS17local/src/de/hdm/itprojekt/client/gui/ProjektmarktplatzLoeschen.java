@@ -29,18 +29,20 @@ public class ProjektmarktplatzLoeschen extends VerticalPanel {
 	private ListBox marktplatzListbox = new ListBox();
 	// Button zum Löschen
 	private Button loeschenButton = new Button("Löschen", new DeleteClickHandler());
-	// Vector der Marktpl�tze speichert
+	// Vector der Marktplätze speichert
 	private Vector<Projektmarktplatz> pmVector = new Vector<Projektmarktplatz>();
 
-	// Konstruktor der bei Laden des Widgets aufgerufen wird
+	/**
+	 * Konstruktor der Klasse ProjektmarktplatzLöschen
+	 */
 	public ProjektmarktplatzLoeschen() {
 
-		// Hinzuf�gen der Widgets
+		// Hinzufügen der Widgets
 		mainPanel.add(marktplatzNameLabel);
 		mainPanel.add(marktplatzListbox);
 		mainPanel.add(loeschenButton);
 
-		// Try f�r alle Marktpl�tze auslesen
+		// Try für alle Marktpl�tze auslesen
 		try {
 			ClientSideSettings.getProjektAdministration().findAllProjektmarktplatz(new GetAllMarktplatzCallback());
 		} catch (Exception e) {
@@ -95,7 +97,7 @@ public class ProjektmarktplatzLoeschen extends VerticalPanel {
 	}
 
 	/**
-	 * Clickhandler f�r L�schen der Marktpl�tze
+	 * Clickhandler für Löschen der Marktplätze
 	 * 
 	 * @author Moritz Bittner
 	 *

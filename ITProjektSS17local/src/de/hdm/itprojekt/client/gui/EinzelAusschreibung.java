@@ -12,6 +12,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 
+/**
+ * Klasse, die eine Ausschreibung anzeigt und Bewerben Button bereitstellt
+ * @author Moritz Bittner
+ *
+ */
 public class EinzelAusschreibung extends VerticalPanel {
 
 	private VerticalPanel mainPanel = this;
@@ -22,7 +27,7 @@ public class EinzelAusschreibung extends VerticalPanel {
 	private Label titelLabel = new Label("Titel:");
 	private Label beschreibungLabel = new Label("Beschreibung:");
 	private Label fristLabel = new Label("Bewerbungsfrist:");
-	// Werden dann bef�llt
+	// Werden dann befüllt
 	private Label atitelLabel = new Label();
 	private Label abeschreibungLabel = new Label();
 	private Label afristLabel = new Label();
@@ -31,7 +36,10 @@ public class EinzelAusschreibung extends VerticalPanel {
 
 	private int ausschreibungID;
 	
-	
+	/**
+	 * Konstrukro, der Übergeben Ausschreibung anzeigt
+	 * @param a1 Ausschreibungsobjekt, das angezeigt wird
+	 */
 	public EinzelAusschreibung(Ausschreibung a1) {
 		
 		mainPanel.add(titelPanel);
@@ -55,6 +63,10 @@ public class EinzelAusschreibung extends VerticalPanel {
 		
 	}
 	
+	/**
+	 *Clickhandler, der auf Bewerbung anlegen auf Ausschreibung weiterleitet 
+	 * 
+	 */
 	private class JetztBewerbenClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
