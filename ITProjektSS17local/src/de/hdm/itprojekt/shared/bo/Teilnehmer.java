@@ -9,7 +9,6 @@ package de.hdm.itprojekt.shared.bo;
 public class Teilnehmer extends BusinessObjekt {
 
 	private static final long serialVersionUID = 1L;
-	private int idTeilnehmer = 0;
 	private String vorname = "";
 	private String nachname = "";
 	private String zusatz = "";
@@ -18,7 +17,7 @@ public class Teilnehmer extends BusinessObjekt {
 	private String strasse = "";
 	private String email = "";
 	private String firma = "";
-	// private int profil_idProfil = 0;
+
 	/**
 	 * bei Rolle wird angegeben ob Teilnehmers UN/ Team oder Person ist
 	 */
@@ -143,21 +142,6 @@ public class Teilnehmer extends BusinessObjekt {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	/**
-	 * @return the idTeilnehmer
-	 */
-	public int getIdTeilnehmer() {
-		return idTeilnehmer;
-	}
-
-	/**
-	 * @param idTeilnehmer
-	 *            the idTeilnehmer to set
-	 */
-	public void setIdTeilnehmer(int idTeilnehmer) {
-		this.idTeilnehmer = idTeilnehmer;
 	}
 
 	/**
