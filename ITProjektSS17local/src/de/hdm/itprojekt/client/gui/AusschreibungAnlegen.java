@@ -15,6 +15,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
+import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
@@ -35,7 +37,7 @@ public class AusschreibungAnlegen extends VerticalPanel {
 	/**
 	 * Erstellen der Labels
 	 */
-	private Label projektLabel = new Label("Projekt w�hlen: ");
+	private Label projektLabel = new Label("Projekt wählen: ");
 	private Label ausschreibungTitelLabel = new Label("Titel der Ausschreibung: ");
 	private Label stellenbeschreibungLabel = new Label("Stellenbeschreibung: ");
 	private Label bewerbungsfristLabel = new Label("Bewerbungsfrist festlegen: ");
@@ -55,7 +57,7 @@ public class AusschreibungAnlegen extends VerticalPanel {
 	private Button ausschreibungAnlegenButton = new Button("Anlegen", new AnlegenClickHandler());
 
 	/**
-	 * Widgets f�r Suchprofil
+	 * Widgets für Suchprofil
 	 */
 	private HorizontalPanel naviPanel = new HorizontalPanel();
 	private HorizontalPanel msoffice = new HorizontalPanel();
@@ -67,7 +69,7 @@ public class AusschreibungAnlegen extends VerticalPanel {
 	private HorizontalPanel catia = new HorizontalPanel();
 	private HorizontalPanel sql = new HorizontalPanel();
 
-	private Label eigenschaftLabel = new Label("Deine F�higkeiten:");
+	private Label eigenschaftLabel = new Label("Deine Fähigkeiten:");
 	private Label schulabschlussLabel = new Label("Hoechster Schulabschluss");
 	private Label berufserfahrungLabel = new Label("Berufserfahrung");
 	private Label msofficeLabel = new Label("Microsoft Office");
@@ -94,12 +96,12 @@ public class AusschreibungAnlegen extends VerticalPanel {
 	Profil p = new Profil();
 
 	/**
-	 * Konstruktor f�r Anlegen der GUI
+	 * Konstruktor für Anlegen der GUI
 	 */
 	public AusschreibungAnlegen() {
 
 		this.currentUserId = ClientSideSettings.getCurrentUser().getId();
-	
+
 		// CSS Styling
 		projektLabel.addStyleName("Content-Label");
 		ausschreibungTitelLabel.addStyleName("Content-Label");
@@ -223,8 +225,7 @@ public class AusschreibungAnlegen extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 			try {
-			
-
+				// Suchprofil erstellen
 				ClientSideSettings.getProjektAdministration().createProfil(ClientSideSettings.getCurrentUser().getId(),
 						1, new CreateProfilCallback());
 				Window.alert("Deine Daten wurden gespeichert!");
@@ -237,16 +238,17 @@ public class AusschreibungAnlegen extends VerticalPanel {
 		}
 	};
 
-	private class CreateAusschreibungCallback implements AsyncCallback {
+	private class CreateAusschreibungCallback implements AsyncCallback<Ausschreibung> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l�uft noch nit so!");
+			Window.alert("Da ist wohl etwas schief gelaufen!");
 
 		}
 
-		public void onSuccess(Object result) {
-			
+		public void onSuccess(Ausschreibung result) {
+
 			Window.alert("Ausschreibung angelegt!");
+			// ausgewählte Eigenschaften in die Vektoren laden
 			eigenschaftName.add(schulabschlussLabel.getText());
 			eigenschaftName.add(berufserfahrungLabel.getText());
 			eigenschaftName.add(msofficeLabel.getText());
@@ -269,8 +271,10 @@ public class AusschreibungAnlegen extends VerticalPanel {
 			eigenschaftWert.add(catiaListBox.getSelectedIndex());
 			eigenschaftWert.add(sqlListBox.getSelectedIndex());
 
-			ClientSideSettings.getProjektAdministration().createEigenschaft(eigenschaftName, eigenschaftWert,
-					p.getId(), new CreateEigenschaftCallback());
+			// Die Vektoren an die Applikationslogik übergeben um in die DB zu
+			// speichern
+			ClientSideSettings.getProjektAdministration().createEigenschaft(eigenschaftName, eigenschaftWert, p.getId(),
+					new CreateEigenschaftCallback());
 
 		}
 
@@ -279,12 +283,11 @@ public class AusschreibungAnlegen extends VerticalPanel {
 	private class GetAllProjekteByIDCallback implements AsyncCallback<Vector<Projekt>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Nein das falsch");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 		}
 
 		public void onSuccess(Vector<Projekt> result) {
-			// Window.alert("Joo Sucess");
-			// Window.alert(ClientSideSettings.getCurrentUser().getVorname());
+			// Projekte des Nutzers anzeigen
 			for (int i = 0; i < result.size(); i++) {
 				Projekt p1 = result.elementAt(i);
 				pVector.add(p1);
@@ -294,61 +297,17 @@ public class AusschreibungAnlegen extends VerticalPanel {
 		}
 	}
 
-	/*
-	 * Added eigenschaften an Vector
-	 */
-	/**
-	 * private class AddEigenschaftClickHandler implements ClickHandler {
-	 * 
-	 * public void onClick(ClickEvent event) {
-	 * 
-	 * try { eigenschaftName.add(schulabschlussLabel.getText());
-	 * eigenschaftName.add(berufserfahrungLabel.getText());
-	 * eigenschaftName.add(msofficeLabel.getText());
-	 * eigenschaftName.add(msprojectLabel.getText());
-	 * eigenschaftName.add(sapLabel.getText());
-	 * eigenschaftName.add(arisLabel.getText());
-	 * eigenschaftName.add(javaLabel.getText());
-	 * eigenschaftName.add(cLabel.getText());
-	 * eigenschaftName.add(catiaLabel.getText());
-	 * eigenschaftName.add(sqlLabel.getText());
-	 * 
-	 * eigenschaftWert.add(schulabschlussListBox.getSelectedIndex());
-	 * eigenschaftWert.add(berufserfahrungListBox.getSelectedIndex());
-	 * eigenschaftWert.add(msofficeListBox.getSelectedIndex());
-	 * eigenschaftWert.add(msprojectListBox.getSelectedIndex());
-	 * eigenschaftWert.add(sapListBox.getSelectedIndex());
-	 * eigenschaftWert.add(arisListBox.getSelectedIndex());
-	 * eigenschaftWert.add(javaListBox.getSelectedIndex());
-	 * eigenschaftWert.add(cListBox.getSelectedIndex());
-	 * eigenschaftWert.add(catiaListBox.getSelectedIndex());
-	 * eigenschaftWert.add(sqlListBox.getSelectedIndex());
-	 * 
-	 * ClientSideSettings.getProjektAdministration().createEigenschaft(eigenschaftName,
-	 * eigenschaftWert, p.getId(), new CreateEigenschaftCallback());
-	 * 
-	 * ClientSideSettings.getProjektAdministration().createProfil(ClientSideSettings.getCurrentUser().getId(),
-	 * 0, new CreateProfilCallback()); Window.alert("Deine Daten wurden
-	 * gespeichert!");
-	 * 
-	 * } catch (Exception e) { Window.alert(e.toString()); e.printStackTrace();
-	 * }
-	 * 
-	 * } };
-	 **/
-
-	private class CreateEigenschaftCallback implements AsyncCallback {
+	private class CreateEigenschaftCallback implements AsyncCallback<Vector<Eigenschaft>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l�uft noch nit so Eigenschaft!");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(Vector<Eigenschaft> result) {
 
 			Window.alert("Deine Eigenschaften wurden angelegt!");
-		
-
+			// Wenn Eigenschaften gespeichert auf Startseite wechseln
 			RootPanel.get("Content").clear();
 			RootPanel.get("Navi").clear();
 			naviPanel.add(new Navigation());
@@ -359,15 +318,15 @@ public class AusschreibungAnlegen extends VerticalPanel {
 
 	}
 
-	
 	private class CreateProfilCallback implements AsyncCallback<Profil> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l�uft noch nit so!");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
 		public void onSuccess(Profil result) {
+			// Profil finden und dann Ausschreibung anlegen
 			p.setId(result.getId());
 			Window.alert("Dein Profil wurde gespeichert!");
 			int pid = pVector.elementAt(projektListbox.getSelectedIndex()).getId();
