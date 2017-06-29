@@ -20,7 +20,7 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 
 /**
- * GUI Klasse die das VerticalPanel vererbt bekommt f�r Anlegen von Projekten
+ * GUI Klasse die das VerticalPanel vererbt bekommt für Anlegen von Projekten
  * 
  * @author Moritz Bittner
  */
@@ -40,7 +40,7 @@ public class ProjektAnlegen extends VerticalPanel {
 	/**
 	 * Erstellen der Labels
 	 */
-	private Label marktplatzLabel = new Label("Select Projektmarktplatz");
+	private Label marktplatzLabel = new Label("Projektmarktplatz wählen:");
 	private Label projektNameLabel = new Label("Projektname: ");
 	private Label projektBeschreibungLabel = new Label("Projektbeschreibung: ");
 	private Label startDateLabel = new Label("Start Datum: ");
@@ -68,7 +68,7 @@ public class ProjektAnlegen extends VerticalPanel {
 	private DatePicker endPicker = new DatePicker();
 
 	/**
-	 * Konstruktor f�r Anlegen der GUI
+	 * Konstruktor für Anlegen der GUI
 	 */
 	public ProjektAnlegen() {
 
@@ -119,7 +119,7 @@ public class ProjektAnlegen extends VerticalPanel {
 	}
 
 	/**
-	 * Alle Marktpl�tze auslesen Callback
+	 * Alle Marktplätze auslesen Callback
 	 * 
 	 * @author Moritz Bittner
 	 *
