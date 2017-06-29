@@ -20,9 +20,9 @@ import de.hdm.itprojekt.shared.report.Projektverpflechtungen;
  */
 public class ReportNavigation extends VerticalPanel implements ClickHandler{
 	private Button allAds  = new Button("Alle Ausschreibungen", this);
-	private Button adsForProfile  = new Button("Alle Ausschreibungen für Profil", this);
-	private Button adsForApplication  = new Button("Bewerbungen für Ausschreiben", this);
-	private Button openApplication  = new Button("Alle offenen Bewerbungen", this);
+	private Button adsForProfile  = new Button("Alle Ausschreibungen, die Ich erstellt habe.", this);
+	private Button adsForApplication  = new Button("Alle Bewerbungen,die sich bei Mir beworben haben.", this);
+	private Button openApplication  = new Button("Alle Bewerbung von Ausschreibung des Bennutzers", this);
 	private Button projektverpflechtungen = new Button("Projektverpflechtungen", this);
 	private Button fanInFanOut = new Button("Fan-In/Fan-Out Analyse", this);
 	
