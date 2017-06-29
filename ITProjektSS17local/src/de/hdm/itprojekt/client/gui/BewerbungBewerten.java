@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
@@ -32,10 +33,10 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
  *
  */
 
-public class BewerbungBewerten extends VerticalPanel {
+public class BewerbungBewerten extends HorizontalPanel {
 
 	//Panels erstellen
-	private VerticalPanel mainPanel = this;
+	private HorizontalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
 
 	/*
@@ -72,28 +73,31 @@ public class BewerbungBewerten extends VerticalPanel {
 
 	// Label für die aufgerufene Bewerbung
 	private HTMLPanel erstellDatum = new HTMLPanel("<strong>Erstell Datum:</strong>");
+	private HTMLPanel bewerbungsTitel = new HTMLPanel ("<strong>Bewerbungstitel:</strong>");
 	private HTMLPanel bewerbungsText = new HTMLPanel("<strong>Bewerbungs Text:</strong>");
 	private HTMLPanel idBewerbung = new HTMLPanel("<strong>ID Bewerbung:</strong>");
+	private HTMLPanel status = new HTMLPanel("<strong>Status:</strong>");
 	// private HTMLPanel bewertung = new
 	// HTMLPanel("<strong>Bewertung:</strong>");
-	private HTMLPanel status = new HTMLPanel("<strong>Status:</strong>");
 	// private HTMLPanel stellungnahme = new
 	// HTMLPanel("<strong>Stellungnahme:</strong>");
 
 	// Leerzeichen zwischen den Labelen
 	private HTMLPanel erstellDatumSpacePanel = new HTMLPanel("&nbsp;");
+	private HTMLPanel bewerbungsTitelSpacePanel = new HTMLPanel("&nbsp;");
 	private HTMLPanel bewerbungsTextSpacePanel = new HTMLPanel("&nbsp;");
 	private HTMLPanel idBewerbungSpacePanel = new HTMLPanel("&nbsp;");
-	// private HTMLPanel bewertungSpacePanel = new HTMLPanel("&nbsp;");
 	private HTMLPanel statusSpacePanel = new HTMLPanel("&nbsp;");
+	// private HTMLPanel bewertungSpacePanel = new HTMLPanel("&nbsp;");
 	// private HTMLPanel stellungnahmeSpacePanel = new HTMLPanel("&nbsp;");
 
 	// Label für die Inhalte der ausgewählten Bewerbung
 	private Label erstellDatumWert = new Label("wird befüllt");
+	private Label bewerbungsTitelWert = new Label("wird befüllt");
 	private Label bewerbungsTextWert = new Label("wird befüllt");
 	private Label idBewerbungWert = new Label("wird befüllt");
+	private Label statusWert = new Label("wird befüllt");
 	// private Label bewertungWert = new Label("wird befüllt");// TODO
-	private Label statusWert = new Label("wird befüllt");// TODO
 	// private Label stellungnahmeWert = new Label("wird befüllt");
 
 	// Label für Textboxen
@@ -164,6 +168,12 @@ public class BewerbungBewerten extends VerticalPanel {
 		datumPanel.add(erstellDatumSpacePanel);
 		datumPanel.add(erstellDatumWert);
 		editorPanel.add(datumPanel);
+		
+		HorizontalPanel bewerbungsTitelPanel = new HorizontalPanel();
+		bewerbungsTitelPanel.add(bewerbungsTitel);
+		bewerbungsTitelPanel.add(bewerbungsTitelSpacePanel);
+		bewerbungsTitelPanel.add(bewerbungsTitelWert);
+		editorPanel.add(bewerbungsTitelPanel);
 
 		HorizontalPanel bewerbungPanel = new HorizontalPanel();
 		bewerbungPanel.add(bewerbungsText);
@@ -311,6 +321,7 @@ public class BewerbungBewerten extends VerticalPanel {
 				 */
 				erstellDatumWert.setText(String.valueOf(selectedBewerbung.getErstellDatum()));
 				idBewerbungWert.setText(String.valueOf(selectedBewerbung.getId()));
+				bewerbungsTitelWert.setText(selectedBewerbung.getTitel());
 				bewerbungsTextWert.setText(selectedBewerbung.getBewerbungsText());
 				statusWert.setText(selectedBewerbung.getStatus());
 				// bewertungWert.setText(ersteBewerbung.getBewertung());
@@ -408,9 +419,10 @@ public class BewerbungBewerten extends VerticalPanel {
 	// Innerclass für FindProjektByProjektmarktplatzCallBack
 	private class FindProjektByProjektmarktplatzCallBack implements AsyncCallback<Vector<Projekt>> {
 
-		// Hier wird zuerst das result in der Instanzvariablen gespeichert
-		// In der onSucces findet IMMER die Anfragen Behaandlung statt, also was
-		// als nächstes geladen werden muss
+		/* Hier wird zuerst das result in der Instanzvariablen gespeichert
+		 *In der onSucces findet IMMER die Anfragen Behandlung statt, also was
+		 *  als nächstes geladen werden muss(non-Javadoc)
+		 */
 		@Override
 		public void onSuccess(Vector<Projekt> result) {
 			projekte = result;
@@ -447,9 +459,10 @@ public class BewerbungBewerten extends VerticalPanel {
 	// Innerclass für die FindAusschreibungByProjektIdCallback
 	private class FindAusschreibungByProjektIdCallback implements AsyncCallback<Vector<Ausschreibung>> {
 
-		// Hier wird zuerst das result in der Instanzvariablen gespeichert
-		// In der onSucces findet IMMER die Anfragen Behaandlung statt, also was
-		// als nächstes geladen werden muss
+		/* Hier wird zuerst das result in der Instanzvariablen gespeichert
+		 *In der onSucces findet IMMER die Anfragen Behandlung statt, also was
+		 *als nächstes geladen werden muss
+		 */
 		@Override
 		public void onSuccess(Vector<Ausschreibung> result) {
 			ausschreibungen = result;
@@ -462,7 +475,7 @@ public class BewerbungBewerten extends VerticalPanel {
 			 * Projektmarktplätze in die Listbox zu schreiben.
 			 */
 			for (Ausschreibung ausschreibung : result) {
-				ausschreibungListBox.addItem(ausschreibung.getBeschreibung(), String.valueOf(ausschreibung.getId()));
+				ausschreibungListBox.addItem(ausschreibung.getTitel(), String.valueOf(ausschreibung.getId()));
 			}
 
 			// Hier wird die ID zum ersten Projekt aus dem ErgebnissVektor
@@ -485,9 +498,10 @@ public class BewerbungBewerten extends VerticalPanel {
 	// Innerclass für die FindBewerbungByProfilAndAusschreibungIdCallback
 	private class FindBewerbungByAusschreibungIdCallback implements AsyncCallback<Map<Bewerbung, Teilnehmer>> {
 
-		// Hier wird zuerst das result in der Instanzvariablen gespeichert
-		// In der onSucces findet IMMER die Anfragen Behaandlung statt, also was
-		// als nächstes geladen werden muss
+		/* Hier wird zuerst das result in der Instanzvariablen gespeichert
+		 * In der onSucces findet IMMER die Anfragen Behaandlung statt, also was
+		 * als nächstes geladen werden muss
+		 */ 
 		@Override
 		public void onSuccess(Map<Bewerbung, Teilnehmer> result) {
 
@@ -496,10 +510,7 @@ public class BewerbungBewerten extends VerticalPanel {
 
 			// foreach schleife mit einer Map (Key,Value)
 			for (Map.Entry<Bewerbung, Teilnehmer> entry : result.entrySet()) {
-				Teilnehmer teilnehmerZuBewerbung = entry.getValue();
-				String anzeigeFuerListbox = teilnehmerZuBewerbung.getVorname() + " "
-						+ teilnehmerZuBewerbung.getNachname();
-				bewerbungListBox.addItem(anzeigeFuerListbox, String.valueOf(entry.getKey().getId()));
+				bewerbungListBox.addItem(entry.getKey().getTitel(), String.valueOf(entry.getKey().getId()));
 				bewerbungen.add(entry.getKey());
 			}
 			Bewerbung ersteBewerbung = bewerbungen.elementAt(0);
@@ -511,6 +522,7 @@ public class BewerbungBewerten extends VerticalPanel {
 			 */
 			erstellDatumWert.setText(String.valueOf(ersteBewerbung.getErstellDatum()));
 			idBewerbungWert.setText(String.valueOf(ersteBewerbung.getId()));
+			bewerbungsTitelWert.setText(ersteBewerbung.getTitel());
 			bewerbungsTextWert.setText(ersteBewerbung.getBewerbungsText());
 			statusWert.setText(ersteBewerbung.getStatus());
 			// bewertungWert.setText(ersteBewerbung.getBewertung());
@@ -531,6 +543,10 @@ public class BewerbungBewerten extends VerticalPanel {
 		@Override
 		public void onSuccess(Void result) {
 			Window.alert("Speicherung war erfolgreich");
+			
+			//Seite wird hier wieder auf Anfang zurückgesetzt um weitere Bewerbungen zu bewerten
+			//TODO 
+			RootPanel.get("Content").clear();
 
 		}
 
