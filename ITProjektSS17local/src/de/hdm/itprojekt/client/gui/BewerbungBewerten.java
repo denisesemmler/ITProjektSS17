@@ -1,10 +1,7 @@
 package de.hdm.itprojekt.client.gui;
 
-import java.util.Date;
 import java.util.Map;
 import java.util.Vector;
-
-import org.apache.http.impl.cookie.DateParseException;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -37,6 +34,7 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 public class BewerbungBewerten extends VerticalPanel {
 
+	//Panels erstellen
 	private VerticalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
 
