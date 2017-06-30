@@ -54,8 +54,8 @@ import de.hdm.itprojekt.client.ITProjektSS17local;
 
 		/**
 		 * ClickHandler zum schliessen des Popups, der den das Objekt, welches
-		 * in der LGrotte-Klasse erstellt wurde holt und die sichtbarkeit 
-		 * veraendert, abschliessend wird es dem in der LGrotte befindlichen
+		 * in der ItProjektSS17-Klasse erstellt wurde holt und die sichtbarkeit 
+		 * veraendert, abschliessend wird es dem in der ItProjektSS17 befindlichen
 		 * gleichgesetzt
 		 */
 		public class HideClickHandler implements ClickHandler {
