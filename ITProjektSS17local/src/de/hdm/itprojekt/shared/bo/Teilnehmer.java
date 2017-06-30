@@ -213,4 +213,9 @@ public class Teilnehmer extends BusinessObjekt {
 		this.firma = firma;
 	}
 
+	public Teilnehmer(){
+		
+	}
+	
+	
 }
