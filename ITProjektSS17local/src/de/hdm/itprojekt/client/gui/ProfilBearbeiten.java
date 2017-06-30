@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -61,7 +62,9 @@ public class ProfilBearbeiten extends VerticalPanel {
 		strasseLabel.addStyleName("Content-label");
 		plzLabel.addStyleName("Content-label");
 		ortLabel.addStyleName("Content-label");
-
+		
+		RootPanel.get("Content").add(new HTML("<h2>Profil bearbeiten</h2>"));
+		
 		mainPanel.add(labelsPanel);
 
 		// Elemente hinzufügen
