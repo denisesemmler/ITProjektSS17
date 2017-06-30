@@ -11,53 +11,66 @@ import de.hdm.itprojekt.shared.bo.reports.FanInFanOut;
 
 @RemoteServiceRelativePath("reportgenerator")
 
-public interface ReportService  extends RemoteService{
+public interface ReportService extends RemoteService {
 	/**
 	 * Erzeugt Liste mit allen Ausschreibungen.
+	 * 
 	 * @return Liste mit allen Ausschreibungen.
 	 */
 	List<AusschreibungReport> getAllAusschreibungen();
-	
+
 	/**
 	 * Erzeugt Liste mit allen Ausschreibungen, die ein Teilnehmer erstellt hat.
-	 * @param teilnehmerId Id eines Teilnehmers.
+	 * 
+	 * @param teilnehmerId
+	 *            Id eines Teilnehmers.
 	 * @return Liste mit allen Ausschreibungen, die ein Teilnehmer erstellt hat.
 	 */
 	List<AusschreibungReport> getAllAusschreibungenUser(int teilnehmerId);
-	
+
 	/**
-	 * Erzeugt Liste aller Bewerbungen auf Ausschreibungen, die ein Teilnehmer erstellt hat.
-	 * @param teilnehmerId Id eines Teilnehmers.
-	 * @returnListe aller Bewerbungen auf Ausschreibungen, die ein Teilnehmer erstellt hat.
+	 * Erzeugt Liste aller Bewerbungen auf Ausschreibungen, die ein Teilnehmer
+	 * erstellt hat.
+	 * 
+	 * @param teilnehmerId
+	 *            Id eines Teilnehmers.
+	 * @returnListe aller Bewerbungen auf Ausschreibungen, die ein Teilnehmer
+	 *              erstellt hat.
 	 */
 	List<BewerbungReport> getAllBewerbungenUser(int teilnehmerId);
-	
+
 	/**
 	 * Erzeugt Liste aller Bewerbungen, die ein Teilnehmer erstellt hat.
-	 * @param teilnehmerId Id eines Teilnehmers.
+	 * 
+	 * @param teilnehmerId
+	 *            Id eines Teilnehmers.
 	 * @returnListe aller Bewerbungen, die ein Teilnehmer erstellt hat.
 	 */
 	List<BewerbungReport> getAllBewerbungenForUser(int teilnehmerId);
-	
+
 	/**
 	 * Erzeugt Liste von Projektverpflechtungen.
-	 * @param teilnehmerId Id eines Teilnehmers.
+	 * 
+	 * @param teilnehmerId
+	 *            Id eines Teilnehmers.
 	 * @return Liste von Projektverpflechtungen.
 	 */
 	List<BewerbungReport> getProjektverpflechtungen(int teilnehmerId);
-	
+
 	/**
 	 * Erzeugt Liste mit Fan in Fan out.
+	 * 
 	 * @return Liste mit Fan in Fan out.
 	 */
 	List<FanInFanOut> getFanInFanOut();
-	
-	
+
 	/**
 	 * Erzeugt Liste mit passenden Ausschreibungen.
-	 * @param teilnehmerId Id eines Teilnehmers.
+	 * 
+	 * @param teilnehmerId
+	 *            Id eines Teilnehmers.
 	 * @return Liste mit passenden Ausschreibungen.
 	 */
 	List<AusschreibungReport> getVorschlaege(int teilnehmerId);
-	
+
 }
