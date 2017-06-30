@@ -500,8 +500,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 			beteiligungNachBewerbung.setProjektID(projektId);
 			beteiligungNachBewerbung.setBewerbungID(bewerbungId);
 			beteiligungNachBewerbung.setManntage(manntage);
-			beteiligungNachBewerbung.setStartdatum(startdatum);
-			beteiligungNachBewerbung.setEnddatum(enddatum);
+			beteiligungNachBewerbung.setStartdatum(new java.sql.Date(startdatum.getTime()));
+			beteiligungNachBewerbung.setEnddatum(new java.sql.Date(enddatum.getTime()));
 			
 			//Befülltes Objekt in DB speichern
 			btMapper.insert(beteiligungNachBewerbung);
