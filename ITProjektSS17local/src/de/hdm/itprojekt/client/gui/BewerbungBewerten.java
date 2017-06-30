@@ -350,11 +350,17 @@ public class BewerbungBewerten extends HorizontalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 			
+			//Konvertierung von Inputbox in int, wenn inputbox nicht leer ist, sonst standartmäßig 0
+			int manntageWert = 0;
+			if(manntageInBox.getText()!=""){
+				manntageWert = Integer.valueOf(manntageInBox.getText());
+			}
+			
 			// Speicherbutton
 			ClientSideSettings.getProjektAdministration().bewertungZurBewerbung(
 					Integer.valueOf(bewerbungListBox.getSelectedValue()), Float.valueOf(bewertungInBox.getText()),
 					stellungnahmeInBox.getText(), Integer.valueOf(projektListBox.getSelectedValue()),
-					Integer.valueOf(manntageInBox.getText()), startdatumInBox.getValue(), enddatumInBox.getValue(), new BewerbungBewertenCallback());
+					manntageWert, startdatumInBox.getValue(), enddatumInBox.getValue(), new BewerbungBewertenCallback());
 
 			// Zum Verstecken der Bewertung und Stellungnahme nach Eintrag
 			bewertungsZahlAbgeben.setVisible(false);
@@ -544,9 +550,8 @@ public class BewerbungBewerten extends HorizontalPanel {
 			Window.alert("Speicherung war erfolgreich");
 			
 			//Seite wird hier wieder auf Anfang zurückgesetzt um weitere Bewerbungen zu bewerten
-			//TODO 
 			RootPanel.get("Content").clear();
-
+			RootPanel.get("Content").add(new BewerbungVerwalten());
 		}
 
 		@Override

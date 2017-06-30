@@ -27,7 +27,7 @@ public class BewerbungLoeschen extends VerticalPanel {
 	private Label bewerbungNameLabel = new Label("Bewerbung: ");
 	private ListBox bewerbungListbox = new ListBox();
 
-	private Button loeschenButton = new Button("Bewerbung zur�ckziehen", new DeleteClickHandler());
+	private Button loeschenButton = new Button("Bewerbung zurückziehen", new DeleteClickHandler());
 
 	private Vector<Bewerbung> bVector = new Vector<Bewerbung>();
 
@@ -56,15 +56,16 @@ public class BewerbungLoeschen extends VerticalPanel {
 	/**
 	 * Callback für Löschen
 	 */
-	private class DeleteCallback implements AsyncCallback {
+	private class DeleteCallback implements AsyncCallback<Void> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(Void result) {
 			RootPanel.get("Content").clear();
+			RootPanel.get("Content").add(new BewerbungVerwalten());
 
 		}
 

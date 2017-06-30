@@ -75,6 +75,7 @@ public class BewerbungBearbeiten extends VerticalPanel {
 
 		public void onSuccess(Object result) {
 			RootPanel.get("Content").clear();
+			RootPanel.get("Content").add(new BewerbungVerwalten());
 
 		}
 
