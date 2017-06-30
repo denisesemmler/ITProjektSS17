@@ -218,17 +218,21 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 		
 		for(Ausschreibung ausschreibung: ausschreibungen) {
 			List<Eigenschaft> eigenschaftenProfil = EigenschaftMapper.eigenschaftMapper().findByProfil(ausschreibung.getProfil_idSuchprofil());
-			boolean allOk = true;
+			//boolean allOk = true;
+			int same = 0;
 			for(Eigenschaft eigenschaftProfil: eigenschaftenProfil) {
 				for(Eigenschaft eigenschaftTeilnehmer: eigenschaftenTeilnehmer) {
 					if(eigenschaftTeilnehmer.getName().equals(eigenschaftProfil.getName())) {
-						if(eigenschaftTeilnehmer.getWert() < eigenschaftProfil.getWert()) {
-							allOk = false;
+						//if(eigenschaftTeilnehmer.getWert() < eigenschaftProfil.getWert()) {
+						if(eigenschaftTeilnehmer.getWert() == eigenschaftProfil.getWert()) {
+							//allOk = false;
+							same++;
 						}
 					}
 				}
 			}
-			if(allOk) {
+			//if(allOk) {
+			if(same >= 6) {
 				AusschreibungReport reportEntry = new AusschreibungReport(ausschreibung);
 				
 				Projekt projekt = ProjektMapper.projektMapper().findById(ausschreibung.getProjekt_idProjekt());
