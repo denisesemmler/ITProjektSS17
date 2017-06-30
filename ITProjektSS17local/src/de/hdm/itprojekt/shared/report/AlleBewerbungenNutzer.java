@@ -12,6 +12,12 @@ import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.shared.ReportServiceAsync;
 import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
 
+/**
+ * Erstellt einen Bericht aller Bewerbungen vom eingeloggten Teilnehmer
+ * 
+ * @author Jiayi
+ *
+ */
 public class AlleBewerbungenNutzer extends SimpleReport {
 	public AlleBewerbungenNutzer() {
 		super("Ihre Bewerbung - " + ClientSideSettings.getCurrentUser().getVorname() + " "
@@ -78,7 +84,6 @@ public class AlleBewerbungenNutzer extends SimpleReport {
 			}
 		};
 
-		
 		// Spalte für Titel der Bewerbung definieren
 		TextColumn<BewerbungReport> bewerbungsTitelColumn = new TextColumn<BewerbungReport>() {
 			@Override
@@ -102,7 +107,6 @@ public class AlleBewerbungenNutzer extends SimpleReport {
 				return bewerbung.getStatus();
 			}
 		};
-
 
 		// Spalten einen Namen geben
 		table.addColumn(projektColumn, "Projekt");

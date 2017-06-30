@@ -11,6 +11,12 @@ import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.shared.ReportServiceAsync;
 import de.hdm.itprojekt.shared.bo.reports.FanInFanOut;
 
+/**
+ * Erstellt eine Fan in Fan out Analyse für alle Teilnehmer
+ * 
+ * @author Jiayi
+ *
+ */
 public class FanInFanOutReport extends SimpleReport {
 
 	public FanInFanOutReport() {

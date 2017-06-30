@@ -12,6 +12,12 @@ import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.shared.ReportServiceAsync;
 import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 
+/**
+ * Erstellt Bericht mit allen Ausschreibungen vom eingeloggten Teilnehmer
+ * 
+ * @author Jiayi
+ *
+ */
 public class AlleAusschreibungenNutzer extends SimpleReport {
 	public AlleAusschreibungenNutzer() {
 		super("Alle Ausschreibungen für angemeldeten Nutzer");

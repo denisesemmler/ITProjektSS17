@@ -9,7 +9,11 @@ import com.google.gwt.user.client.ui.HTML;
 import de.hdm.itprojekt.shared.bo.BusinessObjekt;
 
 
-
+/**
+ * Abstracter Report, der Titel und Uhrzeit generiert
+ * @author Jiayi
+ *
+ */
 public abstract class SimpleReport extends Report {
  
   private static final long serialVersionUID = 1L;

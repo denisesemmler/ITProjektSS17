@@ -13,6 +13,13 @@ import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.shared.ReportServiceAsync;
 import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 
+/**
+ * Erstellt einen Bericht mit möglichen Bewerbungsvorschlägen für eingeloggten Teilnehmer
+ * Teilnehmer
+ * 
+ * @author Jiayi
+ *
+ */
 public class BewerbungVorschlaege extends SimpleReport {
 	public BewerbungVorschlaege() {
 		super("Ihre Bewerbung - " + ClientSideSettings.getCurrentUser().getVorname() + " "
@@ -80,7 +87,7 @@ public class BewerbungVorschlaege extends SimpleReport {
 				return ausschreibung.getProjektName();
 			}
 		};
-		
+
 		// Spalten einen Namen geben
 		table.addColumn(titleColumn, "Titel");
 		table.addColumn(bewerbungsfristColumn, "Bewerbungsfrist");

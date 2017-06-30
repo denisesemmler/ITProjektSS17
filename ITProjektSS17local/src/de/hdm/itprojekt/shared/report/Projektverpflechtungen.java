@@ -10,6 +10,12 @@ import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.shared.ReportServiceAsync;
 import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
 
+/**
+ * Erstellt zu Teilnehmer eine Projektverpflechtung
+ * 
+ * @author Jiayi
+ *
+ */
 public class Projektverpflechtungen extends SimpleReport {
 
 	public Projektverpflechtungen() {
@@ -18,7 +24,7 @@ public class Projektverpflechtungen extends SimpleReport {
 
 		// Report Generator
 		ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
-		
+
 		// Callback des Service calls
 		final AsyncCallback<List<BewerbungReport>> initReportGeneratorCallback = new AsyncCallback<List<BewerbungReport>>() {
 			@Override
@@ -51,13 +57,13 @@ public class Projektverpflechtungen extends SimpleReport {
 			// Zelle mit Referenzen
 			String refRow = "<tr><td colspan='3'><ul>";
 			for (BewerbungReport ref : bewerbung.getReferenz()) {
-				refRow = refRow + "<li>Projekt: " + ref.getProjektName() + "<ul>"
-						+ "<li>Beworben als: " + ref.getBewerbungName() + "</li>" + "<li>Bewertung: "
-						+ ref.getBewertung() + "</li>" + "<li>Status: " + ref.getStatus() + "</li>" + "</ul></li>";
+				refRow = refRow + "<li>Projekt: " + ref.getProjektName() + "<ul>" + "<li>Beworben als: "
+						+ ref.getBewerbungName() + "</li>" + "<li>Bewertung: " + ref.getBewertung() + "</li>"
+						+ "<li>Status: " + ref.getStatus() + "</li>" + "</ul></li>";
 			}
 
 			refRow = refRow + "</ul></td></tr>";
-			
+
 			// HTMl generieren
 			HTML entry = new HTML(
 					"<table class='reportTable'><tr><th>Name des Bewerbers</th><th>Auf Stelle</th><th>Projekt</th></tr>"
