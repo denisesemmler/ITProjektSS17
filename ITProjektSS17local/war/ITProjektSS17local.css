@@ -131,3 +131,7 @@ table.reportTable th, table.reportTable td{
 	border: 1px solid black;
 	width:200px;
 }
+
+.bold{
+	font-style: italic;
+}

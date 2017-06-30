@@ -22,6 +22,7 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 
@@ -31,19 +32,21 @@ import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
  *
  */
 
-public class BewerbungBewerten extends HorizontalPanel {
+public class BewerbungBewerten extends VerticalPanel {
 
-	//Panels erstellen
-	private HorizontalPanel mainPanel = this;
-	private VerticalPanel editorPanel = new VerticalPanel();
+	// Panels erstellen
+	private VerticalPanel mainPanel = this;
+
+	private HorizontalPanel bodyPanel = new HorizontalPanel();
+	private VerticalPanel selectionPanel = new VerticalPanel();
+	private VerticalPanel bewerbungDetailsPanel = new VerticalPanel();
+	private VerticalPanel ausschreibungEigenschaftenPanel = new VerticalPanel();
+	private VerticalPanel bewerbungEingeschaftenPanel = new VerticalPanel();
 
 	/*
 	 * Insatnzvariablen zu Speicherung der ErgebnisVektoren und späteren
 	 * Zuweisung für die ListBoxen
 	 */
-	private Vector<Projektmarktplatz> projektmarktplätze = new Vector<Projektmarktplatz>();
-	private Vector<Projekt> projekte = new Vector<Projekt>();
-	private Vector<Ausschreibung> ausschreibungen = new Vector<Ausschreibung>();
 	private Vector<Bewerbung> bewerbungen = new Vector<Bewerbung>();
 
 	// Dropdown Menü Instanzvariablen
@@ -63,6 +66,10 @@ public class BewerbungBewerten extends HorizontalPanel {
 	private HTMLPanel bewerbungBewertenPanel = new HTMLPanel(
 			"<h2>Wählen Sie hier die zu bewertende Bewerbung aus</h2>");
 
+	// Überschrift subpanel
+	private HTMLPanel eigenschaftenAusschreibung = new HTMLPanel("<strong>Eigenschaften der Ausschreibung</strong>");
+	private HTMLPanel eigenschaftenBewerbung = new HTMLPanel("<strong>Eigenschaften des Bewerbers</strong>");
+
 	// Panel für die Dropdownfelder
 	private HTMLPanel projektmarktplatzDropdown = new HTMLPanel("<strong>Projektmarktplatz auswählen</strong>");
 	private HTMLPanel projektDropdown = new HTMLPanel("<strong>Projekt auswählen</strong>");
@@ -71,7 +78,7 @@ public class BewerbungBewerten extends HorizontalPanel {
 
 	// Label für die aufgerufene Bewerbung
 	private HTMLPanel erstellDatum = new HTMLPanel("<strong>Erstell Datum:</strong>");
-	private HTMLPanel bewerbungsTitel = new HTMLPanel ("<strong>Bewerbungs Titel:</strong>");
+	private HTMLPanel bewerbungsTitel = new HTMLPanel("<strong>Bewerbungs Titel:</strong>");
 	private HTMLPanel bewerbungsText = new HTMLPanel("<strong>Bewerbungs Text:</strong>");
 	private HTMLPanel idBewerbung = new HTMLPanel("<strong>ID Bewerbung:</strong>");
 	private HTMLPanel status = new HTMLPanel("<strong>Status:</strong>");
@@ -126,31 +133,30 @@ public class BewerbungBewerten extends HorizontalPanel {
 		ClientSideSettings.getProjektAdministration().findAllProjektmarktplatz(new AllProjektmarktplatzCallBack());
 
 		// Großes HorizontalPanel Spalte 1 über die ganze Seite
-		// TODO
+		mainPanel.add(bewerbungBewertenPanel);
+		mainPanel.add(bodyPanel);
 
-		// Dropdown
-		mainPanel.add(editorPanel);
-		editorPanel.add(bewerbungBewertenPanel);
-
-		editorPanel.add(projektmarktplatzDropdown);
-		editorPanel.add(marktplatzListBox);
+		selectionPanel.add(projektmarktplatzDropdown);
+		selectionPanel.add(marktplatzListBox);
 		marktplatzListBox.addChangeHandler(new MarktplatzOnChangeHandler());
 
-		editorPanel.add(projektDropdown);
-		editorPanel.add(projektListBox);
+		selectionPanel.add(projektDropdown);
+		selectionPanel.add(projektListBox);
 		projektListBox.addChangeHandler(new ProjektOnChangeHandler());
 
-		editorPanel.add(ausschreibungDropdown);
-		editorPanel.add(ausschreibungListBox);
+		selectionPanel.add(ausschreibungDropdown);
+		selectionPanel.add(ausschreibungListBox);
 		ausschreibungListBox.addChangeHandler(new AusschreibungOnChangeHandler());
 
-		editorPanel.add(bewerbungDropdown);
-		editorPanel.add(bewerbungListBox);
+		selectionPanel.add(bewerbungDropdown);
+		selectionPanel.add(bewerbungListBox);
 		bewerbungListBox.addChangeHandler(new BewerbungOnChangeHandler());
 
-		// Großes HorizontalPanel Spalte 2 über die ganze Seite
-		// TODO
+		// CSS Classe verticalrand dem Panel hinzufügen
+		selectionPanel.addStyleName("verticalrand");
+		bodyPanel.add(selectionPanel);
 
+		// Großes HorizontalPanel Spalte 2 über die ganze Seite
 		/*
 		 * ausgewählte Bewerbung soll angezeigt werden, dazu werden horizontale
 		 * Panels auf vertikale Panels gelegt
@@ -159,47 +165,36 @@ public class BewerbungBewerten extends HorizontalPanel {
 		idPanel.add(idBewerbung);
 		idPanel.add(idBewerbungSpacePanel);
 		idPanel.add(idBewerbungWert);
-		editorPanel.add(idPanel);
+		bewerbungDetailsPanel.add(idPanel);
 
 		HorizontalPanel datumPanel = new HorizontalPanel();
 		datumPanel.add(erstellDatum);
 		datumPanel.add(erstellDatumSpacePanel);
 		datumPanel.add(erstellDatumWert);
-		editorPanel.add(datumPanel);
-		
+		bewerbungDetailsPanel.add(datumPanel);
+
 		HorizontalPanel bewerbungsTitelPanel = new HorizontalPanel();
 		bewerbungsTitelPanel.add(bewerbungsTitel);
 		bewerbungsTitelPanel.add(bewerbungsTitelSpacePanel);
 		bewerbungsTitelPanel.add(bewerbungsTitelWert);
-		editorPanel.add(bewerbungsTitelPanel);
+		bewerbungDetailsPanel.add(bewerbungsTitelPanel);
 
 		HorizontalPanel bewerbungPanel = new HorizontalPanel();
 		bewerbungPanel.add(bewerbungsText);
 		bewerbungPanel.add(bewerbungsTextSpacePanel);
 		bewerbungPanel.add(bewerbungsTextWert);
-		editorPanel.add(bewerbungPanel);
+		bewerbungDetailsPanel.add(bewerbungPanel);
 
 		HorizontalPanel statusPanel = new HorizontalPanel();
 		statusPanel.add(status);
 		statusPanel.add(statusSpacePanel);
 		statusPanel.add(statusWert);
-		editorPanel.add(statusPanel);
-
-		// HorizontalPanel bewertungPanel = new HorizontalPanel();
-		// bewertungPanel.add(bewertung);
-		// bewertungPanel.add(bewertungSpacePanel);
-		// bewertungPanel.add(bewertungWert);
-		// editorPanel.add(bewertungPanel);
-		//
-		// HorizontalPanel stellungnahmePanel = new HorizontalPanel();
-		// stellungnahmePanel.add(stellungnahme);
-		// stellungnahmePanel.add(stellungnahmeSpacePanel);
-		// stellungnahmePanel.add(stellungnahmeWert);
-		// editorPanel.add(stellungnahmePanel);
+		bewerbungDetailsPanel.add(statusPanel);
 
 		// Button zum mainPanel hinzugefügt, um Textboxen zum befüllen zu
 		// erhalten
-		editorPanel.add(bewerbungBewerten);
+		bewerbungDetailsPanel.add(bewerbungBewerten);
+		bewerbungDetailsPanel.addStyleName("bewerbungsdetails");
 
 		// Großes HorizontalPanel Spalte 3 über die ganze Seite
 		// TODO
@@ -226,23 +221,43 @@ public class BewerbungBewerten extends HorizontalPanel {
 		bewertungAbgeben.setVisible(false);
 
 		// Textboxen zum befüllen mit Text
-		editorPanel.add(bewertungsZahlAbgeben);
-		editorPanel.add(bewertungInBox);
+		bewerbungDetailsPanel.add(bewertungsZahlAbgeben);
+		bewerbungDetailsPanel.add(bewertungInBox);
 
-		editorPanel.add(startdatum);
-		editorPanel.add(startdatumInBox);
+		HorizontalPanel datePickerPanel = new HorizontalPanel();
+		VerticalPanel startDatumPanel = new VerticalPanel();
+		startDatumPanel.add(startdatum);
+		startDatumPanel.add(startdatumInBox);
+		datePickerPanel.add(startDatumPanel);
 
-		editorPanel.add(enddatum);
-		editorPanel.add(enddatumInBox);
+		VerticalPanel endDatumPanel = new VerticalPanel();
+		endDatumPanel.add(enddatum);
+		endDatumPanel.add(enddatumInBox);
+		datePickerPanel.add(endDatumPanel);
+		bewerbungDetailsPanel.add(datePickerPanel);
 
-		editorPanel.add(manntage);
-		editorPanel.add(manntageInBox);
+		bewerbungDetailsPanel.add(manntage);
+		bewerbungDetailsPanel.add(manntageInBox);
 
-		editorPanel.add(stellungnahmeTextAbgeben);
-		editorPanel.add(stellungnahmeInBox);
+		bewerbungDetailsPanel.add(stellungnahmeTextAbgeben);
+		bewerbungDetailsPanel.add(stellungnahmeInBox);
 
 		// Button zum Bewertung abgeben
-		editorPanel.add(bewertungAbgeben);
+		bewerbungDetailsPanel.add(bewertungAbgeben);
+		bewerbungDetailsPanel.addStyleName("verticalrand");
+		bodyPanel.add(bewerbungDetailsPanel);
+
+		// Auschreibungspanel
+		ausschreibungEigenschaftenPanel.add(eigenschaftenAusschreibung);
+		ausschreibungEigenschaftenPanel.addStyleName("verticalrand");
+
+		bodyPanel.add(ausschreibungEigenschaftenPanel);
+
+		// Bewerungspanel
+		bewerbungEingeschaftenPanel.add(eigenschaftenBewerbung);
+		bewerbungEingeschaftenPanel.addStyleName("verticalrand");
+
+		bodyPanel.add(bewerbungEingeschaftenPanel);
 
 	}
 
@@ -349,18 +364,19 @@ public class BewerbungBewerten extends HorizontalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			
-			//Konvertierung von Inputbox in int, wenn inputbox nicht leer ist, sonst standartmäßig 0
+
+			// Konvertierung von Inputbox in int, wenn inputbox nicht leer ist,
+			// sonst standartmäßig 0
 			int manntageWert = 0;
-			if(manntageInBox.getText()!=""){
+			if (manntageInBox.getText() != "") {
 				manntageWert = Integer.valueOf(manntageInBox.getText());
 			}
-			
+
 			// Speicherbutton
 			ClientSideSettings.getProjektAdministration().bewertungZurBewerbung(
 					Integer.valueOf(bewerbungListBox.getSelectedValue()), Float.valueOf(bewertungInBox.getText()),
-					stellungnahmeInBox.getText(), Integer.valueOf(projektListBox.getSelectedValue()),
-					manntageWert, startdatumInBox.getValue(), enddatumInBox.getValue(), new BewerbungBewertenCallback());
+					stellungnahmeInBox.getText(), Integer.valueOf(projektListBox.getSelectedValue()), manntageWert,
+					startdatumInBox.getValue(), enddatumInBox.getValue(), new BewerbungBewertenCallback());
 
 			// Zum Verstecken der Bewertung und Stellungnahme nach Eintrag
 			bewertungsZahlAbgeben.setVisible(false);
@@ -392,8 +408,6 @@ public class BewerbungBewerten extends HorizontalPanel {
 		// als nächstes geladen werden muss
 		@Override
 		public void onSuccess(Vector<Projektmarktplatz> result) {
-			projektmarktplätze = result;
-
 			/*
 			 * hier ist eine Schleife die durch die Instanzvariable
 			 * durchiteriert ziel ist es die Bezeichnungen der
@@ -423,14 +437,13 @@ public class BewerbungBewerten extends HorizontalPanel {
 	// Innerclass für FindProjektByProjektmarktplatzCallBack
 	private class FindProjektByProjektmarktplatzCallBack implements AsyncCallback<Vector<Projekt>> {
 
-		/* Hier wird zuerst das result in der Instanzvariablen gespeichert
-		 *In der onSucces findet IMMER die Anfragen Behandlung statt, also was
-		 *  als nächstes geladen werden muss(non-Javadoc)
+		/*
+		 * Hier wird zuerst das result in der Instanzvariablen gespeichert In
+		 * der onSucces findet IMMER die Anfragen Behandlung statt, also was als
+		 * nächstes geladen werden muss(non-Javadoc)
 		 */
 		@Override
 		public void onSuccess(Vector<Projekt> result) {
-			projekte = result;
-
 			projektListBox.clear();
 
 			/*
@@ -463,14 +476,13 @@ public class BewerbungBewerten extends HorizontalPanel {
 	// Innerclass für die FindAusschreibungByProjektIdCallback
 	private class FindAusschreibungByProjektIdCallback implements AsyncCallback<Vector<Ausschreibung>> {
 
-		/* Hier wird zuerst das result in der Instanzvariablen gespeichert
-		 *In der onSucces findet IMMER die Anfragen Behandlung statt, also was
-		 *als nächstes geladen werden muss
+		/*
+		 * Hier wird zuerst das result in der Instanzvariablen gespeichert In
+		 * der onSucces findet IMMER die Anfragen Behandlung statt, also was als
+		 * nächstes geladen werden muss
 		 */
 		@Override
 		public void onSuccess(Vector<Ausschreibung> result) {
-			ausschreibungen = result;
-
 			ausschreibungListBox.clear();
 
 			/*
@@ -484,10 +496,15 @@ public class BewerbungBewerten extends HorizontalPanel {
 
 			// Hier wird die ID zum ersten Projekt aus dem ErgebnissVektor
 			// rausgeholt.
-			int ersteAusschreibung = result.elementAt(0).getId();
+			Ausschreibung ersteAusschreibung = result.elementAt(0);
+
+			// Parallel zur Bewerbung werden die Eigenschaften zu der
+			// Ausschreibung nachgeladen
+			ClientSideSettings.getProjektAdministration().findNameAndWertFromEigenschaften(
+					ersteAusschreibung.getProfil_idSuchprofil(), new AusschreibungEigenschaftenCallback());
 
 			// Hier wird die ID zur Weiterverarbeitung der Callbacks verwendet.
-			ClientSideSettings.getProjektAdministration().findBewerbungenByAusschreibungId(ersteAusschreibung,
+			ClientSideSettings.getProjektAdministration().findBewerbungenByAusschreibungId(ersteAusschreibung.getId(),
 					new FindBewerbungByAusschreibungIdCallback());
 
 		}
@@ -502,16 +519,17 @@ public class BewerbungBewerten extends HorizontalPanel {
 	// Innerclass für die FindBewerbungByProfilAndAusschreibungIdCallback
 	private class FindBewerbungByAusschreibungIdCallback implements AsyncCallback<Vector<Bewerbung>> {
 
-		/* Hier wird zuerst das result in der Instanzvariablen gespeichert
-		 * In der onSucces findet IMMER die Anfragen Behaandlung statt, also was
+		/*
+		 * Hier wird zuerst das result in der Instanzvariablen gespeichert In
+		 * der onSucces findet IMMER die Anfragen Behaandlung statt, also was
 		 * als nächstes geladen werden muss
-		 */ 
+		 */
 		@Override
 		public void onSuccess(Vector<Bewerbung> result) {
 
 			bewerbungListBox.clear();
 			bewerbungen.clear();
-			
+
 			bewerbungen.addAll(result);
 
 			// foreach schleife mit einer Map (Key,Value)
@@ -533,6 +551,9 @@ public class BewerbungBewerten extends HorizontalPanel {
 			// bewertungWert.setText(ersteBewerbung.getBewertung());
 			// stellungnahmeWert.setText();
 
+			ClientSideSettings.getProjektAdministration().findNameAndWertFromEigenschaften(ersteBewerbung.getIdProfil(),
+					new BewerberEigenschaften());
+
 		}
 
 		@Override
@@ -548,8 +569,9 @@ public class BewerbungBewerten extends HorizontalPanel {
 		@Override
 		public void onSuccess(Void result) {
 			Window.alert("Speicherung war erfolgreich");
-			
-			//Seite wird hier wieder auf Anfang zurückgesetzt um weitere Bewerbungen zu bewerten
+
+			// Seite wird hier wieder auf Anfang zurückgesetzt um weitere
+			// Bewerbungen zu bewerten
 			RootPanel.get("Content").clear();
 			RootPanel.get("Content").add(new BewerbungVerwalten());
 		}
@@ -557,6 +579,80 @@ public class BewerbungBewerten extends HorizontalPanel {
 		@Override
 		public void onFailure(Throwable caught) {
 			Window.alert("ERROR - Please try it later again :-)");
+		}
+
+	}
+
+	/**
+	 * Eigenschaften zur Ausschreibung laden Callback
+	 * 
+	 * @author Patricia
+	 *
+	 */
+	private class AusschreibungEigenschaftenCallback implements AsyncCallback<Vector<Eigenschaft>> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			Window.alert("ERROR - Please try it later again :-)");
+		}
+
+		@Override
+		public void onSuccess(Vector<Eigenschaft> result) {
+
+			VerticalPanel eigenschaften = new VerticalPanel();
+
+			// Eigenschaften in Liste Darstellen.
+			for (Eigenschaft e : result) {
+
+				HorizontalPanel hp = new HorizontalPanel();
+
+				Label name = new Label(e.getName());
+				name.setWidth("170px");
+				name.addStyleName("bold");
+				hp.add(name);
+
+				Label wert = new Label(e.getWertAsString());
+				hp.add(wert);
+
+				eigenschaften.add(hp);
+			}
+
+			ausschreibungEigenschaftenPanel.add(eigenschaften);
+
+		}
+
+	}
+
+	// Klasse für das lesen der Eigenschaften des Bewerbers
+	private class BewerberEigenschaften implements AsyncCallback<Vector<Eigenschaft>> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			Window.alert("ERROR - Please try it later again :-)");
+		}
+
+		@Override
+		public void onSuccess(Vector<Eigenschaft> result) {
+			VerticalPanel eigenschaften = new VerticalPanel();
+
+			// Eigenschaften in Liste Darstellen.
+			for (Eigenschaft e : result) {
+
+				HorizontalPanel hp = new HorizontalPanel();
+
+				Label name = new Label(e.getName());
+				name.setWidth("170px");
+				name.addStyleName("bold");
+				hp.add(name);
+
+				Label wert = new Label(e.getWertAsString());
+				hp.add(wert);
+
+				eigenschaften.add(hp);
+			}
+
+			bewerbungEingeschaftenPanel.add(eigenschaften);
+
 		}
 
 	}
@@ -578,17 +674,16 @@ public class BewerbungBewerten extends HorizontalPanel {
 						// regelt das die stellungnahmebox bei bewertung 1 dazu
 						// kommt
 					} else if (bewertungsZahl == 1.0) {
-						
-						
+
 						startdatum.setVisible(true);
 						startdatumInBox.setVisible(true);
-						
+
 						enddatum.setVisible(true);
 						enddatumInBox.setVisible(true);
-						
+
 						manntage.setVisible(true);
 						manntageInBox.setVisible(true);
-						
+
 						stellungnahmeTextAbgeben.setVisible(true);
 						stellungnahmeInBox.setVisible(true);
 					}
