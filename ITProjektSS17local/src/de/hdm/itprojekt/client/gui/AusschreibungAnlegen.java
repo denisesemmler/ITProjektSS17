@@ -283,7 +283,6 @@ public class AusschreibungAnlegen extends HorizontalPanel {
 
 		public void onSuccess(Ausschreibung result) {
 
-			Window.alert("Ausschreibung angelegt!");
 			// ausgewählte Eigenschaften in die Vektoren laden
 			eigenschaftName.add(schulabschlussLabel.getText());
 			eigenschaftName.add(berufserfahrungLabel.getText());

@@ -92,7 +92,7 @@ public class Navigation extends HorizontalPanel {
 				break;
 			case "Profil verwalten":
 				RootPanel.get("Content").clear();
-				RootPanel.get("Content").add(new ProfilVerwalten());
+				RootPanel.get("Content").add(new ProfilBearbeiten());
 				break;
 			case "Abmelden":
 				getLogOutPop().setPopupPositionAndShow(new PopupPanel.PositionCallback() {

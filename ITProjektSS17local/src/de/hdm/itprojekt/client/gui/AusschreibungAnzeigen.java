@@ -154,7 +154,7 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 	private class GetAllAusschreibungByIDCallback implements AsyncCallback<Vector<Ausschreibung>> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Nein das falsch");
+			Window.alert("Da ist wohl etwas schief gelaufen!");
 		}
 
 		public void onSuccess(Vector<Ausschreibung> result) {
