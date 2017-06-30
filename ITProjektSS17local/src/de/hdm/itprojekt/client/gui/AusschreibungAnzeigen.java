@@ -16,13 +16,18 @@ import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 
+/**
+ * Klasse für Anzeigen von Ausschreibungen
+ * 
+ * @author Moritz Bittner
+ *
+ */
 public class AusschreibungAnzeigen extends VerticalPanel {
 
 	/**
 	 * Erstellen der Panels
 	 */
 	private VerticalPanel mainPanel = this;
-
 
 	/**
 	 * Erstellen der Labels
@@ -41,15 +46,15 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 	 */
 	private Button marktplatzSuchenButton = new Button("Projekte suchen", new SuchenClickHandler());
 	private Button projektSuchenButton = new Button("Ausschreibungen suchen", new SuchenProjektClickHandler());
-	private Button ausschreibungAnzeigenButton = new Button("Ausschreibung anzeigen", new AusschreibungAnzeigenClickHandler());
-	
-	//Vektoren erstellen
+	private Button ausschreibungAnzeigenButton = new Button("Ausschreibung anzeigen",
+			new AusschreibungAnzeigenClickHandler());
+
+	// Vektoren erstellen
 	private Vector<Projektmarktplatz> pmVector = new Vector<Projektmarktplatz>();
 	private Vector<Projekt> pVector = new Vector<Projekt>();
 	private Vector<Ausschreibung> aVector = new Vector<Ausschreibung>();
 	private int pmID;
 	private int pID;
-
 
 	/**
 	 * Konstruktor für Anlegen der GUI
@@ -62,7 +67,7 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 		mainPanel.add(marktplatzLabel);
 		mainPanel.add(marktplatzListbox);
 		mainPanel.add(marktplatzSuchenButton);
-		//Alle Marktplätze suchen
+		// Alle Marktplätze suchen
 		try {
 			ClientSideSettings.getProjektAdministration().findAllProjektmarktplatz(new GetAllMarktplatzCallback());
 		} catch (Exception e) {
@@ -72,6 +77,9 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 
 	}
 
+	/**
+	 * Callback für auslesen alle Projektmarktplätze
+	 */
 	private class GetAllMarktplatzCallback implements AsyncCallback<Vector<Projektmarktplatz>> {
 
 		public void onFailure(Throwable caught) {
@@ -89,6 +97,10 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 		}
 	}
 
+	/**
+	 * Clickhandler, der neue Widgets anfügt und das Suchen von Projekte in
+	 * ausgewähltem PM veranlasst
+	 */
 	private class SuchenClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
@@ -99,7 +111,7 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 			marktplatzLabel.setText("Projekt wählen");
 			mainPanel.add(projektListbox);
 			mainPanel.add(projektSuchenButton);
-			
+
 			try {
 				ClientSideSettings.getProjektAdministration().findProjekteByProjektmarktplatzId(pmID,
 						new GetAllProjekteByIDCallback());
@@ -107,17 +119,20 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 				Window.alert(e.toString());
 				e.printStackTrace();
 			}
-			
-			
+
 		}
 	};
-	
+
+	/**
+	 * Auslesen aller Projekte by Projektmarktplatz ID
+	 */
 	private class GetAllProjekteByIDCallback implements AsyncCallback<Vector<Projekt>> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen!");
 		}
-		//Gefundene Projekt anzeigen
+
+		// Gefundene Projekt anzeigen
 		public void onSuccess(Vector<Projekt> result) {
 
 			for (int i = 0; i < result.size(); i++) {
@@ -125,21 +140,24 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 				pVector.add(p1);
 				projektListbox.addItem(p1.getName());
 			}
-			
+
 		}
 	}
-	
+
+	/**
+	 * Neue Widgets für Suchen einer Ausschreibung
+	 */
 	private class SuchenProjektClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
-			//Ausschreibungen des Projekts anzeigen
+			// Ausschreibungen des Projekts anzeigen
 			pID = pVector.elementAt(projektListbox.getSelectedIndex()).getId();
 			mainPanel.clear();
 			mainPanel.add(marktplatzLabel);
 			marktplatzLabel.setText("Ausschreibung suchen:");
 			mainPanel.add(ausschreibungListbox);
 			mainPanel.add(ausschreibungAnzeigenButton);
-			
+
 			try {
 				ClientSideSettings.getProjektAdministration().findAusschreibungByProjektId(pID,
 						new GetAllAusschreibungByIDCallback());
@@ -147,10 +165,13 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 				Window.alert(e.toString());
 				e.printStackTrace();
 			}
-			
+
 		}
 	};
-	
+
+	/**
+	 * Callback für Alle ausschreibungen by Projekt ID
+	 */
 	private class GetAllAusschreibungByIDCallback implements AsyncCallback<Vector<Ausschreibung>> {
 
 		public void onFailure(Throwable caught) {
@@ -158,18 +179,20 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 		}
 
 		public void onSuccess(Vector<Ausschreibung> result) {
-			//Gefundene Ausschreibungen in ListBox laden
+			// Gefundene Ausschreibungen in ListBox laden
 			for (int i = 0; i < result.size(); i++) {
 				Ausschreibung a1 = result.elementAt(i);
 				aVector.add(a1);
 				ausschreibungListbox.addItem(a1.getTitel());
 			}
-			
+
 		}
 	}
-	
-	
-	
+
+	/**
+	 * Clickhandler, der Ausschreibung anzeigt und auf Click zu der
+	 * Ausschreibung weiterleitet
+	 */
 	private class AusschreibungAnzeigenClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
@@ -181,7 +204,7 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 				Window.alert(e.toString());
 				e.printStackTrace();
 			}
-			// Anzuzeigende Ausschreibung in  Ausschreibungs Objekt laden
+			// Anzuzeigende Ausschreibung in Ausschreibungs Objekt laden
 			Ausschreibung a = new Ausschreibung();
 			a.setId(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getId());
 			a.setBeschreibung(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBeschreibung());
@@ -189,9 +212,8 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 			a.setBewerbungsfrist(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
 			RootPanel.get("Content").clear();
 			RootPanel.get("Content").add(new EinzelAusschreibung(a));
-			
+
 		}
 	};
-	
-	
+
 }
