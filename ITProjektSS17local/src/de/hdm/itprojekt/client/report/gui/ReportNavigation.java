@@ -20,6 +20,8 @@ import de.hdm.itprojekt.shared.report.Projektverpflechtungen;
  *
  */
 public class ReportNavigation extends VerticalPanel implements ClickHandler{
+	
+	// Buttons init
 	private Button allAds  = new Button("(3) Alle Ausschreibungen", this);
 	private Button adsForProfile  = new Button("Alle Ausschreibungen, die Ich erstellt habe.", this);
 	private Button vorschlag  = new Button("(4) Vorschläge", this);	
@@ -34,7 +36,9 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 	 * Constuctor 
 	 * @param parent Verweis auf den Wrapper der Reports. Wrapper beinhaltet die Naviagtion selbst (linke Seite) und den Bericht (rechte Seite)
 	 */
-	public ReportNavigation(ReportWrapper parent){		
+	public ReportNavigation(ReportWrapper parent){	
+		
+		// Buttons Style zuordnen
 		parent.setStylePrimaryName("reportPanel");
 		allAds.setStylePrimaryName("button1");
 		vorschlag.setStylePrimaryName("button1");
@@ -44,6 +48,7 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 		projektverpflechtungen.setStylePrimaryName("button1");
 		fanInFanOut.setStylePrimaryName("button1");
 		
+		// Buttons den Panel hinzufügen
 		this.add(allAds);
 		this.add(adsForProfile);
 		this.add(vorschlag);
