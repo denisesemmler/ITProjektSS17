@@ -1,6 +1,5 @@
 package de.hdm.itprojekt.client.gui;
 
-import java.util.Map;
 import java.util.Vector;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -25,7 +24,6 @@ import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
-import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 /**
  * 
@@ -73,7 +71,7 @@ public class BewerbungBewerten extends HorizontalPanel {
 
 	// Label für die aufgerufene Bewerbung
 	private HTMLPanel erstellDatum = new HTMLPanel("<strong>Erstell Datum:</strong>");
-	private HTMLPanel bewerbungsTitel = new HTMLPanel ("<strong>Bewerbungstitel:</strong>");
+	private HTMLPanel bewerbungsTitel = new HTMLPanel ("<strong>Bewerbungs Titel:</strong>");
 	private HTMLPanel bewerbungsText = new HTMLPanel("<strong>Bewerbungs Text:</strong>");
 	private HTMLPanel idBewerbung = new HTMLPanel("<strong>ID Bewerbung:</strong>");
 	private HTMLPanel status = new HTMLPanel("<strong>Status:</strong>");
@@ -287,7 +285,7 @@ public class BewerbungBewerten extends HorizontalPanel {
 		@Override
 		public void onChange(ChangeEvent event) {
 
-			ClientSideSettings.getProjektAdministration().findBewerbungenTeilnehmerByAusschreibungId(
+			ClientSideSettings.getProjektAdministration().findBewerbungenByAusschreibungId(
 					Integer.valueOf(ausschreibungListBox.getSelectedValue()).intValue(),
 					new FindBewerbungByAusschreibungIdCallback());
 		}
@@ -483,7 +481,7 @@ public class BewerbungBewerten extends HorizontalPanel {
 			int ersteAusschreibung = result.elementAt(0).getId();
 
 			// Hier wird die ID zur Weiterverarbeitung der Callbacks verwendet.
-			ClientSideSettings.getProjektAdministration().findBewerbungenTeilnehmerByAusschreibungId(ersteAusschreibung,
+			ClientSideSettings.getProjektAdministration().findBewerbungenByAusschreibungId(ersteAusschreibung,
 					new FindBewerbungByAusschreibungIdCallback());
 
 		}
@@ -496,22 +494,23 @@ public class BewerbungBewerten extends HorizontalPanel {
 	}
 
 	// Innerclass für die FindBewerbungByProfilAndAusschreibungIdCallback
-	private class FindBewerbungByAusschreibungIdCallback implements AsyncCallback<Map<Bewerbung, Teilnehmer>> {
+	private class FindBewerbungByAusschreibungIdCallback implements AsyncCallback<Vector<Bewerbung>> {
 
 		/* Hier wird zuerst das result in der Instanzvariablen gespeichert
 		 * In der onSucces findet IMMER die Anfragen Behaandlung statt, also was
 		 * als nächstes geladen werden muss
 		 */ 
 		@Override
-		public void onSuccess(Map<Bewerbung, Teilnehmer> result) {
+		public void onSuccess(Vector<Bewerbung> result) {
 
 			bewerbungListBox.clear();
 			bewerbungen.clear();
+			
+			bewerbungen.addAll(result);
 
 			// foreach schleife mit einer Map (Key,Value)
-			for (Map.Entry<Bewerbung, Teilnehmer> entry : result.entrySet()) {
-				bewerbungListBox.addItem(entry.getKey().getTitel(), String.valueOf(entry.getKey().getId()));
-				bewerbungen.add(entry.getKey());
+			for (Bewerbung b : result) {
+				bewerbungListBox.addItem(b.getTitel(), String.valueOf(b.getId()));
 			}
 			Bewerbung ersteBewerbung = bewerbungen.elementAt(0);
 
