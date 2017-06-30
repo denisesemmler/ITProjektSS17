@@ -68,9 +68,9 @@ public class AusschreibungBearbeiten extends HorizontalPanel {
 	public AusschreibungBearbeiten() {
 
 		// CSS Styling
-		ausschreibungTitelLabel.addStyleName("Content-Label");
-		stellenbeschreibungLabel.addStyleName("Content-Label");
-		bewerbungsfristLabel.addStyleName("Content-label");
+		ausschreibungTitelLabel.addStyleName("label1");
+		stellenbeschreibungLabel.addStyleName("label1");
+		bewerbungsfristLabel.addStyleName("label1");
 
 		// Panels anzeigen
 		mainPanel.add(editorPanel);
@@ -91,8 +91,6 @@ public class AusschreibungBearbeiten extends HorizontalPanel {
 
 		attributePanel.add(bewerbungsfristLabel);
 		attributePanel.add(bewerbungsfrist);
-
-		attributePanel.add(kenntnisseLabel);
 
 		// Ausschreibungen des Nutzers finden
 		try {
@@ -115,7 +113,8 @@ public class AusschreibungBearbeiten extends HorizontalPanel {
 						.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBeschreibung());
 				bewerbungsfrist
 						.setValue(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
-				bewerbungsfrist.setCurrentMonth(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
+				bewerbungsfrist.setCurrentMonth(
+						aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
 				// Anforderungen des Suchprofils laden
 				ClientSideSettings.getProjektAdministration().findNameAndWertFromEigenschaften(
 						aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getProfil_idSuchprofil(),
@@ -147,7 +146,8 @@ public class AusschreibungBearbeiten extends HorizontalPanel {
 			stellenbeschreibungArea
 					.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBeschreibung());
 			bewerbungsfrist.setValue(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
-			bewerbungsfrist.setCurrentMonth(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
+			bewerbungsfrist
+					.setCurrentMonth(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
 			ClientSideSettings.getProjektAdministration().findNameAndWertFromEigenschaften(
 					aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getProfil_idSuchprofil(),
 					new GetEigenschaftCallback());
@@ -167,10 +167,14 @@ public class AusschreibungBearbeiten extends HorizontalPanel {
 			// Ausschreibung gezeigt werden
 			eigenschaftenVert.clear();
 			mainPanel.add(eigenschaftenVert);
+			eigenschaftenVert.setStylePrimaryName("verticalrand");
+			eigenschaftenVert.add(kenntnisseLabel);
+			kenntnisseLabel.setStylePrimaryName("label1");
 
 			// Labels und ListBoxen erstellen für Eigenschaften
 			for (int i = 0; i < result.size(); i++) {
 				HorizontalPanel eigenschaftenPanel = new HorizontalPanel();
+				eigenschaftenPanel.setStylePrimaryName("label1");
 				Label abschlussLabel = new Label();
 				abschlussLabel.setWidth("200px");
 				Label berufserfahrungLabel = new Label();
@@ -228,7 +232,7 @@ public class AusschreibungBearbeiten extends HorizontalPanel {
 
 			}
 			// Änderungs Button hinzufügen
-			mainPanel.add(ausschreibungAndernButton);
+			eigenschaftenVert.add(ausschreibungAndernButton);
 
 		}
 

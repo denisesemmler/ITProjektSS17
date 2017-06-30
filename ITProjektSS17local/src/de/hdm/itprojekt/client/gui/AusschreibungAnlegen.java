@@ -42,8 +42,8 @@ public class AusschreibungAnlegen extends HorizontalPanel {
 	private Label ausschreibungTitelLabel = new Label("Titel der Ausschreibung: ");
 	private Label stellenbeschreibungLabel = new Label("Stellenbeschreibung: ");
 	private Label bewerbungsfristLabel = new Label("Bewerbungsfrist festlegen: ");
-	
-	//Erstellen der TextBox und Area
+
+	// Erstellen der TextBox und Area
 	private TextBox ausschreibungTitelBox = new TextBox();
 	private TextArea stellenbeschreibungArea = new TextArea();
 
