@@ -122,4 +122,13 @@ public class Beteiligung extends BusinessObjekt {
 		this.enddatum = enddatum;
 	}
 
+	@Override
+	public String toString() {
+		return "Beteiligung [stellungnahme=" + stellungnahme + ", manntage=" + manntage + ", startdatum=" + startdatum
+				+ ", enddatum=" + enddatum + ", projektID=" + projektID + ", bewerbungID=" + bewerbungID + ", getId()="
+				+ getId() + ", getCreationDate()=" + getCreationDate() + "]";
+	}
+	
+	
+
 }
