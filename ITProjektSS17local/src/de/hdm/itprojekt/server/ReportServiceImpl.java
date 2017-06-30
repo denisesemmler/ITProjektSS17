@@ -139,32 +139,29 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 		Vector<Bewerbung> bewerbungen = BewerbungMapper.bewerbungMapper().findBewerbungByTeilnehmerId(profil.getId());
 
 		for (Bewerbung bewerbung : bewerbungen) {
-			// Nur laufende Bewerbungen
-			if (bewerbung.getStatus().toLowerCase().equals("laufend")) {
 
-				// BO erstellen
-				BewerbungReport reportEntry = new BewerbungReport(bewerbung);
+			// BO erstellen
+			BewerbungReport reportEntry = new BewerbungReport(bewerbung);
 
-				// Ausschreibungsname ermitteln
-				Ausschreibung ausschreibung = AusschreibungMapper.ausschreibungMapper()
-						.findById(bewerbung.getAusschreibungID());
-				reportEntry.setBewerbungName(ausschreibung.getTitel());
+			// Ausschreibungsname ermitteln
+			Ausschreibung ausschreibung = AusschreibungMapper.ausschreibungMapper()
+					.findById(bewerbung.getAusschreibungID());
+			reportEntry.setBewerbungName(ausschreibung.getTitel());
 
-				// Projektname ermitteln
-				Projekt projekt = ProjektMapper.projektMapper().findById(ausschreibung.getProjekt_idProjekt());
-				reportEntry.setProjektName(projekt.getName());
+			// Projektname ermitteln
+			Projekt projekt = ProjektMapper.projektMapper().findById(ausschreibung.getProjekt_idProjekt());
+			reportEntry.setProjektName(projekt.getName());
 
-				// Ansprechpartner ermitteln
-				Teilnehmer teilnehmer = TeilnehmerMapper.teilnehmerMapper()
-						.findById(ausschreibung.getTeilnehmer_idTeilnehmer());
-				reportEntry.setAnsprechpartnerName(teilnehmer.getVorname() + " " + teilnehmer.getNachname());
+			// Ansprechpartner ermitteln
+			Teilnehmer teilnehmer = TeilnehmerMapper.teilnehmerMapper()
+					.findById(ausschreibung.getTeilnehmer_idTeilnehmer());
+			reportEntry.setAnsprechpartnerName(teilnehmer.getVorname() + " " + teilnehmer.getNachname());
 
-				// Bo der Liste hinzufügen
-				reportEntry.setFrist(ausschreibung.getBewerbungsfrist());
+			// Bo der Liste hinzufügen
+			reportEntry.setFrist(ausschreibung.getBewerbungsfrist());
 
-				// Der Liste hinzufügen
-				report.add(reportEntry);
-			}
+			// Der Liste hinzufügen
+			report.add(reportEntry);
 		}
 
 		return report;
