@@ -396,22 +396,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 				//Rückgabe an den Aufrufer
 				return bewerbungen;
 	}
-
-	@Override
-	public Map<Bewerbung, Teilnehmer> findBewerbungenTeilnehmerByAusschreibungId(int ausscchreibungId)
-			throws IllegalArgumentException {
-	
-		Vector<Bewerbung> bewerbungen = this.findBewerbungenByAusschreibungId(ausscchreibungId);
-		
-		Map<Bewerbung, Teilnehmer> bewerbungTeilnehmerMap = new HashMap<Bewerbung, Teilnehmer>();
-		
-		for(Bewerbung b : bewerbungen){
-			bewerbungTeilnehmerMap.put(b,this.findTeilnehmerByBewerbungId(b.getId()));
-		}
-		
-		return bewerbungTeilnehmerMap;
-		
-	}
 	
 	
 	
@@ -503,11 +487,10 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		//Bewertung an Bewerbung hinzufügen
 		bewerbungAusDb.setBewertung(bewertung);
 		
-		//Ergebnis in die DB updaten
-		bMapper.update(bewerbungAusDb);
-		
 		//Beteiligung ab Bewertung 1, sonst nix.
 		if(bewertung == 1){
+			
+			bewerbungAusDb.setStatus("Angenommen");
 			
 			//Neues Objekt
 			Beteiligung beteiligungNachBewerbung = new Beteiligung();
@@ -523,8 +506,12 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 			//Befülltes Objekt in DB speichern
 			btMapper.insert(beteiligungNachBewerbung);
 			
+		}else{
+			bewerbungAusDb.setStatus("Abgelehnt");
 		}
 		
+		//Ergebnis in die DB updaten
+		bMapper.update(bewerbungAusDb);
 	}
 	
 	

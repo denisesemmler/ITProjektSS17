@@ -75,8 +75,6 @@ public interface ProjektAdministration extends RemoteService {
 	
 	public Vector<Bewerbung> findBewerbungenByAusschreibungId(int AuscchreibungId) throws IllegalArgumentException;
 	
-	public Map<Bewerbung,Teilnehmer> findBewerbungenTeilnehmerByAusschreibungId(int AuscchreibungId) throws IllegalArgumentException;
-	
 	public Vector<Ausschreibung> findAllAusschreibungByTeilnehmerId(int teilnehmerId) throws IllegalArgumentException;
 	
 	public Vector<Ausschreibung> findAllAusschreibungen() throws IllegalArgumentException;

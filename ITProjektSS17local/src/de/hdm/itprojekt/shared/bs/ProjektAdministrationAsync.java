@@ -64,9 +64,6 @@ public interface ProjektAdministrationAsync {
 	
 	void findBewerbungenByAusschreibungId(int AusschreibungId, AsyncCallback<Vector<Bewerbung>> callback);
 
-	void findBewerbungenTeilnehmerByAusschreibungId(int AuscchreibungId,
-			AsyncCallback<Map<Bewerbung, Teilnehmer>> callback);
-	
 	void findAllAusschreibungByTeilnehmerId(int teilnehmerId, AsyncCallback<Vector<Ausschreibung>> callback);
 	
 	void findAllAusschreibungen(AsyncCallback<Vector<Ausschreibung>> callback);
