@@ -15,4 +15,5 @@ public interface ReportServiceAsync {
 	void getAllBewerbungenForUser(int teilnehmerId, AsyncCallback<List<BewerbungReport>> callback);
 	void getProjektverpflechtungen(int teilnehmerId, AsyncCallback<List<BewerbungReport>> callback);
 	void getFanInFanOut(AsyncCallback<List<FanInFanOut>> callback);
+	void getVorschlaege(int teilnehmerId, AsyncCallback<List<AusschreibungReport>> callback);
 }

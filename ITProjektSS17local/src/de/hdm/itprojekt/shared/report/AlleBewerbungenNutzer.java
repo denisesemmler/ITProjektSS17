@@ -32,7 +32,7 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
             	renderTable(result);
             }
           };
-    	reportGenerator.getAllBewerbungenForUser(ClientSideSettings.getCurrentUser().getId(), initReportGeneratorCallback);        
+    	reportGenerator.getAllBewerbungenForUser(ClientSideSettings.getCurrentUser().getId(), initReportGeneratorCallback);
 	}
 	
 	private void setSize(int i) {

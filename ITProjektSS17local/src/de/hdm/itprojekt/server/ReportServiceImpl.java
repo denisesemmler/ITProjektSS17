@@ -35,9 +35,6 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 	private static final long serialVersionUID = -7548005663369824973L;
 
 	@Override
-	/**
-	 * 
-	 */
 	public List<AusschreibungReport> getAllAusschreibungen() {
 		List<AusschreibungReport> report = new ArrayList<AusschreibungReport>();
 		
@@ -206,6 +203,12 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 			
 			report.add(reportEntry);
 		}
+		return report;
+	}
+
+	@Override
+	public List<AusschreibungReport> getVorschlaege(int teilnehmerId) {
+		List<AusschreibungReport> report = new ArrayList<>();
 		return report;
 	}
 }
