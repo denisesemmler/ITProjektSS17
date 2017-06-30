@@ -66,8 +66,12 @@ public class Eigenschaft extends BusinessObjekt {
 		this.profil_idProfil = profil_idProfil;
 	}
 
+	/**
+	 * Konvertiert die technisch gespeicherte id in einen lesbaren String
+	 * @return Eigenschafts Wert als lesbarer String
+	 */
 	public String getWertAsString() {
-		if (this.name.equals("Hoechster Schulabschluss")) {
+		if (this.name.equals("Höchster Schulabschluss")) {
 			String[] options = { "Hauptschulabschluss", "Mittlere Reife", "Fachhochschulreife", "Abitur", "Bachelor",
 					"Master" };
 			return options[this.wert];
