@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.client.gui;
 
+import com.google.appengine.api.utils.SystemProperty;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -139,7 +140,9 @@ public class ProfilAnzeigen extends HorizontalPanel {
 				break;
 			case "Zum ReportGenerator":
 				RootPanel.get("Content").clear();
-				Window.open("http://1-dot-global-bridge-162410.appspot.com/Report.html", "_self", "");
+				
+				//Routing zum Report Generator--> protocol (http:) + "//" + host (localhost:8888) + /Report.html
+				Window.open(Window.Location.getProtocol()+"//"+Window.Location.getHost()+"/Report.html", "_self", "");
 				break;
 			}
 		}
