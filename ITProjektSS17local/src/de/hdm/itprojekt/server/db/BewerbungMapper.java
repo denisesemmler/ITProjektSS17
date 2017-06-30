@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import de.hdm.itprojekt.server.ServersideSettings;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 /**
  * 
@@ -216,28 +217,8 @@ public class BewerbungMapper {
 				b.setId(rs.getInt("maxId") + 1);
 				// neues SQL Statement
 				stmt = con.createStatement();
-				// SQL Query ausf�hren um Datensatz in DB zu schreiben
-				stmt.executeUpdate("INSERT INTO Bewerbung (idBewerbung, bewerbungstext, erstelldatum, bewertung, Profil_idProfil, Ausschreibung_idAusschreibung, status, titel) " +
-						"VALUES "
-						+ "('" 
-						+ b.getId()
-						+ "', '" 
-						+ b.getBewerbungsText()
-						+ "', '" 
-						+ b.getErstellDatum()
-						+ "', '" 
-						+ b.getBewertung()
-						+ "', '" 
-						+ b.getIdProfil()
-						+ "', '" 
-						+ b.getAusschreibungID()
-						+ "', '" 
-						+ b.getStatus()
-						+ "', '" 
-						+ b.getTitel()
-						+ "')");	
 				
-				System.out.println("INSERT INTO Bewerbung (idBewerbung, bewerbungstext, erstelldatum, bewertung, Profil_idProfil, Ausschreibung_idAusschreibung, status, titel) " +
+				String sql = "INSERT INTO Bewerbung (idBewerbung, bewerbungstext, erstelldatum, bewertung, Profil_idProfil, Ausschreibung_idAusschreibung, status, titel) " +
 						"VALUES "
 						+ "('" 
 						+ b.getId()
@@ -255,7 +236,11 @@ public class BewerbungMapper {
 						+ b.getStatus()
 						+ "', '" 
 						+ b.getTitel()
-						+ "')");	
+						+ "')";	
+				// SQL Query ausf�hren um Datensatz in DB zu schreiben
+				stmt.executeUpdate(sql);
+
+				ServersideSettings.getLogger().info(sql);
 					
 			}
 		}
@@ -278,20 +263,40 @@ public class BewerbungMapper {
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
+			
+			//SQL Zusammenbauen mit der StringBuilder Klasse. Einzelnen Strings Werden mit Append konkatiniert.
+			StringBuilder sb = new StringBuilder();
+			sb.append("UPDATE `bewerbung` SET `idBewerbung`=");
+			sb.append(b.getId());
+			sb.append(",");
+			sb.append("`bewerbungstext`=");
+			sb.append(b.getBewerbungsText());
+			sb.append(",");
+			sb.append("`erstelldatum`=");
+			sb.append(b.getErstellDatum());
+			sb.append(",");
+			sb.append("`bewertung`=");
+			sb.append(b.getBewertung());
+			sb.append(",");
+			sb.append("`Profil_idProfil`=");
+			sb.append(b.getIdProfil());
+			sb.append(",");
+			sb.append("`Ausschreibung_idAusschreibung`=");
+			sb.append(b.getAusschreibungID());
+			sb.append(",");
+			sb.append("`status`=");
+			sb.append(b.getStatus());
+			sb.append(",");
+			sb.append("`titel`=");
+			sb.append(b.getTitel());
+			sb.append("WHERE idBewerbung =");
+			sb.append(b.getId());
+			
 			// SQL Query ausf�hren
-			stmt.executeUpdate("UPDATE Bewerbung "
-					+ "SET bewerbungstext = '" 
-					+ b.getBewerbungsText()
-	
-					+ "' WHERE idBewerbung = " 
-					+ b.getId());
+			stmt.executeUpdate(sb.toString());
 			
-			
-			System.out.println("UPDATE Bewerbung "
-					+ "SET bewerbungstext = '" 
-					+ b.getBewerbungsText()
-					+ "' WHERE idBewerbung = " 
-					+ b.getId());
+			ServersideSettings.getLogger().info(sb.toString());
+
 			
 		}
 		// Error Handling
