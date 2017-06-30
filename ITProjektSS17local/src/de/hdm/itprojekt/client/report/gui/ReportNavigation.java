@@ -16,28 +16,32 @@ import de.hdm.itprojekt.shared.report.Projektverpflechtungen;
 
 /**
  * Navigation, die auf die unterschiedlichen Berichte verlinkt.
+ * 
  * @author Jiayi
  *
  */
-public class ReportNavigation extends VerticalPanel implements ClickHandler{
-	
+public class ReportNavigation extends VerticalPanel implements ClickHandler {
+
 	// Buttons init
-	private Button allAds  = new Button("(3) Alle Ausschreibungen", this);
-	private Button adsForProfile  = new Button("Alle Ausschreibungen, die Ich erstellt habe.", this);
-	private Button vorschlag  = new Button("(4) Vorschläge", this);	
-	private Button adsForApplication  = new Button("(5) Alle Bewerbungen,die sich bei Mir beworben haben.", this);
-	private Button openApplication  = new Button("(6) Alle Bewerbungen von Ausschreibung des Benutzers", this);
+	private Button allAds = new Button("(3) Alle Ausschreibungen", this);
+	private Button adsForProfile = new Button("Alle Ausschreibungen, die Ich erstellt habe.", this);
+	private Button vorschlag = new Button("(4) Vorschläge", this);
+	private Button adsForApplication = new Button("(5) Alle Bewerbungen,die sich bei Mir beworben haben.", this);
+	private Button openApplication = new Button("(6) Alle Bewerbungen von Ausschreibung des Benutzers", this);
 	private Button projektverpflechtungen = new Button("(7) Projektverpflechtungen", this);
 	private Button fanInFanOut = new Button("(8) Fan-In/Fan-Out Analyse", this);
-	
+
 	ReportWrapper parent;
-	
+
 	/**
-	 * Constuctor 
-	 * @param parent Verweis auf den Wrapper der Reports. Wrapper beinhaltet die Naviagtion selbst (linke Seite) und den Bericht (rechte Seite)
+	 * Constuctor
+	 * 
+	 * @param parent
+	 *            Verweis auf den Wrapper der Reports. Wrapper beinhaltet die
+	 *            Naviagtion selbst (linke Seite) und den Bericht (rechte Seite)
 	 */
-	public ReportNavigation(ReportWrapper parent){	
-		
+	public ReportNavigation(ReportWrapper parent) {
+
 		// Buttons Style zuordnen
 		parent.setStylePrimaryName("reportPanel");
 		allAds.setStylePrimaryName("button1");
@@ -47,7 +51,7 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 		openApplication.setStylePrimaryName("button1");
 		projektverpflechtungen.setStylePrimaryName("button1");
 		fanInFanOut.setStylePrimaryName("button1");
-		
+
 		// Buttons den Panel hinzufügen
 		this.add(allAds);
 		this.add(adsForProfile);
@@ -56,28 +60,29 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 		this.add(openApplication);
 		this.add(projektverpflechtungen);
 		this.add(fanInFanOut);
-		
+
 		this.parent = parent;
 	}
+
 	/**
 	 * Zeigt Bericht an, abhänig davon welcher Button gedrückt wurde
 	 */
 	public void onClick(ClickEvent event) {
 		Widget sender = (Widget) event.getSource();
 
-		if(sender == allAds) {
+		if (sender == allAds) {
 			this.parent.setReport(new AlleAusschreibungen());
-		} else if (sender == adsForProfile){
+		} else if (sender == adsForProfile) {
 			this.parent.setReport(new AlleAusschreibungenNutzer());
 		} else if (sender == vorschlag) {
 			this.parent.setReport(new BewerbungVorschlaege());
-		} else if (sender == adsForApplication){
+		} else if (sender == adsForApplication) {
 			this.parent.setReport(new BewerbungZuAusschreibung());
-		} else if (sender == openApplication){
+		} else if (sender == openApplication) {
 			this.parent.setReport(new AlleBewerbungenNutzer());
-		} else if (sender == projektverpflechtungen){
+		} else if (sender == projektverpflechtungen) {
 			this.parent.setReport(new Projektverpflechtungen());
-		} else if (sender == fanInFanOut){
+		} else if (sender == fanInFanOut) {
 			this.parent.setReport(new FanInFanOutReport());
 		}
 	}

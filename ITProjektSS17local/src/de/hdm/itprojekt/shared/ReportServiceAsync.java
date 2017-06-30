@@ -10,10 +10,16 @@ import de.hdm.itprojekt.shared.bo.reports.FanInFanOut;
 
 public interface ReportServiceAsync {
 	void getAllAusschreibungen(AsyncCallback<List<AusschreibungReport>> callback);
+
 	void getAllAusschreibungenUser(int teilnehmerId, AsyncCallback<List<AusschreibungReport>> callback);
+
 	void getAllBewerbungenUser(int teilnehmerId, AsyncCallback<List<BewerbungReport>> callback);
+
 	void getAllBewerbungenForUser(int teilnehmerId, AsyncCallback<List<BewerbungReport>> callback);
+
 	void getProjektverpflechtungen(int teilnehmerId, AsyncCallback<List<BewerbungReport>> callback);
+
 	void getFanInFanOut(AsyncCallback<List<FanInFanOut>> callback);
+
 	void getVorschlaege(int teilnehmerId, AsyncCallback<List<AusschreibungReport>> callback);
 }

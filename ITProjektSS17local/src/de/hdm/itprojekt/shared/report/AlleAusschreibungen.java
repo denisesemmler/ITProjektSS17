@@ -8,17 +8,26 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
-import de.hdm.itprojekt.client.gui.ClientSideSettings;
 
+import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.shared.ReportServiceAsync;
 import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
-
+/**
+ * Erstellt Report mit allen Ausschreibungen
+ * @author Jiayi
+ *
+ */
 public class AlleAusschreibungen extends SimpleReport {
-      
+     
+	/**
+	 * Erstellt den Report
+	 */
 	public AlleAusschreibungen() {
 		super("Alle Ausschreibungen");
+		// Report Generator
     	ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
     	
+    	// Callback des Service calls
     	final AsyncCallback<List<AusschreibungReport>> initReportGeneratorCallback = new AsyncCallback<List<AusschreibungReport>>() {
             @Override
     		public void onFailure(Throwable caught) {
@@ -27,20 +36,23 @@ public class AlleAusschreibungen extends SimpleReport {
             @Override
     		public void onSuccess(List<AusschreibungReport> result) {
             	setSize(result.size());
-            	renderTable(result);
+            	render(result);
             }
           };
     	reportGenerator.getAllAusschreibungen(initReportGeneratorCallback);        
 	}
 	
-	private void setSize(int i) {
+	@Override
+	protected void setSize(int i) {
 		Label test = new Label("Anzahl Berichte: "+i);
 		this.add(test);
 	}
 	
-	private void renderTable(List<AusschreibungReport> ausschreibungen) {
+	
+	protected void render(List<AusschreibungReport> ausschreibungen) {
 		CellTable<AusschreibungReport> table = new CellTable<AusschreibungReport>();
 		
+		// Spalte für ID definieren
 		TextColumn<AusschreibungReport> idColumn = new TextColumn<AusschreibungReport>() {
 			@Override
 			public String getValue(AusschreibungReport ausschreibung) {
@@ -48,6 +60,7 @@ public class AlleAusschreibungen extends SimpleReport {
 			}
 		};
 		
+		// Spalte für Titel definieren
 		TextColumn<AusschreibungReport> titleColumn = new TextColumn<AusschreibungReport>() {
 			@Override
 			public String getValue(AusschreibungReport ausschreibung) {
@@ -55,6 +68,7 @@ public class AlleAusschreibungen extends SimpleReport {
 			}
 		};
 		
+		// Spalte für Bewerbungsfrist definieren
 		TextColumn<AusschreibungReport> bewerbungsfristColumn = new TextColumn<AusschreibungReport>() {
 			@Override
 			public String getValue(AusschreibungReport ausschreibung) {
@@ -64,6 +78,7 @@ public class AlleAusschreibungen extends SimpleReport {
 			}
 		};
 		
+		// Spalte für Ansprechpartner definieren
 		TextColumn<AusschreibungReport> ansprechpartnerColumn = new TextColumn<AusschreibungReport>() {
 			@Override
 			public String getValue(AusschreibungReport ausschreibung) {
@@ -71,6 +86,7 @@ public class AlleAusschreibungen extends SimpleReport {
 			}
 		};
 		
+		// Spalte für Projektname definieren
 		TextColumn<AusschreibungReport> projektColumn = new TextColumn<AusschreibungReport>() {
 			@Override
 			public String getValue(AusschreibungReport ausschreibung) {
@@ -78,14 +94,14 @@ public class AlleAusschreibungen extends SimpleReport {
 			}
 		};
 		
-		//idColumn.setSortable(true);
-		
+		// Spalten einen Namen geben
 		table.addColumn(idColumn, "ID");
 		table.addColumn(titleColumn, "Titel");
 		table.addColumn(bewerbungsfristColumn, "Bewerbungsfrist");
 		table.addColumn(ansprechpartnerColumn, "Ansprechpartner");
 		table.addColumn(projektColumn, "Projekt");
 		
+		// Daten der Tabelle hinzufügen
 		table.setRowCount(ausschreibungen.size(), true);
 	    table.setRowData(0, ausschreibungen);
 	    
