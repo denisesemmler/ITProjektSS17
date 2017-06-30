@@ -86,12 +86,12 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
 			}
 		};
 		
-		TextColumn<BewerbungReport> bewertungColumn = new TextColumn<BewerbungReport>() {
-			@Override
-			public String getValue(BewerbungReport bewerbung) {
-				return String.valueOf(bewerbung.getBewertung());
-			}
-		};
+		//TextColumn<BewerbungReport> bewertungColumn = new TextColumn<BewerbungReport>() {
+			//@Override
+			//public String getValue(BewerbungReport bewerbung) {
+				//return String.valueOf(bewerbung.getBewertung());
+			//}
+		//};
 		
 		TextColumn<BewerbungReport> statusColumn = new TextColumn<BewerbungReport>() {
 			@Override
@@ -109,7 +109,7 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
 	
 		table.addColumn(bewerbungsTitelColumn, "Bewerbungstitel");
 		table.addColumn(bewerbungsTextColumn, "Bewerbungstext");
-		table.addColumn(bewertungColumn, "Bewertung");
+		//table.addColumn(bewertungColumn, "Bewertung");
 		
 		table.addColumn(ansprechpartnerColumn, "Ansprechpartner");
 		table.addColumn(bewerbungsfristColumn, "Bewerbungsfrist");
