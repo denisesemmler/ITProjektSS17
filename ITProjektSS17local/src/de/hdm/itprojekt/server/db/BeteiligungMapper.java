@@ -247,7 +247,7 @@ public class BeteiligungMapper {
 				// neues SQL Statement
 				stmt = con.createStatement();
 				
-				String sql2 = "INSERT INTO Beteiligung (idBeteiligung, bewerbungId, stellungnahme, projektId, manntage, startdatum, enddatum)"
+				String sql2 = "INSERT INTO Beteiligung (idBeteiligung, Bewerbung_idBewerbung, stellungnahme, Projekt_idProjekt, manntage, startdatum, enddatum)"
 						+ "VALUES " + "('" + b.getId() + "', '" + b.getBewerbungID() + "', '"
 						+ b.getStellungnahme() + "', '" + b.getProjektID() + "', '" 
 						+ b.getManntage() + "', '" + b.getStartdatum() + "', '" + b.getEnddatum() +"')";

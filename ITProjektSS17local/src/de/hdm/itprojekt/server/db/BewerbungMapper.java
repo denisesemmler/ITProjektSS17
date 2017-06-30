@@ -266,36 +266,37 @@ public class BewerbungMapper {
 			
 			//SQL Zusammenbauen mit der StringBuilder Klasse. Einzelnen Strings Werden mit Append konkatiniert.
 			StringBuilder sb = new StringBuilder();
-			sb.append("UPDATE `bewerbung` SET `idBewerbung`=");
+			sb.append("UPDATE bewerbung SET idBewerbung = ");
 			sb.append(b.getId());
-			sb.append(",");
-			sb.append("`bewerbungstext`=");
+			sb.append(" , ");
+			sb.append(" bewerbungstext= '");
 			sb.append(b.getBewerbungsText());
-			sb.append(",");
-			sb.append("`erstelldatum`=");
+			sb.append("' , ");
+			sb.append("erstelldatum = '");
 			sb.append(b.getErstellDatum());
-			sb.append(",");
-			sb.append("`bewertung`=");
+			sb.append("' , ");
+			sb.append("bewertung = ");
 			sb.append(b.getBewertung());
-			sb.append(",");
-			sb.append("`Profil_idProfil`=");
+			sb.append(" , ");
+			sb.append("Profil_idProfil = ");
 			sb.append(b.getIdProfil());
-			sb.append(",");
-			sb.append("`Ausschreibung_idAusschreibung`=");
+			sb.append(" , ");
+			sb.append("Ausschreibung_idAusschreibung = ");
 			sb.append(b.getAusschreibungID());
-			sb.append(",");
-			sb.append("`status`=");
+			sb.append(" , ");
+			sb.append("status = '");
 			sb.append(b.getStatus());
-			sb.append(",");
-			sb.append("`titel`=");
+			sb.append("' , ");
+			sb.append("titel = '");
 			sb.append(b.getTitel());
+			sb.append("' ");
 			sb.append("WHERE idBewerbung =");
 			sb.append(b.getId());
 			
+			ServersideSettings.getLogger().info(sb.toString());
 			// SQL Query ausf�hren
 			stmt.executeUpdate(sb.toString());
 			
-			ServersideSettings.getLogger().info(sb.toString());
 
 			
 		}
