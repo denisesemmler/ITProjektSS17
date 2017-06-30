@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Widget;
 import de.hdm.itprojekt.shared.report.AlleAusschreibungen;
 import de.hdm.itprojekt.shared.report.AlleAusschreibungenNutzer;
 import de.hdm.itprojekt.shared.report.AlleBewerbungenNutzer;
+import de.hdm.itprojekt.shared.report.BewerbungVorschlaege;
 import de.hdm.itprojekt.shared.report.BewerbungZuAusschreibung;
 import de.hdm.itprojekt.shared.report.FanInFanOutReport;
 import de.hdm.itprojekt.shared.report.Projektverpflechtungen;
@@ -19,12 +20,13 @@ import de.hdm.itprojekt.shared.report.Projektverpflechtungen;
  *
  */
 public class ReportNavigation extends VerticalPanel implements ClickHandler{
-	private Button allAds  = new Button("Alle Ausschreibungen", this);
+	private Button allAds  = new Button("(3) Alle Ausschreibungen", this);
 	private Button adsForProfile  = new Button("Alle Ausschreibungen, die Ich erstellt habe.", this);
-	private Button adsForApplication  = new Button("Alle Bewerbungen,die sich bei Mir beworben haben.", this);
-	private Button openApplication  = new Button("Alle Bewerbungen von Ausschreibung des Benutzers", this);
-	private Button projektverpflechtungen = new Button("Projektverpflechtungen", this);
-	private Button fanInFanOut = new Button("Fan-In/Fan-Out Analyse", this);
+	private Button vorschlag  = new Button("(4) Vorschläge", this);	
+	private Button adsForApplication  = new Button("(5) Alle Bewerbungen,die sich bei Mir beworben haben.", this);
+	private Button openApplication  = new Button("(6) Alle Bewerbungen von Ausschreibung des Benutzers", this);
+	private Button projektverpflechtungen = new Button("(7) Projektverpflechtungen", this);
+	private Button fanInFanOut = new Button("(8) Fan-In/Fan-Out Analyse", this);
 	
 	ReportWrapper parent;
 	
@@ -35,6 +37,7 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 	public ReportNavigation(ReportWrapper parent){		
 		parent.setStylePrimaryName("reportPanel");
 		allAds.setStylePrimaryName("button1");
+		vorschlag.setStylePrimaryName("button1");
 		adsForProfile.setStylePrimaryName("button1");
 		adsForApplication.setStylePrimaryName("button1");
 		openApplication.setStylePrimaryName("button1");
@@ -43,6 +46,7 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 		
 		this.add(allAds);
 		this.add(adsForProfile);
+		this.add(vorschlag);
 		this.add(adsForApplication);
 		this.add(openApplication);
 		this.add(projektverpflechtungen);
@@ -60,6 +64,8 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler{
 			this.parent.setReport(new AlleAusschreibungen());
 		} else if (sender == adsForProfile){
 			this.parent.setReport(new AlleAusschreibungenNutzer());
+		} else if (sender == vorschlag) {
+			this.parent.setReport(new BewerbungVorschlaege());
 		} else if (sender == adsForApplication){
 			this.parent.setReport(new BewerbungZuAusschreibung());
 		} else if (sender == openApplication){
