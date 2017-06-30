@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.Label;
 
 import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.shared.ReportServiceAsync;
-
+import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
 
 public class AlleBewerbungenNutzer extends SimpleReport{
@@ -33,6 +33,20 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
             }
           };
     	reportGenerator.getAllBewerbungenForUser(ClientSideSettings.getCurrentUser().getId(), initReportGeneratorCallback);
+    	
+    	
+    	final AsyncCallback<List<AusschreibungReport>> initReportVerschlaegeGeneratorCallback = new AsyncCallback<List<AusschreibungReport>>() {
+            @Override
+    		public void onFailure(Throwable caught) {
+              ClientSideSettings.getLogger().severe("Der ReportGenerator konnte nicht initialisiert werden!");
+            }
+            @Override
+    		public void onSuccess(List<AusschreibungReport> result) {
+            	renderVorschlaege(result);
+            }
+          };
+    	reportGenerator.getVorschlaege(ClientSideSettings.getCurrentUser().getId(), initReportVerschlaegeGeneratorCallback);   	
+    	
 	}
 	
 	private void setSize(int i) {
@@ -40,6 +54,31 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
 		this.add(test);
 	}
 	
+	private void renderVorschlaege(List<AusschreibungReport> vorlaege) {
+		CellTable<AusschreibungReport> table = new CellTable<AusschreibungReport>();
+		
+		TextColumn<AusschreibungReport> stelleColumn = new TextColumn<AusschreibungReport>() {
+			@Override
+			public String getValue(AusschreibungReport vorschlag) {
+				return vorschlag.getTitel();
+			}
+		};
+		
+		TextColumn<AusschreibungReport> projektColumn = new TextColumn<AusschreibungReport>() {
+			@Override
+			public String getValue(AusschreibungReport vorschlag) {
+				return vorschlag.getProjektName();
+			}
+		};
+		
+		table.addColumn(projektColumn, "Projekt");
+		table.addColumn(stelleColumn, "Stelle");
+		
+		table.setRowCount(vorlaege.size(), true);
+	    table.setRowData(0, vorlaege);
+	    
+		this.add(table);
+	}
 	
 	private void renderTable(List<BewerbungReport> ausschreibungen) {
 		CellTable<BewerbungReport> table = new CellTable<BewerbungReport>();
