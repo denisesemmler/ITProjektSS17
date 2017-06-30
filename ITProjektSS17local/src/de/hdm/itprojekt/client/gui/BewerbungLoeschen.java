@@ -15,6 +15,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Profil;
 
+/**
+ * Klasse für Löschen eigener Berwerbungen
+ * 
+ * @author Moritz Bittner
+ *
+ */
 public class BewerbungLoeschen extends VerticalPanel {
 
 	private VerticalPanel mainPanel = this;
@@ -27,6 +33,9 @@ public class BewerbungLoeschen extends VerticalPanel {
 
 	Profil p = new Profil();
 
+	/**
+	 * Konsturktor für das Löschen von Bewerbungen
+	 */
 	public BewerbungLoeschen() {
 		mainPanel.add(bewerbungNameLabel);
 		mainPanel.add(bewerbungListbox);
@@ -34,7 +43,7 @@ public class BewerbungLoeschen extends VerticalPanel {
 		mainPanel.add(loeschenButton);
 
 		int currentUserId = ClientSideSettings.getCurrentUser().getId();
-
+		// Get current user
 		try {
 			ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(currentUserId,
 					new GetPartnerProfileCallback());
@@ -44,6 +53,9 @@ public class BewerbungLoeschen extends VerticalPanel {
 		}
 	}
 
+	/**
+	 * Callback für Löschen
+	 */
 	private class DeleteCallback implements AsyncCallback {
 
 		public void onFailure(Throwable caught) {
@@ -58,6 +70,9 @@ public class BewerbungLoeschen extends VerticalPanel {
 
 	}
 
+	/**
+	 * Alle Bewerbungen des Users auslesen Callback
+	 */
 	private class GetBewerbungByIdCallback implements AsyncCallback<Vector<Bewerbung>> {
 
 		public void onFailure(Throwable caught) {
@@ -75,6 +90,9 @@ public class BewerbungLoeschen extends VerticalPanel {
 		}
 	}
 
+	/**
+	 * ClickHandler, der das Löschen veranlasst
+	 */
 	private class DeleteClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
@@ -93,6 +111,9 @@ public class BewerbungLoeschen extends VerticalPanel {
 
 	};
 
+	/**
+	 * Auslesen des Profil Callback
+	 */
 	private class GetPartnerProfileCallback implements AsyncCallback<Profil> {
 
 		public void onFailure(Throwable caught) {

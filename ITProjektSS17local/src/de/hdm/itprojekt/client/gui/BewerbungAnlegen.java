@@ -16,6 +16,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Profil;
 
+/**
+ * Klasse für Anlegen einer Bewerbung
+ * 
+ * @author Moritz Bittner, Philipp Müller
+ *
+ */
 public class BewerbungAnlegen extends VerticalPanel {
 
 	private VerticalPanel mainPanel = this;
@@ -32,6 +38,12 @@ public class BewerbungAnlegen extends VerticalPanel {
 
 	Profil p = new Profil();
 
+	/**
+	 * Bewerbung auf übergebene Ausschreibung anlegen
+	 * 
+	 * @param aID
+	 *            Ausschreibung auf die User sich bewirbt
+	 */
 	public BewerbungAnlegen(int aID) {
 
 		mainPanel.add(titelLabel);
@@ -44,6 +56,7 @@ public class BewerbungAnlegen extends VerticalPanel {
 
 		int currentUserId = ClientSideSettings.getCurrentUser().getId();
 
+		// Auslesen des aktuellen User
 		try {
 			ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(currentUserId,
 					new GetPartnerProfileCallback());
@@ -54,6 +67,10 @@ public class BewerbungAnlegen extends VerticalPanel {
 
 	}
 
+	/**
+	 * ClickHandler, der Bewerbung auf ProfilId und AusschreibungID onClick
+	 * ausliest
+	 */
 	private class BewerbungSendenClickHandler implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
@@ -64,10 +81,13 @@ public class BewerbungAnlegen extends VerticalPanel {
 		}
 	};
 
+	/**
+	 * Callback, der bei Bewerbung anlegen
+	 */
 	private class BewerbungSendenCallback implements AsyncCallback<Bewerbung> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Nein das falsch");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 		}
 
 		public void onSuccess(Bewerbung result) {
@@ -77,10 +97,13 @@ public class BewerbungAnlegen extends VerticalPanel {
 
 	}
 
+	/**
+	 * Partnerprofil auslesen Callback
+	 */
 	private class GetPartnerProfileCallback implements AsyncCallback<Profil> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat läuft noch nit so Profil finden!");
+			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
@@ -93,6 +116,9 @@ public class BewerbungAnlegen extends VerticalPanel {
 
 	}
 
+	/**
+	 * Bewerbung des Profil auf Ausschreibung auslesen Callback
+	 */
 	private class BewerbungByProfilIdAndAusschreibungsIdCallback implements AsyncCallback<Bewerbung> {
 
 		@Override
