@@ -385,7 +385,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	
 	
 	/**
-	 * Diese Methode implementiert denn UC alle Bewerbungen zu jeweiligen Ausschreibung in der GUI anzuzeigen
+	 * Diese Methode implementiert denn UC alle Bewerbungen zu jeweiligen Ausschreibung in der GUI anzuzeigen.
+	 * @return {@link Vector} von {@link Bewerbung}, die einen Status von "laufend" haben.
 	 */
 	@Override
 	public Vector<Bewerbung> findBewerbungenByAusschreibungId(int ausschreibungId) throws IllegalArgumentException {
@@ -393,8 +394,18 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		//Alle Bewerbungen zu der jew. Ausschreibung werden hier "gemerkt"
 				Vector<Bewerbung> bewerbungen = bMapper.findByAusschreibungsId(ausschreibungId);
 				
+				Vector<Bewerbung> bewerbungenFuerDieGui = new Vector<Bewerbung>();
+				
+				//Schleife, die nur die Bewerbungen im status laufend rausfilter
+				for(Bewerbung b : bewerbungen){
+					if(b.getStatus().equals("Laufend")){
+						bewerbungenFuerDieGui.add(b);
+					}
+				}
+				
+				
 				//Rückgabe an den Aufrufer
-				return bewerbungen;
+				return bewerbungenFuerDieGui;
 	}
 	
 	
@@ -463,7 +474,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		return bewerbungenZuTeilnehmer;
 	}
 	
-	
+	/**
+	 * Liest zum Profil und zur Ausschreibung die Bewerbung
+	 */
 	@Override
 	public Bewerbung findBewerbungByProfilIdAndAusschreibungId(int profilId, int ausschreibungID)
 			throws IllegalArgumentException {

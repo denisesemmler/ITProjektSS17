@@ -294,7 +294,7 @@ public class BewerbungMapper {
 			sb.append(b.getId());
 			
 			ServersideSettings.getLogger().info(sb.toString());
-			// SQL Query ausf�hren
+			// SQL Query ausfuehren
 			stmt.executeUpdate(sb.toString());
 			
 
