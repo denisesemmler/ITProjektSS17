@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 /**
@@ -122,6 +123,7 @@ public class AnmeldeFormular extends VerticalPanel {
 			ClientSideSettings.getCurrentUser().setId(result.getId());
 			ClientSideSettings.getCurrentUser().setVorname(result.getVorname());
 			ClientSideSettings.getCurrentUser().setNachname(result.getNachname());
+			ClientSideSettings.getCurrentUser().setFirma(result.getFirma());
 			ClientSideSettings.getCurrentUser().setZusatz(result.getZusatz());
 			ClientSideSettings.getCurrentUser().setStrasse(result.getStrasse());
 			ClientSideSettings.getCurrentUser().setPlz(result.getPlz());
@@ -134,14 +136,14 @@ public class AnmeldeFormular extends VerticalPanel {
 
 	}
 
-	private class CreateProfilCallback implements AsyncCallback {
+	private class CreateProfilCallback implements AsyncCallback<Profil> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(Profil result) {
 			// Weiterleitung auf ProfilAnlegen um dann Eigenschaften anzulegen
 			RootPanel.get("Content").clear();
 			RootPanel.get("Content").add(new ProfilAnlegen());

@@ -113,6 +113,7 @@ public class ProfilBearbeiten extends HorizontalPanel {
 				t.setId(ClientSideSettings.getCurrentUser().getId());
 				t.setVorname(firstNameBox.getText());
 				t.setNachname(lastNameBox.getText());
+				t.setFirma(firmaBox.getText());
 				t.setZusatz(zusatzBox.getText());
 				t.setStrasse(strasseBox.getText());
 				t.setPlz(Integer.parseInt(plzBox.getText()));
