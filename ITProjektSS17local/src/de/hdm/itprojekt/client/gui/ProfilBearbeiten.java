@@ -20,7 +20,7 @@ import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
-public class ProfilBearbeiten extends VerticalPanel {
+public class ProfilBearbeiten extends HorizontalPanel {
 
 	// Vektoren für Eigenschaften erstellen
 	private Vector<Eigenschaft> eigenschaften = new Vector<Eigenschaft>();
@@ -28,7 +28,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 	private Vector<Label> eigenschaftLabelVector = new Vector<Label>();
 
 	// Panels erstellen
-	private VerticalPanel mainPanel = this;
+	private HorizontalPanel mainPanel = this;
 	private VerticalPanel labelsPanel = new VerticalPanel();
 	private VerticalPanel eigenschaftenVert = new VerticalPanel();
 	private Label firstNameLabel = new Label("Vorname: ");
@@ -56,12 +56,12 @@ public class ProfilBearbeiten extends VerticalPanel {
 	public ProfilBearbeiten() {
 
 		// CSS Styling
-		firstNameLabel.addStyleName("Content-label");
-		lastNameLabel.addStyleName("Content-label");
-		zusatzLabel.addStyleName("Content-label");
-		strasseLabel.addStyleName("Content-label");
-		plzLabel.addStyleName("Content-label");
-		ortLabel.addStyleName("Content-label");
+		firstNameLabel.addStyleName("label1");
+		lastNameLabel.addStyleName("label1");
+		zusatzLabel.addStyleName("label1");
+		strasseLabel.addStyleName("label1");
+		plzLabel.addStyleName("label1");
+		ortLabel.addStyleName("label1");
 		
 		RootPanel.get("Content").add(new HTML("<h2>Profil bearbeiten</h2>"));
 		
@@ -140,13 +140,20 @@ public class ProfilBearbeiten extends VerticalPanel {
 
 		public void onSuccess(Vector<Eigenschaft> result) {
 
-			labelsPanel.add(eigenschaftenVert);
+			mainPanel.add(eigenschaftenVert);
+			eigenschaftenVert.setStylePrimaryName("verticalrand");
+			eigenschaftenVert.add(kenntnisseLabel);
+			kenntnisseLabel.setStylePrimaryName("label1");
 			// Labels und ListBoxen erstellen für Eigenschaften
 			for (int i = 0; i < result.size(); i++) {
 				HorizontalPanel eigenschaftenPanel = new HorizontalPanel();
+				eigenschaftenPanel.setStylePrimaryName("label1");
 				Label abschlussLabel = new Label();
+				abschlussLabel.setWidth("200px");
 				Label berufserfahrungLabel = new Label();
+				berufserfahrungLabel.setWidth("200px");
 				Label eigenschaftLabel = new Label();
+				eigenschaftLabel.setWidth("200px");
 				ListBox abschlussListBox = new ListBox();
 				ListBox berufserfahrungListBox = new ListBox();
 				ListBox eigenschaftWertBox = new ListBox();
@@ -198,7 +205,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 
 			}
 			// Speicher Button hinzufügen
-			labelsPanel.add(speichern);
+			eigenschaftenVert.add(speichern);
 
 		}
 
