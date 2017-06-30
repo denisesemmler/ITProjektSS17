@@ -41,7 +41,7 @@ public class ProfilAnlegen extends VerticalPanel {
 
 	// Labels erstellen
 	private Label eigenschaftLabel = new Label("Deine Fähigkeiten:");
-	private Label schulabschlussLabel = new Label("Hoechster Schulabschluss");
+	private Label schulabschlussLabel = new Label("Höchster Schulabschluss");
 	private Label berufserfahrungLabel = new Label("Berufserfahrung");
 	private Label msofficeLabel = new Label("Microsoft Office");
 	private Label msprojectLabel = new Label("Microsoft Project");

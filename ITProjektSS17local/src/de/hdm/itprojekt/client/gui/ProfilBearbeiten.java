@@ -163,7 +163,7 @@ public class ProfilBearbeiten extends VerticalPanel {
 					berufserfahrungListBox.setSelectedIndex(result.elementAt(i).getWert());
 					eigenschaftListVector.add(berufserfahrungListBox);
 
-				} else if (result.elementAt(i).getName().equals("Hoechster Schulabschluss")) {
+				} else if (result.elementAt(i).getName().equals("Höchster Schulabschluss")) {
 					eigenschaftenVert.add(eigenschaftenPanel);
 					eigenschaftenPanel.add(abschlussLabel);
 					abschlussLabel.setText(result.elementAt(i).getName());

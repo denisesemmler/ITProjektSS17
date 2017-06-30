@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
@@ -41,12 +42,14 @@ public class AusschreibungAnlegen extends HorizontalPanel {
 	private Label ausschreibungTitelLabel = new Label("Titel der Ausschreibung: ");
 	private Label stellenbeschreibungLabel = new Label("Stellenbeschreibung: ");
 	private Label bewerbungsfristLabel = new Label("Bewerbungsfrist festlegen: ");
-
+	
+	//Erstellen der TextBox und Area
 	private TextBox ausschreibungTitelBox = new TextBox();
-	private TextBox stellenbeschreibungBox = new TextBox();
+	private TextArea stellenbeschreibungArea = new TextArea();
 
 	private DatePicker bewerbungsfrist = new DatePicker();
 	/**
+	 * 
 	 * Erstellen der ListBox
 	 */
 	private ListBox projektListbox = new ListBox();
@@ -140,7 +143,7 @@ public class AusschreibungAnlegen extends HorizontalPanel {
 		attributePanel.add(ausschreibungTitelBox);
 
 		attributePanel.add(stellenbeschreibungLabel);
-		attributePanel.add(stellenbeschreibungBox);
+		attributePanel.add(stellenbeschreibungArea);
 
 		attributePanel.add(bewerbungsfristLabel);
 		attributePanel.add(bewerbungsfrist);
@@ -364,7 +367,7 @@ public class AusschreibungAnlegen extends HorizontalPanel {
 			p.setId(result.getId());
 
 			int pid = pVector.elementAt(projektListbox.getSelectedIndex()).getId();
-			ClientSideSettings.getProjektAdministration().createAusschreibung(stellenbeschreibungBox.getText(),
+			ClientSideSettings.getProjektAdministration().createAusschreibung(stellenbeschreibungArea.getText(),
 					bewerbungsfrist.getValue(), ausschreibungTitelBox.getText(), "laufend", pid, p.getId(),
 					ClientSideSettings.getCurrentUser().getId(), new CreateAusschreibungCallback());
 

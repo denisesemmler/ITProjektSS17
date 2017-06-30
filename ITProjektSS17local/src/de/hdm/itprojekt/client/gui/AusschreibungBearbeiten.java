@@ -23,7 +23,7 @@ import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Profil;
 
-public class AusschreibungBearbeiten extends VerticalPanel {
+public class AusschreibungBearbeiten extends HorizontalPanel {
 
 	private Vector<Ausschreibung> aVector = new Vector<Ausschreibung>();
 	private Vector<Eigenschaft> eigenschaften = new Vector<Eigenschaft>();
@@ -32,7 +32,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 	/**
 	 * Erstellen der Panels
 	 */
-	private VerticalPanel mainPanel = this;
+	private HorizontalPanel mainPanel = this;
 	private VerticalPanel editorPanel = new VerticalPanel();
 	private VerticalPanel attributePanel = new VerticalPanel();
 	private VerticalPanel eigenschaftenVert = new VerticalPanel();
@@ -115,6 +115,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 						.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBeschreibung());
 				bewerbungsfrist
 						.setValue(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
+				bewerbungsfrist.setCurrentMonth(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
 				// Anforderungen des Suchprofils laden
 				ClientSideSettings.getProjektAdministration().findNameAndWertFromEigenschaften(
 						aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getProfil_idSuchprofil(),
@@ -146,6 +147,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 			stellenbeschreibungArea
 					.setText(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBeschreibung());
 			bewerbungsfrist.setValue(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
+			bewerbungsfrist.setCurrentMonth(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
 			ClientSideSettings.getProjektAdministration().findNameAndWertFromEigenschaften(
 					aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getProfil_idSuchprofil(),
 					new GetEigenschaftCallback());
@@ -164,14 +166,17 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 			// Zuerst Panel clearen, damit immer nur eigenschaften der aktuellen
 			// Ausschreibung gezeigt werden
 			eigenschaftenVert.clear();
-			attributePanel.add(eigenschaftenVert);
+			mainPanel.add(eigenschaftenVert);
 
 			// Labels und ListBoxen erstellen für Eigenschaften
 			for (int i = 0; i < result.size(); i++) {
 				HorizontalPanel eigenschaftenPanel = new HorizontalPanel();
 				Label abschlussLabel = new Label();
+				abschlussLabel.setWidth("200px");
 				Label berufserfahrungLabel = new Label();
+				berufserfahrungLabel.setWidth("200px");
 				Label eigenschaftLabel = new Label();
+				eigenschaftLabel.setWidth("200px");
 				ListBox abschlussListBox = new ListBox();
 				ListBox berufserfahrungListBox = new ListBox();
 				ListBox eigenschaftWertBox = new ListBox();
@@ -191,7 +196,7 @@ public class AusschreibungBearbeiten extends VerticalPanel {
 					berufserfahrungListBox.setSelectedIndex(result.elementAt(i).getWert());
 					eigenschaftListVector.add(berufserfahrungListBox);
 
-				} else if (result.elementAt(i).getName().equals("Hoechster Schulabschluss")) {
+				} else if (result.elementAt(i).getName().equals("Höchster Schulabschluss")) {
 					eigenschaftenVert.add(eigenschaftenPanel);
 					eigenschaftenPanel.add(abschlussLabel);
 					abschlussLabel.setText(result.elementAt(i).getName());
