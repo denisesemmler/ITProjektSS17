@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.Label;
 
 import de.hdm.itprojekt.client.gui.ClientSideSettings;
 import de.hdm.itprojekt.shared.ReportServiceAsync;
-
+import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
 import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
 
 public class AlleBewerbungenNutzer extends SimpleReport{
@@ -32,7 +32,9 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
             	renderTable(result);
             }
           };
-    	reportGenerator.getAllBewerbungenForUser(ClientSideSettings.getCurrentUser().getId(), initReportGeneratorCallback);        
+    	reportGenerator.getAllBewerbungenForUser(ClientSideSettings.getCurrentUser().getId(), initReportGeneratorCallback);
+    	
+    	
 	}
 	
 	private void setSize(int i) {
@@ -86,12 +88,12 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
 			}
 		};
 		
-		TextColumn<BewerbungReport> bewertungColumn = new TextColumn<BewerbungReport>() {
-			@Override
-			public String getValue(BewerbungReport bewerbung) {
-				return String.valueOf(bewerbung.getBewertung());
-			}
-		};
+		//TextColumn<BewerbungReport> bewertungColumn = new TextColumn<BewerbungReport>() {
+			//@Override
+			//public String getValue(BewerbungReport bewerbung) {
+				//return String.valueOf(bewerbung.getBewertung());
+			//}
+		//};
 		
 		TextColumn<BewerbungReport> statusColumn = new TextColumn<BewerbungReport>() {
 			@Override
@@ -109,7 +111,7 @@ ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
 	
 		table.addColumn(bewerbungsTitelColumn, "Bewerbungstitel");
 		table.addColumn(bewerbungsTextColumn, "Bewerbungstext");
-		table.addColumn(bewertungColumn, "Bewertung");
+		//table.addColumn(bewertungColumn, "Bewertung");
 		
 		table.addColumn(ansprechpartnerColumn, "Ansprechpartner");
 		table.addColumn(bewerbungsfristColumn, "Bewerbungsfrist");

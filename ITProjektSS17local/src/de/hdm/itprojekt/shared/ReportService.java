@@ -51,4 +51,13 @@ public interface ReportService  extends RemoteService{
 	 * @return Liste mit Fan in Fan out.
 	 */
 	List<FanInFanOut> getFanInFanOut();
+	
+	
+	/**
+	 * Erzeugt Liste mit passenden Ausschreibungen.
+	 * @param teilnehmerId Id eines Teilnehmers.
+	 * @return Liste mit passenden Ausschreibungen.
+	 */
+	List<AusschreibungReport> getVorschlaege(int teilnehmerId);
+	
 }

@@ -35,9 +35,6 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 	private static final long serialVersionUID = -7548005663369824973L;
 
 	@Override
-	/**
-	 * 
-	 */
 	public List<AusschreibungReport> getAllAusschreibungen() {
 		List<AusschreibungReport> report = new ArrayList<AusschreibungReport>();
 		
@@ -205,6 +202,44 @@ public class ReportServiceImpl extends RemoteServiceServlet implements ReportSer
 			reportEntry.setFanIn(fanIn);
 			
 			report.add(reportEntry);
+		}
+		return report;
+	}
+
+	@Override
+	public List<AusschreibungReport> getVorschlaege(int teilnehmerId) {
+		List<AusschreibungReport> report = new ArrayList<>();
+		
+		
+		Profil profil = ProfilMapper.profilMapper().findByTeilnehmerId(teilnehmerId);
+		List<Eigenschaft> eigenschaftenTeilnehmer = EigenschaftMapper.eigenschaftMapper().findByProfil(profil.getId());
+		
+		List<Ausschreibung> ausschreibungen = AusschreibungMapper.ausschreibungMapper().findAllAusschreibungen();
+		
+		for(Ausschreibung ausschreibung: ausschreibungen) {
+			List<Eigenschaft> eigenschaftenProfil = EigenschaftMapper.eigenschaftMapper().findByProfil(ausschreibung.getProfil_idSuchprofil());
+			boolean allOk = true;
+			for(Eigenschaft eigenschaftProfil: eigenschaftenProfil) {
+				for(Eigenschaft eigenschaftTeilnehmer: eigenschaftenTeilnehmer) {
+					if(eigenschaftTeilnehmer.getName().equals(eigenschaftProfil.getName())) {
+						if(eigenschaftTeilnehmer.getWert() < eigenschaftProfil.getWert()) {
+							allOk = false;
+						}
+					}
+				}
+			}
+			if(allOk) {
+				AusschreibungReport reportEntry = new AusschreibungReport(ausschreibung);
+				
+				Projekt projekt = ProjektMapper.projektMapper().findById(ausschreibung.getProjekt_idProjekt());
+				reportEntry.setProjektName(projekt.getName());
+				
+				Teilnehmer teilnehmer = TeilnehmerMapper.teilnehmerMapper().findById(ausschreibung.getTeilnehmer_idTeilnehmer());
+				reportEntry.setAnsprechpartnerName(teilnehmer.getVorname() + " " + teilnehmer.getNachname());
+				
+				report.add(reportEntry);
+			}
+		
 		}
 		return report;
 	}
