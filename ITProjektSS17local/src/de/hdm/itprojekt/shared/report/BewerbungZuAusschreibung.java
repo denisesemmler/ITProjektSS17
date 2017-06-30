@@ -11,6 +11,12 @@ import de.hdm.itprojekt.shared.ReportServiceAsync;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
 
+/**
+ * Erstellt einen Bericht mit allen Bewerbungen zu den Ausschreibungen vom eingeloggten Teilnehmer
+ * 
+ * @author Jiayi
+ *
+ */
 public class BewerbungZuAusschreibung extends SimpleReport {
 
 	public BewerbungZuAusschreibung() {
@@ -54,7 +60,7 @@ public class BewerbungZuAusschreibung extends SimpleReport {
 						+ eigenschaft.getWertAsString() + "</li>";
 			}
 			eigenschaftenRow = eigenschaftenRow + "</ul></td></tr>";
-			
+
 			// HTMl generieren
 			HTML entry = new HTML(
 					"<table class='reportTable'><tr><th>Name des Bewerbers</th><th>Auf Stelle</th><th>Projekt</th><th>Bewerbungstitel</th><th>Bewerbungstext</th></tr>"
