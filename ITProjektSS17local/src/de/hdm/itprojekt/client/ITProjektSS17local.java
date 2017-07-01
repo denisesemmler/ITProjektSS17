@@ -42,7 +42,7 @@ public class ITProjektSS17local implements EntryPoint {
 	private HorizontalPanel naviPanel = new HorizontalPanel();
 
 	// Begruessungstext im Label
-	private Label loginLabel = new Label("Log in with your Google-Account and get started with Pr0ject");
+	private Label loginLabel = new Label("Logge dich mit deinem Google-Account an um spannende Projekte zu durchstöbern und daran teilzunehmen!");
 
 	// Zur An- und Abmeldung
 	private Anchor signInLink = new Anchor("Anmelden");
