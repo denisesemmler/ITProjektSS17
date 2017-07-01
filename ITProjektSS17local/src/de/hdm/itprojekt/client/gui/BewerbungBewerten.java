@@ -668,6 +668,7 @@ public class BewerbungBewerten extends VerticalPanel {
 						stellungnahmeInBox.setVisible(false);
 						startdatumInBox.setVisible(false);
 						enddatumInBox.setVisible(false);
+						manntageInBox.setVisible(false);
 						Window.alert("Nur Zahlen von 0.0 bis 1.0 erlaubt");
 						bewertungInBox.setText(" ");
 						
@@ -691,6 +692,9 @@ public class BewerbungBewerten extends VerticalPanel {
 					else {
 						stellungnahmeTextAbgeben.setVisible(false);
 						stellungnahmeInBox.setVisible(false);
+						startdatumInBox.setVisible(false);
+						enddatumInBox.setVisible(false);
+						manntageInBox.setVisible(false);
 					}
 				} catch (NumberFormatException e) {
 					Window.alert("Nur Zahlen im Format von 0.0 bis 1.0 erlaubt");
