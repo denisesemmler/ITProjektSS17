@@ -32,7 +32,7 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 	/**
 	 * Erstellen der Labels
 	 */
-	private Label marktplatzLabel = new Label("Projektmarktplatz wfhlen:");
+	private Label marktplatzLabel = new Label("Projektmarktplatz wählen:");
 
 	/**
 	 * Erstellen der ListBox
@@ -210,7 +210,8 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 			a.setBeschreibung(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBeschreibung());
 			a.setTitel(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getTitel());
 			a.setBewerbungsfrist(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
-			a.setProfil_idSuchprofil(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getProfil_idSuchprofil());
+			a.setProfil_idSuchprofil(
+					aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getProfil_idSuchprofil());
 			RootPanel.get("Content").clear();
 			RootPanel.get("Content").add(new EinzelAusschreibung(a));
 

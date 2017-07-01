@@ -249,7 +249,7 @@ public class AusschreibungBearbeiten extends HorizontalPanel {
 				a.setId(id);
 				a.setTitel(ausschreibungTitelBox.getText());
 				a.setBeschreibung(stellenbeschreibungArea.getText());
-				a.setBewerbungsfrist(new java.sql.Date((bewerbungsfrist.getValue()).getTime()));
+				a.setBewerbungsfrist(new java.sql.Date(((bewerbungsfrist.getValue()).getTime())+(3600*2*1000)));
 				ClientSideSettings.getProjektAdministration().updateAusschreibung(a, new SpeichernCallback());
 				// Suchprofil Id in Profil Obejkt speichern
 				p.setId(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getProfil_idSuchprofil());
