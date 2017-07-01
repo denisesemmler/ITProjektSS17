@@ -74,6 +74,7 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 		}
 
 		public void onSuccess(Void result) {
+			Window.alert("Änderungen gespeichert");
 			RootPanel.get("Content").clear();
 			RootPanel.get("Content").add(new ProjektmarktplatzVerwalten());
 

@@ -62,7 +62,10 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 	public AusschreibungAnzeigen() {
 
 		// CSS Styling
-		marktplatzLabel.addStyleName("Content-Label");
+		marktplatzLabel.addStyleName("label1");
+		marktplatzListbox.addStyleDependentName("label1");
+	
+		
 		// GUI erstellen
 		mainPanel.add(marktplatzLabel);
 		mainPanel.add(marktplatzListbox);
@@ -109,7 +112,9 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 			mainPanel.clear();
 			mainPanel.add(marktplatzLabel);
 			marktplatzLabel.setText("Projekt wählen");
+			marktplatzLabel.addStyleName("label1");
 			mainPanel.add(projektListbox);
+			projektListbox.addStyleName("label1");
 			mainPanel.add(projektSuchenButton);
 
 			try {
@@ -155,7 +160,9 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 			mainPanel.clear();
 			mainPanel.add(marktplatzLabel);
 			marktplatzLabel.setText("Ausschreibung suchen:");
+			marktplatzLabel.addStyleName("label1");
 			mainPanel.add(ausschreibungListbox);
+			ausschreibungListbox.addStyleName("label1");
 			mainPanel.add(ausschreibungAnzeigenButton);
 
 			try {
@@ -184,6 +191,7 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 				Ausschreibung a1 = result.elementAt(i);
 				aVector.add(a1);
 				ausschreibungListbox.addItem(a1.getTitel());
+				
 			}
 
 		}

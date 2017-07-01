@@ -13,12 +13,12 @@ public class AusschreibungMapper {
 	/**
 	 * <p>
 	 * Mapper-Klasse zur Abbildung von <code>Ausschreibungen</code> Objekten auf
-	 * die Datenbank. �ber das Mapping k�nnen sowohl Objekte als auch deren
+	 * die Datenbank. über das Mapping können sowohl Objekte als auch deren
 	 * Attribute in die Datenbank geschrieben werden, als auch von der Datenbank
 	 * ausgelesen werden.
 	 * </p>
 	 * <p>
-	 * Es werden Methoden zum Erstellen, �ndern, L�schen und Ausgeben von
+	 * Es werden Methoden zum Erstellen, ändern, Löschen und Ausgeben von
 	 * Nutzern bereitgestellt.
 	 * </p>
 	 * 

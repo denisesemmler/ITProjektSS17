@@ -45,7 +45,13 @@ public class BewerbungAnlegen extends VerticalPanel {
 	 *            Ausschreibung auf die User sich bewirbt
 	 */
 	public BewerbungAnlegen(int aID) {
-
+		
+		//CSS-Styling
+		textLabel.addStyleName("label1");
+		textA.addStyleName("label1");
+		titelLabel.addStyleName("label1");
+		titelA.addStyleName("label1");
+	
 		mainPanel.add(titelLabel);
 		mainPanel.add(titelA);
 		mainPanel.add(textLabel);
@@ -101,7 +107,8 @@ public class BewerbungAnlegen extends VerticalPanel {
 		}
 
 		public void onSuccess(Bewerbung result) {
-			Window.alert("Bewerbung angelegt");
+			//Wenn Bewerbung angelegt wurde zurück auf Bewerbung verwalten
+			Window.alert("Bewerbung wurde eingereicht");
 			RootPanel.get("Content").clear();
 			RootPanel.get("Content").add(new BewerbungVerwalten());
 		}
@@ -119,7 +126,7 @@ public class BewerbungAnlegen extends VerticalPanel {
 		}
 
 		public void onSuccess(Profil result) {
-
+			//Profil Id speichern
 			p.setId(result.getId());
 
 

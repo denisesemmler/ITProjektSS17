@@ -30,6 +30,8 @@ public class ProfilAnlegen extends VerticalPanel {
 
 	// Die verschiedenen Panels erstellen
 	private VerticalPanel mainPanel = this;
+	private HorizontalPanel abschlussPanel = new HorizontalPanel();
+	private HorizontalPanel erfahrungPanel = new HorizontalPanel();
 	private HorizontalPanel naviPanel = new HorizontalPanel();
 	private HorizontalPanel msoffice = new HorizontalPanel();
 	private HorizontalPanel msproject = new HorizontalPanel();
@@ -72,6 +74,20 @@ public class ProfilAnlegen extends VerticalPanel {
 	Profil p = new Profil();
 
 	public ProfilAnlegen() {
+		//CSS-Styling
+	    schulabschlussListBox.setStylePrimaryName("label1");
+		berufserfahrungListBox.setStylePrimaryName("label1");
+		abschlussPanel.setStylePrimaryName("label1");
+		erfahrungPanel.setStylePrimaryName("label1");
+		msoffice.setStylePrimaryName("label1");
+		msproject.setStylePrimaryName("label1");
+		sap.setStylePrimaryName("label1");
+		aris.setStylePrimaryName("label1");
+		java.setStylePrimaryName("label1");
+		c.setStylePrimaryName("label1");
+		catia.setStylePrimaryName("label1");
+		sql.setStylePrimaryName("label1");
+		
 		// aktuellen UserId und dazugehörigen ProfilId suchen
 		this.currentUserId = ClientSideSettings.getCurrentUser().getId();
 		ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(currentUserId,
@@ -79,18 +95,23 @@ public class ProfilAnlegen extends VerticalPanel {
 
 		// GUI erstellen
 		mainPanel.add(eigenschaftLabel);
-		mainPanel.add(schulabschlussLabel);
+		eigenschaftLabel.setStylePrimaryName("label2");
+		schulabschlussLabel.setWidth("200px");
+		mainPanel.add(abschlussPanel);
+		abschlussPanel.add(schulabschlussLabel);
 
-		mainPanel.add(schulabschlussListBox);
+		abschlussPanel.add(schulabschlussListBox);
 		schulabschlussListBox.addItem("Hauptschulabschluss");
 		schulabschlussListBox.addItem("Mittlere Reife");
 		schulabschlussListBox.addItem("Fachhochschulreife");
 		schulabschlussListBox.addItem("Abitur");
 		schulabschlussListBox.addItem("Bachelor");
 		schulabschlussListBox.addItem("Master");
-
-		mainPanel.add(berufserfahrungLabel);
-		mainPanel.add(berufserfahrungListBox);
+		
+		mainPanel.add(erfahrungPanel);
+		erfahrungPanel.add(berufserfahrungLabel);
+		berufserfahrungLabel.setWidth("200px");
+		erfahrungPanel.add(berufserfahrungListBox);
 		berufserfahrungListBox.addItem("weniger als 1 Jahr");
 		berufserfahrungListBox.addItem("1 - 5 Jahre");
 		berufserfahrungListBox.addItem("6 - 10 Jahre");
@@ -106,27 +127,35 @@ public class ProfilAnlegen extends VerticalPanel {
 		mainPanel.add(sql);
 
 		msoffice.add(msofficeLabel);
+		msofficeLabel.setWidth("200px");
 		msoffice.add(msofficeListBox);
 
 		msproject.add(msprojectLabel);
+		msprojectLabel.setWidth("200px");
 		msproject.add(msprojectListBox);
 
 		sap.add(sapLabel);
+		sapLabel.setWidth("200px");
 		sap.add(sapListBox);
 
 		aris.add(arisLabel);
+		arisLabel.setWidth("200px");
 		aris.add(arisListBox);
 
 		java.add(javaLabel);
+		javaLabel.setWidth("200px");
 		java.add(javaListBox);
 
 		c.add(cLabel);
+		cLabel.setWidth("200px");
 		c.add(cListBox);
 
 		catia.add(catiaLabel);
+		catiaLabel.setWidth("200px");
 		catia.add(catiaListBox);
 
 		sql.add(sqlLabel);
+		sqlLabel.setWidth("200px");
 		sql.add(sqlListBox);
 
 		msofficeListBox.addItem("Keine Kenntnisse");
@@ -193,7 +222,7 @@ public class ProfilAnlegen extends VerticalPanel {
 				eigenschaftWert.add(cListBox.getSelectedIndex());
 				eigenschaftWert.add(catiaListBox.getSelectedIndex());
 				eigenschaftWert.add(sqlListBox.getSelectedIndex());
-				// Diese dann in der DB speichern
+				// Diese dann an die Applikationslogik übergeben um diese dann in der DB zu speichern
 				ClientSideSettings.getProjektAdministration().createEigenschaft(eigenschaftName, eigenschaftWert,
 						p.getId(), new CreateEigenschaftCallback());
 
@@ -216,7 +245,7 @@ public class ProfilAnlegen extends VerticalPanel {
 
 			Window.alert("Dein Profil wurde angelegt!");
 			// Wenn Eigenschaften angelegt wurden, dann User existing setzen,
-			// damit dieser beim nächsten Aufruf der Seite dirket auf die
+			// damit dieser beim nächsten Aufruf der Seite direkt auf die
 			// Startseite kommt
 			ClientSideSettings.getCurrentUser().setProfilExisting(true);
 

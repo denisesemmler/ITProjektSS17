@@ -20,7 +20,14 @@ import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Projekt;
+	
 
+/**
+ * Klasse für das Anlegen einer Ausschreibung
+ * 
+ * @author Philipp Mueller
+ *
+ */
 public class AusschreibungAnlegen extends HorizontalPanel {
 
 	private Vector<Projekt> pVector = new Vector<Projekt>();
@@ -73,7 +80,8 @@ public class AusschreibungAnlegen extends HorizontalPanel {
 	private HorizontalPanel c = new HorizontalPanel();
 	private HorizontalPanel catia = new HorizontalPanel();
 	private HorizontalPanel sql = new HorizontalPanel();
-
+	
+	//Labels erstellen
 	private Label eigenschaftLabel = new Label("Voraussetzungen für diese Stelle:");
 	private Label schulabschlussLabel = new Label("Höchster Schulabschluss");
 	private Label berufserfahrungLabel = new Label("Berufserfahrung");
@@ -85,7 +93,8 @@ public class AusschreibungAnlegen extends HorizontalPanel {
 	private Label cLabel = new Label("C/C++");
 	private Label catiaLabel = new Label("CATIA");
 	private Label sqlLabel = new Label("SQL/DB");
-
+	
+	//ListBoxen erstellen
 	private ListBox schulabschlussListBox = new ListBox();
 	private ListBox berufserfahrungListBox = new ListBox();
 	private ListBox msofficeListBox = new ListBox();

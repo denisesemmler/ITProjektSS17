@@ -20,6 +20,12 @@ import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Profil;
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
+/**
+ * Klasse für zum bearbeiten des Profils
+ * 
+ * @author Philipp Mueller
+ *
+ */
 public class ProfilBearbeiten extends HorizontalPanel {
 
 	// Vektoren für Eigenschaften erstellen
@@ -166,7 +172,7 @@ public class ProfilBearbeiten extends HorizontalPanel {
 		}
 
 		public void onSuccess(Vector<Eigenschaft> result) {
-
+			//eigenschaften laden um anzuzeigen
 			mainPanel.add(eigenschaftenVert);
 			eigenschaftenVert.setStylePrimaryName("verticalrand");
 			eigenschaftenVert.add(kenntnisseLabel);

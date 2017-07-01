@@ -23,6 +23,12 @@ import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Profil;
 
+/**
+ * Klasse für das Bearbeiten einer Ausschreibung
+ * 
+ * @author Moritz Bittner & Philipp Mueller
+ *
+ */
 public class AusschreibungBearbeiten extends HorizontalPanel {
 
 	private Vector<Ausschreibung> aVector = new Vector<Ausschreibung>();
@@ -186,7 +192,8 @@ public class AusschreibungBearbeiten extends HorizontalPanel {
 				ListBox eigenschaftWertBox = new ListBox();
 				eigenschaften.add(result.elementAt(i));
 
-				// Eigenschaften laden und anzeigen
+				// Eigenschaften laden und anzeigen, Bei berufserfahrung in
+				// diese ListBox laden
 				if (result.elementAt(i).getName().equals("Berufserfahrung")) {
 					eigenschaftenVert.add(eigenschaftenPanel);
 					eigenschaftenPanel.add(berufserfahrungLabel);
@@ -200,6 +207,7 @@ public class AusschreibungBearbeiten extends HorizontalPanel {
 					berufserfahrungListBox.setSelectedIndex(result.elementAt(i).getWert());
 					eigenschaftListVector.add(berufserfahrungListBox);
 
+					// bei Schulabschluss in diese ListBox laden
 				} else if (result.elementAt(i).getName().equals("Höchster Schulabschluss")) {
 					eigenschaftenVert.add(eigenschaftenPanel);
 					eigenschaftenPanel.add(abschlussLabel);
@@ -215,6 +223,7 @@ public class AusschreibungBearbeiten extends HorizontalPanel {
 					abschlussListBox.setSelectedIndex(result.elementAt(i).getWert());
 					eigenschaftListVector.add(abschlussListBox);
 
+					// bei sonstigen Eigenschaften in diese ListBox
 				} else {
 
 					eigenschaftenVert.add(eigenschaftenPanel);
@@ -244,24 +253,25 @@ public class AusschreibungBearbeiten extends HorizontalPanel {
 			// Bei Speicherung neue Daten im Objekt speichern und updaten sowie
 			// Profil updaten
 			try {
-				//Überprüfen ob Eingaben erfolgt
+				// Überprüfen ob Eingaben erfolgt
 				String input = ausschreibungTitelBox.getText();
-				if (input.matches("")){
+				if (input.matches("")) {
 					Window.alert("Bitte einen Ausschreibungstitel eingeben");
 					return;
-				}				
+				}
 				String input1 = stellenbeschreibungArea.getText();
-				if (input1.matches("")){
+				if (input1.matches("")) {
 					Window.alert("Bitte eine Stellenbeschreibung eingeben");
 					return;
 				}
-				
+
+				// Neue Daten in Ausschreibungs Objekt laden
 				int id = aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getId();
 				Ausschreibung a = new Ausschreibung();
 				a.setId(id);
 				a.setTitel(ausschreibungTitelBox.getText());
 				a.setBeschreibung(stellenbeschreibungArea.getText());
-				a.setBewerbungsfrist(new java.sql.Date(((bewerbungsfrist.getValue()).getTime())+(3600*2*1000)));
+				a.setBewerbungsfrist(new java.sql.Date(((bewerbungsfrist.getValue()).getTime()) + (3600 * 2 * 1000)));
 				ClientSideSettings.getProjektAdministration().updateAusschreibung(a, new SpeichernCallback());
 				// Suchprofil Id in Profil Obejkt speichern
 				p.setId(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getProfil_idSuchprofil());

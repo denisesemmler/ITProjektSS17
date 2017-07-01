@@ -82,7 +82,8 @@ public class ProfilAnzeigen extends HorizontalPanel {
 		mainPanel.add(labelsPanel);
 		mainPanel.add(dataPanel);
 		mainPanel.add(buttonsPanel);
-
+		
+		//Willkommenstext hinzufügen
 		RootPanel.get("Content").add(new HTML("<h3>Willkommen bei Pr0ject, "
 				+ ClientSideSettings.getCurrentUser().getVorname() + "</h3> <br /> " + "<h3>Mein Profil: </h3>"));
 
