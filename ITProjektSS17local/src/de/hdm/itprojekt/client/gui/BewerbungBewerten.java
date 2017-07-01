@@ -593,7 +593,8 @@ public class BewerbungBewerten extends VerticalPanel {
 		public void onSuccess(Vector<Eigenschaft> result) {
 
 			VerticalPanel eigenschaften = new VerticalPanel();
-
+			ausschreibungEigenschaftenPanel.clear();
+			
 			// Eigenschaften in Liste Darstellen.
 			for (Eigenschaft e : result) {
 
@@ -627,6 +628,7 @@ public class BewerbungBewerten extends VerticalPanel {
 		@Override
 		public void onSuccess(Vector<Eigenschaft> result) {
 			VerticalPanel eigenschaften = new VerticalPanel();
+			bewerbungEingeschaftenPanel.clear();
 
 			// Eigenschaften in Liste Darstellen.
 			for (Eigenschaft e : result) {
@@ -658,14 +660,18 @@ public class BewerbungBewerten extends VerticalPanel {
 
 			if (bewertungInBox.getText() != "") {
 				try {
+					
 					// Regelt das die Stellungnahme bei Zahlen größer 1 wegfällt
 					Float bewertungsZahl = Float.valueOf(bewertungInBox.getText());
 					if (bewertungsZahl > 1.0) {
 						stellungnahmeTextAbgeben.setVisible(false);
 						stellungnahmeInBox.setVisible(false);
+						startdatumInBox.setVisible(false);
+						enddatumInBox.setVisible(false);
 						Window.alert("Nur Zahlen von 0.0 bis 1.0 erlaubt");
-						// regelt das die stellungnahmebox bei bewertung 1 dazu
-						// kommt
+						bewertungInBox.setText(" ");
+						
+					// regelt das die stellungnahmebox bei bewertung 1 dazu kommt
 					} else if (bewertungsZahl == 1.0) {
 
 						startdatum.setVisible(true);
@@ -680,6 +686,7 @@ public class BewerbungBewerten extends VerticalPanel {
 						stellungnahmeTextAbgeben.setVisible(true);
 						stellungnahmeInBox.setVisible(true);
 					}
+					
 					// regelt das die stellungnahmebox unter wert 1 wegfällt
 					else {
 						stellungnahmeTextAbgeben.setVisible(false);
