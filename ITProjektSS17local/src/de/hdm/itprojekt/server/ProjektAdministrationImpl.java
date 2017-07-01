@@ -2,8 +2,6 @@ package de.hdm.itprojekt.server;
 
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
 
 import com.google.appengine.api.users.User;
@@ -46,7 +44,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	private EigenschaftMapper eMapper = null;
 	private BewerbungMapper bMapper = null;
 	private BeteiligungMapper btMapper = null;
-	private Teilnehmer user;
 	private static final long serialVersionUID = 1L;
 
 	public ProjektAdministrationImpl() throws IllegalArgumentException {
@@ -456,7 +453,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 */
 	public void deleteBewerbung(Bewerbung b) {
 		Beteiligung beteiligung = btMapper.findByBewerbung(b);
-		//btMapper.delete(beteiligung);
+		if(beteiligung!=null){
+			btMapper.delete(beteiligung);
+		}
 		bMapper.delete(b);
 	}
 
@@ -527,14 +526,6 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		bMapper.update(bewerbungAusDb);
 	}
 	
-	
-	
-	
-	// Methoden für Teilnehmer
-	public void setUser(Teilnehmer t) {
-		user = t;
-	}
-
 	
 	@Override
 	public Teilnehmer createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, 

@@ -64,6 +64,7 @@ public class BewerbungLoeschen extends VerticalPanel {
 		}
 
 		public void onSuccess(Void result) {
+			Window.alert("Bewerbung zurückgezogen.");
 			RootPanel.get("Content").clear();
 			RootPanel.get("Content").add(new BewerbungVerwalten());
 
