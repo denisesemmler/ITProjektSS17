@@ -445,7 +445,7 @@ public class BewerbungBewerten extends VerticalPanel {
 			 * Projektmarktplätze in die Listbox zu schreiben.
 			 */
 			for (Projekt projekt : result) {
-				projektListBox.addItem(projekt.getBeschreibung(), String.valueOf(projekt.getId()));
+				projektListBox.addItem(projekt.getName(), String.valueOf(projekt.getId()));
 			}
 
 			// Hier wird die ID zum ersten Projekt aus dem ErgebnissVektor
