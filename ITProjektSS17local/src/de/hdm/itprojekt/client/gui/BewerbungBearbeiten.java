@@ -122,9 +122,7 @@ public class BewerbungBearbeiten extends VerticalPanel {
 			}
 
 			try {
-				int id = bVector.elementAt(bewerbungsListbox.getSelectedIndex()).getId();
-				Bewerbung bewerbung = new Bewerbung();
-				bewerbung.setId(id);
+				Bewerbung bewerbung = bVector.elementAt(bewerbungsListbox.getSelectedIndex());
 				bewerbung.setBewerbungsText(bewerbungTextArea.getText());
 				ClientSideSettings.getProjektAdministration().updateBewerbung(bewerbung, new SaveChangesCallback());
 
