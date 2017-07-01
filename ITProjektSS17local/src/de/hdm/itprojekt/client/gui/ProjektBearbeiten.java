@@ -168,8 +168,9 @@ public class ProjektBearbeiten extends VerticalPanel {
 				p.setId(id);
 				p.setName(projektNameBox.getText());
 				p.setBeschreibung(projektBeschreibungArea.getText());
-				p.setStartDatum(new java.sql.Date((startPicker.getValue()).getTime()));
-				p.setEndDatum(new java.sql.Date((endPicker.getValue()).getTime()));
+				//Datum speichern + 2h wg. Zeitzone
+				p.setStartDatum(new java.sql.Date((startPicker.getValue()).getTime()+(3600*2*1000)));
+				p.setEndDatum(new java.sql.Date((endPicker.getValue()).getTime()+(3600*2*1000)));
 				ClientSideSettings.getProjektAdministration().updateProjekt(p, new SpeichernCallback());
 
 			} catch (Exception e) {
