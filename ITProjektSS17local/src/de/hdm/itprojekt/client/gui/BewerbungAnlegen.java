@@ -47,8 +47,8 @@ public class BewerbungAnlegen extends VerticalPanel {
 	public BewerbungAnlegen(int aID) {
 		
 		//CSS-Styling
+		textA.addStyleName("textarea");
 		textLabel.addStyleName("label1");
-		textA.addStyleName("label1");
 		titelLabel.addStyleName("label1");
 		titelA.addStyleName("label1");
 	
