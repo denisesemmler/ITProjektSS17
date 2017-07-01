@@ -46,7 +46,7 @@ public class BewerbungBearbeiten extends VerticalPanel {
 	public BewerbungBearbeiten() {
 
 		bewerbungTextArea.addStyleName("textarea");
-		
+
 		mainPanel.add(editorPanel);
 		editorPanel.add(bewerbungLabel);
 		editorPanel.add(bewerbungsListbox);
@@ -57,7 +57,7 @@ public class BewerbungBearbeiten extends VerticalPanel {
 		editorPanel.add(speichernButton);
 
 		int currentUserId = ClientSideSettings.getCurrentUser().getId();
-		//Get current user
+		// Get current user
 		try {
 			ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(currentUserId,
 					new GetPartnerProfileCallback());
@@ -67,23 +67,26 @@ public class BewerbungBearbeiten extends VerticalPanel {
 		}
 
 	}
+
 	/**
 	 * Callback für Speichern von Änderungen
 	 */
-	private class SaveChangesCallback implements AsyncCallback {
+	private class SaveChangesCallback implements AsyncCallback<Void> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(Void result) {
+			Window.alert("Änderungen gespeichert");
 			RootPanel.get("Content").clear();
 			RootPanel.get("Content").add(new BewerbungVerwalten());
 
 		}
 
 	}
+
 	/**
 	 * Callbakck für Auslesen von Bewerbung einer Bewerbung-ID
 	 */
@@ -112,6 +115,13 @@ public class BewerbungBearbeiten extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 
+			//Eingabeüberprüfung
+			if (bewerbungTextArea.getText().matches("")) {
+				Window.alert("Bitte Wert eintragen!");
+				return;
+			}
+			
+			
 			try {
 				int id = bVector.elementAt(bewerbungsListbox.getSelectedIndex()).getId();
 				Bewerbung bewerbung = new Bewerbung();
@@ -125,6 +135,7 @@ public class BewerbungBearbeiten extends VerticalPanel {
 			}
 		}
 	}
+
 	/**
 	 * ClickHandler der auf Änderungen reagiert und entsprechend befüllt
 	 */
@@ -157,7 +168,6 @@ public class BewerbungBearbeiten extends VerticalPanel {
 		public void onSuccess(Profil result) {
 
 			p.setId(result.getId());
-			Window.alert("Dein Profil wurde gefunden!");
 
 			try {
 				ClientSideSettings.getProjektAdministration().findBewerbungByTeilnehmerid(p.getId(),
