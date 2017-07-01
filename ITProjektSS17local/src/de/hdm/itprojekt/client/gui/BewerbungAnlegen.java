@@ -121,7 +121,7 @@ public class BewerbungAnlegen extends VerticalPanel {
 		public void onSuccess(Profil result) {
 
 			p.setId(result.getId());
-			Window.alert("Dein Profil wurde gefunden!");
+
 
 		}
 
