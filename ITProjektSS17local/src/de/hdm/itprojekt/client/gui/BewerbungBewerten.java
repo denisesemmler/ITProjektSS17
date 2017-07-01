@@ -82,10 +82,6 @@ public class BewerbungBewerten extends VerticalPanel {
 	private HTMLPanel bewerbungsText = new HTMLPanel("<strong>Bewerbungs Text:</strong>");
 	private HTMLPanel idBewerbung = new HTMLPanel("<strong>ID Bewerbung:</strong>");
 	private HTMLPanel status = new HTMLPanel("<strong>Status:</strong>");
-	// private HTMLPanel bewertung = new
-	// HTMLPanel("<strong>Bewertung:</strong>");
-	// private HTMLPanel stellungnahme = new
-	// HTMLPanel("<strong>Stellungnahme:</strong>");
 
 	// Leerzeichen zwischen den Labelen
 	private HTMLPanel erstellDatumSpacePanel = new HTMLPanel("&nbsp;");
@@ -93,8 +89,6 @@ public class BewerbungBewerten extends VerticalPanel {
 	private HTMLPanel bewerbungsTextSpacePanel = new HTMLPanel("&nbsp;");
 	private HTMLPanel idBewerbungSpacePanel = new HTMLPanel("&nbsp;");
 	private HTMLPanel statusSpacePanel = new HTMLPanel("&nbsp;");
-	// private HTMLPanel bewertungSpacePanel = new HTMLPanel("&nbsp;");
-	// private HTMLPanel stellungnahmeSpacePanel = new HTMLPanel("&nbsp;");
 
 	// Label für die Inhalte der ausgewählten Bewerbung
 	private Label erstellDatumWert = new Label("wird befüllt");
@@ -102,8 +96,6 @@ public class BewerbungBewerten extends VerticalPanel {
 	private Label bewerbungsTextWert = new Label("wird befüllt");
 	private Label idBewerbungWert = new Label("wird befüllt");
 	private Label statusWert = new Label("wird befüllt");
-	// private Label bewertungWert = new Label("wird befüllt");// TODO
-	// private Label stellungnahmeWert = new Label("wird befüllt");
 
 	// Label für Textboxen
 	private Label bewertungsZahlAbgeben = new Label("Hier bitte Bewertung eintragen (0.0-1.0)");
@@ -182,6 +174,7 @@ public class BewerbungBewerten extends VerticalPanel {
 		HorizontalPanel bewerbungPanel = new HorizontalPanel();
 		bewerbungPanel.add(bewerbungsText);
 		bewerbungPanel.add(bewerbungsTextSpacePanel);
+		bewerbungsTextWert.setWordWrap(true);
 		bewerbungPanel.add(bewerbungsTextWert);
 		bewerbungDetailsPanel.add(bewerbungPanel);
 
@@ -197,7 +190,6 @@ public class BewerbungBewerten extends VerticalPanel {
 		bewerbungDetailsPanel.addStyleName("bewerbungsdetails");
 
 		// Großes HorizontalPanel Spalte 3 über die ganze Seite
-		// TODO
 
 		// Zum Verstecken der Textboxen bis es ausgewählt wird
 		bewertungsZahlAbgeben.setVisible(false);

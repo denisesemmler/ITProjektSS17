@@ -320,8 +320,13 @@ public class BewerbungMapper {
 		try {
 		// neues SQL Statement anlegen
 		Statement stmt = con.createStatement();
+		
+		String sql = "DELETE FROM Bewerbung WHERE idBewerbung = " + b.getId();
+		
 		// SQL Query ausf�hren
-		stmt.executeUpdate("DELETE FROM Bewerbung WHERE idBewerbung = " + b.getId());
+		stmt.executeUpdate(sql);
+		
+		ServersideSettings.getLogger().info(sql);
 	}
 		// Error Handling
 		catch (SQLException e) {
