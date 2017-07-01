@@ -252,7 +252,7 @@ public class BewerbungMapper {
 			// SQL Zusammenbauen mit der StringBuilder Klasse. Einzelnen Strings
 			// Werden mit Append konkatiniert.
 			StringBuilder sb = new StringBuilder();
-			sb.append("UPDATE bewerbung SET idBewerbung = ");
+			sb.append("UPDATE Bewerbung SET idBewerbung = ");
 			sb.append(b.getId());
 			sb.append(" , ");
 			sb.append(" bewerbungstext= '");
