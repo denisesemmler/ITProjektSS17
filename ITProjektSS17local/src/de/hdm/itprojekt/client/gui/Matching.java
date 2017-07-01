@@ -100,7 +100,7 @@ public class Matching extends  VerticalPanel {
 				a.setBeschreibung(aVector.elementAt(passendeAusschreibungListBox.getSelectedIndex()).getBeschreibung());
 				a.setTitel(aVector.elementAt(passendeAusschreibungListBox.getSelectedIndex()).getTitel());
 				a.setBewerbungsfrist(aVector.elementAt(passendeAusschreibungListBox.getSelectedIndex()).getBewerbungsfrist());
-				
+				a.setProjekt_idProjekt(aVector.elementAt(passendeAusschreibungListBox.getSelectedIndex()).getProfil_idSuchprofil());
 				//RootPanel clearen und GUI EinzelAusschreibung laden
 				RootPanel.get("Content").clear();
 				RootPanel.get("Content").add(new EinzelAusschreibung(a));
