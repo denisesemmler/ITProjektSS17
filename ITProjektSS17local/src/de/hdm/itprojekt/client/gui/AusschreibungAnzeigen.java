@@ -210,6 +210,7 @@ public class AusschreibungAnzeigen extends VerticalPanel {
 			a.setBeschreibung(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBeschreibung());
 			a.setTitel(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getTitel());
 			a.setBewerbungsfrist(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getBewerbungsfrist());
+			a.setProfil_idSuchprofil(aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getProfil_idSuchprofil());
 			RootPanel.get("Content").clear();
 			RootPanel.get("Content").add(new EinzelAusschreibung(a));
 
