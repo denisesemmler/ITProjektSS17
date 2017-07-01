@@ -182,15 +182,16 @@ public class ProjektBearbeiten extends VerticalPanel {
 	/**
 	 * Callback für Speichern
 	 */
-	private class SpeichernCallback implements AsyncCallback {
+	private class SpeichernCallback implements AsyncCallback<Void> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(Void result) {
 			RootPanel.get("Content").clear();
+			RootPanel.get("Content").add(new ProjektVerwalten());
 
 		}
 

@@ -10,6 +10,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
+
 /**
  * GUI Klasse die das VerticalPanel vererbt bekommt für Anlegen von
  * Projektmarktplätzen
@@ -43,16 +45,17 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel {
 	 * @author Moritz Bittner
 	 *
 	 */
-	private class CreateProjektmarktplatzCallback implements AsyncCallback {
+	private class CreateProjektmarktplatzCallback implements AsyncCallback<Projektmarktplatz> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(Projektmarktplatz result) {
 			Window.alert("Projektmarktplatz gespeichert");
 			RootPanel.get("Content").clear();
+			RootPanel.get("Content").add(new ProjektmarktplatzVerwalten());
 
 		}
 

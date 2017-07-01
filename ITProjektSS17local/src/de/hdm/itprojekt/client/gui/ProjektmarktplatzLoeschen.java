@@ -57,15 +57,16 @@ public class ProjektmarktplatzLoeschen extends VerticalPanel {
 	 * @author Moritz Bittner
 	 *
 	 */
-	private class DeleteCallback implements AsyncCallback {
+	private class DeleteCallback implements AsyncCallback<Void> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(Void result) {
 			RootPanel.get("Content").clear();
+			RootPanel.get("Content").add(new ProjektmarktplatzVerwalten());
 
 		}
 
