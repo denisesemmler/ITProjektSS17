@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Vector;
+
 import de.hdm.itprojekt.shared.bo.Teilnehmer;
 
 /**
@@ -80,7 +80,6 @@ public class TeilnehmerMapper {
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
 				t.setFirma(rs.getString("firma"));
-				
 
 				// Objekt zur�ckgeben
 				return t;
@@ -132,7 +131,7 @@ public class TeilnehmerMapper {
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
 				t.setFirma(rs.getString("firma"));
-				
+
 				// ... Objekt dem Ergebnisvektor hinzufügen
 				result.add(t);
 			}
@@ -160,8 +159,7 @@ public class TeilnehmerMapper {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
 			// SQL Query ausführen
-			ResultSet rs = stmt
-					.executeQuery("SELECT * FROM Teilnehmer WHERE email = '" +emailAdresse+ "'");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Teilnehmer WHERE email = '" + emailAdresse + "'");
 			// Wenn der Eintrag gefunden wurde
 			if (rs.next()) {
 				// Neues User Objekt anlegen
@@ -176,8 +174,7 @@ public class TeilnehmerMapper {
 				t.setPlz(rs.getInt("plz"));
 				t.setStrasse(rs.getString("strasse"));
 				t.setFirma(rs.getString("firma"));
-			
-				
+
 				return t;
 			}
 		} catch (SQLException e) {
@@ -253,15 +250,14 @@ public class TeilnehmerMapper {
 				// SQL Query ausf�hren um Datensatz in DB zu schreiben
 				stmt.executeUpdate(
 						"INSERT INTO Teilnehmer (idTeilnehmer, vorname, nachname, zusatz, email, ort, plz, strasse, firma) "
-								+ "VALUES " + "('" + t.getId() + "', '"+ t.getVorname() + "', '" + t.getNachname() + "', '" + t.getZusatz()
-								+ "', '" + t.getEmail() + "', '" + t.getOrt() + "', '"
-								+ t.getPlz() + "', '" + t.getStrasse() + "', '" + t.getFirma() +"')");
+								+ "VALUES " + "('" + t.getId() + "', '" + t.getVorname() + "', '" + t.getNachname()
+								+ "', '" + t.getZusatz() + "', '" + t.getEmail() + "', '" + t.getOrt() + "', '"
+								+ t.getPlz() + "', '" + t.getStrasse() + "', '" + t.getFirma() + "')");
 
-				System.out.println(
-						"(idTeilnehmer, vorname, nachname, zusatz, email, ort, plz, strasse, firma) "
-								+ "VALUES " + "('" + t.getId() + "', '"+ t.getVorname() + "', '" + t.getNachname() + "', '" + t.getZusatz()
-								+ "', '" + t.getEmail() + "', '" + t.getOrt() + "', '"
-								+ t.getPlz() + "', '" + t.getStrasse() + "', '" + t.getFirma() +"')");
+				System.out.println("(idTeilnehmer, vorname, nachname, zusatz, email, ort, plz, strasse, firma) "
+						+ "VALUES " + "('" + t.getId() + "', '" + t.getVorname() + "', '" + t.getNachname() + "', '"
+						+ t.getZusatz() + "', '" + t.getEmail() + "', '" + t.getOrt() + "', '" + t.getPlz() + "', '"
+						+ t.getStrasse() + "', '" + t.getFirma() + "')");
 			}
 		}
 		// Error Handling
@@ -285,15 +281,15 @@ public class TeilnehmerMapper {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
 			// SQL Query ausf�hren
-			stmt.executeUpdate("UPDATE Teilnehmer " + "SET vorname = '" + t.getVorname() + "', nachname = '" + t.getNachname() + "', zusatz = '" + t.getZusatz()
-					+ "',email = '" + t.getEmail() + "',ort = '" + t.getOrt()
-					+ "', plz = '" + t.getPlz() + "',strasse = '"  + t.getStrasse() + "',firma = '" + t.getFirma() +  "' WHERE idTeilnehmer = "
-					+ t.getId());
+			stmt.executeUpdate("UPDATE Teilnehmer " + "SET vorname = '" + t.getVorname() + "', nachname = '"
+					+ t.getNachname() + "', zusatz = '" + t.getZusatz() + "',email = '" + t.getEmail() + "',ort = '"
+					+ t.getOrt() + "', plz = '" + t.getPlz() + "',strasse = '" + t.getStrasse() + "',firma = '"
+					+ t.getFirma() + "' WHERE idTeilnehmer = " + t.getId());
 
-			System.out.println("UPDATE Teilnehmer " + "SET vorname = '" + t.getVorname() + "', nachname = '" + t.getNachname() + "', zusatz = '" + t.getZusatz()
-			+ "',email = '" + t.getEmail() + "',ort = '" + t.getOrt()
-			+ "', plz = '" + t.getPlz() + "',strasse = '" + t.getStrasse() + "',firma = '" + t.getFirma() +  "' WHERE idTeilnehmer = "
-			+ t.getId());
+			System.out.println("UPDATE Teilnehmer " + "SET vorname = '" + t.getVorname() + "', nachname = '"
+					+ t.getNachname() + "', zusatz = '" + t.getZusatz() + "',email = '" + t.getEmail() + "',ort = '"
+					+ t.getOrt() + "', plz = '" + t.getPlz() + "',strasse = '" + t.getStrasse() + "',firma = '"
+					+ t.getFirma() + "' WHERE idTeilnehmer = " + t.getId());
 		}
 		// Error Handling
 		catch (SQLException e) {
@@ -326,41 +322,28 @@ public class TeilnehmerMapper {
 		}
 	}
 
-	//Suche von Teilnehmrn anhand der ID
-	/*public Teilnehmer findByProfil(Profil suchProfil) {
-		// Datenbankverbindung öffnen
-		Connection con = DBConnection.connection();
-
-		try {
-			// neues SQL Statement anlegen
-			Statement stmt = con.createStatement();
-			// SQL Query ausführen
-			ResultSet rs = stmt
-					.executeQuery("SELECT * FROM Teilnehmer " + "WHERE Profil_idProfil = " + suchProfil.getIdProfil());
-			// Wenn der Eintrag gefunden wurde
-			if (rs.next()) {
-				// Neues User Objekt anlegen
-				Teilnehmer t = new Teilnehmer();
-				// Das Objekt mit Daten aus der DB f�llen
-				t.setId(rs.getInt("idTeilnehmer"));
-				t.setVorname(rs.getString("vorname"));
-				t.setNachname(rs.getString("nachname"));
-				t.setZusatz(rs.getString("zusatz"));
-				t.setEmail(rs.getString("email"));
-				t.setRolle(rs.getInt("rolle"));
-				t.setOrt(rs.getString("ort"));
-				t.setPlz(rs.getInt("plz"));
-				t.setStrasse(rs.getString("strasse"));
-				t.setProfil_idProfil(rs.getInt("Profil_idProfil"));
-				t.setProjektLeiter(rs.getInt("projektleiter"));
-
-				return t;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return null;
-	}*/
+	// Suche von Teilnehmrn anhand der ID
+	/*
+	 * public Teilnehmer findByProfil(Profil suchProfil) { //
+	 * Datenbankverbindung öffnen Connection con = DBConnection.connection();
+	 * 
+	 * try { // neues SQL Statement anlegen Statement stmt =
+	 * con.createStatement(); // SQL Query ausführen ResultSet rs = stmt
+	 * .executeQuery("SELECT * FROM Teilnehmer " + "WHERE Profil_idProfil = " +
+	 * suchProfil.getIdProfil()); // Wenn der Eintrag gefunden wurde if
+	 * (rs.next()) { // Neues User Objekt anlegen Teilnehmer t = new
+	 * Teilnehmer(); // Das Objekt mit Daten aus der DB f�llen
+	 * t.setId(rs.getInt("idTeilnehmer"));
+	 * t.setVorname(rs.getString("vorname"));
+	 * t.setNachname(rs.getString("nachname"));
+	 * t.setZusatz(rs.getString("zusatz")); t.setEmail(rs.getString("email"));
+	 * t.setRolle(rs.getInt("rolle")); t.setOrt(rs.getString("ort"));
+	 * t.setPlz(rs.getInt("plz")); t.setStrasse(rs.getString("strasse"));
+	 * t.setProfil_idProfil(rs.getInt("Profil_idProfil"));
+	 * t.setProjektLeiter(rs.getInt("projektleiter"));
+	 * 
+	 * return t; } } catch (SQLException e) { e.printStackTrace(); return null;
+	 * } return null; }
+	 */
 
 }

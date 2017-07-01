@@ -36,7 +36,6 @@ import de.hdm.itprojekt.shared.bs.ProjektAdministration;
  * @author Patricia
  *
  */
-@SuppressWarnings("serial")
 public class ProjektAdministrationImpl extends RemoteServiceServlet implements ProjektAdministration {
 
 	private ProjektmarktplatzMapper pmMapper = null;

@@ -7,8 +7,6 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import de.hdm.itprojekt.client.report.gui.ReportWrapper;
-
 /**
  * Klasse für Navigationsleiste
  * 

@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
-import de.hdm.itprojekt.shared.bo.Profil;
 
 /**
  * p> Mapper-Klasse zur Abbildung von <code>Eigenschaft</code> Objekten auf die
@@ -82,8 +81,9 @@ public class EigenschaftMapper {
 				stmt = con.createStatement();
 
 				// In DB einfuegen
-				stmt.executeUpdate("INSERT INTO Eigenschaft (idEigenschaft, name, wert, Profil_idProfil)" + "VALUES ('" + e.getId() + "','"
-						+ e.getName() + "','" + e.getWert() + "','" + e.getProfil_idProfil() + "')");
+				stmt.executeUpdate(
+						"INSERT INTO Eigenschaft (idEigenschaft, name, wert, Profil_idProfil)" + "VALUES ('" + e.getId()
+								+ "','" + e.getName() + "','" + e.getWert() + "','" + e.getProfil_idProfil() + "')");
 
 			}
 		}
@@ -103,8 +103,8 @@ public class EigenschaftMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE Eigenschaft SET name= '" + e.getName() + "', wert= '" + e.getWert() + "' WHERE idEigenschaft= "
-					+ e.getId());
+			stmt.executeUpdate("UPDATE Eigenschaft SET name= '" + e.getName() + "', wert= '" + e.getWert()
+					+ "' WHERE idEigenschaft= " + e.getId());
 
 		}
 
@@ -115,8 +115,7 @@ public class EigenschaftMapper {
 		return e;
 	}
 
-	
-	//Eigenschaften werden anhand ihrer einzigartigen ID gesucht
+	// Eigenschaften werden anhand ihrer einzigartigen ID gesucht
 	public Vector<Eigenschaft> findByProfil(int profilId) {
 
 		// Datenbankverbindung �ffnen
@@ -135,7 +134,7 @@ public class EigenschaftMapper {
 				e.setName(rs.getString("name"));
 				e.setWert(rs.getInt("wert"));
 				result.add(e);
-				
+
 			}
 		}
 		// Error Handling
@@ -143,7 +142,7 @@ public class EigenschaftMapper {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 		return result;
 
 	}

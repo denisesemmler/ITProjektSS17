@@ -115,13 +115,12 @@ public class BewerbungBearbeiten extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 
-			//Eingabeüberprüfung
+			// Eingabeüberprüfung
 			if (bewerbungTextArea.getText().matches("")) {
 				Window.alert("Bitte Wert eintragen!");
 				return;
 			}
-			
-			
+
 			try {
 				int id = bVector.elementAt(bewerbungsListbox.getSelectedIndex()).getId();
 				Bewerbung bewerbung = new Bewerbung();

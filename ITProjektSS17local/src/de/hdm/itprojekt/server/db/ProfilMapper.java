@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Profil;
 
 /**
@@ -54,7 +53,7 @@ public class ProfilMapper {
 	 *            - Primärschlüssel von Profil
 	 * @return Profil Objekt, das die gesuchte ID enth�lt
 	 * 
-	 * */
+	 */
 	public Profil insert(Profil p) {
 
 		// Datenbankverbindung �ffnen
@@ -71,9 +70,9 @@ public class ProfilMapper {
 				// neues SQL Statement
 				stmt = con.createStatement();
 				// SQL Query ausf�hren um Datensatz in DB zu schreiben
-				stmt.executeUpdate(
-						"INSERT INTO Profil (idProfil, erstelldatum, Teilnehmer_idTeilnehmer, suchprofil) "
-								+ "VALUES " + "('" + p.getId() + "', '"  + p.getErstellDatum() + "', '" + p.getTeilnehmer_idTeilnehmer() + "', '" + p.getSuchprofil() +"')");
+				stmt.executeUpdate("INSERT INTO Profil (idProfil, erstelldatum, Teilnehmer_idTeilnehmer, suchprofil) "
+						+ "VALUES " + "('" + p.getId() + "', '" + p.getErstellDatum() + "', '"
+						+ p.getTeilnehmer_idTeilnehmer() + "', '" + p.getSuchprofil() + "')");
 
 			}
 		}
@@ -83,6 +82,7 @@ public class ProfilMapper {
 		}
 		return p;
 	}
+
 	public Profil findById(int id) {
 		// Datenbankverbindung �ffnen
 		Connection con = DBConnection.connection();
@@ -91,8 +91,7 @@ public class ProfilMapper {
 			// Neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
 			// SQL Query ausführen
-			ResultSet rs = stmt.executeQuery("SELECT * FROM Profil "
-					+ "WHERE idProfil = " + id);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Profil " + "WHERE idProfil = " + id);
 			// Bei Treffer
 			if (rs.next()) {
 				// Neues Source Objekt erzeugen
@@ -115,7 +114,7 @@ public class ProfilMapper {
 		// Falls nichts gefunden wurde null zur�ckgeben
 		return null;
 	}
-	
+
 	public Profil findByTeilnehmerId(int id) {
 		// Datenbankverbindung �ffnen
 		Connection con = DBConnection.connection();
@@ -134,8 +133,6 @@ public class ProfilMapper {
 				p.setErstellDatum(rs.getDate("erstelldatum"));
 				p.setAenderungsDatum(rs.getDate("aenderungsdatum"));
 
-				
-
 				// Objekt zurückgeben
 				return p;
 			}
@@ -147,7 +144,7 @@ public class ProfilMapper {
 		}
 		return null;
 	}
-	
+
 	public int findByTeilnehmerIdINT(int id) {
 		// Datenbankverbindung �ffnen
 		Connection con = DBConnection.connection();
@@ -163,7 +160,7 @@ public class ProfilMapper {
 				// Neues Source Objekt erzeugen
 				int p;
 				// Id und Source mit den Daten aus der DB füllen
-				p = rs.getInt("idProfil");				
+				p = rs.getInt("idProfil");
 
 				// Objekt zurückgeben
 				return p;
@@ -181,23 +178,20 @@ public class ProfilMapper {
 	public Profil update(Profil p) {
 		// Datenbankverbindung �ffnen
 		Connection con = DBConnection.connection();
-		
+
 		try {
 			// neues SQL Statement anlegen
 			Statement stmt = con.createStatement();
 			// SQL Query ausf�hren
-			stmt.executeUpdate("UPDATE Profil "
-					+ "SET aenderungsdatum = '" 
-					+ p.getAenderungsDatum()
-					+ "' WHERE idProfil = " 
-					+ p.getId());	
-			
+			stmt.executeUpdate("UPDATE Profil " + "SET aenderungsdatum = '" + p.getAenderungsDatum()
+					+ "' WHERE idProfil = " + p.getId());
+
 		}
 		// Error Handling
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return p;
 	}
 

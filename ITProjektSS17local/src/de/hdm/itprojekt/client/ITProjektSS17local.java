@@ -11,24 +11,19 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
-
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm.itprojekt.client.gui.LogOutPopUp;
 import de.hdm.itprojekt.client.gui.AnmeldeFormular;
 import de.hdm.itprojekt.client.gui.ClientSideSettings;
+import de.hdm.itprojekt.client.gui.LogOutPopUp;
 import de.hdm.itprojekt.client.gui.Navigation;
 import de.hdm.itprojekt.client.gui.ProfilAnlegen;
 import de.hdm.itprojekt.client.gui.ProfilAnzeigen;
-import de.hdm.itprojekt.client.gui.ProjektLoeschen;
-
 import de.hdm.itprojekt.shared.LoginServiceAsync;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Profil;
@@ -43,8 +38,7 @@ public class ITProjektSS17local implements EntryPoint {
 
 	//Zwei Panels fuer die GUI
 		private VerticalPanel loginPanel = new VerticalPanel();
-		private HorizontalPanel emailPanel = new HorizontalPanel();
-		private HorizontalPanel passwordPanel = new HorizontalPanel();
+
 		private HorizontalPanel naviPanel = new HorizontalPanel();
 
 		
@@ -52,9 +46,7 @@ public class ITProjektSS17local implements EntryPoint {
 		private Label loginLabel = new Label(
 				"Log in with your Google-Account and get started with Pr0ject");
 		
-		//Email und Password Label
-		private Label emailLabel = new Label("Email:");
-		private Label passwordLabel = new Label("Password:");
+		
 		//Zur An- und Abmeldung
 		private Anchor signInLink = new Anchor("Anmelden");
 		private final Button loginButton = new Button("Anmelden");
@@ -175,17 +167,17 @@ public class ITProjektSS17local implements EntryPoint {
  * zurueckgegeben wird festgelegt
  */
 
-private class SetUserCallback implements AsyncCallback {
+/*private class SetUserCallback implements AsyncCallback<Teilnehmer> {
 	public void onFailure(Throwable caught) {
 	}
 
-	public void onSuccess(Object result) {
+	public void onSuccess(Teilnehmer result) {
 		try {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-}
+}*/
 
 private class GetProfileCallback implements AsyncCallback<Profil> {
 

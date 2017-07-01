@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-import org.eclipse.jetty.server.Server;
-
 import de.hdm.itprojekt.server.ServersideSettings;
 import de.hdm.itprojekt.shared.bo.Beteiligung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;

@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Profil;
 
 /**
@@ -204,14 +205,14 @@ public class ProfilAnlegen extends VerticalPanel {
 		}
 	};
 
-	private class CreateEigenschaftCallback implements AsyncCallback {
+	private class CreateEigenschaftCallback implements AsyncCallback<Vector<Eigenschaft>> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(Vector<Eigenschaft> result) {
 
 			Window.alert("Dein Profil wurde angelegt!");
 			// Wenn Eigenschaften angelegt wurden, dann User existing setzen,
