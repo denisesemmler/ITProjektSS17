@@ -22,7 +22,7 @@ import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
  */
 public class BewerbungVorschlaege extends SimpleReport {
 	public BewerbungVorschlaege() {
-		super("Ihre Bewerbung - " + ClientSideSettings.getCurrentUser().getVorname() + " "
+		super("Ihre Vorschläge - " + ClientSideSettings.getCurrentUser().getVorname() + " "
 				+ ClientSideSettings.getCurrentUser().getNachname());
 		// Report Generator
 		ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();

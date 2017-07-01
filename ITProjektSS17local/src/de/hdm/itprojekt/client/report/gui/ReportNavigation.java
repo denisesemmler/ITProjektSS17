@@ -24,10 +24,10 @@ public class ReportNavigation extends VerticalPanel implements ClickHandler {
 
 	// Buttons init
 	private Button allAds = new Button("(3) Alle Ausschreibungen", this);
-	private Button adsForProfile = new Button("Alle Ausschreibungen, die Ich erstellt habe.", this);
-	private Button vorschlag = new Button("(4) Vorschläge", this);
-	private Button adsForApplication = new Button("(5) Alle Bewerbungen,die sich bei Mir beworben haben.", this);
-	private Button openApplication = new Button("(6) Alle Bewerbungen von Ausschreibung des Benutzers", this);
+	private Button adsForProfile = new Button("Meine Ausschreibungen", this);
+	private Button vorschlag = new Button("(4) Passende Ausschreibungen für mein Profil", this);
+	private Button adsForApplication = new Button("(5) Alle Bewerbungen auf meine Ausschreibungen", this);
+	private Button openApplication = new Button("(6) Meine Bewerbungen", this);
 	private Button projektverpflechtungen = new Button("(7) Projektverpflechtungen", this);
 	private Button fanInFanOut = new Button("(8) Fan-In/Fan-Out Analyse", this);
 

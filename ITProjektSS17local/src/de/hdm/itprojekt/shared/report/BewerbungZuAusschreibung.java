@@ -20,7 +20,7 @@ import de.hdm.itprojekt.shared.bo.reports.BewerbungReport;
 public class BewerbungZuAusschreibung extends SimpleReport {
 
 	public BewerbungZuAusschreibung() {
-		super("Ihre Bewerbungen");
+		super("Bewerbungen auf meine Ausschreibungen");
 		// Report Generator
 		ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
 

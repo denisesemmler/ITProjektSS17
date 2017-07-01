@@ -20,7 +20,7 @@ import de.hdm.itprojekt.shared.bo.reports.AusschreibungReport;
  */
 public class AlleAusschreibungenNutzer extends SimpleReport {
 	public AlleAusschreibungenNutzer() {
-		super("Alle Ausschreibungen für angemeldeten Nutzer");
+		super("Meine Ausschreibungen");
 		// Report Generator
 		ReportServiceAsync reportGenerator = ClientSideSettings.getReportGenerator();
 
