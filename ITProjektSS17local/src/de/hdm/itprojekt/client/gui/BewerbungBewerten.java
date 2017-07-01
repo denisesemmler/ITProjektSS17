@@ -27,6 +27,7 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 
 /**
+ * Diese Klasse implementiert die Seite Bewerbung Bewerten
  * 
  * @author Patricia
  *

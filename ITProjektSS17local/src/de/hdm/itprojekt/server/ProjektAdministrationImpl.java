@@ -29,13 +29,16 @@ import de.hdm.itprojekt.shared.bo.Teilnehmer;
 import de.hdm.itprojekt.shared.bs.ProjektAdministration;
 
 /**
+ * Diese Klasse ist die Implementierung des Remote Interfaces
+ * ProjektAdminitration Hier sind alle UseCases ausprogrammiert, sie stellt die
+ * Applikationslogik dar
  * 
  * @author Patricia
  *
  */
 @SuppressWarnings("serial")
 public class ProjektAdministrationImpl extends RemoteServiceServlet implements ProjektAdministration {
-	
+
 	private ProjektmarktplatzMapper pmMapper = null;
 	private ProjektMapper pMapper = null;
 	private AusschreibungMapper aMapper = null;
@@ -53,9 +56,10 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	}
 
 	@Override
-	/* Init ist eine Initialisierungsmethode, diese Methode MUSS für jede
+	/*
+	 * Init ist eine Initialisierungsmethode, diese Methode MUSS für jede
 	 * Instanz von "ProjektAdministrationImpl" gerufen werden!
-	 */ 
+	 */
 	public void init() throws IllegalArgumentException {
 		pmMapper = ProjektmarktplatzMapper.projektmarktplatzMapper();
 		pMapper = ProjektMapper.projektMapper();
@@ -66,7 +70,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		bMapper = BewerbungMapper.bewerbungMapper();
 		btMapper = BeteiligungMapper.beteiligungMapper();
 	}
-	
+
 	/*
 	 * Methoden für Projektmarktplätze
 	 */
@@ -75,19 +79,20 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 * Diese Methode implementiert denn UC Projektmarktplatz anlegen
 	 */
 	@Override
-	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez, int idTeilnehmer) throws IllegalArgumentException {
+	public Projektmarktplatz createProjektmarktplatz(String projektmarktplatzBez, int idTeilnehmer)
+			throws IllegalArgumentException {
 
-		//Neues Objekt wird erstellt
+		// Neues Objekt wird erstellt
 		Projektmarktplatz pm = new Projektmarktplatz();
-		
-		//Werte die über die Gui reinkommen werden in das Objekt gesteckt
+
+		// Werte die über die Gui reinkommen werden in das Objekt gesteckt
 		pm.setBezeichnung(projektmarktplatzBez);
 		pm.setTeilnehmer_idTeilnehmer(idTeilnehmer);
 
 		// Objekt mit Werten wird in DB gespeichert
 		return this.pmMapper.insert(pm);
 	}
-	
+
 	/**
 	 * Diese Methode implementiert denn UC Projektmarktplatz bearbeiten
 	 */
@@ -95,59 +100,62 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	public void updateProjektmarktplatz(Projektmarktplatz pm) throws IllegalArgumentException {
 		pmMapper.update(pm);
 	}
-	
+
 	/**
 	 * Diese Methode implementiert denn UC Projektmarktplatz löschen
 	 */
 	@Override
 	public void deleteProjektmarktplatz(Projektmarktplatz pm) throws IllegalArgumentException {
-		
-		//Alle Projekte zum Projektmarktplatz werden hier "gemerkt"
+
+		// Alle Projekte zum Projektmarktplatz werden hier "gemerkt"
 		Vector<Projekt> projekte = pMapper.findAllProjektmarktplatzById(pm.getId());
-		
-		//Alle Projektzeilen löschen
-		for (Projekt projekt : projekte){
+
+		// Alle Projektzeilen löschen
+		for (Projekt projekt : projekte) {
 			this.deleteProjekt(projekt);
 		}
-		
-		//Projektmarktplatz aus DB entfernen
+
+		// Projektmarktplatz aus DB entfernen
 		this.pmMapper.delete(pm);
 	}
 
 	/**
-	 * Diese Methode implementiert denn UC alle Projekte zum jeweiligen Projektmarktplatz in der GUI anzuzeigen
+	 * Diese Methode implementiert denn UC alle Projekte zum jeweiligen
+	 * Projektmarktplatz in der GUI anzuzeigen
 	 */
 	@Override
 	public Vector<Projekt> findProjekteByProjektmarktplatzId(int projektmarktplatzId) throws IllegalArgumentException {
-		
-		//Alle Projekte zum Projektmarktplatz werden hier "gemerkt"
+
+		// Alle Projekte zum Projektmarktplatz werden hier "gemerkt"
 		Vector<Projekt> projekte = pMapper.findAllProjektmarktplatzById(projektmarktplatzId);
-		
-		//Rückgabe an den Aufrufer
+
+		// Rückgabe an den Aufrufer
 		return projekte;
 	}
-	
+
 	/**
-	 * Diese Methode implementiert denn UC alle Projektmarktplätze in der GUI anzuzeigen
+	 * Diese Methode implementiert denn UC alle Projektmarktplätze in der GUI
+	 * anzuzeigen
 	 */
 	@Override
 	public Vector<Projektmarktplatz> findAllProjektmarktplatz() throws IllegalArgumentException {
-		//Alle Projektmarktplätze werden hier "gemerkt"
+		// Alle Projektmarktplätze werden hier "gemerkt"
 		Vector<Projektmarktplatz> projektmarktplatz = pmMapper.findAllProjektmarkplaetze();
-		
-		//Rückgabe an den Aufrufer
+
+		// Rückgabe an den Aufrufer
 		return projektmarktplatz;
 	}
-	
+
 	@Override
-	public Vector<Projektmarktplatz> findProjektmarktplatzByTeilnehmerId(int teilnehmerId) throws IllegalArgumentException {
-		//Alle Projektmarktplätze werden hier "gemerkt"
+	public Vector<Projektmarktplatz> findProjektmarktplatzByTeilnehmerId(int teilnehmerId)
+			throws IllegalArgumentException {
+		// Alle Projektmarktplätze werden hier "gemerkt"
 		Vector<Projektmarktplatz> projektmarktplatz = pmMapper.findByTeilnehmerId(teilnehmerId);
-		
-		//Rückgabe an den Aufrufer
+
+		// Rückgabe an den Aufrufer
 		return projektmarktplatz;
 	}
-	
+
 	/*
 	 * Methoden für Projekte
 	 */
@@ -158,11 +166,11 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	@Override
 	public Projekt createProjekt(String projektName, String projektBeschreibung, Date startDatum, Date endDatum,
 			int TeilnehmerID, int MarktplatzID) throws IllegalArgumentException {
-		
-		//Neues Objekt
+
+		// Neues Objekt
 		Projekt p = new Projekt();
-		
-		//Werte werden hinzugefügt
+
+		// Werte werden hinzugefügt
 		p.setName(projektName);
 		p.setBeschreibung(projektBeschreibung);
 		p.setStartDatum(new java.sql.Date(startDatum.getTime()));
@@ -191,6 +199,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 * Diese Methode löscht ein Projekt mit all ihren Abhängigkeiten (gemäß
 	 * tablesV3). Diese sind: {@link Ausschreibung}, {@link Profil},
 	 * {@link Eigenschaft}, {@link Bewerbung}, {@link Beteiligung}
+	 * 
 	 * @param p
 	 *            ist das Objekt eines Projekts, dass gelöscht werden soll.
 	 * 
@@ -207,33 +216,34 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		pMapper.delete(p);
 	}
-	
+
 	/**
-	 * Diese Methode implementiert denn UC alle Ausschreibungen zum jeweiligen Projekt in der GUI anzuzeigen
+	 * Diese Methode implementiert denn UC alle Ausschreibungen zum jeweiligen
+	 * Projekt in der GUI anzuzeigen
 	 */
 	@Override
 	public Vector<Ausschreibung> findAusschreibungByProjektId(int projektId) throws IllegalArgumentException {
-		
-		//Alle Ausschreibungen zum Projekt werden hier "gemerkt"
+
+		// Alle Ausschreibungen zum Projekt werden hier "gemerkt"
 		Vector<Ausschreibung> ausschreibungen = getAusschreibungByProjektId(projektId);
-		
-		//Rückgabe
+
+		// Rückgabe
 		return ausschreibungen;
 	}
-	
+
 	/**
-	 * Diese Methode implementiert denn UC alle Projekte zur jeweiligen TeilnehmerId in der GUI anzuzeigen
+	 * Diese Methode implementiert denn UC alle Projekte zur jeweiligen
+	 * TeilnehmerId in der GUI anzuzeigen
 	 */
 	@Override
 	public Vector<Projekt> findAllProjektByTeilnehmerId(int teilnehmerId) throws IllegalArgumentException {
-		
-		//Alle Projekt zur Teilnehmerid werden hier "gemerkt"
+
+		// Alle Projekt zur Teilnehmerid werden hier "gemerkt"
 		Vector<Projekt> projekteZuTeilnehmer = pMapper.findAllProjektByTeilnehmerId(teilnehmerId);
-		
-		//Rückgabe
+
+		// Rückgabe
 		return projekteZuTeilnehmer;
 	}
-	
 
 	/*
 	 * Methode zum erstellen des Profils
@@ -241,19 +251,19 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	@Override
 	public Profil createProfil(int teilnehmerId, int suchprofil) throws IllegalArgumentException {
 		Profil p = new Profil();
-		
+
 		Date erstelldatum = new Date();
 		p.setErstellDatum(new java.sql.Date(erstelldatum.getTime()));
 		p.setTeilnehmer_idTeilnehmer(teilnehmerId);
 		p.setSuchprofil(suchprofil);
-		
+
 		return pfMapper.insert(p);
 	}
-	
+
 	/*
 	 * Methode zum updaten des Profils
-	 */	
-	
+	 */
+
 	@Override
 	public void updateProfil(Profil p) throws IllegalArgumentException {
 
@@ -276,28 +286,30 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 
 		/*
-		 *  Hier wird eine Liste aller Bewerbungen zur Ausschreibungen von der DB gelesen
-		 */  
+		 * Hier wird eine Liste aller Bewerbungen zur Ausschreibungen von der DB
+		 * gelesen
+		 */
 		Vector<Bewerbung> bewerbungenZuProfil = bMapper.findByAusschreibungsId(a.getId());
 
 		/*
-		 *  Hier werden die Bewerbungen aus der DB entfernt, aber erst wenn die dazugehörige Beteiligung entfernt ist
+		 * Hier werden die Bewerbungen aus der DB entfernt, aber erst wenn die
+		 * dazugehörige Beteiligung entfernt ist
 		 */
 		for (Bewerbung b : bewerbungenZuProfil) {
 			this.deleteBewerbung(b);
 		}
 
-		
 	}
 
 	/**
 	 * Diese Methode liest alle Ausschreibungen zu einem Projekt.
+	 * 
 	 * @param projektId
 	 * @return Vector aller Ausschreibungen zum übergebenen Projekt p.
 	 */
 	private Vector<Ausschreibung> getAusschreibungByProjektId(int projektId) {
 		return aMapper.findByProjekt(projektId);
-		
+
 	}
 
 	// Methoden für Ausschreibung
@@ -306,15 +318,15 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	 */
 	@Override
 	public Ausschreibung createAusschreibung(String beschreibung, Date bewerbungsfrist, String titel, String status,
-			int projekt_idProjekt, int profil_idSuchprofil, int teilnehmer_idTeilnehmer) throws IllegalArgumentException {
+			int projekt_idProjekt, int profil_idSuchprofil, int teilnehmer_idTeilnehmer)
+			throws IllegalArgumentException {
 
 		// Neues Objekt erstellen
 		Ausschreibung ausschreibung = new Ausschreibung();
 
-
 		// Werte zum Objekt hinzufügen
 		ausschreibung.setBeschreibung(beschreibung);
-		
+
 		// kurze schreibweise einer Typkonvertierung
 		ausschreibung.setBewerbungsfrist(new java.sql.Date(bewerbungsfrist.getTime())); // Timestamp?
 		ausschreibung.setTitel(titel);
@@ -340,7 +352,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	/**
 	 * Diese Methode implementiert denn UC Ausschreibung löschen
 	 */
-	
+
 	/*
 	 * Methode zum Löschen von Ausschreibungen, da das Projekt sonst nicht
 	 * gelöscht werden kann
@@ -351,69 +363,67 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		// Hier wird die Ausschreibung aus der DB entfernt
 		this.aMapper.delete(a);
 	}
-	
+
 	/*
 	 * Methode zum Anzeigen aller Ausschreibungen
 	 */
 	@Override
 	public Vector<Ausschreibung> findAllAusschreibungen() throws IllegalArgumentException {
-		
-		//Alle Projekt zur Teilnehmerid werden hier "gemerkt"
-				Vector<Ausschreibung> ausschreibungen = aMapper.findAllAusschreibungen();
-				
-				//Rückgabe
-				return ausschreibungen;
+
+		// Alle Projekt zur Teilnehmerid werden hier "gemerkt"
+		Vector<Ausschreibung> ausschreibungen = aMapper.findAllAusschreibungen();
+
+		// Rückgabe
+		return ausschreibungen;
 	}
-	
-	
+
 	/**
-	 * Diese Methode implementiert denn UC alle Uassschreibung nach TeilnehmerId in der GUI anzuzeigen
+	 * Diese Methode implementiert denn UC alle Uassschreibung nach TeilnehmerId
+	 * in der GUI anzuzeigen
 	 */
 	@Override
 	public Vector<Ausschreibung> findAllAusschreibungByTeilnehmerId(int teilnehmerId) throws IllegalArgumentException {
-		
-		//Alle Projekt zur Teilnehmerid werden hier "gemerkt"
-				Vector<Ausschreibung> ausschreibungenZuTeilnehmer = aMapper.findAllAusschreibungByTeilnehmerId(teilnehmerId);
-				
-				//Rückgabe
-				return ausschreibungenZuTeilnehmer;
+
+		// Alle Projekt zur Teilnehmerid werden hier "gemerkt"
+		Vector<Ausschreibung> ausschreibungenZuTeilnehmer = aMapper.findAllAusschreibungByTeilnehmerId(teilnehmerId);
+
+		// Rückgabe
+		return ausschreibungenZuTeilnehmer;
 	}
-	
-	
-	
+
 	/**
-	 * Diese Methode implementiert denn UC alle Bewerbungen zu jeweiligen Ausschreibung in der GUI anzuzeigen.
-	 * @return {@link Vector} von {@link Bewerbung}, die einen Status von "laufend" haben.
+	 * Diese Methode implementiert denn UC alle Bewerbungen zu jeweiligen
+	 * Ausschreibung in der GUI anzuzeigen.
+	 * 
+	 * @return {@link Vector} von {@link Bewerbung}, die einen Status von
+	 *         "laufend" haben.
 	 */
 	@Override
 	public Vector<Bewerbung> findBewerbungenByAusschreibungId(int ausschreibungId) throws IllegalArgumentException {
-		
-		//Alle Bewerbungen zu der jew. Ausschreibung werden hier "gemerkt"
-				Vector<Bewerbung> bewerbungen = bMapper.findByAusschreibungsId(ausschreibungId);
-				
-				Vector<Bewerbung> bewerbungenFuerDieGui = new Vector<Bewerbung>();
-				
-				//Schleife, die nur die Bewerbungen im status laufend rausfilter
-				for(Bewerbung b : bewerbungen){
-					if(b.getStatus().equals("Laufend")){
-						bewerbungenFuerDieGui.add(b);
-					}
-				}
-				
-				
-				//Rückgabe an den Aufrufer
-				return bewerbungenFuerDieGui;
+
+		// Alle Bewerbungen zu der jew. Ausschreibung werden hier "gemerkt"
+		Vector<Bewerbung> bewerbungen = bMapper.findByAusschreibungsId(ausschreibungId);
+
+		Vector<Bewerbung> bewerbungenFuerDieGui = new Vector<Bewerbung>();
+
+		// Schleife, die nur die Bewerbungen im status laufend rausfilter
+		for (Bewerbung b : bewerbungen) {
+			if (b.getStatus().equals("Laufend")) {
+				bewerbungenFuerDieGui.add(b);
+			}
+		}
+
+		// Rückgabe an den Aufrufer
+		return bewerbungenFuerDieGui;
 	}
-	
-	
-	
+
 	// Methoden für Bewerbung
 	/**
 	 * Diese Methode implementiert denn UC Auf Ausschreibung bewerben
 	 */
 	@Override
-	public Bewerbung createBewerbung(String bewerbungsText, Date erstellDatum, float bewertung, String status, String titel,
-			int idProfil, int ausschreibungID) throws IllegalArgumentException {
+	public Bewerbung createBewerbung(String bewerbungsText, Date erstellDatum, float bewertung, String status,
+			String titel, int idProfil, int ausschreibungID) throws IllegalArgumentException {
 
 		// Neues Objekt erstellen
 		Bewerbung bewerbung = new Bewerbung();
@@ -447,90 +457,86 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 	/**
 	 * Diese Methode implementiert denn UC Bewerbung zurückziehen
 	 */
-	
+
 	/*
-	 *  Methode um die Beteiligung zu löschen, da die Bewerbung vorher nicht(non-Javadoc) gelöscht werden kann
+	 * Methode um die Beteiligung zu löschen, da die Bewerbung vorher
+	 * nicht(non-Javadoc) gelöscht werden kann
 	 */
 	public void deleteBewerbung(Bewerbung b) {
 		Beteiligung beteiligung = btMapper.findByBewerbung(b);
-		if(beteiligung!=null){
+		if (beteiligung != null) {
 			btMapper.delete(beteiligung);
 		}
 		bMapper.delete(b);
 	}
 
-	
-	
 	/**
-	 * Diese Methode implementiert denn UC Bewerbung nach TeilnehmerId in der GUI anzuzeigen
+	 * Diese Methode implementiert denn UC Bewerbung nach TeilnehmerId in der
+	 * GUI anzuzeigen
 	 */
 	@Override
 	public Vector<Bewerbung> findBewerbungByTeilnehmerid(int teilnehmerId) throws IllegalArgumentException {
-		
-		//Alle Bewerbungen zu der jew. TeilnehmerId werden hier "gemerkt"
+
+		// Alle Bewerbungen zu der jew. TeilnehmerId werden hier "gemerkt"
 		Vector<Bewerbung> bewerbungenZuTeilnehmer = bMapper.findBewerbungByTeilnehmerId(teilnehmerId);
-		
+
 		return bewerbungenZuTeilnehmer;
 	}
-	
+
 	/**
 	 * Liest zum Profil und zur Ausschreibung die Bewerbung
 	 */
 	@Override
 	public Bewerbung findBewerbungByProfilIdAndAusschreibungId(int profilId, int ausschreibungID)
 			throws IllegalArgumentException {
-		
+
 		return bMapper.findByProfilIdAndAusschreibungsId(profilId, ausschreibungID);
-		
-		
+
 	}
-	
-	
-	
+
 	/**
 	 * Diese Methode implementiert denn UC Bewertung erstellen + Beteiligung
 	 */
 	@Override
-	public void bewertungZurBewerbung(int bewerbungId, float bewertung, String stellungnahme, int projektId, int manntage, Date startdatum, Date enddatum) throws IllegalArgumentException {
-		
-		//Bewerbung mittels BewerbungsId aus der DB holen
+	public void bewertungZurBewerbung(int bewerbungId, float bewertung, String stellungnahme, int projektId,
+			int manntage, Date startdatum, Date enddatum) throws IllegalArgumentException {
+
+		// Bewerbung mittels BewerbungsId aus der DB holen
 		Bewerbung bewerbungAusDb = bMapper.findById(bewerbungId);
-		
-		//Bewertung an Bewerbung hinzufügen
+
+		// Bewertung an Bewerbung hinzufügen
 		bewerbungAusDb.setBewertung(bewertung);
-		
-		//Beteiligung ab Bewertung 1, sonst nix.
-		if(bewertung == 1){
-			
+
+		// Beteiligung ab Bewertung 1, sonst nix.
+		if (bewertung == 1) {
+
 			bewerbungAusDb.setStatus("Angenommen");
-			
-			//Neues Objekt
+
+			// Neues Objekt
 			Beteiligung beteiligungNachBewerbung = new Beteiligung();
-			
-			//Hier wird das Objekt mit Daten befüllt
+
+			// Hier wird das Objekt mit Daten befüllt
 			beteiligungNachBewerbung.setStellungnahme(stellungnahme);
 			beteiligungNachBewerbung.setProjektID(projektId);
 			beteiligungNachBewerbung.setBewerbungID(bewerbungId);
 			beteiligungNachBewerbung.setManntage(manntage);
 			beteiligungNachBewerbung.setStartdatum(new java.sql.Date(startdatum.getTime()));
 			beteiligungNachBewerbung.setEnddatum(new java.sql.Date(enddatum.getTime()));
-			
-			//Befülltes Objekt in DB speichern
+
+			// Befülltes Objekt in DB speichern
 			btMapper.insert(beteiligungNachBewerbung);
-			
-		}else{
+
+		} else {
 			bewerbungAusDb.setStatus("Abgelehnt");
 		}
-		
-		//Ergebnis in die DB updaten
+
+		// Ergebnis in die DB updaten
 		bMapper.update(bewerbungAusDb);
 	}
-	
-	
+
 	@Override
-	public Teilnehmer createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, 
-									   int plz, String ort, String emailAdresse, String firma)
-			throws IllegalArgumentException {
+	public Teilnehmer createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz,
+			String ort, String emailAdresse, String firma) throws IllegalArgumentException {
 
 		Teilnehmer teilnehmer = new Teilnehmer();
 
@@ -542,32 +548,30 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		teilnehmer.setOrt(ort);
 		teilnehmer.setEmail(emailAdresse);
 		teilnehmer.setFirma(firma);
-	
 
-		//Teilnehmer t = this.tMapper.insert(teilnehmer);
+		// Teilnehmer t = this.tMapper.insert(teilnehmer);
 
 		return this.tMapper.insert(teilnehmer);
 
 	}
+
 	@Override
 	public void updateTeilnehmer(Teilnehmer t) throws IllegalArgumentException {
-		
+
 		tMapper.update(t);
 	}
-										
-	
+
 	public Teilnehmer login(String requestUri) {
 
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
-		
+
 		Teilnehmer logInf = new Teilnehmer();
 
 		if (user != null) {
 			Teilnehmer existingPerson = tMapper.findByEmail(user.getEmail());
-			
-			
-			if(existingPerson != null){
+
+			if (existingPerson != null) {
 				ClientSideSettings.getLogger().info("Userobjekt E-Mail = " + user.getEmail()
 						+ "  Bestehender User: E-Mail  =" + existingPerson.getEmail());
 
@@ -578,7 +582,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 			}
 
 			logInf.setLoggedIn(true);
-			//logInf.setName(user.getNickname());
+			// logInf.setName(user.getNickname());
 			logInf.setLogoutUrl(userService.createLogoutURL(requestUri));
 			logInf.setEmail(user.getEmail());
 		} else {
@@ -588,114 +592,113 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		}
 		return logInf;
 	}
-	
-	
-	
+
 	/**
 	 * Methode für die BewerbungsBewertung in der GUI
 	 */
 	@Override
 	public Teilnehmer findTeilnehmerByBewerbungId(int bewerbungId) throws IllegalArgumentException {
-		
-		//BewerbungsId wird über den Mapper aufruf in die Variable bewerbung geschrieben
+
+		// BewerbungsId wird über den Mapper aufruf in die Variable bewerbung
+		// geschrieben
 		Bewerbung bewerbung = bMapper.findById(bewerbungId);
-		
+
 		int profilId = bewerbung.getIdProfil();
-		//ProfilId wird über den Mapper aufruf in die Variable profil geschrieben
+		// ProfilId wird über den Mapper aufruf in die Variable profil
+		// geschrieben
 		Profil profil = pfMapper.findById(profilId);
-		
+
 		int teilnehmerId = profil.getTeilnehmer_idTeilnehmer();
-		//Alle Teilnehmer zur Bewerbungid werden hier "gemerkt"
+		// Alle Teilnehmer zur Bewerbungid werden hier "gemerkt"
 		Teilnehmer teilnehmer = tMapper.findById(teilnehmerId);
 
-		//Rückgabe
+		// Rückgabe
 		return teilnehmer;
 	}
-	
-	
-	
-  /* Eigenschaft hinzufügen*/
+
+	/* Eigenschaft hinzufügen */
 	@Override
-	public Vector<Eigenschaft> createEigenschaft(Vector<String> name, Vector<Integer> wert, int teilnehmerId) throws IllegalArgumentException { 
+	public Vector<Eigenschaft> createEigenschaft(Vector<String> name, Vector<Integer> wert, int teilnehmerId)
+			throws IllegalArgumentException {
 		Vector<Eigenschaft> eigenschaften = new Vector<Eigenschaft>();
-		
-		for (int i =0; i< name.size(); i++){
+
+		for (int i = 0; i < name.size(); i++) {
 			String eigenname = name.elementAt(i);
 			int eigenwert = wert.elementAt(i);
-			
-		Eigenschaft e = new Eigenschaft();
-		e.setName(eigenname);
-		e.setWert(eigenwert);
-		e.setProfil_idProfil(teilnehmerId);
-		eigenschaften.add(e);
-		eMapper.insert(e);
-		
+
+			Eigenschaft e = new Eigenschaft();
+			e.setName(eigenname);
+			e.setWert(eigenwert);
+			e.setProfil_idProfil(teilnehmerId);
+			eigenschaften.add(e);
+			eMapper.insert(e);
+
 		}
 		return eigenschaften;
 	}
+
 	@Override
 	public Profil getProfilIdCurrentUser(int teilnehmerId) throws IllegalArgumentException {
 		return pfMapper.findByTeilnehmerId(teilnehmerId);
-	
+
 	}
-	
-	
-//Methode um Name und Wert von Eigenschaften zu lesen
+
+	// Methode um Name und Wert von Eigenschaften zu lesen
 	public Vector<Eigenschaft> findNameAndWertFromEigenschaften(int profilId) throws IllegalArgumentException {
-		
+
 		Vector<Eigenschaft> eigenschaftenNameWert = eMapper.findByProfil(profilId);
-		
+
 		return eigenschaftenNameWert;
 	}
-	
+
 	@Override
 	public void updateEigenschaft(Vector<Eigenschaft> eigenschaften) throws IllegalArgumentException {
 
-		for (int i =0; i< eigenschaften.size(); i++){
-		
-		eMapper.update(eigenschaften.elementAt(i));
-		
+		for (int i = 0; i < eigenschaften.size(); i++) {
+
+			eMapper.update(eigenschaften.elementAt(i));
+
+		}
+
 	}
-		
-		
-	}
-	@Override	
-	public Vector<Ausschreibung> matchingAusschreibung (int profilUserId) throws IllegalArgumentException {
-			
-			//Vector für passende Ausschreibungen
-			Vector<Ausschreibung> matching = new Vector<Ausschreibung>();
-			
-			///Vector für eigenschaften des Users
-			Vector<Eigenschaft> eigenschaftenUser = findNameAndWertFromEigenschaften(profilUserId);
-			//Alle ausschreibungen abrufen
-			Vector<Ausschreibung> allAusschreibungen = findAllAusschreibungen();
-			
-		
-			for(int i=0; i<allAusschreibungen.size();i++){
-				//Vector für eigenschaften des Suchprofils
-				Vector<Eigenschaft> eigenschaftenSuch = new Vector<Eigenschaft>();
-				eigenschaftenSuch = findNameAndWertFromEigenschaften(allAusschreibungen.elementAt(i).getProfil_idSuchprofil());
-				//Variable für Anzahl der übereinstimmenden Eigenschaften 
-				int k = 0;
-				
-				for(int j=0; j<eigenschaftenSuch.size();j++){
-					//Übereinstimmung der einzelnen Werte überprüfen
-					if(eigenschaftenUser.elementAt(j).getWert() == eigenschaftenSuch.elementAt(j).getWert()){
-						k++;
-						//Wenn 4 Eigenschaften übereinstimmen, dann passt Ausschreibung und in den matching-Vektor laden
-						if(k==6){
+
+	@Override
+	public Vector<Ausschreibung> matchingAusschreibung(int profilUserId) throws IllegalArgumentException {
+
+		// Vector für passende Ausschreibungen
+		Vector<Ausschreibung> matching = new Vector<Ausschreibung>();
+
+		/// Vector für eigenschaften des Users
+		Vector<Eigenschaft> eigenschaftenUser = findNameAndWertFromEigenschaften(profilUserId);
+		// Alle ausschreibungen abrufen
+		Vector<Ausschreibung> allAusschreibungen = findAllAusschreibungen();
+
+		for (int i = 0; i < allAusschreibungen.size(); i++) {
+			// Vector für eigenschaften des Suchprofils
+			Vector<Eigenschaft> eigenschaftenSuch = new Vector<Eigenschaft>();
+			eigenschaftenSuch = findNameAndWertFromEigenschaften(
+					allAusschreibungen.elementAt(i).getProfil_idSuchprofil());
+			// Variable für Anzahl der übereinstimmenden Eigenschaften
+			int k = 0;
+
+			for (int j = 0; j < eigenschaftenSuch.size(); j++) {
+				// Übereinstimmung der einzelnen Werte überprüfen
+				if (eigenschaftenUser.elementAt(j).getWert() == eigenschaftenSuch.elementAt(j).getWert()) {
+					k++;
+					// Wenn 4 Eigenschaften übereinstimmen, dann passt
+					// Ausschreibung und in den matching-Vektor laden
+					if (k == 6) {
 						matching.add(allAusschreibungen.elementAt(i));
 						break;
-						}
-						
 					}
-					
-				
+
 				}
-				
+
 			}
-			//Gebe Vektor mit passenden Ausschreibung an GUI zurück	
-		 return matching;
+
+		}
+		// Gebe Vektor mit passenden Ausschreibung an GUI zurück
+		return matching;
 	}
-	
+
 }
