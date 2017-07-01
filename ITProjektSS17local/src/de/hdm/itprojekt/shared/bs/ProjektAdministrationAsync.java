@@ -1,7 +1,6 @@
 package de.hdm.itprojekt.shared.bs;
 
 import java.util.Date;
-import java.util.Map;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -88,8 +87,6 @@ public interface ProjektAdministrationAsync {
 	/*
 	 * F�r Teilnehmer
 	 */
-	void setUser(Teilnehmer t, AsyncCallback<Void> callback);
-
 	void login(String requestUri, AsyncCallback<Teilnehmer> callback);
 
 	void createTeilnehmer(String vorname, String nachname, String zusatz, String strasse, int plz, String ort,

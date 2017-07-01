@@ -1,7 +1,6 @@
 package de.hdm.itprojekt.shared.bs;
 
 import java.util.Date;
-import java.util.Map;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -100,8 +99,6 @@ public interface ProjektAdministration extends RemoteService {
 	/*
 	 * Methoden zum anlegen von Teilnehmern
 	 */
-
-	void setUser(Teilnehmer t);
 
 	public Teilnehmer login(String requestUri);
 	
