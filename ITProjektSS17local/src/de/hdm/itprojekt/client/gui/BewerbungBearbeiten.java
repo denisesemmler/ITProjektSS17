@@ -46,7 +46,7 @@ public class BewerbungBearbeiten extends VerticalPanel {
 	public BewerbungBearbeiten() {
 
 		bewerbungTextArea.addStyleName("textarea");
-		
+
 		mainPanel.add(editorPanel);
 		editorPanel.add(bewerbungLabel);
 		editorPanel.add(bewerbungsListbox);
@@ -57,7 +57,7 @@ public class BewerbungBearbeiten extends VerticalPanel {
 		editorPanel.add(speichernButton);
 
 		int currentUserId = ClientSideSettings.getCurrentUser().getId();
-		//Get current user
+		// Get current user
 		try {
 			ClientSideSettings.getProjektAdministration().getProfilIdCurrentUser(currentUserId,
 					new GetPartnerProfileCallback());
@@ -67,6 +67,7 @@ public class BewerbungBearbeiten extends VerticalPanel {
 		}
 
 	}
+
 	/**
 	 * Callback für Speichern von Änderungen
 	 */
@@ -84,6 +85,7 @@ public class BewerbungBearbeiten extends VerticalPanel {
 		}
 
 	}
+
 	/**
 	 * Callbakck für Auslesen von Bewerbung einer Bewerbung-ID
 	 */
@@ -112,6 +114,13 @@ public class BewerbungBearbeiten extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 
+			//Eingabeüberprüfung
+			if (bewerbungTextArea.getText().matches("")) {
+				Window.alert("Bitte Wert eintragen!");
+				return;
+			}
+			
+			
 			try {
 				int id = bVector.elementAt(bewerbungsListbox.getSelectedIndex()).getId();
 				Bewerbung bewerbung = new Bewerbung();
@@ -125,6 +134,7 @@ public class BewerbungBearbeiten extends VerticalPanel {
 			}
 		}
 	}
+
 	/**
 	 * ClickHandler der auf Änderungen reagiert und entsprechend befüllt
 	 */
@@ -157,7 +167,6 @@ public class BewerbungBearbeiten extends VerticalPanel {
 		public void onSuccess(Profil result) {
 
 			p.setId(result.getId());
-			Window.alert("Dein Profil wurde gefunden!");
 
 			try {
 				ClientSideSettings.getProjektAdministration().findBewerbungByTeilnehmerid(p.getId(),

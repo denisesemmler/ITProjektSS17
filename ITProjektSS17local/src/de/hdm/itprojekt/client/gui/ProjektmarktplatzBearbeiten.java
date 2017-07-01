@@ -91,7 +91,7 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 		}
 
 		public void onSuccess(Vector<Projektmarktplatz> result) {
-
+			Window.alert("Änderungen gespeichert");
 			for (int i = 0; i < result.size(); i++) {
 				Projektmarktplatz pm1 = result.elementAt(i);
 				pmVector.add(pm1);
@@ -110,6 +110,13 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 
+			//Eingabeüberprüfung
+			if (marktplatzNameBox.getText().matches("")) {
+				Window.alert("Bitte Wert eintragen!");
+				return;
+			}
+			
+			
 			try {
 				int id = pmVector.elementAt(marktplatzListbox.getSelectedIndex()).getId();
 				Projektmarktplatz pm = new Projektmarktplatz();

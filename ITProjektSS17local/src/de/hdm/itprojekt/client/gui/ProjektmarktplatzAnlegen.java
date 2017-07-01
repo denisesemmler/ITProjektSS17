@@ -71,6 +71,14 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 
+			//Eingabeüberprüfung
+			if (projektmarktplatzNameBox.getText().matches("")) {
+				Window.alert("Bitte Wert eintragen!");
+				return;
+			}
+			
+			
+			
 			try {
 
 				ClientSideSettings.getProjektAdministration().createProjektmarktplatz(

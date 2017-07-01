@@ -75,6 +75,16 @@ public class BewerbungAnlegen extends VerticalPanel {
 
 		public void onClick(ClickEvent event) {
 
+			//Eingabeüberprüfung
+			if (titelA.getText().matches("")) {
+				Window.alert("Bitte Wert eintragen!");
+				return;
+			}
+			if (textA.getText().matches("")) {
+				Window.alert("Bitte Wert eintragen!");
+				return;
+			}
+			
 			ClientSideSettings.getProjektAdministration().findBewerbungByProfilIdAndAusschreibungId(p.getId(),
 					ausschreibungID, new BewerbungByProfilIdAndAusschreibungsIdCallback());
 
