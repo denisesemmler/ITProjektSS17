@@ -83,9 +83,9 @@ public class FanInFanOutReport extends SimpleReport {
 
 		// Spalten einen Namen geben
 		table.addColumn(nameColumn, "Name");
-		table.addColumn(fanOutColumn, "Fan-Out/Bewerbung");
-		table.addColumn(fanInColumn, "Fan-In/Ausschreibung");
-		table.addColumn(analyseColumn, "Fan-In/Fan-Out Analyse");
+		table.addColumn(fanOutColumn, "getätigte Bewerbungen");
+		table.addColumn(fanInColumn, "getätigte Ausschreibungen");
+		table.addColumn(analyseColumn, "Verhältnis");
 
 		// Daten der Tabelle hinzufügen
 		table.setRowCount(report.size(), true);
