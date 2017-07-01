@@ -119,14 +119,13 @@ public class BewerbungLoeschen extends VerticalPanel {
 	private class GetPartnerProfileCallback implements AsyncCallback<Profil> {
 
 		public void onFailure(Throwable caught) {
-			Window.alert("Dat l�uft noch nit so Profil finden!");
+			Window.alert("Da ist wohl etwas schief gleaufen");
 
 		}
 
 		public void onSuccess(Profil result) {
 
 			p.setId(result.getId());
-			Window.alert("Dein Profil wurde gefunden!");
 
 			try {
 				ClientSideSettings.getProjektAdministration().findBewerbungByTeilnehmerid(p.getId(),

@@ -101,7 +101,7 @@ public class BewerbungAnlegen extends VerticalPanel {
 		}
 
 		public void onSuccess(Bewerbung result) {
-
+			Window.alert("Bewerbung angelegt");
 			RootPanel.get("Content").clear();
 			RootPanel.get("Content").add(new BewerbungVerwalten());
 		}
