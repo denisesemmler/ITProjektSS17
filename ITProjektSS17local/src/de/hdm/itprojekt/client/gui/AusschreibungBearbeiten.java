@@ -244,6 +244,18 @@ public class AusschreibungBearbeiten extends HorizontalPanel {
 			// Bei Speicherung neue Daten im Objekt speichern und updaten sowie
 			// Profil updaten
 			try {
+				//Überprüfen ob Eingaben erfolgt
+				String input = ausschreibungTitelBox.getText();
+				if (input.matches("")){
+					Window.alert("Bitte einen Ausschreibungstitel eingeben");
+					return;
+				}				
+				String input1 = stellenbeschreibungArea.getText();
+				if (input1.matches("")){
+					Window.alert("Bitte eine Stellenbeschreibung eingeben");
+					return;
+				}
+				
 				int id = aVector.elementAt(ausschreibungListbox.getSelectedIndex()).getId();
 				Ausschreibung a = new Ausschreibung();
 				a.setId(id);

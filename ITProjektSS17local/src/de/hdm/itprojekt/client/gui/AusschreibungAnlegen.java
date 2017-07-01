@@ -262,6 +262,17 @@ public class AusschreibungAnlegen extends HorizontalPanel {
 
 		public void onClick(ClickEvent event) {
 			try {
+				//Überprüfen ob Eingaben erfolgt
+				String input = ausschreibungTitelBox.getText();
+				if (input.matches("")){
+					Window.alert("Bitte einen Ausschreibungstitel eingeben");
+					return;
+				}				
+				String input1 = stellenbeschreibungArea.getText();
+				if (input1.matches("")){
+					Window.alert("Bitte eine Stellenbeschreibung eingeben");
+					return;
+				}
 				// Suchprofil erstellen
 				ClientSideSettings.getProjektAdministration().createProfil(ClientSideSettings.getCurrentUser().getId(),
 						1, new CreateProfilCallback());

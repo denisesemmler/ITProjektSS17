@@ -94,6 +94,34 @@ public class AnmeldeFormular extends VerticalPanel {
 		public void onClick(ClickEvent event) {
 
 			try {
+				//Überprüfen ob Eingaben erfolgt
+				String input = firstNameBox.getText();
+				if (input.matches("")){
+					Window.alert("Bitte einen Vornamen eingeben");
+					return;
+				}				
+				String input1 = lastNameBox.getText();
+				if (input1.matches("")){
+					Window.alert("Bitte einen Nachnamen eingeben");
+					return;
+				}
+				String input2 = strasseBox.getText();
+				if (input2.matches("")){
+					Window.alert("Bitte eine Strasse eingeben");
+					return;
+				}
+				String input3 = plzBox.getText();
+				if (!input3.matches("[0-9]*") || input3.matches("")){
+					Window.alert("Bitte eine Postleitzahl und ausschließlich Zahlen eingeben ");
+					return;
+				}
+				String input4 = ortBox.getText();
+				if (input4.matches("")){
+					Window.alert("Bitte einen Ort eingeben");
+					return;
+				}
+				
+				
 				// Teilnehmer anlegen
 				ClientSideSettings.getProjektAdministration().createTeilnehmer(firstNameBox.getText(),
 						lastNameBox.getText(), zusatzBox.getText(), strasseBox.getText(),

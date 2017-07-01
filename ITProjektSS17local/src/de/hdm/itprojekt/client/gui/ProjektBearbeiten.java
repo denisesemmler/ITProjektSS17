@@ -163,6 +163,17 @@ public class ProjektBearbeiten extends VerticalPanel {
 	private class SpeichernButtonHandler implements ClickHandler {
 		public void onClick(ClickEvent event) {
 			try {
+				//Eingabe überprüfen
+				String input = projektNameBox.getText();
+				if (input.matches("")){
+					Window.alert("Bitte einen Projektnamen eingeben");
+					return;
+				}				
+				String input1 = projektBeschreibungArea.getText();
+				if (input1.matches("")){
+					Window.alert("Bitte eine Projektbeschreibung eingeben");
+					return;
+				}
 				int id = pVector.elementAt(projektListbox.getSelectedIndex()).getId();
 				Projekt p = new Projekt();
 				p.setId(id);

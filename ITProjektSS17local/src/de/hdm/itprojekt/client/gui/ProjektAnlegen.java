@@ -174,6 +174,17 @@ public class ProjektAnlegen extends VerticalPanel {
 			// Projektmarktplatz ID
 			int id = pmVector.elementAt(marktplatzListbox.getSelectedIndex()).getId();
 			try {
+				//Überprüfen ob Eingaben erfolgt
+				String input = projektNameBox.getText();
+				if (input.matches("")){
+					Window.alert("Bitte einen Projektnamen eingeben");
+					return;
+				}				
+				String input1 = projektBeschreibungArea.getText();
+				if (input1.matches("")){
+					Window.alert("Bitte eine Projektbeschreibung eingeben");
+					return;
+				}
 
 				ClientSideSettings.getProjektAdministration().createProjekt(projektNameBox.getText(),
 						projektBeschreibungArea.getText(), (startPicker.getValue()), (endPicker.getValue()),
