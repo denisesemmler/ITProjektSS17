@@ -66,15 +66,16 @@ public class ProjektmarktplatzBearbeiten extends VerticalPanel {
 	/**
 	 * Callback für Speichern der Änderungen
 	 */
-	private class SaveChangesCallback implements AsyncCallback {
+	private class SaveChangesCallback implements AsyncCallback<Void> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(Void result) {
 			RootPanel.get("Content").clear();
+			RootPanel.get("Content").add(new ProjektmarktplatzVerwalten());
 
 		}
 

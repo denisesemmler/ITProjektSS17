@@ -594,6 +594,7 @@ public class BewerbungBewerten extends VerticalPanel {
 
 			VerticalPanel eigenschaften = new VerticalPanel();
 			ausschreibungEigenschaftenPanel.clear();
+			ausschreibungEigenschaftenPanel.add(eigenschaftenAusschreibung);
 			
 			// Eigenschaften in Liste Darstellen.
 			for (Eigenschaft e : result) {
@@ -629,6 +630,7 @@ public class BewerbungBewerten extends VerticalPanel {
 		public void onSuccess(Vector<Eigenschaft> result) {
 			VerticalPanel eigenschaften = new VerticalPanel();
 			bewerbungEingeschaftenPanel.clear();
+			bewerbungEingeschaftenPanel.add(eigenschaftenBewerbung);
 
 			// Eigenschaften in Liste Darstellen.
 			for (Eigenschaft e : result) {
@@ -666,8 +668,11 @@ public class BewerbungBewerten extends VerticalPanel {
 					if (bewertungsZahl > 1.0) {
 						stellungnahmeTextAbgeben.setVisible(false);
 						stellungnahmeInBox.setVisible(false);
+						startdatum.setVisible(false);
 						startdatumInBox.setVisible(false);
+						enddatum.setVisible(false);
 						enddatumInBox.setVisible(false);
+						manntage.setVisible(false);
 						manntageInBox.setVisible(false);
 						Window.alert("Nur Zahlen von 0.0 bis 1.0 erlaubt");
 						bewertungInBox.setText(" ");
@@ -692,8 +697,11 @@ public class BewerbungBewerten extends VerticalPanel {
 					else {
 						stellungnahmeTextAbgeben.setVisible(false);
 						stellungnahmeInBox.setVisible(false);
+						startdatum.setVisible(false);
 						startdatumInBox.setVisible(false);
+						enddatum.setVisible(false);
 						enddatumInBox.setVisible(false);
+						manntage.setVisible(false);
 						manntageInBox.setVisible(false);
 					}
 				} catch (NumberFormatException e) {

@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
+import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Projektmarktplatz;
 
 /**
@@ -146,15 +147,16 @@ public class ProjektAnlegen extends VerticalPanel {
 	 * @author Moritz Bittner
 	 *
 	 */
-	private class CreateProjectCallback implements AsyncCallback {
+	private class CreateProjectCallback implements AsyncCallback<Projekt> {
 
 		public void onFailure(Throwable caught) {
 			Window.alert("Da ist wohl etwas schief gelaufen");
 
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(Projekt result) {
 			RootPanel.get("Content").clear();
+			RootPanel.get("Content").add(new ProjektVerwalten());
 
 		}
 
