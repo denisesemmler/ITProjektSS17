@@ -32,7 +32,7 @@ public class BewerbungBearbeiten extends VerticalPanel {
 	private VerticalPanel editorPanel = new VerticalPanel();
 
 	private Label bewerbungLabel = new Label("Bewerbung auswählen:");
-	private Label ausschreibenLabel = new Label("Ausschreibung ändern:");
+	private Label ausschreibenLabel = new Label("Anschreiben ändern:");
 	private TextArea bewerbungTextArea = new TextArea();
 	private ListBox bewerbungsListbox = new ListBox();
 
@@ -45,6 +45,8 @@ public class BewerbungBearbeiten extends VerticalPanel {
 	 */
 	public BewerbungBearbeiten() {
 
+		bewerbungTextArea.addStyleName("textarea");
+		
 		mainPanel.add(editorPanel);
 		editorPanel.add(bewerbungLabel);
 		editorPanel.add(bewerbungsListbox);
