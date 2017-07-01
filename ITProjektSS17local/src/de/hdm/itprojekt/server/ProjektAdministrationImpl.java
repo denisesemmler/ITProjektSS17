@@ -172,9 +172,9 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		// Werte werden hinzugefügt
 		p.setName(projektName);
 		p.setBeschreibung(projektBeschreibung);
-		//Datum speichern + 2h wg. Zeitzone
-		p.setStartDatum(new java.sql.Date(startDatum.getTime()+(3600*2*1000)));
-		p.setEndDatum(new java.sql.Date(endDatum.getTime()+(3600*2*1000)));
+		// Datum speichern + 2h wg. Zeitzone
+		p.setStartDatum(new java.sql.Date(startDatum.getTime() + (3600 * 2 * 1000)));
+		p.setEndDatum(new java.sql.Date(endDatum.getTime() + (3600 * 2 * 1000)));
 		p.setTeilnehmer_idTeilnehmer(TeilnehmerID);
 		p.setProjektmarktplatz_idProjektmarktplatz(MarktplatzID);
 
@@ -328,7 +328,7 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 		ausschreibung.setBeschreibung(beschreibung);
 
 		// kurze schreibweise einer Typkonvertierung
-		ausschreibung.setBewerbungsfrist(new java.sql.Date(bewerbungsfrist.getTime()+(3600*2*1000)));
+		ausschreibung.setBewerbungsfrist(new java.sql.Date(bewerbungsfrist.getTime() + (3600 * 2 * 1000)));
 		ausschreibung.setTitel(titel);
 		ausschreibung.setStatus(status);
 		ausschreibung.setProjekt_idProjekt(projekt_idProjekt);
@@ -520,8 +520,8 @@ public class ProjektAdministrationImpl extends RemoteServiceServlet implements P
 			beteiligungNachBewerbung.setProjektID(projektId);
 			beteiligungNachBewerbung.setBewerbungID(bewerbungId);
 			beteiligungNachBewerbung.setManntage(manntage);
-			beteiligungNachBewerbung.setStartdatum(new java.sql.Date(startdatum.getTime()+(3600*2*1000)));
-			beteiligungNachBewerbung.setEnddatum(new java.sql.Date(enddatum.getTime()+(3600*2*1000)));
+			beteiligungNachBewerbung.setStartdatum(new java.sql.Date(startdatum.getTime() + (3600 * 2 * 1000)));
+			beteiligungNachBewerbung.setEnddatum(new java.sql.Date(enddatum.getTime() + (3600 * 2 * 1000)));
 
 			// Befülltes Objekt in DB speichern
 			btMapper.insert(beteiligungNachBewerbung);
